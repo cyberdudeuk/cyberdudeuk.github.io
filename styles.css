@@ -157,6 +157,8 @@ pre { overflow-x: auto; background: #07182a; color: #eaf2fb; padding: 1rem; bord
 }
 @media (max-width: 680px) {
   .nav-toggle { display: inline-block; background: var(--blue); color: #fff; border: 0; padding: .45rem .75rem; border-radius: .35rem; font-weight: 800; }
+  .js-enabled .nav-links { display: none; width: 100%; flex-direction: column; }
+  .js-enabled .nav-links.open { display: flex; }
   .nav-links { display: none; width: 100%; flex-direction: column; }
   .nav-links.open { display: flex; }
   .top-nav { flex-wrap: wrap; }

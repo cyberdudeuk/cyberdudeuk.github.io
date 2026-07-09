@@ -27,3 +27,8 @@ python3 -m http.server 8000
 ```
 
 Then visit <http://localhost:8000>.
+
+
+## Deployment
+
+The portal is deployed to GitHub Pages with the workflow in `.github/workflows/pages.yml`. The workflow publishes the repository root as a static site on pushes to `main` and can also be triggered manually with `workflow_dispatch`.
