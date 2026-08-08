@@ -1,201 +1,1008 @@
-<!doctype html>
-<html lang="en-GB">
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="light" data-contrast="normal" data-density="normal">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A public-good toolkit for government-grade AI skills, agents, metadata, assurance, DEIA, secure-by-design and quantum-ready public-sector delivery.">
-  <title>Public AI Utility Toolkit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Public AI Utility Toolkit — governance, assurance and inclusive delivery for AI-assisted public services</title>
+  <meta name="description" content="A public-good toolkit for AI-assisted public services: risk-based human review (H0–H5), evidence packs, DEIA screening, transparency records, quantum readiness and 68 tiered guidance sources.">
+  <meta name="author" content="Public AI Utility Toolkit working group">
+  <meta name="robots" content="index, follow">
+  <meta name="colour-scheme" content="light dark">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b3d91" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
+  <meta name="version" content="2.0.0">
+  <meta name="last-reviewed" content="2026-08-08">
+  <meta name="next-review" content="2026-11-08">
+  <link rel="canonical" href="https://cyberdudeuk.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Public AI Utility Toolkit">
+  <meta property="og:title" content="Public AI Utility Toolkit">
+  <meta property="og:description" content="Build safer, fairer and more accountable AI-assisted public services — guidance, working tools and a tiered resource library.">
+  <meta property="og:url" content="https://cyberdudeuk.github.io/">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b3d91'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3EAI%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Public AI Utility Toolkit",
+    "url": "https://cyberdudeuk.github.io/",
+    "inLanguage": "en-GB",
+    "description": "A public-good toolkit for governing, assuring and delivering AI-assisted public services.",
+    "license": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "version": "2.0.0",
+    "dateModified": "2026-08-08",
+    "isAccessibleForFree": true,
+    "publisher": { "@type": "Organization", "name": "Public AI Utility Toolkit working group" }
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header" role="banner">
-    <nav class="top-nav" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="Public AI Utility Toolkit home">
-        <span class="brand-mark" aria-hidden="true">◆</span>
-        <span>Public AI Utility Toolkit</span>
+
+  <header class="site-header">
+    <div class="wrap hdr">
+      <a class="brand" href="#top">
+        <span class="mark" aria-hidden="true">AI</span>
+        <span>Public AI Utility Toolkit<small>Public-good AI governance &amp; delivery</small></span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <div class="nav-links" id="nav-links">
-        <a href="#knowledge">Knowledge</a>
-        <a href="#toolkit">Toolkit</a>
-        <a href="#assurance">Assurance</a>
-        <a href="#catalogue">Catalogue</a>
-        <a href="#ucd">UCD & DEIA</a>
-        <a href="#practice">Practice</a>
-      </div>
-    </nav>
+      <button class="icon-btn nav-toggle js-only" id="navToggle" type="button" aria-expanded="false" aria-controls="primary-nav">☰ Menu</button>
+      <nav class="top-nav" id="primary-nav" aria-label="Primary">
+      <a href="#start-here">Start here</a>
+      <a href="#knowledge">Knowledge</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#tools">Tools</a>
+      <a href="#assurance">Assurance</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#ucd">UCD &amp; DEIA</a>
+      <a href="#practice">Practice</a>
+      <a href="#resources">Resources</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contact">Contact</a>
+      </nav>
+      <div class="hdr-tools js-only"></div>
+    </div>
   </header>
 
   <main id="main" tabindex="-1">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-content">
-        <p class="eyebrow">A public-good, government-grade AI knowledge utility</p>
-        <h1 id="hero-title">Build safer, fairer and more accountable AI-assisted public services.</h1>
-        <p class="lead">A comprehensive portal and toolkit for AI skills, agents, metadata standards, human review, code of practice, secure-by-design delivery, protection by default, quantum readiness and inclusive user-centred design.</p>
-        <div class="hero-actions" aria-label="Primary actions">
-          <a class="button" href="#toolkit">Explore the toolkit</a>
-          <a class="button button-secondary" href="#practice">Read the code of practice</a>
-        </div>
-      </div>
-      <aside class="hero-card" aria-label="Utility status summary">
-        <h2>Utility principles</h2>
-        <ul class="check-list">
-          <li>Humans remain accountable</li>
-          <li>AI outputs are verified, not trusted by default</li>
-          <li>Public value, equality and accessibility are built in</li>
-          <li>Evidence, metadata and provenance are mandatory</li>
-        </ul>
-      </aside>
-    </section>
 
-    <section class="section" aria-labelledby="mission-title">
-      <div class="section-heading">
-        <p class="eyebrow">Mission</p>
-        <h2 id="mission-title">From static guidance to a living public-sector utility</h2>
-        <p>This portal frames AI-assisted delivery as a governed public good: open where possible, protected where necessary, and continuously improved through evidence, service research and community assurance.</p>
-      </div>
-      <div class="metrics-grid" aria-label="Key maturity goals">
-        <article><strong>100%</strong><span>material AI-assisted work creates evidence</span></article>
-        <article><strong>0</strong><span>self-approval for high-risk outputs</span></article>
-        <article><strong>H0–H5</strong><span>risk-based human-in-the-loop model</span></article>
-        <article><strong>PQC</strong><span>crypto-agile and quantum-ready by design</span></article>
-      </div>
-    </section>
+<section id="top" class="section" style="padding-top:44px" aria-labelledby="sec-h-1">
+  <div class="wrap">
+    <span class="eyebrow">A public-good, government-grade AI knowledge utility</span>
+    <h1 id="sec-h-1">Build safer, fairer and more accountable AI-assisted public services.</h1>
+    <p class="lede">A practical portal and toolkit for AI skills, agents, metadata standards, human review, code of practice, secure-by-design delivery, protection by default, quantum readiness and inclusive user-centred design — with the guidance, templates and working tools you need to act today.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#start-here">Start here — find your route</a>
+      <a class="btn btn-secondary" href="#tools">Use the interactive tools</a>
+      <a class="btn btn-secondary" href="#practice">Read the code of practice</a>
+    </div>
+    <div class="grid g4" style="margin-top:12px">
+      <div class="stat"><span class="num">100%</span><span class="lbl">material AI-assisted work creates evidence</span></div>
+      <div class="stat"><span class="num">0</span><span class="lbl">self-approval for high-risk outputs</span></div>
+      <div class="stat"><span class="num">H0–H5</span><span class="lbl">risk-based human-in-the-loop model</span></div>
+      <div class="stat"><span class="num">PQC</span><span class="lbl">crypto-agile and quantum-ready by design</span></div>
+    </div>
+    <div class="callout" style="margin-top:26px">
+      <h2 style="font-size:1.05rem;margin-bottom:8px">Four non-negotiable principles</h2>
+      <ul class="ticks">
+        <li><strong>Humans remain accountable.</strong> AI never grants authority a person does not already hold.</li>
+        <li><strong>AI outputs are verified, not trusted by default.</strong> Every claim traces to a citable source.</li>
+        <li><strong>Public value, equality and accessibility are built in</strong> — screened before delivery, not audited after.</li>
+        <li><strong>Evidence, metadata and provenance are mandatory</strong> for anything material or public-facing.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <section class="section alt" id="knowledge" aria-labelledby="knowledge-title">
-      <div class="section-heading">
-        <p class="eyebrow">Combined body of knowledge</p>
-        <h2 id="knowledge-title">Authoritative guidance, standards and reusable intelligence</h2>
-        <p>The corpus is organised as a knowledge graph that links laws, policies, standards, design guidance, engineering practice, AI governance, metadata, evidence and reusable delivery patterns.</p>
-      </div>
-      <div class="card-grid three">
-        <article class="card">
-          <h3>Guidance corpus</h3>
-          <p>Index GOV.UK, GDS, CDDO, departmental, standards, GitHub and AI Engineering Lab sources with authority tiering, freshness checks and applicability metadata.</p>
-        </article>
-        <article class="card">
-          <h3>Knowledge graph</h3>
-          <p>Link services, repositories, datasets, APIs, controls, skills, agents, people, approvals, models, risks and evidence into one navigable public-sector map.</p>
-        </article>
-        <article class="card">
-          <h3>Executable guidance</h3>
-          <p>Translate policy and standards into schemas, conformance packs, tests, scripts, checklists, prompts, skills and agent guardrails.</p>
-        </article>
-      </div>
-    </section>
+<section id="start-here" class="section alt" aria-labelledby="sec-h-2">
+  <div class="wrap">
+    <span class="eyebrow">Start here</span>
+    <h2 id="sec-h-2">Pick the route that matches your job today</h2>
+    <p class="lede">Task-first entry points, because people arrive with a decision to make — not an interest in our information architecture.</p>
+    <div class="grid g3" id="personaGrid"><article class="card"><h3>New or occasional contributor</h3><p style="font-style:italic;color:var(--c-text)">"I don’t want to get this wrong."</p><p>Plain-language guidance, safe defaults, confidence prompts, buddying and clear role limits.</p><p><a href="#start-here">Take the 5-minute triage, then use the declaration generator.</a></p></article><article class="card"><h3>Experienced practitioner</h3><p style="font-style:italic;color:var(--c-text)">"Give me the fast, correct route."</p><p>Direct links to standards, patterns, conformance packs, test scripts and evidence automation.</p><p><a href="#toolkit">Jump to the toolkit and copy the metadata schema.</a></p></article><article class="card"><h3>Specialist reviewer</h3><p style="font-style:italic;color:var(--c-text)">"Show me what to challenge."</p><p>Source-linked evidence, issue triage, risk decisions and assurance history.</p><p><a href="#assurance">Use the H-level table and reviewer checklist.</a></p></article><article class="card"><h3>Accountable owner / SRO</h3><p style="font-style:italic;color:var(--c-text)">"What am I signing?"</p><p>Risk overview, approval gates, residual risk, maturity dashboard and public transparency records.</p><p><a href="#tool-atrs">Generate the transparency record and check the MoSCoW roadmap.</a></p></article><article class="card"><h3>Supplier or delivery partner</h3><p style="font-style:italic;color:var(--c-text)">"What will I be assessed against?"</p><p>Published expectations, evidence formats, accessibility and security obligations, exit terms.</p><p><a href="#resources">Filter resources by procurement and security.</a></p></article><article class="card"><h3>Member of the public</h3><p style="font-style:italic;color:var(--c-text)">"How is AI being used on my case?"</p><p>Plain-English explanation, published records, how to challenge a decision and get support.</p><p><a href="#transparency">Read the transparency and redress commitments.</a></p></article></div>
+    <h3 style="margin-top:32px">Common tasks</h3>
+    <div class="grid g3">
+      <a class="card card--link" href="#tool-triage"><span class="tag t-gov">2 minutes</span><h3>Decide how much human review my output needs</h3><p>Answer six questions and get an H0–H5 level, the reviewers required and the evidence to keep.</p></a>
+      <a class="card card--link" href="#tool-evidence"><span class="tag t-gov">3 minutes</span><h3>Write an AI-use declaration and evidence pack</h3><p>Generate a copy-ready record of sources consulted, checks made and who approved what.</p></a>
+      <a class="card card--link" href="#tool-deia"><span class="tag t-ok">5 minutes</span><h3>Screen a change for equality and accessibility impact</h3><p>Flag protected characteristics, access needs, assisted digital and exclusion risks early.</p></a>
+      <a class="card card--link" href="#tool-atrs"><span class="tag t-warn">10 minutes</span><h3>Draft a public transparency record</h3><p>Produce an ATRS-shaped record describing the tool, its purpose, data, oversight and risks.</p></a>
+      <a class="card card--link" href="#tool-pqc"><span class="tag t-warn">5 minutes</span><h3>Check quantum and cryptographic exposure</h3><p>Score harvest-now-decrypt-later risk against NCSC migration milestones.</p></a>
+      <a class="card card--link" href="#resources"><span class="tag t-gov">Reference</span><h3>Find the authoritative source for a rule</h3><p>Search 68 tiered laws, standards, guidance documents and tools.</p></a>
+    </div>
+    <div class="callout warn" style="margin-top:26px">
+      <p><strong>Not sure whether to use AI at all?</strong> Ask three questions first: is there a simpler non-AI way to meet the user need; can you explain the decision to the person it affects; and could you defend this use at a public inquiry? If any answer is no, stop and seek advice.</p>
+    </div>
+  </div>
+</section>
+<section id="knowledge" class="section" aria-labelledby="sec-h-3">
+ <div class="wrap">
+  <span class="eyebrow">Combined body of knowledge</span>
+  <h2 id="sec-h-3">Authoritative guidance, standards and reusable intelligence</h2>
+  <p class="lede">The corpus is organised as a knowledge graph linking laws, policies, standards, design guidance, security controls, skills, agents and evidence — so that a rule can always be traced to its source and its consequences.</p>
+  <div class="grid g3">
+   <article class="card"><span class="tag t-gov">Layer 1</span><h3>Guidance corpus</h3><p>Index GOV.UK, GDS, CDDO, departmental, international standards, GitHub and engineering-lab sources with authority tiering, freshness checks and applicability metadata.</p><p><a href="#resources">Browse the 68 indexed sources →</a></p></article>
+   <article class="card"><span class="tag t-gov">Layer 2</span><h3>Knowledge graph</h3><p>Link services, repositories, datasets, APIs, controls, skills, agents, people, approvals, models, risks and evidence so impact analysis is a query, not a workshop.</p><p><a href="#catalogue">See the metadata model →</a></p></article>
+   <article class="card"><span class="tag t-gov">Layer 3</span><h3>Executable guidance</h3><p>Translate policy and standards into schemas, conformance packs, tests, scripts, checklists and prompt patterns that run in delivery pipelines.</p><p><a href="#toolkit">See the conformance packs →</a></p></article>
+  </div>
 
-    <section class="section" id="toolkit" aria-labelledby="toolkit-title">
-      <div class="section-heading">
-        <p class="eyebrow">Toolkit</p>
-        <h2 id="toolkit-title">A complete operating kit for AI-assisted public delivery</h2>
-        <p>Use the filters to explore reusable components. Each asset is designed to be catalogued, versioned, assured and adapted across tools such as Codex, Copilot, Claude Code and CI pipelines.</p>
-      </div>
-      <div class="toolbar" aria-label="Toolkit filters">
-        <label for="toolkit-filter">Filter toolkit assets</label>
-        <select id="toolkit-filter">
-          <option value="all">Show all</option>
-          <option value="governance">Governance</option>
-          <option value="delivery">Delivery</option>
-          <option value="assurance">Assurance</option>
-          <option value="future">Future-ready</option>
-        </select>
-      </div>
-      <div class="card-grid" id="toolkit-grid">
-        <article class="card toolkit-item" data-category="governance"><h3>AI asset metadata standard</h3><p>Machine-readable schemas for skills, agents, prompts, tools, model-use events, evidence packs, source records and orchestration runs.</p></article>
-        <article class="card toolkit-item" data-category="delivery"><h3>Skill registry</h3><p>Discover approved, draft and deprecated skills with owners, sources, risk ratings, compatibility, evaluation reports and required reviewers.</p></article>
-        <article class="card toolkit-item" data-category="delivery"><h3>Agent registry</h3><p>Catalogue bounded agents by autonomy level, permissions, allowed skills, prohibited actions, model constraints and escalation rules.</p></article>
-        <article class="card toolkit-item" data-category="assurance"><h3>Evidence pack builder</h3><p>Generate source consultation records, AI-use declarations, validation results, human acknowledgements and approval logs.</p></article>
-        <article class="card toolkit-item" data-category="assurance"><h3>DEIA impact screen</h3><p>Assess equality, accessibility, assisted digital, digital inclusion, protected characteristic and vulnerable user impacts before reliance.</p></article>
-        <article class="card toolkit-item" data-category="future"><h3>Quantum readiness assessor</h3><p>Inventory cryptography, identify long-life data, assess harvest-now-decrypt-later exposure and plan crypto-agile migration paths.</p></article>
-      </div>
-    </section>
+  <h3 style="margin-top:38px">Authority tiering — how conflicts are resolved</h3>
+  <p>When two sources disagree, the lower tier number wins. Record the conflict and the resolution in the evidence pack.</p>
+  <div class="table-scroll">
+   <table>
+    <caption>Source authority tiers used across the corpus</caption>
+    <thead><tr><th scope="col">Tier</th><th scope="col">Source type</th><th scope="col">Examples</th><th scope="col">Treatment</th></tr></thead>
+    <tbody>
+     <tr><td><strong>0</strong></td><td>Law and statutory instruments</td><td>Equality Act 2010, DPA 2018, Accessibility Regulations 2018</td><td>Binding. Non-compliance is not a risk to accept — escalate.</td></tr>
+     <tr><td><strong>1</strong></td><td>Mandated standards and cross-government policy</td><td>Service Standard, Technology Code of Practice, Secure by Design, WCAG 2.2, ATRS</td><td>Comply or record a formal, time-boxed exception with an owner.</td></tr>
+     <tr><td><strong>2</strong></td><td>Recognised international and professional standards</td><td>ISO/IEC 42001, NIST AI RMF, OWASP LLM Top 10</td><td>Adopt as good practice; justify divergence.</td></tr>
+     <tr><td><strong>3</strong></td><td>Community, vendor and research material</td><td>Blogs, model cards, toolkits, preprints</td><td>Useful signal. Never the sole basis for a control or a public claim.</td></tr>
+    </tbody>
+   </table>
+  </div>
 
-    <section class="section alt" id="assurance" aria-labelledby="assurance-title">
-      <div class="section-heading">
-        <p class="eyebrow">Assurance</p>
-        <h2 id="assurance-title">Human-centred controls for trustworthy AI work</h2>
-        <p>Risk-based human-in-the-loop controls make sure AI does not grant authority the user does not possess. Material work requires evidence, review and accountable ownership.</p>
-      </div>
-      <div class="timeline" aria-label="Assurance workflow">
-        <div><span>1</span><h3>Classify</h3><p>Identify service impact, data sensitivity, equality and accessibility risk, security risk and model/tool exposure.</p></div>
-        <div><span>2</span><h3>Select</h3><p>Recommend applicable standards, source guidance, skills, agents, conformance packs and human review roles.</p></div>
-        <div><span>3</span><h3>Execute</h3><p>Apply approved tools with least privilege, source citations, deterministic checks, pair/buddy support and logs.</p></div>
-        <div><span>4</span><h3>Review</h3><p>Use 4-eyes or 6-eyes review, specialist assurance and no self-approval for material or high-risk outputs.</p></div>
-        <div><span>5</span><h3>Learn</h3><p>Capture evidence, incidents, feedback, source drift, model changes and improvement opportunities.</p></div>
-      </div>
-    </section>
+  <h3 style="margin-top:34px">Freshness and drift controls</h3>
+  <div class="grid g2">
+   <div class="card"><h3>Every indexed source carries</h3><ul class="clean"><li>• Authority tier and issuing body</li><li>• Date checked and next check due</li><li>• Applicability (organisation, service type, data classification)</li><li>• Supersession chain and withdrawal status</li><li>• Linked controls, skills and conformance tests</li></ul></div>
+   <div class="card"><h3>Drift triggers a review when</h3><ul class="clean"><li>• A cited source is updated, withdrawn or superseded</li><li>• A model or its version changes materially</li><li>• A control fails in production or a conformance test breaks</li><li>• An incident, complaint or FOI request touches the artefact</li><li>• The scheduled review date passes without confirmation</li></ul></div>
+  </div>
+ </div>
+</section>
 
-    <section class="section" id="catalogue" aria-labelledby="catalogue-title">
-      <div class="section-heading">
-        <p class="eyebrow">Metadata catalogue</p>
-        <h2 id="catalogue-title">Treat skills, agents and code as assets in their own right</h2>
-        <p>Every reusable AI capability should be discoverable, accountable, interoperable and governed like a public-sector knowledge, information, data or software asset.</p>
-      </div>
-      <div class="schema-panel">
-        <div>
-          <h3>Catalogue fields</h3>
-          <ul class="tag-list" aria-label="Catalogue metadata fields">
-            <li>Asset ID</li><li>Owner</li><li>Status</li><li>Version</li><li>Authority tier</li><li>Risk level</li><li>Source provenance</li><li>Review roles</li><li>Compatibility</li><li>Evidence rules</li><li>Lifecycle</li><li>Deprecation</li>
-          </ul>
-        </div>
-        <pre aria-label="Example skill asset metadata"><code>asset_type: ai_skill
+<section id="toolkit" class="section alt" aria-labelledby="sec-h-4">
+ <div class="wrap">
+  <span class="eyebrow">Toolkit</span>
+  <h2 id="sec-h-4">A complete operating kit for AI-assisted public delivery</h2>
+  <p class="lede">Every asset is designed to be catalogued, versioned, reviewed and reused. Filter by purpose, or search across names, descriptions and linked standards.</p>
+  <div class="grid g2 js-only" style="align-items:end;margin-bottom:6px">
+    <div class="field" style="margin:0">
+      <label for="tkSearch">Search the toolkit</label>
+      <span class="hint" id="tkSearchHint">Searches asset names, descriptions and linked standards.</span>
+      <input type="search" id="tkSearch" aria-describedby="tkSearchHint" placeholder="e.g. accessibility, agents, quantum, evidence">
+    </div>
+    <div class="field" style="margin:0">
+      <label for="tkCat">Filter by purpose</label>
+      <select id="tkCat"><option value="all">Show all</option><option value="governance">Governance</option><option value="delivery">Delivery</option><option value="assurance">Assurance</option><option value="future">Future-ready</option></select>
+    </div>
+  </div>
+  <p class="count-note" id="tkCount" role="status" aria-live="polite">Showing 18 of 18 toolkit assets.</p>
+  <div class="grid g3" id="tkGrid"><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-01</span><span class="tag">Governance</span><span class="tag">Medium effort</span></div>
+    <h3>AI asset metadata standard</h3><p>Machine-readable schemas for skills, agents, prompts, tools, model-use events, evidence packs and source provenance.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> JSON Schema + YAML template</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.w3.org/TR/prov-o/" rel="noopener noreferrer">PROV-O<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://cyclonedx.org/capabilities/mlbom/" rel="noopener noreferrer">CycloneDX ML-BOM<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://www.w3.org/TR/vocab-dcat-3/" rel="noopener noreferrer">DCAT 3<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-02</span><span class="tag">Delivery</span><span class="tag">Large effort</span></div>
+    <h3>Skill registry</h3><p>Approved, draft and deprecated skills with owners, sources, risk ratings, compatibility and evidence rules.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Register + lifecycle policy</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://huggingface.co/docs/hub/model-cards" rel="noopener noreferrer">Model cards<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://github.com/alphagov" rel="noopener noreferrer">alphagov<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-03</span><span class="tag">Delivery</span><span class="tag">Large effort</span></div>
+    <h3>Agent registry and bounding</h3><p>Bounded agents by autonomy level, permissions, allowed skills, prohibited actions, model constraints and kill-switch owner.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Register + autonomy policy</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://modelcontextprotocol.io/" rel="noopener noreferrer">MCP<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" rel="noopener noreferrer">OWASP LLM Top 10<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-04</span><span class="tag">Assurance</span><span class="tag">Small effort</span><span class="tag t-ok">Live tool</span></div>
+    <h3>Evidence pack builder</h3><p>Source consultation records, AI-use declarations, validation results, human acknowledgements and audit trails.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Generator on this page</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub" rel="noopener noreferrer">ATRS<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    <p style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="#tool-evidence">Open the tool</a></p>
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-05</span><span class="tag">Assurance</span><span class="tag">Small effort</span><span class="tag t-ok">Live tool</span></div>
+    <h3>DEIA impact screen</h3><p>Equality, accessibility, assisted digital, digital inclusion, protected characteristic and vulnerability screening.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Screening tool on this page</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.equalityhumanrights.com/guidance/public-sector-equality-duty" rel="noopener noreferrer">PSED<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://www.w3.org/TR/WCAG22/" rel="noopener noreferrer">WCAG 2.2<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    <p style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="#tool-deia">Open the tool</a></p>
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-06</span><span class="tag">Future-ready</span><span class="tag">Medium effort</span><span class="tag t-ok">Live tool</span></div>
+    <h3>Quantum readiness assessor</h3><p>Inventory cryptography, identify long-life data, assess harvest-now-decrypt-later exposure and plan crypto-agility.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Assessment tool on this page</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.ncsc.gov.uk/collection/post-quantum-cryptography" rel="noopener noreferrer">NCSC PQC<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://csrc.nist.gov/projects/post-quantum-cryptography" rel="noopener noreferrer">NIST PQC<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    <p style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="#tool-pqc">Open the tool</a></p>
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-07</span><span class="tag">Assurance</span><span class="tag">Small effort</span><span class="tag t-ok">Live tool</span></div>
+    <h3>Human review triage (H0–H5)</h3><p>Risk-based routing that decides how many eyes, which specialists and what evidence an AI-assisted output needs.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Triage tool on this page</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer">NIST AI RMF<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    <p style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="#tool-triage">Open the tool</a></p>
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-08</span><span class="tag">Delivery</span><span class="tag">Medium effort</span></div>
+    <h3>Prompt and context pattern library</h3><p>Reviewed prompt patterns with source-citation requirements, refusal conditions, data-handling rules and test cases.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Pattern library + tests</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.gov.uk/government/publications/generative-ai-framework-for-hmg" rel="noopener noreferrer">GenAI Framework for HMG<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-09</span><span class="tag">Assurance</span><span class="tag">Large effort</span></div>
+    <h3>Conformance packs</h3><p>Executable checks turning WCAG, Service Standard, Secure by Design and TCoP clauses into automated tests.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> CI pack</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://pa11y.org/" rel="noopener noreferrer">Pa11y<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" rel="noopener noreferrer">Secure by Design<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-10</span><span class="tag">Governance</span><span class="tag">Small effort</span><span class="tag t-ok">Live tool</span></div>
+    <h3>Transparency record generator</h3><p>Produce an ATRS-shaped public record for any algorithmic or AI-assisted tool in use.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Generator on this page</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub" rel="noopener noreferrer">ATRS hub<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    <p style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="#tool-atrs">Open the tool</a></p>
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-11</span><span class="tag">Governance</span><span class="tag">Medium effort</span></div>
+    <h3>Supplier and procurement assurance kit</h3><p>Questions, evidence asks and contract clauses for AI suppliers: model provenance, evaluations, accessibility, exit.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Question bank + clauses</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.iso.org/standard/81230.html" rel="noopener noreferrer">ISO/IEC 42001<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://www.etsi.org/deliver/etsi_en/301500_301599/301549/" rel="noopener noreferrer">EN 301 549<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-12</span><span class="tag">Assurance</span><span class="tag">Medium effort</span></div>
+    <h3>Incident, near-miss and drift reporting</h3><p>Report AI failures, hallucinations, bias incidents, prompt injection and source drift with learning loops.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Process + register</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://atlas.mitre.org/" rel="noopener noreferrer">MITRE ATLAS<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development" rel="noopener noreferrer">NCSC secure AI<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-13</span><span class="tag">Future-ready</span><span class="tag">Large effort</span></div>
+    <h3>Model and data provenance ledger</h3><p>Signed, tamper-evident record of which model, version, prompt, source and human touched each artefact.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Ledger spec</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://c2pa.org/" rel="noopener noreferrer">C2PA<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://slsa.dev/" rel="noopener noreferrer">SLSA<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-14</span><span class="tag">Future-ready</span><span class="tag">Medium effort</span></div>
+    <h3>Sustainability and cost-to-serve calculator</h3><p>Estimate energy, carbon and unit cost of model calls, and test whether a non-AI option is proportionate.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Calculator + reporting</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.gov.uk/government/publications/greening-government-ict-and-digital-services-strategy-2020-2025" rel="noopener noreferrer">Greening Government ICT<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://w3c.github.io/sustyweb/" rel="noopener noreferrer">W3C WSG<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-15</span><span class="tag">Delivery</span><span class="tag">Medium effort</span></div>
+    <h3>Inclusive research and co-design kit</h3><p>Recruitment, consent, reimbursement and session plans that reach disabled, digitally excluded and seldom-heard users.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Research kit</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.gov.uk/service-manual/user-research/running-research-sessions-with-people-with-disabilities" rel="noopener noreferrer">Research with disabled people<span class="ext visually-hidden"> (opens an external website)</span></a>, <a href="https://www.gov.uk/service-manual/helping-people-to-use-your-service" rel="noopener noreferrer">Assisted digital<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-16</span><span class="tag">Delivery</span><span class="tag">Small effort</span><span class="tag t-ok">Live tool</span></div>
+    <h3>Plain-language and reading-age checker</h3><p>Test AI-drafted content against GOV.UK style, reading age 9, and inclusive terminology before publication.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Checker on this page</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.gov.uk/guidance/style-guide" rel="noopener noreferrer">GOV.UK style guide<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    <p style="margin-top:6px"><a class="btn btn-secondary btn-sm" href="#tool-readability">Open the tool</a></p>
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-17</span><span class="tag">Governance</span><span class="tag">Medium effort</span></div>
+    <h3>Records, retention and FOI readiness</h3><p>Classify AI interaction logs as records; set retention, disclosure and redaction rules ahead of FOI/SAR requests.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Retention schedule</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://www.legislation.gov.uk/ukpga/2018/12/contents" rel="noopener noreferrer">DPA 2018<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article><article class="card">
+    <div class="tags"><span class="tag t-gov">TK-18</span><span class="tag">Delivery</span><span class="tag">Medium effort</span></div>
+    <h3>Capability and competence pathway</h3><p>Role-based learning paths, licence-to-operate checks and refreshers for anyone using AI on public work.</p>
+    <p style="font-size:.85rem;margin:0"><strong>Output:</strong> Curriculum map</p>
+    <p style="font-size:.85rem;margin:0"><strong>Anchored to:</strong> <a href="https://ddat-capability-framework.service.gov.uk/" rel="noopener noreferrer">DDaT framework<span class="ext visually-hidden"> (opens an external website)</span></a></p>
+    
+  </article></div>
+  <p class="count-note" id="tkEmpty" hidden="">No assets match. Try a broader term or reset the filter.</p>
+ </div>
+</section>
+<section id="tools" class="section" aria-labelledby="sec-h-5">
+ <div class="wrap">
+  <span class="eyebrow">Working tools</span>
+  <h2 id="sec-h-5">Do the work here, not in a separate spreadsheet</h2>
+  <p class="lede">Six tools that turn the guidance into an artefact you can paste into a ticket, a change record or a board paper. Everything runs in your browser — nothing you type is sent anywhere, stored or transmitted.</p><noscript id="nsTools"><div class="callout warn"><p><strong>These tools need JavaScript.</strong> The questions below still work as a printable checklist, and every judgement they make is explained in the Assurance and UCD sections. Nothing you enter is ever sent anywhere.</p></div></noscript>
+  <div class="callout ok"><p><strong>Privacy by design:</strong> these tools are client-side only. Do not enter personal data, case details or anything above OFFICIAL. Use references and descriptions instead.</p></div>
+
+  <details id="tool-triage" open="" aria-label="1. Human review triage — what level of oversight does this need?">
+   <summary>1. Human review triage — what level of oversight does this need?</summary>
+   <div class="details-body">
+    <form id="triageForm">
+     <fieldset><legend>About the output</legend>
+      <div class="field"><label for="tr-what">What is the AI helping you produce?</label><input type="text" id="tr-what" placeholder="e.g. Draft accessibility review of a caseworker screen"></div>
+      <div class="field"><label for="tr-audience">Who will see or be affected by it?</label>
+        <select id="tr-audience"><option value="0">Only me</option><option value="1">My immediate team</option><option value="2">My organisation</option><option value="3">External partners or suppliers</option><option value="4">Members of the public</option></select></div>
+      <div class="field"><label for="tr-impact">If it were wrong, what is the worst realistic consequence?</label>
+        <select id="tr-impact"><option value="0">Wasted personal time only</option><option value="1">Internal rework</option><option value="2">Reputational or financial harm to the organisation</option><option value="3">Unfair or inaccessible treatment of a group</option><option value="4">Harm to an individual’s rights, entitlements, safety or health</option></select></div>
+      <div class="field"><label for="tr-data">Highest data classification involved</label>
+        <select id="tr-data"><option value="0">None / public</option><option value="1">Internal, non-personal</option><option value="2">Personal data</option><option value="3">Special category or criminal offence data</option><option value="4">OFFICIAL-SENSITIVE or higher</option></select></div>
+      <div class="field"><label for="tr-rev">How reversible is the outcome?</label>
+        <select id="tr-rev"><option value="0">Instantly reversible</option><option value="2">Reversible with effort</option><option value="4">Hard or impossible to reverse</option></select></div>
+      <fieldset style="margin-top:8px"><legend style="font-size:.95rem">Does any of the following apply?</legend>
+       <div class="check"><input type="checkbox" id="tr-c1" value="2"><label for="tr-c1">It informs or automates a decision about a person</label></div>
+       <div class="check"><input type="checkbox" id="tr-c2" value="2"><label for="tr-c2">It will be published or is disclosable under FOI</label></div>
+       <div class="check"><input type="checkbox" id="tr-c3" value="2"><label for="tr-c3">It is code, configuration or infrastructure that will reach production</label></div>
+       <div class="check"><input type="checkbox" id="tr-c4" value="2"><label for="tr-c4">It involves statistics, legal, clinical, financial or safety content</label></div>
+       <div class="check"><input type="checkbox" id="tr-c5" value="2"><label for="tr-c5">An agent will act autonomously using tools or credentials</label></div>
+       <div class="check"><input type="checkbox" id="tr-c6" value="1"><label for="tr-c6">The subject matter is outside my professional competence</label></div>
+      </fieldset>
+     </fieldset>
+     <button type="button" class="btn btn-primary js-only" id="triageGo">Get my review level</button>
+    </form>
+    <div class="result-box" id="triageOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">Your result will appear here.</p></div>
+    <div class="actions no-print js-only"><button class="btn btn-secondary btn-sm js-only" data-copy="triageOut">Copy result</button><button class="btn btn-secondary btn-sm js-only" data-reset="triageOut">Reset</button></div>
+   </div>
+  </details>
+
+  <details id="tool-evidence" aria-label="2. AI-use declaration and evidence pack generator">
+   <summary>2. AI-use declaration and evidence pack generator</summary>
+   <div class="details-body">
+    <p>Produces a copy-ready record. Attach it to the artefact, the ticket or the change record.</p>
+    <form id="evForm" class="grid g2">
+     <div class="field"><label for="ev-art">Artefact or reference</label><input type="text" id="ev-art" placeholder="e.g. CR-1487 caseworker screen review"></div>
+     <div class="field"><label for="ev-role">Your role</label><input type="text" id="ev-role" placeholder="e.g. Interaction designer"></div>
+     <div class="field"><label for="ev-tool">Tool and model version used</label><input type="text" id="ev-tool" placeholder="e.g. Approved assistant, model v3.2 (2026-07)"></div>
+     <div class="field"><label for="ev-h">Human review level applied</label><select id="ev-h"><option>H0</option><option>H1</option><option selected="">H2</option><option>H3</option><option>H4</option><option>H5</option></select></div>
+     <div class="field" style="grid-column:1/-1"><label for="ev-extent">Extent of AI assistance</label><span class="hint">Be specific: what did AI do, and what did you do?</span><textarea id="ev-extent" placeholder="AI drafted the initial structure and suggested WCAG criteria; I verified each criterion against the specification, rewrote the findings and added two issues AI missed."></textarea></div>
+     <div class="field" style="grid-column:1/-1"><label for="ev-sources">Sources consulted and verified (one per line)</label><textarea id="ev-sources" placeholder="WCAG 2.2 – https://www.w3.org/TR/WCAG22/
+GOV.UK Design System – https://design-system.service.gov.uk/"></textarea></div>
+     <div class="field" style="grid-column:1/-1"><label for="ev-checks">Checks performed</label><textarea id="ev-checks" placeholder="Every citation opened and confirmed; keyboard and screen reader test run; figures recalculated by hand; no personal data entered."></textarea></div>
+     <div class="field"><label for="ev-rev">Reviewer(s) and role</label><input type="text" id="ev-rev" placeholder="e.g. A. Patel, accessibility specialist"></div>
+     <div class="field"><label for="ev-res">Residual risk or limitation</label><input type="text" id="ev-res" placeholder="e.g. Not tested with voice control"></div>
+    </form>
+    <button type="button" class="btn btn-primary js-only" id="evGo">Generate declaration</button>
+    <div class="result-box" id="evOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">Your result will appear here.</p></div>
+    <div class="actions no-print js-only"><button class="btn btn-secondary btn-sm js-only" data-copy="evOut">Copy result</button><button class="btn btn-secondary btn-sm js-only" data-reset="evOut">Reset</button></div>
+   </div>
+  </details>
+
+  <details id="tool-deia" aria-label="3. DEIA impact screen — equality, accessibility and inclusion">
+   <summary>3. DEIA impact screen — equality, accessibility and inclusion</summary>
+   <div class="details-body">
+    <p>A screening tool, not a substitute for a full equality impact assessment. It tells you whether you need one.</p>
+    <form id="deiaForm">
+     <div class="field"><label for="de-what">What is changing?</label><input type="text" id="de-what" placeholder="e.g. AI-assisted triage of benefit enquiries"></div>
+     <fieldset><legend>Tick everything that could apply</legend>
+      <div class="check"><input type="checkbox" id="de1"><label for="de1">The change could affect people differently by age, disability, race, sex, religion, pregnancy, gender reassignment, sexual orientation, marriage or civil partnership</label></div>
+      <div class="check"><input type="checkbox" id="de2"><label for="de2">Training data, prompts or sources may under-represent some groups</label></div>
+      <div class="check"><input type="checkbox" id="de3"><label for="de3">Outputs will be read by the public or by people with access needs</label></div>
+      <div class="check"><input type="checkbox" id="de4"><label for="de4">The service is used by people who are digitally excluded or need assisted digital support</label></div>
+      <div class="check"><input type="checkbox" id="de5"><label for="de5">It affects people in vulnerable circumstances, in crisis, or at risk of harm</label></div>
+      <div class="check"><input type="checkbox" id="de6"><label for="de6">Language, literacy, numeracy or reading age could be a barrier</label></div>
+      <div class="check"><input type="checkbox" id="de7"><label for="de7">It replaces or reduces a human contact route</label></div>
+      <div class="check"><input type="checkbox" id="de8"><label for="de8">There is no easy way for someone to challenge or appeal the outcome</label></div>
+      <div class="check"><input type="checkbox" id="de9"><label for="de9">Welsh language or other alternative formats may be required</label></div>
+      <div class="check"><input type="checkbox" id="de10"><label for="de10">We have not yet tested with disabled users or assistive technology</label></div>
+     </fieldset>
+     <button type="button" class="btn btn-primary js-only" id="deiaGo">Screen this change</button>
+    </form>
+    <div class="result-box" id="deiaOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">Your result will appear here.</p></div>
+    <div class="actions no-print js-only"><button class="btn btn-secondary btn-sm js-only" data-copy="deiaOut">Copy result</button><button class="btn btn-secondary btn-sm js-only" data-reset="deiaOut">Reset</button></div>
+   </div>
+  </details>
+
+  <details id="tool-atrs" aria-label="4. Transparency record generator (ATRS-shaped)">
+   <summary>4. Transparency record generator (ATRS-shaped)</summary>
+   <div class="details-body">
+    <p>Drafts a public-facing record of how an algorithmic or AI tool is used. Publish it, and link it from the service.</p>
+    <form id="atForm" class="grid g2">
+     <div class="field"><label for="at-name">Tool name</label><input type="text" id="at-name"></div>
+     <div class="field"><label for="at-org">Organisation and owner</label><input type="text" id="at-org"></div>
+     <div class="field" style="grid-column:1/-1"><label for="at-purpose">What it does, in plain English</label><textarea id="at-purpose" placeholder="Explain it as you would to someone affected by it."></textarea></div>
+     <div class="field"><label for="at-role">Role in the decision</label><select id="at-role"><option>Assists a human who decides</option><option>Recommends, human confirms</option><option>Automates a step, human can override</option><option>Fully automated decision</option></select></div>
+     <div class="field"><label for="at-scale">Scale of use</label><input type="text" id="at-scale" placeholder="e.g. ~4,000 cases per month"></div>
+     <div class="field" style="grid-column:1/-1"><label for="at-data">Data used</label><textarea id="at-data" placeholder="Categories of data, source, whether personal or special category, retention."></textarea></div>
+     <div class="field" style="grid-column:1/-1"><label for="at-risk">Known risks and mitigations</label><textarea id="at-risk"></textarea></div>
+     <div class="field" style="grid-column:1/-1"><label for="at-redress">How someone can question or challenge the outcome</label><textarea id="at-redress"></textarea></div>
+    </form>
+    <button type="button" class="btn btn-primary js-only" id="atGo">Generate transparency record</button>
+    <div class="result-box" id="atOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">Your result will appear here.</p></div>
+    <div class="actions no-print js-only"><button class="btn btn-secondary btn-sm js-only" data-copy="atOut">Copy result</button><button class="btn btn-secondary btn-sm js-only" data-reset="atOut">Reset</button></div>
+   </div>
+  </details>
+
+  <details id="tool-pqc" aria-label="5. Quantum readiness and crypto-agility assessor">
+   <summary>5. Quantum readiness and crypto-agility assessor</summary>
+   <div class="details-body">
+    <form id="pqForm">
+     <div class="field"><label for="pq-life">How long must this data stay confidential?</label>
+      <select id="pq-life"><option value="0">Under 1 year</option><option value="1">1–5 years</option><option value="3">5–10 years</option><option value="5">More than 10 years, or lifelong (health, identity, security)</option></select></div>
+     <fieldset><legend>Tick what is true today</legend>
+      <div class="check"><input type="checkbox" id="pq1" value="3"><label for="pq1">We have no complete inventory of where cryptography is used</label></div>
+      <div class="check"><input type="checkbox" id="pq2" value="3"><label for="pq2">Algorithms are hard-coded or embedded in third-party products we cannot change quickly</label></div>
+      <div class="check"><input type="checkbox" id="pq3" value="2"><label for="pq3">Data travels over networks that a capable adversary could record</label></div>
+      <div class="check"><input type="checkbox" id="pq4" value="2"><label for="pq4">We rely on RSA or elliptic-curve key exchange with no PQC migration plan</label></div>
+      <div class="check"><input type="checkbox" id="pq5" value="2"><label for="pq5">Long-life signatures (certificates, firmware, legal records) are in scope</label></div>
+      <div class="check"><input type="checkbox" id="pq6" value="1"><label for="pq6">Suppliers have not been asked about their PQC roadmap</label></div>
+     </fieldset>
+     <button type="button" class="btn btn-primary js-only" id="pqGo">Assess exposure</button>
+    </form>
+    <div class="result-box" id="pqOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">Your result will appear here.</p></div>
+    <div class="actions no-print js-only"><button class="btn btn-secondary btn-sm js-only" data-copy="pqOut">Copy result</button><button class="btn btn-secondary btn-sm js-only" data-reset="pqOut">Reset</button></div>
+   </div>
+  </details>
+
+  <details id="tool-readability" aria-label="6. Plain-language and inclusive content checker">
+   <summary>6. Plain-language and inclusive content checker</summary>
+   <div class="details-body">
+    <p>Paste AI-drafted content to check reading difficulty, sentence length, jargon and non-inclusive phrasing before publication.</p>
+    <div class="field"><label for="rdText">Content to check</label><span class="hint">Nothing leaves your browser. Do not paste personal data.</span><textarea id="rdText" style="min-height:160px" placeholder="Paste your draft here…"></textarea></div>
+    <button type="button" class="btn btn-primary js-only" id="rdGo">Check this content</button>
+    <div class="result-box" id="rdOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">Your result will appear here.</p></div>
+    <div class="actions no-print js-only"><button class="btn btn-secondary btn-sm js-only" data-copy="rdOut">Copy result</button><button class="btn btn-secondary btn-sm js-only" data-reset="rdOut">Reset</button></div>
+   </div>
+  </details>
+ </div>
+</section>
+<section id="assurance" class="section alt" aria-labelledby="sec-h-6">
+ <div class="wrap">
+  <span class="eyebrow">Assurance</span>
+  <h2 id="sec-h-6">Human-centred controls for trustworthy AI work</h2>
+  <p class="lede">Risk-based human-in-the-loop controls make sure AI never grants authority a user does not already possess, and that every material output can be defended after the fact.</p>
+
+  <h3>The five-stage assurance workflow</h3>
+  <ol class="steps">
+   <li><strong>Classify</strong> — identify service impact, data sensitivity, equality and accessibility risk, security risk and model/agent autonomy. <a href="#tool-triage">Use the triage tool →</a></li>
+   <li><strong>Select</strong> — apply the standards, source guidance, skills, agents, conformance packs and review level the classification demands.</li>
+   <li><strong>Execute</strong> — work with least privilege, mandatory source citation, deterministic checks and pair or buddy support where competence is thin.</li>
+   <li><strong>Review</strong> — 4-eyes or 6-eyes review, specialist assurance, and no self-approval for material or high-risk outputs.</li>
+   <li><strong>Learn</strong> — capture evidence, incidents, near-misses, feedback, source drift and model changes; feed them back into the corpus.</li>
+  </ol>
+
+  <h3 style="margin-top:34px">The H0–H5 human review model</h3>
+  <div class="table-scroll">
+   <table>
+    <caption>Review levels, when they apply and the evidence each produces</caption>
+    <thead><tr><th scope="col">Level</th><th scope="col">Name</th><th scope="col">What it means</th><th scope="col">Typical examples</th><th scope="col">Evidence</th></tr></thead>
+    <tbody><tr><td><span class="badge-h">H0</span></td><td><strong>No review needed</strong></td><td>Personal, throwaway, non-published exploration with no personal or sensitive data.</td><td>Explaining a concept to yourself; drafting private notes.</td><td>None required.</td></tr><tr><td><span class="badge-h">H1</span></td><td><strong>Self-check</strong></td><td>Author verifies facts, sources and accessibility before use. Low impact, easily reversible.</td><td>Internal meeting notes, first-draft ideas.</td><td>AI-use note in the document.</td></tr><tr><td><span class="badge-h">H2</span></td><td><strong>Peer check</strong></td><td>A second competent person checks output before it leaves the team.</td><td>Internal reports, non-public analysis, low-risk code in a sandbox.</td><td>Reviewer name, date, issues found.</td></tr><tr><td><span class="badge-h">H3</span></td><td><strong>Specialist review (4-eyes)</strong></td><td>A named specialist in the relevant discipline reviews. No self-approval.</td><td>Accessibility, security, legal, statistical or clinical content; production code.</td><td>Specialist sign-off + test results.</td></tr><tr><td><span class="badge-h">H4</span></td><td><strong>Multi-specialist review (6-eyes)</strong></td><td>Two or more specialisms plus the accountable owner. Independent challenge required.</td><td>Public-facing decisions, casework support, anything affecting entitlements.</td><td>Panel record, dissent captured, residual risk stated.</td></tr><tr><td><span class="badge-h">H5</span></td><td><strong>Governance board and publication</strong></td><td>Formal board approval, published transparency record and monitored deployment.</td><td>Automated or semi-automated decisions about people; national services.</td><td>ATRS record, DPIA, EQIA, monitoring plan, review date.</td></tr></tbody>
+   </table>
+  </div>
+
+  <h3 style="margin-top:34px">Reviewer checklist</h3>
+  <div class="grid g2">
+   <div class="card"><h3>Always check</h3><ul class="ticks">
+    <li>Every citation opens, exists and says what the text claims</li>
+    <li>Numbers, dates, thresholds and legal references independently verified</li>
+    <li>Nothing asserts compliance that has not actually been tested</li>
+    <li>No personal or sensitive data was entered into an unapproved tool</li>
+    <li>Accessibility and plain-language requirements met, not assumed</li>
+    <li>Assumptions, gaps and residual risk stated explicitly</li>
+    <li>Reviewer is independent of the author at H3 and above</li>
+   </ul></div>
+   <div class="card"><h3>Common failure patterns</h3><ul class="clean">
+    <li>• <strong>Confident fabrication</strong> — plausible citations that do not exist</li>
+    <li>• <strong>Stale authority</strong> — quoting withdrawn or superseded guidance</li>
+    <li>• <strong>Compliance theatre</strong> — a checklist ticked without a test run</li>
+    <li>• <strong>Silent scope creep</strong> — an agent doing more than was authorised</li>
+    <li>• <strong>Automation bias</strong> — reviewers rubber-stamping fluent output</li>
+    <li>• <strong>Averaged users</strong> — outputs tuned to a majority that excludes minorities</li>
+    <li>• <strong>Evidence gaps</strong> — no record of who checked what, or when</li>
+   </ul></div>
+  </div>
+
+  <h3 style="margin-top:34px">Accountability at a glance (RACI)</h3>
+  <div class="table-scroll">
+   <table><caption>Who does what in AI-assisted delivery</caption>
+    <thead><tr><th scope="col">Activity</th><th scope="col">Responsible</th><th scope="col">Accountable</th><th scope="col">Consulted</th><th scope="col">Informed</th></tr></thead>
+    <tbody>
+     <tr><td>Classifying risk and review level</td><td>Author</td><td>Service owner</td><td>Specialist reviewers</td><td>Delivery team</td></tr>
+     <tr><td>Verifying sources and outputs</td><td>Author</td><td>Author</td><td>Peer reviewer</td><td>Service owner</td></tr>
+     <tr><td>Specialist sign-off (H3+)</td><td>Named specialist</td><td>Service owner</td><td>Author</td><td>Assurance board</td></tr>
+     <tr><td>Equality and accessibility screening</td><td>Author</td><td>Service owner</td><td>Equality &amp; accessibility leads</td><td>Governance board</td></tr>
+     <tr><td>Data protection and lawful basis</td><td>Product owner</td><td>Data controller / SIRO</td><td>DPO</td><td>ICO where required</td></tr>
+     <tr><td>Publishing a transparency record</td><td>Service owner</td><td>SRO</td><td>Comms, legal</td><td>Public</td></tr>
+     <tr><td>Incident and near-miss reporting</td><td>Anyone who spots it</td><td>Service owner</td><td>Security, DPO</td><td>Assurance board</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<section id="catalogue" class="section" aria-labelledby="sec-h-7">
+ <div class="wrap">
+  <span class="eyebrow">Metadata catalogue</span>
+  <h2 id="sec-h-7">Treat skills, agents and code as assets in their own right</h2>
+  <p class="lede">Every reusable AI capability should be discoverable, accountable, interoperable and governed like any other public asset — with an owner, a version, a risk rating and a retirement plan.</p>
+  <div class="grid g2">
+   <div>
+    <h3>Catalogue fields</h3>
+    <div class="table-scroll"><table><caption>Minimum viable metadata for any AI asset</caption>
+     <thead><tr><th scope="col">Field</th><th scope="col">Why it matters</th></tr></thead><tbody>
+     <tr><td><code>asset_id</code></td><td>Stable identifier so evidence, incidents and dependencies can point at it.</td></tr>
+     <tr><td><code>owner</code></td><td>A named person, not a team inbox. Accountability needs a face.</td></tr>
+     <tr><td><code>status</code></td><td>draft / approved / restricted / deprecated / withdrawn.</td></tr>
+     <tr><td><code>version</code></td><td>Semantic versioning; breaking changes force re-review.</td></tr>
+     <tr><td><code>authority_tier</code></td><td>0–3 tier of the sources the asset relies on.</td></tr>
+     <tr><td><code>risk_level</code> / <code>human_review</code></td><td>H0–H5 floor that consumers must apply.</td></tr>
+     <tr><td><code>source_provenance</code></td><td>Which guidance, data and code it derives from, with dates.</td></tr>
+     <tr><td><code>permissions</code></td><td>Least-privilege scopes, tools and credentials the asset may use.</td></tr>
+     <tr><td><code>prohibited_actions</code></td><td>Explicit red lines an agent must never cross.</td></tr>
+     <tr><td><code>deia_screen</code></td><td>Date and outcome of equality and accessibility screening.</td></tr>
+     <tr><td><code>evaluation</code></td><td>Test suite, pass thresholds and last run.</td></tr>
+     <tr><td><code>compatibility</code></td><td>Models, runtimes and versions it is validated against.</td></tr>
+     <tr><td><code>lifecycle</code></td><td>Review cadence, next review, deprecation and retirement date.</td></tr>
+     <tr><td><code>contact</code> / <code>redress</code></td><td>How to report a problem or challenge an outcome.</td></tr>
+    </tbody></table></div>
+   </div>
+   <div>
+    <h3>Example skill asset metadata</h3>
+    <div class="code-block"><button class="btn btn-secondary btn-sm copy no-print" data-copy="yamlEx">Copy</button><pre id="yamlEx">asset_type: ai_skill
 asset_id: review-accessibility-govuk
+title: GOV.UK accessibility review assistant
 status: approved
-human_review: H3 specialist
-self_approval_allowed: false
-source_freshness_required: true
-evidence_pack_required: true</code></pre>
-      </div>
-    </section>
+version: 2.1.0
+owner: a.patel@example.gov.uk
+authority_tier: 1
+human_review: H3
+specialist_review: [accessibility, content_design]
+self_approval: false
+source_provenance:
+  - id: wcag22
+    url: https://www.w3.org/TR/WCAG22/
+    checked: 2026-07-14
+    next_check: 2026-10-14
+  - id: govuk-design-system
+    url: https://design-system.service.gov.uk/
+    checked: 2026-07-14
+permissions:
+  tools: [read_page, run_axe]
+  data_classification_max: OFFICIAL
+prohibited_actions:
+  - claiming_conformance_without_test_evidence
+  - processing_personal_data
+  - autonomous_publication
+deia_screen:
+  completed: 2026-06-02
+  outcome: mitigations_applied
+evaluation:
+  suite: a11y-regression-v4
+  threshold: 0.95
+  last_run: 2026-08-01
+compatibility:
+  models: ["&gt;=v3.1"]
+  runtimes: [node20, python3.12]
+evidence_rules:
+  require_citations: true
+  require_reviewer_signoff: true
+  retain_for: P7Y
+lifecycle:
+  review_cadence: P3M
+  next_review: 2026-11-01
+  deprecation: null
+contact: ai-assurance@example.gov.uk</pre></div>
+   </div>
+  </div>
+  <div class="callout" style="margin-top:26px"><p><strong>Interoperability note:</strong> map these fields to <a href="https://www.w3.org/TR/vocab-dcat-3/" rel="noopener noreferrer">DCAT 3<span class="ext visually-hidden"> (opens an external website)</span></a> for cataloguing, <a href="https://www.w3.org/TR/prov-o/" rel="noopener noreferrer">PROV-O<span class="ext visually-hidden"> (opens an external website)</span></a> for evidence chains and <a href="https://cyclonedx.org/capabilities/mlbom/" rel="noopener noreferrer">CycloneDX ML-BOM<span class="ext visually-hidden"> (opens an external website)</span></a> for supply chain, so registries in different organisations can federate rather than fork.</p></div>
+ </div>
+</section>
+<section id="ucd" class="section alt" aria-labelledby="sec-h-8">
+ <div class="wrap">
+  <span class="eyebrow">UCD, DEIA and accessibility</span>
+  <h2 id="sec-h-8">Designed for real people, varied needs and accountable teams</h2>
+  <p class="lede">Inclusion is a delivery activity, not a compliance report. This section states what we commit to, how we test it, and how you can hold us to it.</p>
 
-    <section class="section alt" id="ucd" aria-labelledby="ucd-title">
-      <div class="section-heading">
-        <p class="eyebrow">UCD, DEIA and accessibility</p>
-        <h2 id="ucd-title">Designed for real people, varied needs and accountable teams</h2>
-        <p>The portal is built around inclusive journeys for public servants, suppliers, reviewers, specialists and service owners. DEIA is treated as a design requirement and assurance control, not a final checklist.</p>
-      </div>
-      <div class="persona-grid">
-        <article><h3>New or occasional contributor</h3><p>Plain-language guidance, confidence prompts, buddying, role limits and safe defaults.</p></article>
-        <article><h3>Experienced practitioner</h3><p>Fast routes to standards, code patterns, conformance packs, test scripts and evidence automation.</p></article>
-        <article><h3>Specialist reviewer</h3><p>Source-linked evidence, issue triage, risk decisions and assurance history.</p></article>
-        <article><h3>Accountable owner</h3><p>Risk overview, approval gates, residual risk, maturity dashboards and public transparency records.</p></article>
-      </div>
-      <div class="accessibility-box" role="note" aria-label="Accessibility and inclusion statement">
-        <h3>Inclusion commitments</h3>
-        <p>Use semantic HTML, keyboard access, visible focus, high colour contrast, responsive layout, reduced-motion support, plain language, progressive disclosure and routes for assisted support. The content is designed to support equality, diversity, inclusion and accessibility obligations, but formal compliance decisions remain with authorised humans.</p>
-      </div>
-    </section>
+  <h3>Design and research practice</h3>
+  <div class="grid g3">
+   <article class="card"><h3>Start with user needs</h3><p>Every asset traces to a named user need and a measurable outcome. If we cannot name the need, we do not build the feature.</p><p><a href="https://www.gov.uk/guidance/government-design-principles" rel="noopener noreferrer">Government Design Principles →<span class="ext visually-hidden"> (opens an external website)</span></a></p></article>
+   <article class="card"><h3>Research with the full range of users</h3><p>Recruit disabled participants, assistive technology users, people with low digital confidence and people in vulnerable circumstances — in every round, not a one-off "accessibility round".</p><p><a href="https://www.gov.uk/service-manual/user-research/running-research-sessions-with-people-with-disabilities" rel="noopener noreferrer">Inclusive research guidance →<span class="ext visually-hidden"> (opens an external website)</span></a></p></article>
+   <article class="card"><h3>Test with assistive technology</h3><p>Manual testing with screen readers, magnification, voice control, switch access and keyboard-only. Automated tools catch a minority of real barriers.</p><p><a href="https://www.w3.org/WAI/ARIA/apg/" rel="noopener noreferrer">ARIA Authoring Practices →<span class="ext visually-hidden"> (opens an external website)</span></a></p></article>
+   <article class="card"><h3>Design for the whole journey</h3><p>Including offline, assisted digital, third-party support, and what happens when the AI is unavailable or wrong.</p><p><a href="https://www.gov.uk/service-manual/helping-people-to-use-your-service" rel="noopener noreferrer">Assisted digital guidance →<span class="ext visually-hidden"> (opens an external website)</span></a></p></article>
+   <article class="card"><h3>Write for reading age 9</h3><p>Plain English, short sentences, no unexplained acronyms, inclusive terminology, and alternative formats on request.</p><p><a href="#tool-readability">Check your content →</a></p></article>
+   <article class="card"><h3>Measure exclusion, not just satisfaction</h3><p>Track drop-out by channel and need, assisted digital volumes, complaint themes and accessibility issue ageing — and publish them.</p><p><a href="https://www.gov.uk/service-manual/service-standard" rel="noopener noreferrer">Service Standard →<span class="ext visually-hidden"> (opens an external website)</span></a></p></article>
+  </div>
 
-    <section class="section" id="practice" aria-labelledby="practice-title">
-      <div class="section-heading">
-        <p class="eyebrow">Code of practice and conduct</p>
-        <h2 id="practice-title">Responsible use of AI assistive technology</h2>
-        <p>This code of practice complements behavioural codes of conduct. It defines operational rules for model-backed tools, direct AI use, coding assistants, multi-agent orchestration and AI-generated artefacts.</p>
-      </div>
-      <div class="accordion" data-accordion>
-        <button type="button" aria-expanded="true" aria-controls="practice-1">Core duties</button>
-        <div id="practice-1"><p>Remain accountable, disclose material AI assistance, verify outputs, protect data, cite sources, preserve evidence, avoid unsupported compliance claims and escalate uncertainty.</p></div>
-        <button type="button" aria-expanded="false" aria-controls="practice-2">Prohibited behaviours</button>
-        <div id="practice-2"><p>Do not input unauthorised sensitive data, bypass review, self-approve material work, hide AI use, deploy without authority, override failing checks or claim legal/compliance approval without accountable review.</p></div>
-        <button type="button" aria-expanded="false" aria-controls="practice-3">Multi-agent and multi-skill rules</button>
-        <div id="practice-3"><p>Use one accountable orchestrator, least-privilege tools, explicit skill versions, separation of duties, conflict escalation, audit logs, evidence packs and human approval before high-impact action.</p></div>
-        <div id="practice-2" hidden><p>Do not input unauthorised sensitive data, bypass review, self-approve material work, hide AI use, deploy without authority, override failing checks or claim legal/compliance approval without accountable review.</p></div>
-        <button type="button" aria-expanded="false" aria-controls="practice-3">Multi-agent and multi-skill rules</button>
-        <div id="practice-3" hidden><p>Use one accountable orchestrator, least-privilege tools, explicit skill versions, separation of duties, conflict escalation, audit logs, evidence packs and human approval before high-impact action.</p></div>
-      </div>
-    </section>
+  <h3 style="margin-top:34px">Accessibility commitments for this portal</h3>
+  <div class="grid g2">
+   <div class="card"><h3>What we build in</h3><ul class="ticks">
+    <li>Semantic HTML, landmarks and a logical heading order</li>
+    <li>Full keyboard operation with a visible, high-contrast focus indicator</li>
+    <li>Text contrast of at least 4.5:1 and 3:1 for interface components</li>
+    <li>Light, dark and high-contrast themes, plus a larger-text setting that persists</li>
+    <li>Respect for <code>prefers-reduced-motion</code> and no motion-only meaning</li>
+    <li>Responsive to 320&nbsp;CSS&nbsp;px and to 400% zoom without loss of content</li>
+    <li>Status messages announced through ARIA live regions</li>
+    <li>No colour-only meaning; icons always paired with text</li>
+    <li>Descriptive link text that makes sense out of context</li>
+    <li>A print stylesheet that expands links and collapsible content</li>
+   </ul></div>
+   <div class="card"><h3>How we test and report</h3><ul class="ticks">
+    <li>Automated checks in the pipeline on every change</li>
+    <li>Manual keyboard and screen reader testing before release</li>
+    <li>Periodic testing with disabled participants</li>
+    <li>A published accessibility statement listing known gaps and fix dates</li>
+    <li>A named contact and a 5-working-day response commitment</li>
+    <li>Escalation route to the Equality Advisory and Support Service</li>
+   </ul>
+   <p style="margin-top:8px"><a href="https://www.gov.uk/guidance/make-your-website-or-app-accessible-and-publish-an-accessibility-statement" rel="noopener noreferrer">Accessibility statement guidance →<span class="ext visually-hidden"> (opens an external website)</span></a></p></div>
+  </div>
 
-    <section class="section cta" aria-labelledby="cta-title">
-      <h2 id="cta-title">Make guidance usable, testable and accountable.</h2>
-      <p>Start with the corpus, encode metadata, publish skills, bound agents, enforce review, and continuously improve through evidence and user research.</p>
-      <a class="button" href="#top">Back to top</a>
-    </section>
+  <h3 style="margin-top:34px">DEIA in AI specifically</h3>
+  <div class="grid g2">
+   <div class="callout warn"><p><strong>Known equity risks of AI-assisted delivery.</strong> Performance that degrades for under-represented groups; language models that default to majority dialects and names; outputs written above the reading age of the audience; automation that removes the human route people in crisis rely on; accessibility regressions in AI-generated code and content; and reviewers who trust fluent text more than accurate text.</p></div>
+   <div class="callout ok"><p><strong>What we do about them.</strong> Screen every change with the DEIA tool; disaggregate evaluation by affected group where lawful and proportionate; keep a human route that cannot be removed by efficiency targets; test AI-generated interfaces with assistive technology before merge; publish limitations honestly; and give people a real way to challenge an outcome.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="practice" class="section" aria-labelledby="sec-h-9">
+ <div class="wrap">
+  <span class="eyebrow">Code of practice and conduct</span>
+  <h2 id="sec-h-9">Responsible use of AI assistive technology</h2>
+  <p class="lede">This code complements behavioural codes of conduct and the Civil Service values. It defines operational rules for model-backed tools, direct AI use, coding assistants, multi-agent orchestration and AI-generated artefacts.</p>
+
+  <details open=""><summary>Core duties</summary><div class="details-body">
+   <ul class="ticks">
+    <li><strong>Stay accountable.</strong> You own every output you use, send or publish. "The AI wrote it" is never a defence.</li>
+    <li><strong>Disclose material assistance.</strong> If AI shaped the substance, structure, analysis or code, say so.</li>
+    <li><strong>Verify before you rely.</strong> Open every citation. Recalculate every figure. Test every claim of compliance.</li>
+    <li><strong>Protect data.</strong> Only approved tools, only permitted classifications, only the minimum necessary.</li>
+    <li><strong>Cite sources.</strong> Traceable to a tiered, dated, authoritative source — not to the model.</li>
+    <li><strong>Preserve evidence.</strong> Keep the record for as long as the retention schedule requires.</li>
+    <li><strong>Work within competence.</strong> AI does not qualify you to make specialist judgements.</li>
+    <li><strong>Escalate uncertainty.</strong> Raising a doubt early is always cheaper than defending a mistake late.</li>
+   </ul></div></details>
+
+  <details><summary>Prohibited behaviours</summary><div class="details-body">
+   <ul class="clean">
+    <li>• Entering unauthorised personal, special category, commercially confidential or classified data into any tool</li>
+    <li>• Bypassing, weakening or "temporarily" disabling a review control</li>
+    <li>• Self-approving material or high-risk work</li>
+    <li>• Concealing AI involvement where it was material</li>
+    <li>• Presenting unverified output as assured, tested or compliant</li>
+    <li>• Using AI to generate evidence, sign-offs, approvals or audit records that did not happen</li>
+    <li>• Granting an agent broader permissions than the person operating it holds</li>
+    <li>• Using AI to profile, rank or make decisions about people without an approved lawful basis and published record</li>
+    <li>• Copying licensed or copyright material into outputs without permission and attribution</li>
+    <li>• Ignoring a known defect because a deadline is closer than the consequence</li>
+   </ul></div></details>
+
+  <details><summary>Multi-agent and multi-skill rules</summary><div class="details-body">
+   <ul class="ticks">
+    <li>One accountable orchestrator per task, with a named human owner.</li>
+    <li>Least-privilege tools and credentials, time-boxed and revocable.</li>
+    <li>Explicit, pinned skill and model versions — no silent upgrades in a governed workflow.</li>
+    <li>Separation of duties: the agent that produces must not be the agent that approves.</li>
+    <li>Declared prohibited actions and a tested kill switch with a named owner.</li>
+    <li>Full step-level logging: which skill, which model, which source, which permission, which human.</li>
+    <li>Untrusted content is data, never instruction. Treat retrieved web, document and email content as hostile by default.</li>
+    <li>Bounded autonomy: agents propose irreversible actions; humans commit them.</li>
+   </ul></div></details>
+
+  <details><summary>Data, privacy and security rules</summary><div class="details-body">
+   <ul class="clean">
+    <li>• Establish and record the lawful basis before processing personal data. Complete a DPIA where required.</li>
+    <li>• Minimise: use references, synthetic or redacted examples instead of real records wherever possible.</li>
+    <li>• Never let an AI tool retain data for training unless that has been assured and contracted.</li>
+    <li>• Treat AI interaction logs as records: classify, retain, and prepare for FOI and subject access requests.</li>
+    <li>• Apply Secure by Design activities to AI components as to any other system component.</li>
+    <li>• Threat-model for prompt injection, data poisoning, model extraction and excessive agency.</li>
+    <li>• Report incidents and near-misses through the normal security and data protection routes.</li>
+   </ul></div></details>
+
+  <details><summary>AI-generated code and infrastructure</summary><div class="details-body">
+   <ul class="ticks">
+    <li>Treat generated code as untrusted third-party contribution: review, test, scan and attribute it.</li>
+    <li>No merge without a human reviewer who understands the code and can maintain it.</li>
+    <li>Check licences and provenance of anything that looks copied.</li>
+    <li>Run dependency, secret and SAST scanning; record the results in the evidence pack.</li>
+    <li>Accessibility and performance tests apply equally to generated interfaces.</li>
+    <li>Record the model, prompt pattern and version in the commit or pull request.</li>
+   </ul></div></details>
+
+  <details><summary>Speaking up, redress and no-blame reporting</summary><div class="details-body">
+   <p>Anyone may pause an AI-assisted process they believe is unsafe, unfair or unlawful, without needing permission and without detriment. Near-misses should be reported as readily as incidents — they are the cheapest learning available.</p>
+   <p>Members of the public affected by an AI-assisted outcome must be able to find out that AI was involved, understand the outcome in plain English, request a human review, and escalate to an independent route. If any of those four is missing, the service is not ready.</p>
+   </div></details>
+ </div>
+</section>
+<section id="resources" class="section alt" aria-labelledby="sec-h-10">
+ <div class="wrap">
+  <span class="eyebrow">Resource library</span>
+  <h2 id="sec-h-10">Guidance, standards, toolkits and solutions — indexed and tiered</h2>
+  <p class="lede">68 curated sources, each with its authority tier and a note on what it is actually useful for. Search, filter, then follow the link to the source of truth.</p><noscript id="nsSearch"><div class="callout"><p><strong>Search and filtering need JavaScript.</strong> The complete resource list is shown below and works without it.</p></div></noscript>
+  <div class="grid g2 js-only" style="align-items:end">
+   <div class="field" style="margin:0"><label for="resSearch">Search resources</label><span class="hint" id="resHint">Searches titles, publishers, topics and descriptions.</span><input type="search" id="resSearch" aria-describedby="resHint" placeholder="e.g. WCAG, procurement, quantum, bias"></div>
+   <div class="field" style="margin:0"><label for="resType">Filter by type</label><select id="resType"><option value="all">All types</option><option value="law">Law</option><option value="standard">Standard</option><option value="policy">Policy &amp; framework</option><option value="guidance">Guidance</option><option value="toolkit">Toolkit</option><option value="tool">Tool</option><option value="research">Research</option></select></div>
+  </div>
+  <div class="chip-row js-only" role="group" aria-label="Filter by topic">
+   <button class="chip" data-topic="all" aria-pressed="true">All topics</button>
+   <button class="chip" data-topic="accessibility" aria-pressed="false">Accessibility</button>
+   <button class="chip" data-topic="deia" aria-pressed="false">DEIA</button>
+   <button class="chip" data-topic="ucd" aria-pressed="false">UCD &amp; research</button>
+   <button class="chip" data-topic="governance" aria-pressed="false">Governance</button>
+   <button class="chip" data-topic="security" aria-pressed="false">Security</button>
+   <button class="chip" data-topic="privacy" aria-pressed="false">Privacy</button>
+   <button class="chip" data-topic="pqc" aria-pressed="false">Quantum</button>
+   <button class="chip" data-topic="metadata" aria-pressed="false">Metadata</button>
+   <button class="chip" data-topic="engineering" aria-pressed="false">Engineering</button>
+   <button class="chip" data-topic="ethics" aria-pressed="false">Ethics</button>
+   <button class="chip" data-topic="sustainability" aria-pressed="false">Sustainability</button>
+  </div>
+  <p class="count-note" id="resCount" role="status" aria-live="polite">Showing 68 of 68 resources.</p>
+  <div class="table-scroll"><table id="resTable">
+   <caption>Indexed guidance, standards and tools. Tier 0 is law; tier 3 is community or vendor material.</caption>
+   <thead><tr><th scope="col" style="width:26%">Resource</th><th scope="col" style="width:14%">Publisher</th><th scope="col" style="width:9%">Type</th><th scope="col" style="width:7%">Tier</th><th scope="col">Use it for</th></tr></thead>
+   <tbody id="resBody"><tr>
+   <td><a href="https://www.gov.uk/government/publications/generative-ai-framework-for-hmg" rel="noopener noreferrer">Generative AI Framework for HMG<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">governance</span><span class="tag">genai</span><span class="tag">uk</span></div></td>
+   <td>DSIT / GDS</td><td>Policy</td><td><span class="tag t-gov">Tier 1</span></td><td>Baseline principles and practical guardrails for building generative AI in government.</td></tr><tr>
+   <td><a href="https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government" rel="noopener noreferrer">AI Playbook for the UK Government<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">governance</span><span class="tag">delivery</span><span class="tag">uk</span></div></td>
+   <td>DSIT</td><td>Policy</td><td><span class="tag t-gov">Tier 1</span></td><td>Ten principles plus per-technology guidance for safe, effective public sector AI adoption.</td></tr><tr>
+   <td><a href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub" rel="noopener noreferrer">Algorithmic Transparency Recording Standard (ATRS)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">transparency</span><span class="tag">governance</span><span class="tag">uk</span></div></td>
+   <td>DSIT / CDDO</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Mandatory-style template for publishing how an algorithmic tool is used in decision-making.</td></tr><tr>
+   <td><a href="https://www.gov.uk/government/publications/data-ethics-framework" rel="noopener noreferrer">Data Ethics Framework<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ethics</span><span class="tag">data</span><span class="tag">uk</span></div></td>
+   <td>DSIT</td><td>Policy</td><td><span class="tag t-gov">Tier 1</span></td><td>Structured ethical appraisal for public sector data and AI projects.</td></tr><tr>
+   <td><a href="https://www.gov.uk/service-manual/service-standard" rel="noopener noreferrer">Service Standard (14 points)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">delivery</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>The assessment backbone for any public service — align AI features to each point.</td></tr><tr>
+   <td><a href="https://www.gov.uk/service-manual" rel="noopener noreferrer">Government Service Manual<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">delivery</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>End-to-end practice guidance for user research, design, technology and operations.</td></tr><tr>
+   <td><a href="https://www.gov.uk/guidance/government-design-principles" rel="noopener noreferrer">Government Design Principles<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Ten principles — start with user needs, do less, design with data, do the hard work to make it simple.</td></tr><tr>
+   <td><a href="https://www.gov.uk/guidance/the-technology-code-of-practice" rel="noopener noreferrer">Technology Code of Practice<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">delivery</span><span class="tag">governance</span><span class="tag">uk</span></div></td>
+   <td>CDDO</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Criteria for technology spend approval — interoperability, open standards, security, sustainability.</td></tr><tr>
+   <td><a href="https://ddat-capability-framework.service.gov.uk/" rel="noopener noreferrer">Digital, Data and Technology Capability Framework<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">skills</span><span class="tag">people</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Map AI-related skills to recognised roles and progression levels.</td></tr><tr>
+   <td><a href="https://www.gov.uk/government/publications/open-source-guidance" rel="noopener noreferrer">Open source guidance (coding in the open)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">engineering</span><span class="tag">openness</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>When code should be open or closed, and how to publish safely.</td></tr><tr>
+   <td><a href="https://www.gov.uk/guidance/gds-api-technical-and-data-standards" rel="noopener noreferrer">GDS API technical and data standards<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">engineering</span><span class="tag">interoperability</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>How to design, document and version APIs that agents and skills can call.</td></tr><tr>
+   <td><a href="https://www.w3.org/TR/WCAG22/" rel="noopener noreferrer">WCAG 2.2<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">deia</span></div></td>
+   <td>W3C</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>The normative success criteria — target AA as a minimum, AAA where feasible.</td></tr><tr>
+   <td><a href="https://www.w3.org/WAI/ARIA/apg/" rel="noopener noreferrer">ARIA Authoring Practices Guide (APG)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">engineering</span></div></td>
+   <td>W3C WAI</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Accessible patterns for tabs, accordions, comboboxes, dialogs and more.</td></tr><tr>
+   <td><a href="https://www.etsi.org/deliver/etsi_en/301500_301599/301549/" rel="noopener noreferrer">EN 301 549 accessibility requirements<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">procurement</span></div></td>
+   <td>ETSI/CEN/CENELEC</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>The procurement-facing accessibility standard referenced by UK/EU regulations.</td></tr><tr>
+   <td><a href="https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps" rel="noopener noreferrer">Accessibility requirements for public sector websites and apps<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>GOV.UK</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>What the 2018 regulations require, including the accessibility statement duty.</td></tr><tr>
+   <td><a href="https://www.legislation.gov.uk/uksi/2018/952/contents/made" rel="noopener noreferrer">Public Sector Bodies (Websites and Mobile Applications) Accessibility Regulations 2018<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>legislation.gov.uk</td><td>Law</td><td><span class="tag t-risk">Tier 0</span></td><td>The underlying legal duty.</td></tr><tr>
+   <td><a href="https://www.legislation.gov.uk/ukpga/2010/15/contents" rel="noopener noreferrer">Equality Act 2010<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">deia</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>legislation.gov.uk</td><td>Law</td><td><span class="tag t-risk">Tier 0</span></td><td>Protected characteristics, reasonable adjustments and discrimination duties.</td></tr><tr>
+   <td><a href="https://www.equalityhumanrights.com/guidance/public-sector-equality-duty" rel="noopener noreferrer">Public Sector Equality Duty guidance<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">deia</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>EHRC</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Due regard duty — evidence it in every AI-assisted decision or service change.</td></tr><tr>
+   <td><a href="https://www.gov.uk/service-manual/helping-people-to-use-your-service/making-your-service-accessible-an-introduction" rel="noopener noreferrer">Make your service accessible: an introduction<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">ucd</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Practical starting point for teams new to accessibility duties.</td></tr><tr>
+   <td><a href="https://www.gov.uk/guidance/make-your-website-or-app-accessible-and-publish-an-accessibility-statement" rel="noopener noreferrer">Publish an accessibility statement<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">transparency</span><span class="tag">uk</span></div></td>
+   <td>GOV.UK</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Model wording and required disclosures for non-accessible content.</td></tr><tr>
+   <td><a href="https://www.gov.uk/service-manual/user-research/running-research-sessions-with-people-with-disabilities" rel="noopener noreferrer">Research with people with disabilities and access needs<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">research</span><span class="tag">deia</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>How to recruit and run inclusive sessions, including with assistive technology users.</td></tr><tr>
+   <td><a href="https://www.gov.uk/service-manual/helping-people-to-use-your-service" rel="noopener noreferrer">Helping people to use your service (assisted digital)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">deia</span><span class="tag">inclusion</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Assisted digital support and digital inclusion planning.</td></tr><tr>
+   <td><a href="https://inclusivedesignprinciples.info/" rel="noopener noreferrer">Inclusive Design Principles<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">deia</span></div></td>
+   <td>Paciello/TPGi et al.</td><td>Guidance</td><td><span class="tag t-ok">Tier 2</span></td><td>Seven principles: provide comparable experience, be consistent, give control, offer choice.</td></tr><tr>
+   <td><a href="https://inclusive.microsoft.design/" rel="noopener noreferrer">Inclusive Design Toolkit<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">deia</span></div></td>
+   <td>Microsoft</td><td>Toolkit</td><td><span class="tag ">Tier 3</span></td><td>Persona spectrum and exclusion-mapping activities for workshops.</td></tr><tr>
+   <td><a href="https://github.com/UKHomeOffice/posters" rel="noopener noreferrer">Home Office accessibility "dos and don’ts" posters<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">deia</span><span class="tag">uk</span></div></td>
+   <td>UK Home Office</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Print-ready posters for autistic users, screen readers, dyslexia, low vision, D/deaf users.</td></tr><tr>
+   <td><a href="https://design-system.service.gov.uk/" rel="noopener noreferrer">GOV.UK Design System<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">engineering</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Tested, accessible components and patterns — reuse before you invent.</td></tr><tr>
+   <td><a href="https://prototype-kit.service.gov.uk/" rel="noopener noreferrer">GOV.UK Prototype Kit<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ucd</span><span class="tag">research</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Rapid, realistic prototypes for usability testing without production risk.</td></tr><tr>
+   <td><a href="https://www.gov.uk/guidance/style-guide" rel="noopener noreferrer">GOV.UK style guide (content design)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">content</span><span class="tag">deia</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Plain English, reading age, formatting and inclusive terminology.</td></tr><tr>
+   <td><a href="https://webaim.org/resources/contrastchecker/" rel="noopener noreferrer">WebAIM contrast checker<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">tool</span></div></td>
+   <td>WebAIM</td><td>Tool</td><td><span class="tag ">Tier 3</span></td><td>Verify 4.5:1 text and 3:1 non-text contrast before shipping.</td></tr><tr>
+   <td><a href="https://pa11y.org/" rel="noopener noreferrer">Pa11y automated accessibility testing<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">ci</span><span class="tag">tool</span></div></td>
+   <td>Pa11y</td><td>Tool</td><td><span class="tag ">Tier 3</span></td><td>Add automated WCAG checks to your pipeline — never as a substitute for manual testing.</td></tr><tr>
+   <td><a href="https://www.deque.com/axe/devtools/" rel="noopener noreferrer">axe DevTools<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">accessibility</span><span class="tag">tool</span></div></td>
+   <td>Deque</td><td>Tool</td><td><span class="tag ">Tier 3</span></td><td>Browser-based rule engine used widely for triage.</td></tr><tr>
+   <td><a href="https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development" rel="noopener noreferrer">Guidelines for secure AI system development<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">security</span><span class="tag">ai</span><span class="tag">uk</span></div></td>
+   <td>NCSC + international partners</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Secure design, development, deployment and operation across the AI lifecycle.</td></tr><tr>
+   <td><a href="https://www.security.gov.uk/policy-and-guidance/secure-by-design/" rel="noopener noreferrer">Secure by Design (UK government)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">security</span><span class="tag">delivery</span><span class="tag">uk</span></div></td>
+   <td>Cabinet Office / GSG</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Mandated activities and artefacts for digital service security in HMG.</td></tr><tr>
+   <td><a href="https://www.ncsc.gov.uk/collection/cyber-assessment-framework" rel="noopener noreferrer">Cyber Assessment Framework (CAF)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">security</span><span class="tag">assurance</span><span class="tag">uk</span></div></td>
+   <td>NCSC</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Outcome-based objectives A–D for essential services and government systems.</td></tr><tr>
+   <td><a href="https://www.ncsc.gov.uk/collection/post-quantum-cryptography" rel="noopener noreferrer">Post-quantum cryptography guidance and migration timeline<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">pqc</span><span class="tag">security</span><span class="tag">uk</span></div></td>
+   <td>NCSC</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Discovery by 2028, high-priority migration by 2031, complete by 2035.</td></tr><tr>
+   <td><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" rel="noopener noreferrer">Post-Quantum Cryptography standards (FIPS 203/204/205)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">pqc</span><span class="tag">security</span></div></td>
+   <td>NIST</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>ML-KEM, ML-DSA and SLH-DSA — the algorithms your crypto inventory should target.</td></tr><tr>
+   <td><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" rel="noopener noreferrer">OWASP Top 10 for LLM Applications<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">security</span><span class="tag">ai</span><span class="tag">engineering</span></div></td>
+   <td>OWASP</td><td>Standard</td><td><span class="tag t-ok">Tier 2</span></td><td>Prompt injection, insecure output handling, supply chain and agency risks.</td></tr><tr>
+   <td><a href="https://atlas.mitre.org/" rel="noopener noreferrer">MITRE ATLAS adversarial ML knowledge base<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">security</span><span class="tag">ai</span><span class="tag">threat</span></div></td>
+   <td>MITRE</td><td>Toolkit</td><td><span class="tag t-ok">Tier 2</span></td><td>Tactics and techniques for threat modelling AI systems.</td></tr><tr>
+   <td><a href="https://csrc.nist.gov/pubs/sp/800/218/final" rel="noopener noreferrer">Secure Software Development Framework (SP 800-218)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">engineering</span><span class="tag">security</span></div></td>
+   <td>NIST</td><td>Standard</td><td><span class="tag t-ok">Tier 2</span></td><td>Baseline secure SDLC practices to bind AI-generated code to.</td></tr><tr>
+   <td><a href="https://slsa.dev/" rel="noopener noreferrer">SLSA supply chain integrity framework<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">engineering</span><span class="tag">supplychain</span></div></td>
+   <td>OpenSSF</td><td>Standard</td><td><span class="tag t-ok">Tier 2</span></td><td>Provenance levels for build artefacts — extend to model and skill artefacts.</td></tr><tr>
+   <td><a href="https://cyclonedx.org/capabilities/mlbom/" rel="noopener noreferrer">CycloneDX ML-BOM / AI-BOM<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">metadata</span><span class="tag">supplychain</span></div></td>
+   <td>OWASP CycloneDX</td><td>Standard</td><td><span class="tag t-ok">Tier 2</span></td><td>Machine-readable bill of materials for models, datasets and AI components.</td></tr><tr>
+   <td><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/" rel="noopener noreferrer">Guidance on AI and data protection<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">privacy</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>ICO</td><td>Guidance</td><td><span class="tag t-gov">Tier 1</span></td><td>Lawful basis, fairness, transparency and accountability for AI processing.</td></tr><tr>
+   <td><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/ai-and-data-protection-risk-toolkit/" rel="noopener noreferrer">AI and data protection risk toolkit<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">privacy</span><span class="tag">assurance</span><span class="tag">uk</span></div></td>
+   <td>ICO</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Risk statements and controls mapped to the AI lifecycle.</td></tr><tr>
+   <td><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/" rel="noopener noreferrer">Data protection impact assessments (DPIA)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">privacy</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>ICO</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>When a DPIA is mandatory and what a defensible one contains.</td></tr><tr>
+   <td><a href="https://www.legislation.gov.uk/ukpga/2018/12/contents" rel="noopener noreferrer">Data Protection Act 2018<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">privacy</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>legislation.gov.uk</td><td>Law</td><td><span class="tag t-risk">Tier 0</span></td><td>UK GDPR implementation, including automated decision-making safeguards.</td></tr><tr>
+   <td><a href="https://www.iso.org/standard/81230.html" rel="noopener noreferrer">ISO/IEC 42001 AI management systems<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">governance</span><span class="tag">certification</span></div></td>
+   <td>ISO/IEC</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Certifiable management system for responsible AI — useful for supplier assurance.</td></tr><tr>
+   <td><a href="https://www.iso.org/standard/77304.html" rel="noopener noreferrer">ISO/IEC 23894 AI risk management<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">risk</span><span class="tag">governance</span></div></td>
+   <td>ISO/IEC</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>AI-specific application of ISO 31000 risk management.</td></tr><tr>
+   <td><a href="https://www.iso.org/standard/27001" rel="noopener noreferrer">ISO/IEC 27001 information security management<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">security</span><span class="tag">certification</span></div></td>
+   <td>ISO/IEC</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Control baseline most suppliers will already hold.</td></tr><tr>
+   <td><a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer">AI Risk Management Framework (AI RMF 1.0) + GenAI Profile<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">risk</span><span class="tag">governance</span></div></td>
+   <td>NIST</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Govern, Map, Measure, Manage — pairs cleanly with UK assurance practice.</td></tr><tr>
+   <td><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" rel="noopener noreferrer">EU AI Act (Regulation 2024/1689)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">legal</span><span class="tag">risk</span><span class="tag">eu</span></div></td>
+   <td>EUR-Lex</td><td>Law</td><td><span class="tag t-risk">Tier 0</span></td><td>Risk tiers and obligations that may bind UK bodies operating in the EU market.</td></tr><tr>
+   <td><a href="https://oecd.ai/en/ai-principles" rel="noopener noreferrer">OECD AI Principles<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ethics</span><span class="tag">international</span></div></td>
+   <td>OECD</td><td>Policy</td><td><span class="tag t-ok">Tier 2</span></td><td>Internationally agreed values-based principles for trustworthy AI.</td></tr><tr>
+   <td><a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" rel="noopener noreferrer">Recommendation on the Ethics of AI<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ethics</span><span class="tag">international</span></div></td>
+   <td>UNESCO</td><td>Policy</td><td><span class="tag t-ok">Tier 2</span></td><td>Global normative instrument covering human rights and inclusion.</td></tr><tr>
+   <td><a href="https://www.turing.ac.uk/research/publications/understanding-artificial-intelligence-ethics-and-safety" rel="noopener noreferrer">Understanding AI ethics and safety<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ethics</span><span class="tag">uk</span><span class="tag">research</span></div></td>
+   <td>The Alan Turing Institute</td><td>Guidance</td><td><span class="tag t-ok">Tier 2</span></td><td>The SUM values and FAST Track principles used across UK public sector.</td></tr><tr>
+   <td><a href="https://aistandardshub.org/" rel="noopener noreferrer">AI Standards Hub<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">standards</span><span class="tag">uk</span></div></td>
+   <td>BSI / NPL / Turing</td><td>Toolkit</td><td><span class="tag t-ok">Tier 2</span></td><td>Searchable database of AI standards in development and published.</td></tr><tr>
+   <td><a href="https://www.adalovelaceinstitute.org/" rel="noopener noreferrer">Ada Lovelace Institute research<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">ethics</span><span class="tag">public</span><span class="tag">research</span></div></td>
+   <td>Ada Lovelace Institute</td><td>Research</td><td><span class="tag ">Tier 3</span></td><td>Public attitudes, algorithmic impact assessment and deliberative methods.</td></tr><tr>
+   <td><a href="https://theodi.org/" rel="noopener noreferrer">Open Data Institute<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">data</span><span class="tag">openness</span></div></td>
+   <td>ODI</td><td>Research</td><td><span class="tag ">Tier 3</span></td><td>Data ethics canvas and data institution patterns.</td></tr><tr>
+   <td><a href="https://arxiv.org/abs/1810.03993" rel="noopener noreferrer">Model Cards for Model Reporting<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">metadata</span><span class="tag">transparency</span></div></td>
+   <td>Mitchell et al.</td><td>Research</td><td><span class="tag t-ok">Tier 2</span></td><td>The reference format for documenting intended use and performance by group.</td></tr><tr>
+   <td><a href="https://arxiv.org/abs/1803.09010" rel="noopener noreferrer">Datasheets for Datasets<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">metadata</span><span class="tag">data</span></div></td>
+   <td>Gebru et al.</td><td>Research</td><td><span class="tag t-ok">Tier 2</span></td><td>Provenance, composition and collection questions for training/eval data.</td></tr><tr>
+   <td><a href="https://www.w3.org/TR/prov-o/" rel="noopener noreferrer">PROV-O provenance ontology<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">metadata</span><span class="tag">provenance</span></div></td>
+   <td>W3C</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Entity–activity–agent model for machine-readable evidence chains.</td></tr><tr>
+   <td><a href="https://www.w3.org/TR/vocab-dcat-3/" rel="noopener noreferrer">DCAT 3 data catalogue vocabulary<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">metadata</span><span class="tag">interoperability</span></div></td>
+   <td>W3C</td><td>Standard</td><td><span class="tag t-gov">Tier 1</span></td><td>Describe datasets and services so registries can federate.</td></tr><tr>
+   <td><a href="https://c2pa.org/" rel="noopener noreferrer">C2PA content provenance and authenticity<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">provenance</span><span class="tag">genai</span></div></td>
+   <td>C2PA</td><td>Standard</td><td><span class="tag t-ok">Tier 2</span></td><td>Cryptographic manifests for AI-generated or edited media.</td></tr><tr>
+   <td><a href="https://modelcontextprotocol.io/" rel="noopener noreferrer">Model Context Protocol<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">agents</span><span class="tag">engineering</span><span class="tag">interoperability</span></div></td>
+   <td>MCP</td><td>Standard</td><td><span class="tag ">Tier 3</span></td><td>Open protocol for connecting assistants to tools and data with explicit scopes.</td></tr><tr>
+   <td><a href="https://huggingface.co/docs/hub/model-cards" rel="noopener noreferrer">Model cards on Hugging Face Hub<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">metadata</span><span class="tag">engineering</span></div></td>
+   <td>Hugging Face</td><td>Toolkit</td><td><span class="tag ">Tier 3</span></td><td>Practical templates and YAML front-matter conventions.</td></tr><tr>
+   <td><a href="https://github.com/alphagov" rel="noopener noreferrer">alphagov on GitHub<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">engineering</span><span class="tag">openness</span><span class="tag">uk</span></div></td>
+   <td>GDS</td><td>Toolkit</td><td><span class="tag t-gov">Tier 1</span></td><td>Reference implementations, frontend, and publishing platform source.</td></tr><tr>
+   <td><a href="https://x-govuk.github.io/" rel="noopener noreferrer">x-govuk community tools<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">engineering</span><span class="tag">community</span><span class="tag">uk</span></div></td>
+   <td>Cross-government community</td><td>Toolkit</td><td><span class="tag t-ok">Tier 2</span></td><td>Community-built plugins, design tooling and prototypes.</td></tr><tr>
+   <td><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="noopener noreferrer">Open Government Licence v3.0<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">openness</span><span class="tag">legal</span><span class="tag">uk</span></div></td>
+   <td>The National Archives</td><td>Law</td><td><span class="tag t-risk">Tier 0</span></td><td>Default licence for publishing public sector content and guidance.</td></tr><tr>
+   <td><a href="https://www.gov.uk/government/publications/greening-government-ict-and-digital-services-strategy-2020-2025" rel="noopener noreferrer">Greening Government ICT and Digital Services Strategy<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">sustainability</span><span class="tag">uk</span></div></td>
+   <td>Defra / GGC</td><td>Policy</td><td><span class="tag t-gov">Tier 1</span></td><td>Carbon, circular-economy and reporting expectations for digital estates.</td></tr><tr>
+   <td><a href="https://w3c.github.io/sustyweb/" rel="noopener noreferrer">Web Sustainability Guidelines (WSG)<span class="ext visually-hidden"> (opens an external website)</span></a><div class="tags" style="margin-top:5px"><span class="tag">sustainability</span><span class="tag">engineering</span></div></td>
+   <td>W3C Community Group</td><td>Guidance</td><td><span class="tag ">Tier 3</span></td><td>Practical efficiency criteria for pages, media, hosting and AI workloads.</td></tr></tbody>
+  </table></div>
+  <p class="count-note">Links were verified on 2026-08-08. Always confirm you are reading the current version at the source — guidance changes without notice.</p>
+ </div>
+</section>
+
+<section id="transparency" class="section" aria-labelledby="sec-h-11">
+ <div class="wrap">
+  <span class="eyebrow">Trust and transparency</span>
+  <h2 id="sec-h-11">How to check, challenge and contribute</h2>
+  <p class="lede">A guidance utility that cannot be questioned is not trustworthy. Here is how this one is governed, and how you hold it to account.</p>
+  <div class="grid g3">
+   <div class="card"><h3>Provenance of this content</h3><p>Every substantive claim links to a tiered source. Where this portal expresses an opinion or a house rule rather than a legal requirement, it says so.</p></div>
+   <div class="card"><h3>Ownership and review</h3><p><strong>Owner:</strong> Public AI Utility Toolkit working group<br><strong>Version:</strong> 2.0.0<br><strong>Last reviewed:</strong> 2026-08-08<br><strong>Next review due:</strong> 2026-11-08</p></div>
+   <div class="card"><h3>Licence and reuse</h3><p>Open Government Licence v3.0 (content) / MIT (code). Fork it, adapt it for your organisation, and tell us what you changed so others benefit.</p></div>
+   <div class="card"><h3>Data and privacy</h3><p>This site is static and client-side. It sets no tracking cookies, runs no analytics that identify you, and sends nothing you type in the tools to any server. Preferences are stored locally in your browser and you can clear them at any time.</p></div>
+   <div class="card"><h3>Known limitations</h3><p>This is a concept portal, not a statutory instrument. It does not replace your organisation's policies, your DPO, your security team or your legal advice. Some linked standards sit behind paywalls.</p></div>
+   <div class="card"><h3>Report a problem</h3><p>Tell us about a broken link, an out-of-date claim, an accessibility barrier or a gap. Accessibility issues get a response within five working days.</p></div>
+  </div>
+  <h3 style="margin-top:34px">Changelog</h3>
+  <div class="table-scroll"><table><caption>Recent changes to this portal</caption>
+   <thead><tr><th scope="col">Version</th><th scope="col">Date</th><th scope="col">Change</th></tr></thead><tbody>
+   <tr><td>2.0.0</td><td>2026-08-08</td><td>Added task-first entry points, six interactive tools, a tiered resource library, H0–H5 review table, RACI, transparency and redress commitments, MoSCoW roadmap, glossary and FAQ. Added dark, high-contrast and large-text modes, site search, on-page navigation and a print stylesheet.</td></tr>
+   <tr><td>1.0.0</td><td>Initial</td><td>Concept portal: mission, knowledge corpus, toolkit, assurance workflow, catalogue, UCD and code of practice.</td></tr>
+  </tbody></table></div>
+ </div>
+</section>
+
+<section id="roadmap" class="section alt" aria-labelledby="sec-h-12">
+ <div class="wrap">
+  <span class="eyebrow">Gaps and roadmap</span>
+  <h2 id="sec-h-12">What is missing, prioritised with MoSCoW</h2>
+  <p class="lede">An honest backlog is a trust signal. These are the gaps identified in this portal and in most public sector AI guidance, ordered by whether they are essential, valuable, desirable or deliberately out of scope.</p>
+  <div class="chip-row js-only" role="group" aria-label="Filter roadmap by priority">
+   <button class="chip mos" data-mos="all" aria-pressed="true">All</button>
+   <button class="chip mos" data-mos="M" aria-pressed="false">Must have</button>
+   <button class="chip mos" data-mos="S" aria-pressed="false">Should have</button>
+   <button class="chip mos" data-mos="C" aria-pressed="false">Could have</button>
+   <button class="chip mos" data-mos="W" aria-pressed="false">Won't have (this time)</button>
+  </div>
+  <div class="grid g2" id="mosGrid"><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>Named accountable owner and published contact route</h3><p>Nothing on this page is credible without a person who owns it and answers questions.</p></article><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>Accessibility statement, testing evidence and feedback route</h3><p>Legally required for UK public sector sites; also the fastest trust signal.</p></article><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>Version, last-reviewed and next-review dates on every artefact</h3><p>Freshness is the main failure mode of guidance portals.</p></article><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>Machine-readable metadata schema published openly</h3><p>Without a schema, registries cannot federate and evidence cannot be automated.</p></article><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>Risk-based human review model with no self-approval</h3><p>The core control that keeps accountability with people.</p></article><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>Source citation and provenance for every claim</h3><p>Prevents hallucination becoming policy.</p></article><article class="card moscow-M"><span class="tag t-risk">Must have</span><h3>DEIA screening built into the default workflow</h3><p>Equality duty is a due-regard duty — it must happen before decisions, not after.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Search across the whole corpus with filters and permalinks</h3><p>Findability is the top usability complaint for guidance sites.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Role-based entry points and task-first navigation</h3><p>Users arrive with a task, not an interest in your information architecture.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Downloadable, offline and printable formats</h3><p>Supports assisted digital, low bandwidth and audit contexts.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Worked examples and anti-patterns for each control</h3><p>Abstract principles do not change behaviour; examples do.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Change log and subscribe-to-updates</h3><p>Lets teams re-check work when guidance changes.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Multilingual and alternative-format provision (Welsh, Easy Read, BSL)</h3><p>Statutory in some contexts and essential for inclusion in all.</p></article><article class="card moscow-S"><span class="tag t-warn">Should have</span><h3>Automated link-health and freshness checking</h3><p>Broken authority links silently destroy trust.</p></article><article class="card moscow-C"><span class="tag t-gov">Could have</span><h3>API and JSON export of the registry and corpus</h3><p>Enables reuse by other departments and tooling.</p></article><article class="card moscow-C"><span class="tag t-gov">Could have</span><h3>Maturity self-assessment with benchmarking</h3><p>Helps organisations see where they are without a consultant.</p></article><article class="card moscow-C"><span class="tag t-gov">Could have</span><h3>Community contribution workflow with moderation</h3><p>Scales the corpus beyond a single team.</p></article><article class="card moscow-C"><span class="tag t-gov">Could have</span><h3>Interactive decision tree for tool selection</h3><p>Reduces the "which tool may I use?" support burden.</p></article><article class="card moscow-C"><span class="tag t-gov">Could have</span><h3>Carbon and cost telemetry per model call</h3><p>Makes proportionality measurable rather than rhetorical.</p></article><article class="card moscow-W"><span class="tag ">Won't have (this time)</span><h3>Automated approval of any high-risk output</h3><p>Out of scope by design — approval stays human.</p></article><article class="card moscow-W"><span class="tag ">Won't have (this time)</span><h3>Storing personal or official-sensitive data in this portal</h3><p>The portal is public and stateless; sensitive records belong in assured systems.</p></article><article class="card moscow-W"><span class="tag ">Won't have (this time)</span><h3>Vendor-specific lock-in to a single model provider</h3><p>Conflicts with interoperability and exit obligations.</p></article><article class="card moscow-W"><span class="tag ">Won't have (this time)</span><h3>Replacing professional assurance roles</h3><p>The toolkit supports specialists; it does not substitute for them.</p></article></div>
+ </div>
+</section>
+
+<section id="glossary" class="section" aria-labelledby="sec-h-13">
+ <div class="wrap">
+  <span class="eyebrow">Reference</span>
+  <h2 id="sec-h-13">Glossary and frequently asked questions</h2>
+  <div class="layout-side">
+   <div>
+    <h3>Glossary</h3>
+    <div class="field js-only"><label for="glSearch">Filter terms</label><input type="search" id="glSearch" placeholder="Type to filter"></div>
+    <dl id="glList" style="display:grid;gap:12px;margin:0"><div><dt style="font-weight:700">Agent</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Software that plans and acts across multiple steps using tools, within explicit permissions and bounds.</dd></div><div><dt style="font-weight:700">Autonomy level</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">How far an agent may act without a human decision, from suggest-only to bounded execution.</dd></div><div><dt style="font-weight:700">Assisted digital</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Support for people who cannot use a digital service independently.</dd></div><div><dt style="font-weight:700">ATRS</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Algorithmic Transparency Recording Standard — the UK format for publishing algorithmic tool use.</dd></div><div><dt style="font-weight:700">Conformance pack</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">A bundle of automated checks that tests an artefact against a named standard.</dd></div><div><dt style="font-weight:700">Crypto-agility</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">The ability to change cryptographic algorithms without redesigning the system.</dd></div><div><dt style="font-weight:700">DEIA</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Diversity, equity, inclusion and accessibility.</dd></div><div><dt style="font-weight:700">DPIA</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Data protection impact assessment, required for high-risk processing.</dd></div><div><dt style="font-weight:700">Drift</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Divergence between a cited source, a model version or a control and what is actually in use.</dd></div><div><dt style="font-weight:700">EQIA</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Equality impact assessment evidencing the public sector equality duty.</dd></div><div><dt style="font-weight:700">Evidence pack</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">The bundle of records proving how an AI-assisted output was produced, checked and approved.</dd></div><div><dt style="font-weight:700">Harvest now, decrypt later</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Capturing encrypted data today to decrypt once quantum computers are capable.</dd></div><div><dt style="font-weight:700">Human in the loop</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">A person who must act before an output takes effect.</dd></div><div><dt style="font-weight:700">Human on the loop</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">A person who monitors and can intervene in an otherwise automated process.</dd></div><div><dt style="font-weight:700">Least privilege</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Granting only the minimum permissions needed for the shortest necessary time.</dd></div><div><dt style="font-weight:700">Material AI assistance</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">AI involvement that a reasonable reader would want disclosed because it shaped the output.</dd></div><div><dt style="font-weight:700">Prompt injection</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Untrusted content that manipulates a model into unintended actions.</dd></div><div><dt style="font-weight:700">Provenance</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">The verifiable record of where content, data or code came from and how it changed.</dd></div><div><dt style="font-weight:700">PQC</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Post-quantum cryptography — algorithms resistant to quantum attack.</dd></div><div><dt style="font-weight:700">Skill</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">A packaged, versioned capability an assistant or agent can invoke, with defined inputs and limits.</dd></div><div><dt style="font-weight:700">Source tiering</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Ranking sources by authority so conflicts resolve predictably.</dd></div><div><dt style="font-weight:700">4-eyes / 6-eyes</dt><dd style="margin:2px 0 0;color:var(--c-text-muted);font-size:.93rem">Two or three independent people involved in producing and approving an output.</dd></div></dl>
+   </div>
+   <div>
+    <h3>Frequently asked questions</h3>
+    <div id="faqList"><details><summary>Do I have to declare every use of AI?</summary><div class="details-body"><p style="margin:0">No. Declare material assistance — where AI shaped the substance, structure, analysis or code of an output. Trivial uses such as spell-checking do not need a declaration, but your local policy may set a lower threshold.</p></div></details><details><summary>Can AI approve my work?</summary><div class="details-body"><p style="margin:0">No. AI can suggest, draft, check and explain. Approval is a human act by someone with the authority to make that decision. AI never grants authority a user does not already hold.</p></div></details><details><summary>What if the AI cites a source that does not exist?</summary><div class="details-body"><p style="margin:0">Treat it as an incident. Do not publish. Verify every citation against the original, log the failure in the drift and incident register, and check whether the same prompt pattern has been used elsewhere.</p></div></details><details><summary>Is this a substitute for a DPIA, EQIA or security assurance?</summary><div class="details-body"><p style="margin:0">No. This toolkit helps you prepare and evidence those assessments; it does not replace them or the professionals accountable for them.</p></div></details><details><summary>Can I paste official-sensitive information into a general assistant?</summary><div class="details-body"><p style="margin:0">Not unless the tool is explicitly approved for that classification and the data-handling terms have been assured. When in doubt, do not paste — ask your information asset owner.</p></div></details><details><summary>How do I handle AI-generated code?</summary><div class="details-body"><p style="margin:0">Treat it as untrusted third-party code: review it, test it, scan dependencies, record provenance and never merge without a human reviewer who understands it.</p></div></details><details><summary>What accessibility duties apply to AI-generated content?</summary><div class="details-body"><p style="margin:0">The same ones that apply to everything else. WCAG 2.2 AA, plain language, alternative formats and the accessibility statement duty all apply regardless of who or what drafted the content.</p></div></details><details><summary>Who do I contact if something goes wrong?</summary><div class="details-body"><p style="margin:0">Your service owner and the named AI assurance contact for your organisation. Report near-misses too — they are the cheapest form of learning.</p></div></details></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+
+<section id="contact" class="section" aria-labelledby="contact-h">
+ <div class="wrap">
+  <span class="eyebrow">Contact, feedback and support</span>
+  <h2 id="contact-h">Tell us what is wrong, missing or unclear</h2>
+  <p class="lede">Every route below is public and auditable except the direct message form. Choose the one that fits — if you are not sure, raise an issue and we will redirect it.</p>
+
+  <div class="grid g3">
+   <article class="card"><span class="tag t-risk">Bug</span><h3>Something is broken</h3><p>Broken links, tools that do not work, layout failures, incorrect calculations or console errors.</p><p><a class="btn btn-secondary btn-sm" data-issue="bug_report.yml" href="https://github.com/cyberdudeuk/cyberdudeuk.github.io/issues/new?template=bug_report.yml" rel="noopener noreferrer">Report a bug on GitHub</a></p></article>
+   <article class="card"><span class="tag t-ok">Accessibility</span><h3>An accessibility barrier</h3><p>Anything that stops you using this site with a screen reader, keyboard, magnification, voice control or any other assistive technology. These are treated as priority defects.</p><p><a class="btn btn-secondary btn-sm" data-issue="accessibility_issue.yml" href="https://github.com/cyberdudeuk/cyberdudeuk.github.io/issues/new?template=accessibility_issue.yml" rel="noopener noreferrer">Report a barrier</a></p><p class="count-note" id="a11ySla">Target first response: 5 working days.</p></article>
+   <article class="card"><span class="tag t-gov">Feature</span><h3>A feature or resource request</h3><p>A tool you need, a section that is missing, or an authoritative source that should be in the library.</p><p><a class="btn btn-secondary btn-sm" data-issue="feature_request.yml" href="https://github.com/cyberdudeuk/cyberdudeuk.github.io/issues/new?template=feature_request.yml" rel="noopener noreferrer">Request a feature</a></p></article>
+   <article class="card"><span class="tag t-warn">Correction</span><h3>Content is wrong or out of date</h3><p>Superseded guidance, a withdrawn standard, a mis-stated legal duty or a dead authority link. Include the source that proves it.</p><p><a class="btn btn-secondary btn-sm" data-issue="content_correction.yml" href="https://github.com/cyberdudeuk/cyberdudeuk.github.io/issues/new?template=content_correction.yml" rel="noopener noreferrer">Submit a correction</a></p></article>
+   <article class="card"><span class="tag t-risk">Security</span><h3>A security vulnerability</h3><p>Do not open a public issue. Use private disclosure so we can fix it before it is known. See our security policy for scope and timescales.</p><p><a class="btn btn-secondary btn-sm" id="secLink" href="https://github.com/cyberdudeuk/cyberdudeuk.github.io/security/policy">Report privately</a></p></article>
+   <article class="card"><span class="tag">Discussion</span><h3>A question or an idea</h3><p>Not sure it is a defect? Want to talk about approach, reuse this in your organisation, or contribute? Start there.</p><p><a class="btn btn-secondary btn-sm" id="discussLink" href="https://github.com/cyberdudeuk/cyberdudeuk.github.io/issues">Browse or open an issue</a></p></article>
+  </div>
+
+  <h3 style="margin-top:38px">Message the team directly</h3>
+  <p>Use this if your message should not be public — for example it concerns a specific service, a supplier, or information you would not want indexed. It is not a route for personal data or anything above OFFICIAL.</p>
+
+  <div class="callout" id="mailboxState"><p>Choose <strong>Prepare and send message</strong> to compose this in your own email client, or <strong>Copy message instead</strong> if you would rather paste it somewhere. Nothing is transmitted from this page.</p></div>
+
+  <form id="contactForm" novalidate="">
+   <div class="grid g2">
+    <div class="field"><label for="cf-name">Your name <span class="hint" style="display:inline">(optional)</span></label><input type="text" id="cf-name" autocomplete="name"></div>
+    <div class="field"><label for="cf-email">Your email <span class="hint" style="display:inline">(optional — only so we can reply)</span></label><input type="text" id="cf-email" autocomplete="email" inputmode="email"></div>
+    <div class="field"><label for="cf-org">Organisation <span class="hint" style="display:inline">(optional)</span></label><input type="text" id="cf-org" autocomplete="organization"></div>
+    <div class="field"><label for="cf-cat">What is this about?</label>
+     <select id="cf-cat">
+      <option>General enquiry</option><option>Accessibility barrier</option><option>Content correction</option>
+      <option>Feature or resource suggestion</option><option>Reuse or adaptation in my organisation</option>
+      <option>Partnership or contribution</option><option>Data protection or privacy question</option><option>Something else</option>
+     </select></div>
+   </div>
+   <div class="field"><label for="cf-subject">Subject</label><input type="text" id="cf-subject" required="" aria-required="true"></div>
+   <div class="field"><label for="cf-page">Which page or section does this concern? <span class="hint" style="display:inline">(optional)</span></label><input type="text" id="cf-page" placeholder="e.g. Resource library, or the H0–H5 table"></div>
+   <div class="field"><label for="cf-msg">Your message</label><span class="hint">Do not include personal data about anyone else, case details, credentials or anything above OFFICIAL.</span><textarea id="cf-msg" required="" aria-required="true" style="min-height:150px"></textarea></div>
+   <div class="field"><label for="cf-at">Assistive technology you were using <span class="hint" style="display:inline">(optional, helps us reproduce accessibility issues)</span></label><input type="text" id="cf-at" placeholder="e.g. NVDA 2025.1 with Firefox, or keyboard only"></div>
+   <div class="check" style="margin-bottom:14px"><input type="checkbox" id="cf-consent"><label for="cf-consent">I understand this message will be sent from my own email client to the team mailbox, and that I should not include sensitive personal data.</label></div>
+   <div class="actions">
+    <button type="button" class="btn btn-primary js-only" id="cfSend">Prepare and send message</button>
+    <button type="button" class="btn btn-secondary js-only" id="cfCopy">Copy message instead</button>
+    <button type="button" class="btn btn-secondary js-only" id="cfIssue">Open as a GitHub issue instead</button>
+    <button type="button" class="btn btn-secondary js-only" id="cfReset">Clear form</button>
+   </div>
+   <div class="result-box" id="cfOut" role="status" aria-live="polite"><p style="margin:0;color:var(--c-text-muted)">A preview of your message will appear here before anything is sent.</p></div>
+  </form>
+
+  <h3 style="margin-top:34px">What happens to your message</h3>
+  <div class="grid g2">
+   <div class="card"><h3>How it is handled</h3><ul class="clean">
+    <li>• Nothing is transmitted from this page. The form builds a message and hands it to your own email client, or to GitHub, so you stay in control of what is sent.</li>
+    <li>• GitHub issues are public. Do not put personal or sensitive information in them.</li>
+    <li>• Direct messages go to the team mailbox and are handled under the host organisation's retention schedule.</li>
+    <li>• Accessibility reports are logged as defects with a target first response of five working days.</li>
+    <li>• Security reports follow coordinated disclosure and are never opened as public issues.</li>
+   </ul></div>
+   <div class="card"><h3>If we cannot resolve it</h3><ul class="clean">
+    <li>• Ask for the decision to be reviewed by the accountable owner named in the transparency section.</li>
+    <li>• For accessibility complaints in the UK, you can escalate to the <a href="https://www.equalityadvisoryservice.com/" rel="noopener noreferrer">Equality Advisory and Support Service</a>.</li>
+    <li>• For data protection concerns, contact the host organisation's data protection officer, then the <a href="https://ico.org.uk/make-a-complaint/" rel="noopener noreferrer">Information Commissioner's Office</a>.</li>
+    <li>• All correspondence about this repository is capable of being disclosed under freedom of information law.</li>
+   </ul></div>
+  </div>
+ </div>
+</section><section class="section alt" aria-labelledby="sec-h-14">
+ <div class="wrap" style="text-align:center">
+  <h2 id="sec-h-14">Make guidance usable, testable and accountable.</h2>
+  <p class="lede" style="margin:0 auto 20px">Start with the corpus, encode the metadata, publish the skills, bound the agents, enforce the review — and keep improving it in the open.</p>
+  <div class="actions" style="justify-content:center">
+   <a class="btn btn-primary" href="#start-here">Find your route</a>
+   <a class="btn btn-secondary" href="#tools">Open the tools</a>
+   <a class="btn btn-secondary" href="#resources">Browse the resources</a>
+  </div>
+ </div>
+</section>
   </main>
 
   <footer class="site-footer">
-    <p>Public AI Utility Toolkit — a concept portal for public-good AI governance, skills and agent assurance.</p>
-    <p><a href="#main">Return to main content</a></p>
+<div class="wrap">
+ <h2 class="visually-hidden">Site footer</h2>
+ <div class="footer-grid">
+  <div><h2>Get started</h2><ul><li><a href="#start-here">Start here</a></li><li><a href="#tool-triage">Review triage</a></li><li><a href="#tool-evidence">Evidence pack</a></li><li><a href="#tool-deia">DEIA screen</a></li></ul></div>
+  <div><h2>Toolkit</h2><ul><li><a href="#toolkit">All assets</a></li><li><a href="#catalogue">Metadata catalogue</a></li><li><a href="#assurance">Assurance model</a></li><li><a href="#tool-pqc">Quantum readiness</a></li></ul></div>
+  <div><h2>Standards</h2><ul><li><a href="#resources">Resource library</a></li><li><a href="#knowledge">Authority tiering</a></li><li><a href="#practice">Code of practice</a></li><li><a href="#glossary">Glossary and FAQ</a></li></ul></div>
+  <div><h2>Accountability</h2><ul><li><a href="#transparency">Transparency and governance</a></li><li><a href="#ucd">Accessibility commitments</a></li><li><a href="#roadmap">Roadmap and gaps</a></li><li><a href="#transparency">Report a problem</a></li></ul></div>
+  <div><h2>Key external sources</h2><ul>
+   <li><a href="https://www.gov.uk/service-manual" rel="noopener noreferrer">GOV.UK Service Manual<span class="ext visually-hidden"> (opens an external website)</span></a></li>
+   <li><a href="https://design-system.service.gov.uk/" rel="noopener noreferrer">GOV.UK Design System<span class="ext visually-hidden"> (opens an external website)</span></a></li>
+   <li><a href="https://www.w3.org/TR/WCAG22/" rel="noopener noreferrer">WCAG 2.2<span class="ext visually-hidden"> (opens an external website)</span></a></li>
+   <li><a href="https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development" rel="noopener noreferrer">NCSC secure AI<span class="ext visually-hidden"> (opens an external website)</span></a></li>
+   <li><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/" rel="noopener noreferrer">ICO AI guidance<span class="ext visually-hidden"> (opens an external website)</span></a></li>
+  </ul></div>
+ </div>
+ <div class="meta-bar">
+  <span>Public AI Utility Toolkit — a concept portal for public-good AI governance, skills and agent assurance.</span>
+  <span>Version 2.0.0</span><span>Reviewed 2026-08-08</span><span>Next review 2026-11-08</span>
+  <span>Open Government Licence v3.0 (content) / MIT (code)</span>
+  <a href="#main">Return to main content</a>
+ </div>
+</div>
   </footer>
 
   <script src="app.js" defer></script>
