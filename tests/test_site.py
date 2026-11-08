@@ -109,6 +109,10 @@ class Site(unittest.TestCase):
         p.write_text(t.replace(line, line + line, 1), encoding='utf-8')
         self.fails_with('L14')
 
+    def test_L15_contact_form_out_of_step(self):
+        self.edit('.github/ISSUE_TEMPLATE/contact.yml', '        - Black History and Heritage Hub\n', '        - BHM 2026 Hub\n')
+        self.fails_with('L15')
+
     def test_L11_truncated_licence(self):
         self.edit('LICENSE', 'Copyright (c) 2026 cyberdudeuk and contributors', 'Copyright (c) 2026 Em')
         self.fails_with('L11')
