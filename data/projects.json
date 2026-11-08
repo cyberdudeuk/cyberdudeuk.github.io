@@ -1,0 +1,240 @@
+{
+  "launchpad": "cyberdudeuk projects",
+  "version": "1.0.0",
+  "updated": "2026-11-08",
+  "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
+  "categories": [
+    {
+      "id": "ai",
+      "label": "AI governance",
+      "icon": "shield"
+    },
+    {
+      "id": "standards",
+      "label": "Data standards and metadata",
+      "icon": "schema"
+    },
+    {
+      "id": "data",
+      "label": "Data management and quality",
+      "icon": "database"
+    },
+    {
+      "id": "reuse",
+      "label": "Finding and reusing code",
+      "icon": "search"
+    },
+    {
+      "id": "knowledge",
+      "label": "Knowledge mapping",
+      "icon": "hub"
+    },
+    {
+      "id": "skills",
+      "label": "Skills and development",
+      "icon": "mic"
+    },
+    {
+      "id": "community",
+      "label": "Community and heritage",
+      "icon": "groups"
+    },
+    {
+      "id": "experiments",
+      "label": "Experiments",
+      "icon": "science"
+    }
+  ],
+  "projects": [
+    {
+      "id": "ai-capability-governance",
+      "name": "AI Capability Governance and Implementation",
+      "category": "ai",
+      "status": "Prototype",
+      "since": "2026",
+      "updated": "2026-11-08",
+      "summary": "Guidance you can act on for governing AI and AI agents in public services: a six-level human review model, evidence and transparency record generators, an agent registry pattern and a weekly signals scan.",
+      "audience": "Anyone using, buying, approving or assuring AI in public services",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/ai-capability-governance/",
+      "repo": "https://github.com/cyberdudeuk/ai-capability-governance",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": true
+    },
+    {
+      "id": "dcat-ap-uk",
+      "name": "DCAT-AP-UK",
+      "category": "standards",
+      "status": "Proposed, not endorsed",
+      "since": "2026",
+      "updated": "2026-11-07",
+      "summary": "A proposed application profile for describing UK public sector datasets and data services, so they can be found, judged and shared across every catalogue. Under review; the endorsed model remains the cross-government metadata exchange model.",
+      "audience": "Catalogue owners, metadata leads and data architects",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/dcat-ap-uk/",
+      "repo": "https://github.com/cyberdudeuk/dcat-ap-uk",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": false
+    },
+    {
+      "id": "dam-capability-playbooks",
+      "name": "Data Asset Management capability playbooks",
+      "category": "data",
+      "status": "Prototype",
+      "since": "2026",
+      "updated": "2026-11-07",
+      "summary": "Step-by-step guidance on data governance, data cataloguing and data quality for critical data assets in UK government, built around the data asset management policy.",
+      "audience": "Data owners, stewards, catalogue managers and data leaders",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/dam-capability-playbooks/",
+      "repo": "https://github.com/cyberdudeuk/dam-capability-playbooks",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": false
+    },
+    {
+      "id": "dq-commons",
+      "name": "Public Sector Data Quality Commons",
+      "category": "data",
+      "status": "Prototype",
+      "since": "2026",
+      "updated": "2026-11-07",
+      "summary": "A free, open hub and toolkit for data quality in the public sector: check data, find the frameworks and standards that apply, learn, use AI safely and share what works.",
+      "audience": "Anyone responsible for data quality, from first steps to automation",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/dq-commons/",
+      "repo": "https://github.com/cyberdudeuk/dq-commons",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": false
+    },
+    {
+      "id": "github-repos-asset-catalogue",
+      "name": "GitHub Repos Asset Catalogue",
+      "category": "reuse",
+      "status": "Working tool",
+      "since": "2026",
+      "updated": "2026-11-07",
+      "summary": "Before you build it, look for it. Every UK public sector code project on GitHub in one place, explained in plain English, so you can find work that already exists and decide whether to reuse it.",
+      "audience": "Policy leads, service owners, data leaders and engineers",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/github-repos-asset-catalogue/",
+      "repo": "https://github.com/cyberdudeuk/github-repos-asset-catalogue",
+      "licence": "MIT",
+      "new": false
+    },
+    {
+      "id": "knowledge-web",
+      "name": "The Knowledge Web",
+      "category": "knowledge",
+      "status": "Prototype",
+      "since": "2026",
+      "updated": "2026-08-03",
+      "summary": "A navigable, ontology-backed map of a body of work on UK government data standards, governance and knowledge management, delivered as one self-contained file that works offline.",
+      "audience": "People mapping or navigating a large body of knowledge",
+      "levels": [
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "",
+      "repo": "https://github.com/cyberdudeuk/knowledge-web",
+      "how": "Download dist/the-web.html from the repository and open it in a browser",
+      "licence": "Apache 2.0",
+      "new": false
+    },
+    {
+      "id": "plainspoken",
+      "name": "Plainspoken",
+      "category": "skills",
+      "status": "Personal project",
+      "since": "2026",
+      "updated": "2026-10-28",
+      "summary": "A phone-first speaking coach for anyone who speaks at work, with situations drawn from public sector settings: a daily 20-minute routine, event preparation, speak-and-score, role-play and a live cue card.",
+      "audience": "Anyone who wants to speak more clearly at work",
+      "levels": [
+        "Beginner"
+      ],
+      "site": "https://cyberdudeuk.github.io/plainspoken/",
+      "repo": "https://github.com/cyberdudeuk/plainspoken",
+      "licence": "PolyForm Noncommercial 1.0.0 code (see repository for content)",
+      "new": false
+    },
+    {
+      "id": "black-mixed-heritage",
+      "name": "BHM 2026 Hub: Honouring Our Communities",
+      "category": "community",
+      "status": "Personal project, unofficial",
+      "since": "2026",
+      "updated": "2026-10-31",
+      "summary": "A hub celebrating Black and Black-Mixed history, heritage and cultures, Africa and the diaspora, built for Black History Month 2026 in the UK and designed to run all year.",
+      "audience": "Colleagues across the public sector and the wider community",
+      "levels": [
+        "Beginner"
+      ],
+      "site": "https://cyberdudeuk.github.io/black-mixed-heritage/",
+      "repo": "https://github.com/cyberdudeuk/black-mixed-heritage",
+      "licence": "MIT code, CC BY 4.0 content",
+      "new": false
+    },
+    {
+      "id": "ndl-pubsec-mcp",
+      "name": "Public sector MCP server",
+      "category": "experiments",
+      "status": "Experiment",
+      "since": "2026",
+      "updated": "2026-06-11",
+      "summary": "An experiment in building a Model Context Protocol server for public sector data.",
+      "audience": "Developers exploring AI tool integration",
+      "levels": [
+        "Advanced"
+      ],
+      "site": "",
+      "repo": "https://github.com/cyberdudeuk/ndl-pubsec-mcp",
+      "licence": "No licence stated",
+      "new": false,
+      "how": "An early experiment with no published site: see the repository"
+    }
+  ],
+  "excluded": {
+    "why": "Forks and private repositories are not listed.",
+    "repos": [
+      "w3id.org (fork)"
+    ]
+  },
+  "ways_in": {
+    "_note": "Suggested starting points per level, chosen by the owner. Edit freely.",
+    "Beginner": [
+      "github-repos-asset-catalogue",
+      "ai-capability-governance",
+      "plainspoken"
+    ],
+    "Intermediate": [
+      "dam-capability-playbooks",
+      "dq-commons",
+      "ai-capability-governance"
+    ],
+    "Advanced": [
+      "dcat-ap-uk",
+      "knowledge-web",
+      "ndl-pubsec-mcp"
+    ]
+  }
+}

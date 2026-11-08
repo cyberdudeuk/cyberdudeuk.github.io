@@ -1,0 +1,31 @@
+name: Discover
+# Tier 0 (ops/automation.yaml): Mondays, lists public repositories missing from the launchpad, gone from it, or newer
+# than their card, in one issue labelled routine. Never edits the list. Plain commands only (ADR 0002).
+on:
+  schedule: [{cron: '37 6 * * 1'}]   # Mondays 06:37 UTC
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out the commit (plain git)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q .
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth 1 origin "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
+          git remote set-url origin "https://github.com/${GITHUB_REPOSITORY}.git"
+      - name: Python environment
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+          pip install -r requirements.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/discover.py

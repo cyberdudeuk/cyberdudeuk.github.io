@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule: {interval: weekly}
+  # Proposes new commits for the pinned actions (ADR 0002). A person checks each commit against its release tag first.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: weekly}

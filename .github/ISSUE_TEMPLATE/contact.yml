@@ -1,0 +1,46 @@
+name: Contact the maintainer
+description: A question, feedback, or an idea about any of the projects
+title: "[Contact] "
+labels: ["contact"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is public. Do not include personal data, names of colleagues, case details or anything above OFFICIAL.
+        There is no email route: this form is the way to contact the maintainer. For one project, use that project's own form.
+  - type: input
+    id: subject
+    attributes:
+      label: Subject
+    validations:
+      required: true
+  - type: dropdown
+    id: about
+    attributes:
+      label: Which project is it about?
+      options:
+        - The launchpad itself
+        - AI Capability Governance and Implementation
+        - DCAT-AP-UK
+        - Data Asset Management capability playbooks
+        - Public Sector Data Quality Commons
+        - GitHub Repos Asset Catalogue
+        - The Knowledge Web
+        - Plainspoken
+        - BHM 2026 Hub
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: Your message
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: I have not included personal data, case details or anything above OFFICIAL
+          required: true

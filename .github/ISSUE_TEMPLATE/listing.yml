@@ -1,0 +1,29 @@
+name: A project card is wrong or missing
+description: Correct a card, or tell us a project is missing from the launchpad
+title: "[Listing] "
+labels: ["listing"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is public. Do not include personal data, names of colleagues, case details or anything above OFFICIAL.
+        There is no email route: this form is the way to contact the maintainer. For one project, use that project's own form.
+  - type: input
+    id: project
+    attributes:
+      label: Which project?
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong or missing?
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: I have not included personal data, case details or anything above OFFICIAL
+          required: true
