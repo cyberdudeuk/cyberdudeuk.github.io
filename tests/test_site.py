@@ -95,6 +95,13 @@ class Site(unittest.TestCase):
         self.fails_with('L11')
 
 
+class VenvStep(Site):
+    def test_L12_install_in_venv_step(self):
+        self.edit('.github/workflows/checks.yml', 'echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"\n      - name: Install pinned tools into the environment\n        run: pip install -r requirements.txt',
+                  'echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"\n          pip install -r requirements.txt')
+        self.fails_with('L12')
+
+
 def repo(name, pushed='2026-11-01T00:00:00Z', **kw):
     return dict({'name': name, 'html_url': f'https://github.com/cyberdudeuk/{name}', 'pushed_at': pushed, 'fork': False, 'private': False, 'archived': False}, **kw)
 

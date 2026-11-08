@@ -90,6 +90,11 @@ def problems(root):
         for u in re.findall(r'uses:\s*(\S+)', t):
             check(re.search(r'@[0-9a-f]{40}$', u) is not None, f'L10 pages.yml action not pinned to a full commit: {u}')
         check('path: _site' in t and 'python tools/check_site.py' in t, 'L10 pages.yml must check first and publish only _site')
+    # L12 (D-04): a step that creates the virtual environment and installs into it in the same step installs into the
+    # system Python, because a GITHUB_PATH change only applies from the next step; later steps then miss the packages.
+    for w in sorted((root / '.github' / 'workflows').glob('*.y*ml')):
+        for step in re.split(r'\n\s*- ', w.read_text(encoding='utf-8')):
+            check(not ('-m venv' in step and 'pip install' in step), f'L12 {w.name}: a step creates the venv and installs into it; split them')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -101,7 +106,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 11 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 12 checks, {n} projects')
     return 1 if p else 0
 
 
