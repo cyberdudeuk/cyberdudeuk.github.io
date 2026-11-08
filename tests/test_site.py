@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import check_site  # noqa: E402
 import discover  # noqa: E402
 
-FILES = ['index.html', '404.html', 'app.js', 'styles.css', 'README.md', 'LICENSE', 'CHANGELOG.md', 'ACCESSIBILITY.md', 'SECURITY.md',
+FILES = ['requirements.txt', 'index.html', '404.html', 'app.js', 'styles.css', 'README.md', 'LICENSE', 'CHANGELOG.md', 'ACCESSIBILITY.md', 'SECURITY.md',
          'CONTRIBUTING.md', 'SUPPORT.md', 'CODE_OF_CONDUCT.md', 'CITATION.cff', 'data', 'tools', '.github', 'docs', 'ops']
 
 
@@ -87,15 +87,36 @@ class Site(unittest.TestCase):
         self.fails_with('L9')
 
     def test_L10_unpinned_action(self):
-        self.edit('.github/workflows/pages.yml', 'actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e', 'actions/deploy-pages@v4')
+        # Matches whatever commit the action is pinned to, so a Dependabot update does not break the test (D-05).
+        import re
+        p = self.tmp / '.github' / 'workflows' / 'pages.yml'
+        t, n = re.subn(r'actions/deploy-pages@[0-9a-f]{40}', 'actions/deploy-pages@v5', p.read_text(encoding='utf-8'))
+        self.assertEqual(n, 1)
+        p.write_text(t, encoding='utf-8')
         self.fails_with('L10')
+
+    def test_L13_duplicate_pin(self):
+        p = self.tmp / 'requirements.txt'
+        shutil.copy(ROOT / 'requirements.txt', p)
+        p.write_text(p.read_text(encoding='utf-8') + 'PyYAML==6.0.2\n', encoding='utf-8')
+        self.fails_with('L13')
+
+    def test_L14_duplicate_step(self):
+        import re
+        p = self.tmp / '.github' / 'workflows' / 'pages.yml'
+        t = p.read_text(encoding='utf-8')
+        line = re.search(r'      - uses: actions/configure-pages@[^\n]+\n', t).group(0)
+        p.write_text(t.replace(line, line + line, 1), encoding='utf-8')
+        self.fails_with('L14')
 
     def test_L11_truncated_licence(self):
         self.edit('LICENSE', 'Copyright (c) 2026 cyberdudeuk and contributors', 'Copyright (c) 2026 Em')
         self.fails_with('L11')
 
 
-class VenvStep(Site):
+class VenvStep(unittest.TestCase):
+    setUp, tearDown, edit, fails_with = Site.setUp, Site.tearDown, Site.edit, Site.fails_with
+
     def test_L12_install_in_venv_step(self):
         self.edit('.github/workflows/checks.yml', 'echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"\n      - name: Install pinned tools into the environment\n        run: pip install -r requirements.txt',
                   'echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"\n          pip install -r requirements.txt')

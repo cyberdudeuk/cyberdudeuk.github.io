@@ -55,7 +55,7 @@ work, read its own README and status first.
 | `data/projects.json` | The list: every project, its category, status, levels, links and licence. Also the suggested starting points |
 | `data/owner.json` | What the page says about its owner. Nothing personal is published unless it is written here |
 | `tools/build.py` | Builds `index.html` and `404.html` from the data. Never edit those by hand |
-| `tools/check_site.py` | 12 static checks, including a rebuild that must match the committed page |
+| `tools/check_site.py` | 14 static checks, including a rebuild that must match the committed page |
 | `tools/check_browser.py` | Browser checks in Chrome at 1280, 390 and 320px: no sideways scroll, no console errors, filters, the menu switch, and old toolkit links |
 | `tools/discover.py` | Weekly: lists public repositories missing from the list, gone from it, or newer than their card |
 | `tests/` | Vaccination tests: every check must fail on a deliberate break |

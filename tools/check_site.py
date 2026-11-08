@@ -95,6 +95,15 @@ def problems(root):
     for w in sorted((root / '.github' / 'workflows').glob('*.y*ml')):
         for step in re.split(r'\n\s*- ', w.read_text(encoding='utf-8')):
             check(not ('-m venv' in step and 'pip install' in step), f'L12 {w.name}: a step creates the venv and installs into it; split them')
+    # L13 (D-05): sequential Dependabot merges left two pins for the same package, so pip refused to install anything.
+    names = [re.split(r'[=<>~!\[ ]', l.strip())[0].lower() for l in (root / 'requirements.txt').read_text(encoding='utf-8').splitlines() if l.strip() and not l.startswith('#')]
+    check(len(names) == len(set(names)), f'L13 requirements.txt pins a package more than once: {sorted({n for n in names if names.count(n) > 1})}')
+    # L14 (D-05): the same merges left pages.yml with two copies of the configure and upload steps.
+    for w in sorted((root / '.github' / 'workflows').glob('*.y*ml')):
+        for job in re.split(r'\n  [\w-]+:\n', w.read_text(encoding='utf-8')):
+            uses = re.findall(r'uses:\s*([^@\s]+)@', job)
+            dup = sorted({u for u in uses if uses.count(u) > 1})
+            check(not dup, f'L14 {w.name}: the same action is used twice in one job: {dup}')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -106,7 +115,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 12 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 14 checks, {n} projects')
     return 1 if p else 0
 
 
