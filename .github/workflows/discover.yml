@@ -21,11 +21,12 @@ jobs:
           git fetch -q --depth 1 origin "${GITHUB_SHA}"
           git checkout -q FETCH_HEAD
           git remote set-url origin "https://github.com/${GITHUB_REPOSITORY}.git"
-      - name: Python environment
+      - name: Python environment (takes effect from the next step)
         run: |
           python3 -m venv "$RUNNER_TEMP/venv"
           echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
-          pip install -r requirements.txt
+      - name: Install pinned tools into the environment
+        run: pip install -r requirements.txt
       - env:
           GH_TOKEN: ${{ github.token }}
         run: python tools/discover.py
