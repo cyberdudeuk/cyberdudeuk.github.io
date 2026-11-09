@@ -104,6 +104,12 @@ def problems(root):
             uses = re.findall(r'uses:\s*([^@\s]+)@', job)
             dup = sorted({u for u in uses if uses.count(u) > 1})
             check(not dup, f'L14 {w.name}: the same action is used twice in one job: {dup}')
+    # L15 (D-06): the contact form's project list still named the BHM 2026 Hub after the project was renamed, and lacked
+    # the new Amplify portal. Every project must be selectable on the form, by its current name.
+    cf = root / '.github' / 'ISSUE_TEMPLATE' / 'contact.yml'
+    form = cf.read_text(encoding='utf-8') if cf.exists() else ''  # a missing form is reported by L7
+    for p in (d['projects'] if form else []):
+        check(f'- {p["name"]}' in form, f'L15 contact form does not list {p["name"]}')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -115,7 +121,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 14 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 15 checks, {n} projects')
     return 1 if p else 0
 
 

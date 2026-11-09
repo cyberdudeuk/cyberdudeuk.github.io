@@ -27,7 +27,9 @@ body:
         - GitHub Repos Asset Catalogue
         - The Knowledge Web
         - Plainspoken
-        - BHM 2026 Hub
+        - Black History and Heritage Hub
+        - UK Youth Parliament: Amplify portal
+        - Public sector MCP server
         - Something else
     validations:
       required: true

@@ -1,6 +1,6 @@
 {
   "launchpad": "cyberdudeuk projects",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updated": "2026-11-08",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
@@ -38,6 +38,11 @@
       "id": "community",
       "label": "Community and heritage",
       "icon": "groups"
+    },
+    {
+      "id": "youth",
+      "label": "Youth voice",
+      "icon": "mic"
     },
     {
       "id": "experiments",
@@ -90,7 +95,7 @@
       "category": "data",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-07",
+      "updated": "2026-11-08",
       "summary": "Step-by-step guidance on data governance, data cataloguing and data quality for critical data assets in UK government, built around the data asset management policy.",
       "audience": "Data owners, stewards, catalogue managers and data leaders",
       "levels": [
@@ -128,7 +133,7 @@
       "category": "reuse",
       "status": "Working tool",
       "since": "2026",
-      "updated": "2026-11-07",
+      "updated": "2026-11-08",
       "summary": "Before you build it, look for it. Every UK public sector code project on GitHub in one place, explained in plain English, so you can find work that already exists and decide whether to reuse it.",
       "audience": "Policy leads, service owners, data leaders and engineers",
       "levels": [
@@ -147,7 +152,7 @@
       "category": "knowledge",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-08-03",
+      "updated": "2026-11-08",
       "summary": "A navigable, ontology-backed map of a body of work on UK government data standards, governance and knowledge management, delivered as one self-contained file that works offline.",
       "audience": "People mapping or navigating a large body of knowledge",
       "levels": [
@@ -179,12 +184,12 @@
     },
     {
       "id": "black-mixed-heritage",
-      "name": "BHM 2026 Hub: Honouring Our Communities",
+      "name": "Black History and Heritage Hub",
       "category": "community",
-      "status": "Personal project, unofficial",
+      "status": "Personal project, unofficial (name provisional)",
       "since": "2026",
-      "updated": "2026-10-31",
-      "summary": "A hub celebrating Black and Black-Mixed history, heritage and cultures, Africa and the diaspora, built for Black History Month 2026 in the UK and designed to run all year.",
+      "updated": "2026-11-08",
+      "summary": "A year-round hub celebrating Black and Black-Mixed history, heritage and cultures, Africa and the African diaspora. Launched as the BHM 2026 Hub for Black History Month 2026 in the UK; every figure links to its source.",
       "audience": "Colleagues across the public sector and the wider community",
       "levels": [
         "Beginner"
@@ -200,7 +205,7 @@
       "category": "experiments",
       "status": "Experiment",
       "since": "2026",
-      "updated": "2026-06-11",
+      "updated": "2026-11-08",
       "summary": "An experiment in building a Model Context Protocol server for public sector data.",
       "audience": "Developers exploring AI tool integration",
       "levels": [
@@ -211,6 +216,24 @@
       "licence": "No licence stated",
       "new": false,
       "how": "An early experiment with no published site: see the repository"
+    },
+    {
+      "id": "uk-youth-parliament-amplify",
+      "name": "UK Youth Parliament: Amplify portal",
+      "category": "youth",
+      "status": "In progress: portal files not yet in the repository",
+      "since": "2026",
+      "updated": "2026-11-08",
+      "summary": "A youth voice portal: young people's issues, a local routes map, and a dated snapshot of a UK Parliament petition. Public and written for young people.",
+      "audience": "Young people, and those who work with them",
+      "levels": [
+        "Beginner"
+      ],
+      "site": "",
+      "repo": "https://github.com/cyberdudeuk/uk-youth-parliament-amplify",
+      "how": "The portal files are being added to the repository; until then, see its README",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": true
     }
   ],
   "excluded": {
