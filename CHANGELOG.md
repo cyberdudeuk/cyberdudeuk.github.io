@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 — 13 November 2026
+
+- The Amplify portal's files are now in its repository: its card says so, and how to run it, as it has no public site yet.
+- Refreshed the updated dates of nine projects changed on 13 November 2026.
+- Discovery no longer flags a card as stale when the only changes since its date were made by bots, such as Dependabot (D-07).
+
 ## 1.1.0 — 8 November 2026
 
 - Added the UK Youth Parliament: Amplify portal (in progress; its portal files are not yet in its repository) under a new Youth voice area.
