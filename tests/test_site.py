@@ -150,6 +150,15 @@ class Discover(unittest.TestCase):
         self.assertTrue(any('its card says' in x for x in discover.findings([repo('alpha', pushed='2026-11-07T00:00:00Z')], self.DATA)))
         self.assertTrue(any('no public repository' in x for x in discover.findings([], self.DATA)))
 
+    def test_bot_only_push_is_not_flagged(self):
+        # D-07: a Dependabot merge after the card's date is not a change to the project.
+        f = discover.findings([repo('alpha', pushed='2026-11-07T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-04')
+        self.assertEqual(f, [])
+
+    def test_negative_change_by_person_is_flagged(self):
+        f = discover.findings([repo('alpha', pushed='2026-11-07T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-06')
+        self.assertTrue(any('updated on 2026-11-06' in x for x in f))
+
 
 if __name__ == '__main__':
     unittest.main()
