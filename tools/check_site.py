@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static checks for the launchpad. Each names the defect or risk it guards against (docs/defect-register.md);
+"""Static checks for the launchpad (L1 to L21). Each names the defect or risk it guards against (docs/defect-register.md);
 tests/test_site.py proves every check fails on a deliberate break.
 
 Run: python3 tools/check_site.py [root]   (exit 1 on any failure)
@@ -110,6 +110,75 @@ def problems(root):
     form = cf.read_text(encoding='utf-8') if cf.exists() else ''  # a missing form is reported by L7
     for p in (d['projects'] if form else []):
         check(f'- {p["name"]}' in form, f'L15 contact form does not list {p["name"]}')
+    # L16: no third-party requests (the footer promises none). Tags match in any case (D-14). Stylesheets, scripts, images, fonts and CSS urls must be local.
+    css = (root / 'styles.css').read_text(encoding='utf-8')
+    for name, text in (('index.html', s), ('404.html', nf)):
+        for tag in re.findall(r'<(?:link|script|img|source|iframe)\b[^>]*>', text, re.I):
+            for u in re.findall(r'(?:src|href)\s*=\s*["\']([^"\']+)', tag, re.I):
+                check(not re.match(r'(https?:)?//', u, re.I) or 'rel="canonical"' in tag.lower(), f'L16 {name} loads a third-party resource: {u}')
+    for u in re.findall(r'url\(\s*["\']?([^"\')]+)', css):
+        check(not re.match(r'(https?:)?//', u), f'L16 styles.css loads a third-party resource: {u}')
+    # L17: the workshop lists work that is not public yet. Nothing in it may link anywhere (a private workspace link would
+    # leak or break), every item is complete and on the page, and none repeats a public project.
+    wpath = root / 'data' / 'workshop.json'
+    wraw = wpath.read_text(encoding='utf-8') if wpath.exists() else ''
+    check(bool(wraw), 'L17 data/workshop.json is missing')
+    if wraw:
+        w = json.loads(wraw)
+        check(not re.search(r'https?:|claude\.ai|www\.', wraw), 'L17 workshop.json contains a link; workshop items must not link anywhere')
+        check('not yet public' in w.get('status', ''), 'L17 workshop status must say the work is not yet public')
+        wids = [i.get('id') for i in w.get('items', [])]
+        check(len(wids) == len(set(wids)), 'L17 duplicate workshop ids')
+        names = {p['name'].lower() for p in d['projects']}
+        for i in w.get('items', []):
+            for f in ('id', 'name', 'area', 'icon', 'summary'):
+                check(bool(i.get(f)), f'L17 workshop item {i.get("id", "?")} missing {f}')
+            check(i.get('name', '').lower() not in names, f'L17 workshop item {i.get("name")} is already a public project')
+            check(f'id="w-{i.get("id")}"' in s, f'L17 workshop item {i.get("id")} is not on the page')
+    # L18: the headline numbers and the status chart are the data's numbers, not typed by hand.
+    cats_used = {p['category'] for p in d['projects']}
+    want = [len(d['projects']), sum(1 for p in d['projects'] if p.get('site')), len(cats_used), len(json.loads(wraw)['items']) if wraw else -1]
+    got = [int(x) for x in re.findall(r'class="num" data-count="(\d+)">(?:\d+)<', s)]
+    check(got == want, f'L18 headline numbers {got} do not match the data {want}')
+    kinds = [int(x) for x in re.findall(r'<strong data-kind="\w+">(\d+)</strong>', s)]
+    check(sum(kinds) == len(d['projects']), f'L18 status chart counts {sum(kinds)} projects, the data has {len(d["projects"])}')
+    # L19: every coverage map cell holds the number of projects in that area at that level.
+    for c in cats_used:
+        for lvl in sorted(LEVELS):
+            n = sum(1 for p in d['projects'] if p['category'] == c and lvl in p['levels'])
+            m = re.search(r'aria-label="[^"]*, ' + lvl + r': (\d+) project', s[s.find(f'<tr class="c-{c}"'):])
+            check(m is not None and int(m.group(1)) == n, f'L19 coverage cell {c}/{lvl} should be {n}')
+    # L20: the typeface is self-hosted with its licence, and the share image exists at 1200x630.
+    for u in re.findall(r'url\("?(fonts/[^")]+)', css):
+        check((root / u).exists(), f'L20 font file {u} is missing')
+    check((root / 'fonts' / 'OFL.txt').exists(), 'L20 fonts/OFL.txt (the typeface licence) is missing')
+    og = root / 'og.jpg'
+    if og.exists():
+        b = og.read_bytes()
+        size = None
+        i = 2
+        while i < len(b) - 9:
+            if b[i] == 0xFF and b[i + 1] in (0xC0, 0xC2):
+                size = (int.from_bytes(b[i + 7:i + 9], 'big'), int.from_bytes(b[i + 5:i + 7], 'big'))
+                break
+            i += 2 + int.from_bytes(b[i + 2:i + 4], 'big') if b[i] == 0xFF else 1
+        check(size == (1200, 630), f'L20 og.jpg is {size}, not 1200x630: run python3 tools/og.py')
+    else:
+        check(False, 'L20 og.jpg is missing: run python3 tools/og.py')
+    # L21 (D-12): every local file the page uses is copied into the published site. The publish step copies a fixed list,
+    # so a new font or image passed every check here and would still have been missing from the live site.
+    if pw.exists():
+        m = re.search(r'cp -r ([^\n]+?) _site/', pw.read_text(encoding='utf-8'))
+        shipped = set(m.group(1).split()) if m else set()
+        refs = set()
+        for text in (s, nf):
+            for tag in re.findall(r'<(?:link|script|img|source)\b[^>]*>', text, re.I):
+                refs.update(re.findall(r'(?:src|href)="(?!https?:|//|data:|#|/)([^"?#]+)', tag, re.I))
+            refs.update(re.findall(r'<a [^>]*href="(?!https?:|//|#|/)([^"?#]+)"', text))
+            refs.update(re.findall(r'content="https://cyberdudeuk\.github\.io/([^"/]+\.(?:jpg|png))"', text))
+        refs.update(re.findall(r'url\("?(?!https?:|data:)([^")]+)', css))
+        for r in sorted(refs):
+            check(r.split('/')[0] in shipped, f'L21 {r} is used by the page but pages.yml does not publish it')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -121,7 +190,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 15 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 21 checks, {n} projects')
     return 1 if p else 0
 
 

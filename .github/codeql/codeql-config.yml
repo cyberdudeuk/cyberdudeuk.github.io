@@ -1,0 +1,3 @@
+# Third-party test tooling vendored as a minified file (axe-core, MPL-2.0) is not our code: leave it out of analysis.
+paths-ignore:
+  - tools/vendor
