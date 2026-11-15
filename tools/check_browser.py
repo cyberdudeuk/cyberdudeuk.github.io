@@ -8,7 +8,7 @@ B10 a coverage map number not filtering to its projects, B11 a project hidden wh
 B12 an animated headline number not landing on the data's number,
 B13 an automated accessibility rule failing (axe-core, vendored in tools/vendor) on the page in light, dark and phone views
 and on the 404 page (D-11: the 404 heading was white on white),
-B14 the back-to-top button not returning to the top, B15 a ways-in ring drawn empty (D-16).
+B14 the back-to-top button not returning to the top, or its arrow not centred and upright (D-18), B15 a ways-in ring drawn empty (D-16).
 
 Run: python3 tools/check_browser.py [--break NAME]
 --break injects a deliberate fault so CI proves each check fails when it should. Uses the runner's Chrome (CHROME).
@@ -40,10 +40,11 @@ BREAKS = {
     'counters': "document.querySelector('.num[data-count]').textContent='999'",
     'a11y': "document.head.insertAdjacentHTML('beforeend','<style>.intro{color:#eeeeee!important}</style>')",
     'totop': "var t=document.getElementById('toTop'); var c=t.cloneNode(true); c.removeAttribute('href'); t.replaceWith(c);",
+    'arrow': "document.head.insertAdjacentHTML('beforeend','<style>.totop .ico{position:absolute;left:0;top:0;transform:rotate(-90deg)}</style>')",
     'rings': "document.querySelectorAll('.ring .rv').forEach(function(r){r.style.setProperty('--len','0');})",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
-         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'rings': 'B15'}
+         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15'}
 
 
 def serve():
@@ -76,7 +77,7 @@ async def run(brk):
         for w, h, name in ((1280, 900, 'desktop'), (390, 844, 'phone'), (320, 640, 'small phone')):
             ctx, pg, errs = await page(b, w, h)
             await pg.goto(base + 'index.html', wait_until='load')
-            if brk in BREAKS and brk not in ('motion', 'counters', 'search', 'coverage', 'theme', 'a11y', 'totop', 'rings'):
+            if brk in BREAKS and brk not in ('motion', 'counters', 'search', 'coverage', 'theme', 'a11y', 'totop', 'rings', 'arrow'):
                 await pg.evaluate(BREAKS[brk])
             sw = await pg.evaluate('document.documentElement.scrollWidth')
             if sw > w:
@@ -164,10 +165,15 @@ async def run(brk):
         # B14: back to top appears after scrolling and returns to the top
         ctx, pg, errs = await page(b)
         await pg.goto(base + 'index.html', wait_until='load')
-        if brk == 'totop':
+        if brk in ('totop', 'arrow'):
             await pg.evaluate(BREAKS[brk])
         await pg.evaluate('window.scrollTo(0, document.documentElement.scrollHeight)')
         await pg.wait_for_timeout(500)
+        geo = await pg.evaluate("""(() => { const b = document.getElementById('toTop'), i = b && b.querySelector('.ico');
+            if (!b || !i) return null; const r = b.getBoundingClientRect(), q = i.getBoundingClientRect();
+            return {dx: Math.abs((r.left + r.right) / 2 - (q.left + q.right) / 2), dy: Math.abs((r.top + r.bottom) / 2 - (q.top + q.bottom) / 2), t: getComputedStyle(i).transform}; })()""")
+        if not geo or geo['dx'] > 2 or geo['dy'] > 2 or geo['t'] not in ('none', 'matrix(1, 0, 0, 1, 0, 0)'):
+            found.append(f'B14 the back-to-top arrow is not centred and upright: {geo}')
         try:
             await pg.click('#toTop', timeout=2000)
             await pg.wait_for_timeout(1500)

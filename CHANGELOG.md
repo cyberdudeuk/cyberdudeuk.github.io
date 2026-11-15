@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1 — 15 November 2026
+
+- The back-to-top arrow is centred and points up (D-18).
+
 ## 1.3.0 — 15 November 2026
 
 - A name for the portal: **Public Good Works**, by cyberdudeuk. It is set in `data/owner.json` (`site_name`, `tagline`), so it can be changed in one place.
