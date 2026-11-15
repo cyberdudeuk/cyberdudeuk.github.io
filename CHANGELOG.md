@@ -3,7 +3,7 @@
 ## 1.3.2 — 15 November 2026
 
 - The NDL PubSec MCP card was out of date: it said the project had no site and no licence, but its site is live and its
-  code is MIT licensed (documentation OGL v3.0). The card now uses the project's own name, summary and status: a personal project, at alpha (D-19).
+  code is MIT licensed (documentation OGL v3.0). The card now uses the project's own name, summary and status: an official GDS prototype, at alpha (D-19).
 - Discovery now also reports a card that contradicts its repository: no site listed while the repository has a live
   Pages site, or "no licence" while the repository has one. Tested both ways.
 - The headline-number test reads its anchor from the data, so a project gaining a site no longer breaks it.
