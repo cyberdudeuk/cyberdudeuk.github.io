@@ -117,6 +117,10 @@ class Site(unittest.TestCase):
         self.edit('index.html', '<link rel="stylesheet" href="styles.css">', '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter">')
         self.fails_with('L16')
 
+    def test_L16_upper_case_tag_cannot_slip_past(self):
+        self.edit('404.html', '</head>', '<SCRIPT SRC="https://example.com/x.js"></SCRIPT></head>')
+        self.fails_with('L16')
+
     def test_L16_third_party_css_url(self):
         self.edit('styles.css', 'url("fonts/space-grotesk-latin-wght.woff2")', 'url("https://example.com/font.woff2")')
         self.fails_with('L16')

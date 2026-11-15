@@ -110,12 +110,12 @@ def problems(root):
     form = cf.read_text(encoding='utf-8') if cf.exists() else ''  # a missing form is reported by L7
     for p in (d['projects'] if form else []):
         check(f'- {p["name"]}' in form, f'L15 contact form does not list {p["name"]}')
-    # L16: no third-party requests (the footer promises none). Stylesheets, scripts, images, fonts and CSS urls must be local.
+    # L16: no third-party requests (the footer promises none). Tags match in any case (D-14). Stylesheets, scripts, images, fonts and CSS urls must be local.
     css = (root / 'styles.css').read_text(encoding='utf-8')
     for name, text in (('index.html', s), ('404.html', nf)):
-        for tag in re.findall(r'<(?:link|script|img|source|iframe)\b[^>]*>', text):
-            for u in re.findall(r'(?:src|href)="([^"]+)"', tag):
-                check(not re.match(r'(https?:)?//', u) or 'rel="canonical"' in tag, f'L16 {name} loads a third-party resource: {u}')
+        for tag in re.findall(r'<(?:link|script|img|source|iframe)\b[^>]*>', text, re.I):
+            for u in re.findall(r'(?:src|href)\s*=\s*["\']([^"\']+)', tag, re.I):
+                check(not re.match(r'(https?:)?//', u, re.I) or 'rel="canonical"' in tag.lower(), f'L16 {name} loads a third-party resource: {u}')
     for u in re.findall(r'url\(\s*["\']?([^"\')]+)', css):
         check(not re.match(r'(https?:)?//', u), f'L16 styles.css loads a third-party resource: {u}')
     # L17: the workshop lists work that is not public yet. Nothing in it may link anywhere (a private workspace link would
@@ -172,8 +172,8 @@ def problems(root):
         shipped = set(m.group(1).split()) if m else set()
         refs = set()
         for text in (s, nf):
-            for tag in re.findall(r'<(?:link|script|img|source)\b[^>]*>', text):
-                refs.update(re.findall(r'(?:src|href)="(?!https?:|//|data:|#|/)([^"?#]+)', tag))
+            for tag in re.findall(r'<(?:link|script|img|source)\b[^>]*>', text, re.I):
+                refs.update(re.findall(r'(?:src|href)="(?!https?:|//|data:|#|/)([^"?#]+)', tag, re.I))
             refs.update(re.findall(r'<a [^>]*href="(?!https?:|//|#|/)([^"?#]+)"', text))
             refs.update(re.findall(r'content="https://cyberdudeuk\.github\.io/([^"/]+\.(?:jpg|png))"', text))
         refs.update(re.findall(r'url\("?(?!https?:|data:)([^")]+)', css))

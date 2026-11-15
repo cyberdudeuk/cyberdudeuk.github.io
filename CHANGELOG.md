@@ -12,7 +12,7 @@
 - In the workshop: nine pieces of work in development elsewhere that are not public yet, from `data/workshop.json`, never linked.
 - A share picture (`og.jpg`) made from the same data; print styles.
 - Fixes: the page scrolled sideways at 320px (D-10); the 404 heading was white on white (D-11); the font and share
-  picture would not have been published (D-12); the live dot's ring stayed under reduced motion (D-09).
+  picture would not have been published (D-12); the live dot's ring stayed under reduced motion (D-09); the new third-party check missed upper-case tags (D-14).
 - Checks: six new static checks (L16 to L21) and eight new browser checks (B6 to B13), each proved to fail on a
   deliberate break, including automated accessibility rules in light, dark and phone views and on the 404 page.
 
