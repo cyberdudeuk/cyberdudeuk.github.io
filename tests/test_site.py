@@ -63,7 +63,11 @@ class Site(unittest.TestCase):
         self.fails_with('L3')
 
     def test_L3_no_site_and_no_how(self):
-        self.data(lambda d: d['projects'][5].pop('how'))
+        # D-20: the break makes its own case (no site, no "how"), so it holds when every project has a live site.
+        def no_site_no_how(d):
+            d['projects'][5]['site'] = ''
+            d['projects'][5].pop('how', None)
+        self.data(no_site_no_how)
         self.fails_with('L3')
 
     def test_L5_bad_starting_point(self):

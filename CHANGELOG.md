@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.3 — 15 November 2026
+
+- The Knowledge Web and the UK Youth Parliament Amplify portal now have live sites on GitHub Pages (the owner's
+  decision); their cards link to them. Ten projects, ten live sites.
+- The L3 vaccine test makes its own siteless card instead of relying on one in the data (D-20).
+
 ## 1.3.2 — 15 November 2026
 
 - The NDL PubSec MCP card was out of date: it said the project had no site and no licence, but its site is live and its
