@@ -218,7 +218,7 @@
       "id": "ndl-pubsec-mcp",
       "name": "NDL PubSec MCP",
       "category": "experiments",
-      "status": "Experiment: alpha",
+      "status": "Personal project: alpha",
       "since": "2026",
       "updated": "2026-11-15",
       "summary": "An open-source Model Context Protocol server that lets any MCP-capable AI assistant find UK public sector data and check its metadata against the UK Cross-Government Metadata Exchange Model (xGov MEM).",
