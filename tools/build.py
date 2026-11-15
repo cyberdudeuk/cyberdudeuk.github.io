@@ -233,7 +233,7 @@ def build():
     featured = ''
     if feat:
         fk = kind(feat['status'])
-        hl = ''.join(f'<li class="hl hl-{i}">{icon(n, 24)}<span>{e(t)}</span></li>' for i, (t, n) in enumerate(zip(feat['highlights'], ('layers', 'schema', 'database', 'hub'))))
+        hl = ''.join(f'<li class="hl hl-{i}">{icon(n, 24)}<span>{e(t)}</span></li>' for i, (t, n) in enumerate(zip(feat['highlights'], ('layers', 'schema', 'database', 'hub'), strict=False)))
         featured = f'''<section class="featured c-{e(feat["category"])}" id="featured" aria-labelledby="h-featured">
    <div class="feat-body">
     <p class="feat-meta"><span class="flag">New</span><span class="pill k-{fk}"><span class="dot" aria-hidden="true"></span>{e(feat["status"])}</span><span class="muted">Updated {dt.date.fromisoformat(feat["updated"]).day} {dt.date.fromisoformat(feat["updated"]):%B %Y}</span></p>

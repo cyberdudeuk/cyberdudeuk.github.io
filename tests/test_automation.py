@@ -25,6 +25,19 @@ import trials  # noqa: E402
 CONTRACT_LABELS = {'routine', 'digest', 'health', 'review due', 'owner action', 'needs-reply', 'overdue', 'occurrence', 'trial', 'contact', 'accessibility', 'bug', 'listing'}
 
 
+class Linters(unittest.TestCase):
+    # D-21: no linter ran in CI (only node --check), so warnings were never caught. OpenSSF warnings criterion.
+    def test_checks_workflow_runs_both_linters(self):
+        wf = (WF / 'checks.yml').read_text(encoding='utf-8')
+        self.assertIn('ruff check .', wf)
+        self.assertIn('npx eslint .', wf)
+        self.assertIn('ruff==', (ROOT / 'requirements.txt').read_text(encoding='utf-8'))
+
+    def test_linter_configs_exist(self):
+        self.assertTrue((ROOT / 'ruff.toml').exists())
+        self.assertIn('js.configs.recommended', (ROOT / 'eslint.config.mjs').read_text(encoding='utf-8'))
+
+
 class Policy(unittest.TestCase):
     def test_every_workflow_is_declared(self):
         declared = {r['workflow'] for r in POLICY['routines'] if r['workflow'] != 'none'}

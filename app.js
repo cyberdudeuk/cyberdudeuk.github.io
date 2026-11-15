@@ -107,7 +107,7 @@
       var next = isDark() ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       th.setAttribute('aria-checked', String(next === 'dark'));
-      try { localStorage.setItem('theme', next); } catch (x) { /* storage blocked: the choice lasts for this page only */ }
+      try { localStorage.setItem('theme', next); } catch { /* storage blocked: the choice lasts for this page only */ }
     });
   }
 
