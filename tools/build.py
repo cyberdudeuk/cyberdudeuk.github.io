@@ -6,6 +6,7 @@ app.js only adds search, filtering, sorting, the view and menu switches, the the
 Run: python3 tools/build.py  (then python3 tools/check_site.py)
 """
 import datetime as dt
+import hashlib
 import html
 import io
 import json
@@ -47,8 +48,21 @@ ICONS = {  # simple 24px line icons, drawn here so the page makes no third-party
     'moon': '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
     'menu': '<path d="M4 7h16M4 12h16M4 17h16"/>',
     'chat': '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+    'chart': '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    'tool': '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+    'info': '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+    'sprout': '<path d="M12 21v-9M12 12c0-4 3-7 8-7 0 5-3 7-8 7zM12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 5.5 7 5.5z"/>',
+    'briefcase': '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+    'up': '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    'book': '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h7"/>',
 }
 KINDS = [('tool', 'Working tool'), ('proto', 'Prototype'), ('proposed', 'Proposed, not endorsed'), ('personal', 'Personal project'), ('exp', 'Experiment')]
+
+
+def asset(name):
+    """The file's address with a fingerprint of its contents, so a browser never pairs a new page with an old cached
+    stylesheet or script (D-15). GitHub Pages lets browsers keep files for 10 minutes."""
+    return f'{name}?v={hashlib.sha256((ROOT / name).read_bytes()).hexdigest()[:10]}'
 
 
 def icon(name, size=20, label=None):
@@ -121,6 +135,44 @@ def constellation(cats, count, newc, total):
 </svg>'''
 
 
+def seeded(key, n):
+    """n deterministic numbers in 0..1 from a key, so each project's art is the same on every build."""
+    out, i = [], 0
+    while len(out) < n:
+        h = hashlib.sha256(f'{key}:{i}'.encode()).digest()
+        out += [b / 255 for b in h]
+        i += 1
+    return out[:n]
+
+
+def signature(key):
+    """A small constellation unique to each project, drawn from its id: its 'signature' on the card."""
+    v = seeded(key, 40)
+    pts = [(40 + v[2 * i] * 400, 22 + v[2 * i + 1] * 52) for i in range(7)]
+    pts.sort()
+    path = 'M' + ' L'.join(f'{x:.1f} {y:.1f}' for x, y in pts)
+    stars = ''.join(f'<circle cx="{8 + v[14 + i] * 464:.1f}" cy="{6 + v[24 + i] * 84:.1f}" r="{.6 + v[34 + i % 6]:.1f}" class="st" style="animation-delay:{v[24 + i] * 4:.1f}s"/>' for i in range(10))
+    nodes = ''.join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{2.5 + 2.5 * v[30 + i % 10]:.1f}" class="nd" style="animation-delay:{i * .35:.2f}s"/>' for i, (x, y) in enumerate(pts))
+    return (f'<svg class="sig" viewBox="0 0 480 96" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" data-sig="{e(key)}">'
+            f'<g class="stars">{stars}</g><path d="{path}" class="ln"/>{nodes}</svg>')
+
+
+def starfield(n=70):
+    v = seeded('starfield', n * 3)
+    return ('<svg class="starfield" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">' + ''.join(
+        f'<circle cx="{v[3 * i] * 1200:.0f}" cy="{v[3 * i + 1] * 600:.0f}" r="{.5 + v[3 * i + 2] * 1.3:.1f}" style="animation-delay:{v[3 * i + 2] * 5:.1f}s"/>' for i in range(n)) + '</svg>')
+
+
+def ring(n, total, cls):
+    c = 2 * math.pi * 26
+    return (f'<span class="ring {cls}"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="26" class="rt"/>'
+            f'<circle cx="32" cy="32" r="26" class="rv" style="--len:{c * n / total:.1f};--circ:{c:.1f}"/></svg><span class="big">{n}</span></span>')
+
+
+def h2(hid, text, ico):
+    return f'<h2 id="{hid}"><span class="h-ico" aria-hidden="true">{icon(ico, 22)}</span>{text}</h2>'
+
+
 def card(p, cats):
     c = cats[p['category']]
     k = kind(p['status'])
@@ -134,6 +186,7 @@ def card(p, cats):
     upd = dt.date.fromisoformat(p['updated'])
     livedot = '<span class="dot live" aria-hidden="true"></span>' if p.get('site') else '<span class="dot" aria-hidden="true"></span>'
     return f'''<article class="card c-{e(p["category"])}" id="p-{e(p["id"])}" data-category="{e(p["category"])}" data-status="{e(p["status"])}" data-updated="{e(p["updated"])}" data-name="{e(p["name"])}" data-levels="{e(" ".join(x.lower() for x in p["levels"]))}" data-site="{"yes" if p.get("site") else "no"}">
+  {signature(p["id"])}
   <div class="card-top"><span class="tile" aria-hidden="true">{icon(c["icon"], 22)}</span>{new}</div>
   <h3>{e(p["name"])}</h3>
   <p class="sum">{e(p["summary"])}</p>
@@ -214,10 +267,10 @@ def build():
 
     workshop = ''.join(
         f'<article class="wcard" id="w-{e(i["id"])}"><div class="card-top"><span class="tile" aria-hidden="true">{icon(i["icon"], 20)}</span><span class="cat">{e(i["area"])}</span></div>'
-        f'<h3>{e(i["name"])}</h3><p>{e(i["summary"])}</p><span class="pill k-wip">{e(w["status"])}</span></article>'
+        f'<h3>{e(i["name"])}</h3><p>{e(i["summary"])}</p><span class="pill k-wip">{icon("tool", 14)}{e(w["status"])}<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></span></article>'
         for i in items)
 
-    jsonld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': f'{owner["display_name"]}: projects', 'url': SITE,
+    jsonld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': owner.get('site_name') or f'{owner["display_name"]}: projects', 'creator': {'@type': 'Person', 'name': owner['display_name']}, 'url': SITE,
               'dateModified': d['updated'], 'inLanguage': 'en-GB',
               'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(projects), 'itemListElement': [
                   {'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'CreativeWork', 'name': p['name'], 'url': p.get('site') or p['repo'],
@@ -235,11 +288,11 @@ def build():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(owner["display_name"])}: projects for better public services</title>
+<title>{e(owner.get("site_name") or owner["display_name"])}: open tools for public services, by {e(owner["display_name"])}</title>
 <meta name="description" content="Open tools, standards and guidance for data and AI in UK public services, plus personal public-good projects: every project by {e(owner["display_name"])} in one place.">
 <meta name="version" content="{e(d["version"])}">
 <link rel="canonical" href="{SITE}">
-<meta property="og:type" content="website"><meta property="og:title" content="{e(owner["display_name"])}: projects for better public services"><meta property="og:url" content="{SITE}">
+<meta property="og:type" content="website"><meta property="og:title" content="{e(owner.get("site_name") or owner["display_name"])}: open tools for public services"><meta property="og:url" content="{SITE}">
 <meta property="og:description" content="Open tools, standards and guidance for data and AI in UK public services.">
 <meta property="og:image" content="{SITE}og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{len(projects)} projects across {areas} areas of work, drawn as a constellation">
 <meta name="twitter:card" content="summary_large_image">
@@ -247,7 +300,7 @@ def build():
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="{favicon}">
 <link rel="preload" href="fonts/space-grotesk-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="{asset("styles.css")}">
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False).replace("</", "<\\/")}</script>
 <script>/* Old links to the Public AI Utility Toolkit (which lived here until November 2026) go to its new address. */
 (function(){{var h=(location.hash||'').slice(1);var old={json.dumps(OLD_TOOLKIT_SECTIONS)};if(old.indexOf(h)>-1){{location.replace('{NEW_TOOLKIT}#'+h);}}}})();
@@ -259,17 +312,18 @@ def build():
 <div class="progress" aria-hidden="true"></div>
 <header class="masthead">
  <div class="wrap mast">
-  <a class="brand" href="#top">{mark}<span>{e(owner["display_name"])}<small>Projects for better public services</small></span></a>
+  <a class="brand" href="#top">{mark}<span>{e(owner.get("site_name") or owner["display_name"])}<small>by {e(owner["display_name"])} · projects for better public services</small></span></a>
   <nav class="global" aria-label="Sections">{navlinks}</nav>
   <details class="navmenu"><summary>{icon("menu", 20)}Menu</summary><nav aria-label="Sections (menu)">{navlinks}</nav></details>
   <button type="button" class="theme js-only" id="themeToggle" role="switch" aria-checked="false">{icon("moon", 18)}<span>Dark mode</span></button>
  </div>
 </header>
 <section class="hero" id="top" aria-labelledby="h-top">
+ {starfield()}
  <div class="wrap hero-in">
   <div class="hero-text">
-   <p class="eyebrow"><span class="dot live" aria-hidden="true"></span>Launchpad · updated <time datetime="{e(d["updated"])}">{upd.day} {upd:%B %Y}</time></p>
-   <h1 id="h-top">Open tools and guidance for data and AI in public services</h1>
+   <p class="eyebrow"><span class="dot live" aria-hidden="true"></span>{e(owner.get("site_name") or owner["display_name"])} · updated <time datetime="{e(d["updated"])}">{upd.day} {upd:%B %Y}</time></p>
+   <h1 id="h-top">{e(owner.get("tagline") or "Open tools and guidance for data and AI in public services")}</h1>
    <p class="lede">Every project I build, in one place: standards, playbooks, working tools and personal public-good projects. Each lives in its own repository with its own site, built in the open and checked before it is published.</p>
    <div class="actions"><a class="btn btn-amber" href="#projects">Browse all projects{icon("arrow", 18)}</a><a class="btn btn-ghost" href="#ways-in">Not sure where to start?</a></div>
    <div class="stats">
@@ -282,7 +336,8 @@ def build():
   <figure class="hero-art">{constellation(cats, count, newc, len(projects))}
    <figcaption>Each node is an area of work, sized by its number of projects. Amber lines lead to areas with something new. Drawn from the data.</figcaption></figure>
  </div>
- <div class="wrap"><p class="moved">Looking for the <strong>Public AI Utility Toolkit</strong>? It is now <a href="{NEW_TOOLKIT}">AI Capability Governance and Implementation</a>, with its own address.</p></div>
+ <div class="wrap moved-wrap"><p class="moved">Looking for the <strong>Public AI Utility Toolkit</strong>? It is now <a href="{NEW_TOOLKIT}">AI Capability Governance and Implementation</a>, with its own address.</p></div>
+ <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 40 C240 10 480 60 720 34 S1200 8 1440 30 V60 H0 Z" class="w1"/><path d="M0 48 C300 24 540 64 780 42 S1180 22 1440 40 V60 H0 Z" class="w2"/></svg>
 </section>
 <div class="wrap layout">
  <aside class="side" aria-label="Projects by category">
@@ -296,17 +351,17 @@ def build():
   {featured}
 
   <section id="ways-in" aria-labelledby="h-ways">
-   <h2 id="h-ways">Choose your way in</h2>
+   {h2('h-ways', 'Choose your way in', 'compass')}
    <p class="intro">Every project says which levels it supports. Start where you are; the suggestions are a good first stop.</p>
    <div class="grid three">
-    <article class="way w-b"><div class="way-top"><span class="lvl lvl-beginner">Beginner</span><span class="big">{nlevel["Beginner"]}</span></div><h3>New to the subject, or to GitHub</h3><p>Plain-English sites you can use in a browser, with no account and nothing to install.</p><p class="small"><strong>Suggested starting points</strong></p><ul>{pick("Beginner")}</ul><p class="small"><button type="button" class="linkish js-only" data-level-go="beginner">Show all {nlevel["Beginner"]} projects at this level</button></p></article>
-    <article class="way w-i"><div class="way-top"><span class="lvl lvl-intermediate">Intermediate</span><span class="big">{nlevel["Intermediate"]}</span></div><h3>Using it in your work</h3><p>Guidance, registers and tools for a team, an asset or a return.</p><p class="small"><strong>Suggested starting points</strong></p><ul>{pick("Intermediate")}</ul><p class="small"><button type="button" class="linkish js-only" data-level-go="intermediate">Show all {nlevel["Intermediate"]} projects at this level</button></p></article>
-    <article class="way w-a"><div class="way-top"><span class="lvl lvl-advanced">Advanced</span><span class="big">{nlevel["Advanced"]}</span></div><h3>Building, assuring or reusing</h3><p>Open data, schemas, checks and code you can run, adapt or contribute to.</p><p class="small"><strong>Suggested starting points</strong></p><ul>{pick("Advanced")}</ul><p class="small"><button type="button" class="linkish js-only" data-level-go="advanced">Show all {nlevel["Advanced"]} projects at this level</button></p></article>
+    <article class="way w-b"><div class="way-top"><div class="way-id"><span class="tile way-ico" aria-hidden="true">{icon("sprout", 22)}</span><span class="lvl lvl-beginner">Beginner</span></div>{ring(nlevel["Beginner"], len(projects), "lb")}</div><h3>New to the subject, or to GitHub</h3><p>Plain-English sites you can use in a browser, with no account and nothing to install.</p><p class="small"><strong>Suggested starting points</strong></p><ul>{pick("Beginner")}</ul><p class="small"><button type="button" class="linkish js-only" data-level-go="beginner">Show all {nlevel["Beginner"]} projects at this level</button></p></article>
+    <article class="way w-i"><div class="way-top"><div class="way-id"><span class="tile way-ico" aria-hidden="true">{icon("briefcase", 22)}</span><span class="lvl lvl-intermediate">Intermediate</span></div>{ring(nlevel["Intermediate"], len(projects), "li")}</div><h3>Using it in your work</h3><p>Guidance, registers and tools for a team, an asset or a return.</p><p class="small"><strong>Suggested starting points</strong></p><ul>{pick("Intermediate")}</ul><p class="small"><button type="button" class="linkish js-only" data-level-go="intermediate">Show all {nlevel["Intermediate"]} projects at this level</button></p></article>
+    <article class="way w-a"><div class="way-top"><div class="way-id"><span class="tile way-ico" aria-hidden="true">{icon("code", 22)}</span><span class="lvl lvl-advanced">Advanced</span></div>{ring(nlevel["Advanced"], len(projects), "la")}</div><h3>Building, assuring or reusing</h3><p>Open data, schemas, checks and code you can run, adapt or contribute to.</p><p class="small"><strong>Suggested starting points</strong></p><ul>{pick("Advanced")}</ul><p class="small"><button type="button" class="linkish js-only" data-level-go="advanced">Show all {nlevel["Advanced"]} projects at this level</button></p></article>
    </div>
   </section>
 
   <section id="projects" aria-labelledby="h-projects">
-   <div class="sec-head"><h2 id="h-projects">Projects</h2><p class="intro">Search, filter and sort all {len(projects)} public projects.</p></div>
+   <div class="sec-head">{h2('h-projects', 'Projects', 'grid')}<p class="intro">Search, filter and sort all {len(projects)} public projects.</p></div>
    <div class="controls js-only">
     <div class="row">
      <label class="search">{icon("search", 18)}<span class="visually-hidden">Search projects</span><input type="search" id="q" placeholder="Search projects" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
@@ -326,7 +381,7 @@ def build():
   </section>
 
   <section id="coverage" aria-labelledby="h-coverage">
-   <div class="sec-head"><h2 id="h-coverage">Coverage map</h2><p class="intro">Which areas have something for each level, and where the work stands. Select a number to see those projects.</p></div>
+   <div class="sec-head">{h2('h-coverage', 'Coverage map', 'chart')}<p class="intro">Which areas have something for each level, and where the work stands. Select a number to see those projects.</p></div>
    <div class="cov">
     <div class="panel matrix-wrap"><table class="matrix"><caption>Projects by area and level</caption>
      <thead><tr><th scope="col">Area</th>{"".join(f'<th scope="col">{x}</th>' for x in LEVELS)}</tr></thead>
@@ -339,16 +394,16 @@ def build():
   </section>
 
   <section id="workshop" aria-labelledby="h-workshop">
-   <div class="sec-head"><p class="eyebrow amber">Coming next</p><h2 id="h-workshop">In the workshop</h2>
+   <div class="sec-head"><p class="eyebrow amber">Coming next</p>{h2('h-workshop', 'In the workshop', 'tool')}
    <p class="intro">Work in development elsewhere that is not public yet, so there is nothing to link to. Each will get its own repository and site when it is ready; it then moves up into Projects. Interested in one? Use the <a href="{CONTACT}">contact form</a>.</p></div>
    <div class="grid wgrid">{workshop}</div>
   </section>
 
   <section id="about" aria-labelledby="h-about">
-   <h2 id="h-about">About</h2>
+   {h2('h-about', 'About', 'info')}
    <div class="grid two">
-    <article class="panel"><h3>Who makes these</h3>{about_role}<p>{e(owner["about"])}</p></article>
-    <article class="panel"><h3>How to read this page</h3><ul>
+    <article class="panel"><h3><span class="tile sm" aria-hidden="true">{icon("person", 16)}</span>Who makes these</h3>{about_role}<p>{e(owner["about"])}</p></article>
+    <article class="panel"><h3><span class="tile sm" aria-hidden="true">{icon("book", 16)}</span>How to read this page</h3><ul>
      <li>Status is as each project states it. <strong>Prototype</strong> and <strong>proposed</strong> mean not finished and not official.</li>
      <li>Summaries are written from each project's own README.</li>
      <li>None of these is an official government service, policy or endorsement unless the project says so.</li>
@@ -358,13 +413,15 @@ def build():
   </section>
 
   <section id="contact" class="contact" aria-labelledby="h-contact">
-   <div><h2 id="h-contact">Contact</h2>
+   <div>{h2('h-contact', 'Contact', 'chat')}
    <p>Use the <a href="{CONTACT}">contact form</a>. It opens a GitHub issue, which is public, so do not include personal data. There is no email route. For a problem with one project, use that project's own contact form, linked from its site.</p></div>
    <a class="btn btn-amber" href="{CONTACT}">{icon("chat", 18)}Open the contact form</a>
   </section>
  </main>
 </div>
+<a href="#top" class="totop js-only" id="toTop" aria-label="Back to top"><svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" focusable="false"><circle cx="26" cy="26" r="23" class="rt"/><circle cx="26" cy="26" r="23" class="rv" id="toTopRing"/></svg>{icon("up", 20)}</a>
 <footer class="footer">
+ <div class="footer-art" aria-hidden="true">{constellation(cats, count, newc, len(projects))}</div>
  <div class="wrap foot">
   <div class="foot-text">
    <p><strong>Disclaimer.</strong> Made in a personal capacity. These projects are not official government services or policy, and listing a project does not mean any organisation endorses it.</p>
@@ -372,17 +429,17 @@ def build():
    <p><strong>Licences.</strong> This launchpad: code MIT, text OGL v3.0. Typeface: Space Grotesk, SIL Open Font License 1.1 (<a href="fonts/OFL.txt">licence</a>). Each project has its own licence, shown on its card.</p>
    <p><strong>Contact.</strong> <a href="{CONTACT}">Contact form</a> · <a href="{REPO}">Repository</a> · <a href="{REPO}/blob/main/ACCESSIBILITY.md">Accessibility statement</a></p>
   </div>
-  <div class="colophon" aria-label="Colophon">{qr_svg(SITE)}<div class="bc">{barcode_svg("CYBERDUDEUK-" + d["version"])}<span>cyberdudeuk · v{e(d["version"])} · {e(d["updated"])}</span></div></div>
+  <div class="colophon" aria-label="Colophon">{qr_svg(SITE)}<div class="bc">{barcode_svg("CYBERDUDEUK-" + d["version"])}<span>{e(owner.get("site_name") or owner["display_name"])} · {e(owner["display_name"])} · v{e(d["version"])} · {e(d["updated"])}</span></div></div>
  </div>
 </footer>
-<script src="app.js"></script>
+<script src="{asset("app.js")}"></script>
 </body>
 </html>
 '''
     (ROOT / 'index.html').write_text(page, encoding='utf-8')
     notfound = f'''<!DOCTYPE html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found: {e(owner["display_name"])}</title><link rel="stylesheet" href="/styles.css">
+<title>Page not found: {e(owner.get("site_name") or owner["display_name"])}</title><link rel="stylesheet" href="/{asset("styles.css")}">
 <script>/* Old toolkit links: send them to its new address with the same section. */
 (function(){{var h=(location.hash||'').slice(1);var old={json.dumps(OLD_TOOLKIT_SECTIONS)};if(location.pathname==='/'&&old.indexOf(h)>-1){{location.replace('{NEW_TOOLKIT}#'+h);}}}})();</script>
 </head><body><main class="wrap nf" id="main"><p class="eyebrow">Error 404</p><h1>Page not found</h1>

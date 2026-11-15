@@ -114,7 +114,7 @@ class Site(unittest.TestCase):
         self.fails_with('L15')
 
     def test_L16_third_party_font(self):
-        self.edit('index.html', '<link rel="stylesheet" href="styles.css">', '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter">')
+        self.edit('index.html', '<link rel="stylesheet" href="styles.css?v=', '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&v=')
         self.fails_with('L16')
 
     def test_L16_upper_case_tag_cannot_slip_past(self):
@@ -152,6 +152,25 @@ class Site(unittest.TestCase):
     def test_L21_asset_not_published(self):
         self.edit('.github/workflows/pages.yml', 'data fonts og.jpg .nojekyll', 'data .nojekyll')
         self.fails_with('L21')
+
+    def test_L22_stylesheet_changed_without_rebuild(self):
+        p = self.tmp / 'styles.css'
+        p.write_text(p.read_text(encoding='utf-8') + '\n/* changed */\n', encoding='utf-8')
+        self.fails_with('L22')
+
+    def test_L22_no_fingerprint(self):
+        t = (self.tmp / 'index.html').read_text(encoding='utf-8')
+        import re
+        (self.tmp / 'index.html').write_text(re.sub(r'app\.js\?v=\w+', 'app.js', t), encoding='utf-8')
+        self.fails_with('L22')
+
+    def test_L23_card_without_signature(self):
+        self.edit('index.html', 'data-sig="plainspoken"', 'data-sig="nothing"')
+        self.fails_with('L23')
+
+    def test_L23_heading_without_icon(self):
+        self.edit('index.html', '<h2 id="h-coverage"><span class="h-ico"', '<h2 id="h-coverage"><span class="h-none"')
+        self.fails_with('L23')
 
     def test_L11_truncated_licence(self):
         self.edit('LICENSE', 'Copyright (c) 2026 cyberdudeuk and contributors', 'Copyright (c) 2026 Em')
