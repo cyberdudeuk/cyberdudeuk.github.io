@@ -296,3 +296,98 @@ a.cell:hover{background:var(--c);color:var(--surface)}
  .card,.wcard{break-inside:avoid;box-shadow:none}.card[hidden],.cat-block[hidden]{display:flex!important}
  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.8em;word-break:break-all}
 }
+
+/* 1.3.0: richer imagery and motion, all drawn in code and all still under reduced motion */
+.hero .wrap{position:relative;z-index:1}
+.starfield{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.starfield circle{fill:#c9d6e0;animation:twinkle 5s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.8}}
+.wave{display:block;width:100%;height:48px;margin-top:20px;position:relative;z-index:1}
+.wave .w1{fill:color-mix(in srgb,var(--bg) 45%,transparent);animation:sway 14s ease-in-out infinite alternate}
+.wave .w2{fill:var(--bg)}
+@keyframes sway{to{transform:translateX(-30px)}}
+.hero{padding-bottom:0}
+.moved-wrap{position:relative;z-index:1}
+.constellation{transition:transform .4s ease-out}
+
+/* Section headings: an icon tile that draws itself in when the section comes into view */
+h2{display:flex;align-items:center;gap:14px}
+.h-ico{width:44px;height:44px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;flex:none;color:var(--brand);background:var(--brand-soft)}
+.contact .h-ico{background:var(--night2);color:var(--amber)}
+.h-ico path,.h-ico circle,.h-ico rect,.h-ico ellipse{stroke-dasharray:80;stroke-dashoffset:0;transition:stroke-dashoffset 1.1s ease}
+.js main>section:not(.seen) .h-ico :is(path,circle,rect,ellipse){stroke-dashoffset:80}
+.panel h3{display:flex;align-items:center;gap:10px}
+
+/* Project signatures: a small constellation unique to each project */
+.sig{display:block;width:calc(100% + 44px);height:92px;margin:-22px -22px 4px;border-radius:var(--r) var(--r) 0 0;color:var(--c);
+ background:radial-gradient(120% 140% at 15% 0%,color-mix(in srgb,var(--c) 22%,var(--surface)),color-mix(in srgb,var(--c) 6%,var(--surface)))}
+.sig .st{fill:currentColor;opacity:.35;animation:twinkle 4.5s ease-in-out infinite}
+.sig .ln{fill:none;stroke:currentColor;stroke-width:1.4;stroke-dasharray:3 5;opacity:.7}
+.sig .nd{fill:var(--surface);stroke:currentColor;stroke-width:2;animation:glow 3.6s ease-in-out infinite}
+.card:hover .sig .ln{animation:dash 2.4s linear infinite}
+.card{overflow:hidden}
+.card::before{z-index:1}
+#projects.compact .sig{display:none}
+
+/* Spotlight that follows the pointer on cards (fine pointers only, set by app.js) */
+.card::after,.wcard::after,.way::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s ease;
+ background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c,var(--brand)) 12%,transparent),transparent 60%)}
+.card:hover::after,.wcard:hover::after,.way:hover::after{opacity:1}
+.way,.wcard{position:relative;overflow:hidden}
+
+/* Ways in: progress rings and level icons */
+.way-id{display:flex;align-items:center;gap:10px}
+.w-b{--c:var(--ok)}.w-i{--c:var(--int)}.w-a{--c:var(--adv)}
+.way-ico{color:var(--c)}
+.ring{position:relative;width:64px;height:64px;flex:none;display:inline-flex;align-items:center;justify-content:center}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring .rt{fill:none;stroke:var(--line);stroke-width:5}
+.ring .rv{fill:none;stroke:var(--c);stroke-width:5;stroke-linecap:round;stroke-dasharray:var(--len) var(--circ);animation:fillring 1.4s cubic-bezier(.2,.7,.2,1) both}
+.ring .big{position:relative;font:700 1.35rem/1 var(--display);color:var(--c)}
+@keyframes fillring{from{stroke-dasharray:0 var(--circ)}}
+.js .way.reveal:not(.in) .ring .rv{animation:none;stroke-dasharray:0 var(--circ)}
+
+/* Coverage: the status bar grows and cells settle in */
+.bar .seg-bar{transform-origin:0 50%;animation:growx 1.2s cubic-bezier(.2,.7,.2,1) both}
+.js #coverage:not(.seen) .bar .seg-bar{animation:none;transform:scaleX(0)}
+@keyframes growx{from{transform:scaleX(0)}}
+#coverage.seen .cell{animation:pop .5s ease both}
+#coverage.seen tr:nth-child(2) .cell{animation-delay:.05s}#coverage.seen tr:nth-child(3) .cell{animation-delay:.1s}#coverage.seen tr:nth-child(4) .cell{animation-delay:.15s}
+#coverage.seen tr:nth-child(5) .cell{animation-delay:.2s}#coverage.seen tr:nth-child(6) .cell{animation-delay:.25s}#coverage.seen tr:nth-child(7) .cell{animation-delay:.3s}
+#coverage.seen tr:nth-child(8) .cell{animation-delay:.35s}#coverage.seen tr:nth-child(9) .cell{animation-delay:.4s}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+
+/* Workshop: a moving dashed edge and "being built" dots */
+.wcard{border:0;background:var(--surface);--c:var(--amber-text)}
+.wcard::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;
+ background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--amber) 75%,transparent) 0 10px,transparent 10px 18px);background-size:36px 100%;
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:march 2.5s linear infinite}
+@keyframes march{to{background-position:36px 0}}
+.k-wip .ico{flex:none}
+.dots{display:inline-flex;gap:3px;margin-left:2px}
+.dots i{width:4px;height:4px;border-radius:50%;background:currentColor;animation:blink 1.4s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
+
+/* Back to top, with a ring that fills as you scroll */
+.totop{position:fixed;right:20px;bottom:20px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+ background:var(--night);color:#fff;box-shadow:var(--shadow);z-index:20;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+.totop.show{opacity:1;visibility:visible;transform:none}
+.totop:hover{color:var(--amber)}
+.totop svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.totop .rt{fill:none;stroke:var(--night3);stroke-width:3}
+.totop .rv{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-dasharray:144.5;stroke-dashoffset:144.5}
+
+/* Footer: the constellation again, faintly */
+.footer{position:relative;overflow:hidden}
+.footer-art{position:absolute;right:-60px;top:-40px;width:420px;opacity:.10;pointer-events:none}
+.footer-art .constellation text{display:none}
+.foot{position:relative}
+
+@media (prefers-reduced-motion:reduce){
+ .js main>section:not(.seen) .h-ico :is(path,circle,rect,ellipse){stroke-dashoffset:0}
+ .js #coverage:not(.seen) .bar .seg-bar{transform:none}
+ .js .way.reveal:not(.in) .ring .rv{stroke-dasharray:var(--len) var(--circ)}
+ .totop{transform:none}
+}
+@media print{.sig,.starfield,.wave,.totop,.footer-art{display:none!important}}

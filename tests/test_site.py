@@ -164,6 +164,14 @@ class Site(unittest.TestCase):
         (self.tmp / 'index.html').write_text(re.sub(r'app\.js\?v=\w+', 'app.js', t), encoding='utf-8')
         self.fails_with('L22')
 
+    def test_L23_card_without_signature(self):
+        self.edit('index.html', 'data-sig="plainspoken"', 'data-sig="nothing"')
+        self.fails_with('L23')
+
+    def test_L23_heading_without_icon(self):
+        self.edit('index.html', '<h2 id="h-coverage"><span class="h-ico"', '<h2 id="h-coverage"><span class="h-none"')
+        self.fails_with('L23')
+
     def test_L11_truncated_licence(self):
         self.edit('LICENSE', 'Copyright (c) 2026 cyberdudeuk and contributors', 'Copyright (c) 2026 Em')
         self.fails_with('L11')

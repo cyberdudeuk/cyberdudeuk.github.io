@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.3.0 — 15 November 2026
+
+- A name for the portal: **Public Good Works**, by cyberdudeuk. It is set in `data/owner.json` (`site_name`, `tagline`), so it can be changed in one place.
+- More imagery and motion, all drawn in code: a twinkling starfield and a wave edge in the hero, with gentle parallax on
+  the constellation; a generated constellation "signature" unique to each project on its card; icons that draw themselves
+  in on every section heading; progress rings for each level; a growing status chart and settling coverage map; a moving
+  dashed edge and "being built" dots on workshop items; a pointer spotlight on cards; a back-to-top button with a scroll
+  ring; and a faint constellation in the footer. All of it stops under reduced motion.
+- Fixes found while building: ways-in rings drawn empty (D-16) and signature art cropped (D-17).
+- Checks: L23 (signatures, heading icons, the name from the data), B14 (back to top) and B15 (rings), each proved to fail on
+  a deliberate break.
+
 ## 1.2.1 — 15 November 2026
 
 - The stylesheet and script are linked with a fingerprint of their contents, so after an update no browser shows the new

@@ -7,7 +7,8 @@ asks for reduced motion (including the live dot's ring, D-09), B9 one-project ar
 B10 a coverage map number not filtering to its projects, B11 a project hidden when JavaScript is off,
 B12 an animated headline number not landing on the data's number,
 B13 an automated accessibility rule failing (axe-core, vendored in tools/vendor) on the page in light, dark and phone views
-and on the 404 page (D-11: the 404 heading was white on white).
+and on the 404 page (D-11: the 404 heading was white on white),
+B14 the back-to-top button not returning to the top, B15 a ways-in ring drawn empty (D-16).
 
 Run: python3 tools/check_browser.py [--break NAME]
 --break injects a deliberate fault so CI proves each check fails when it should. Uses the runner's Chrome (CHROME).
@@ -38,9 +39,11 @@ BREAKS = {
     'coverage': "document.querySelectorAll('a.cell').forEach(function(c){c.replaceWith(c.cloneNode(true));})",
     'counters': "document.querySelector('.num[data-count]').textContent='999'",
     'a11y': "document.head.insertAdjacentHTML('beforeend','<style>.intro{color:#eeeeee!important}</style>')",
+    'totop': "var t=document.getElementById('toTop'); var c=t.cloneNode(true); c.removeAttribute('href'); t.replaceWith(c);",
+    'rings': "document.querySelectorAll('.ring .rv').forEach(function(r){r.style.setProperty('--len','0');})",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
-         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13'}
+         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'rings': 'B15'}
 
 
 def serve():
@@ -73,7 +76,7 @@ async def run(brk):
         for w, h, name in ((1280, 900, 'desktop'), (390, 844, 'phone'), (320, 640, 'small phone')):
             ctx, pg, errs = await page(b, w, h)
             await pg.goto(base + 'index.html', wait_until='load')
-            if brk in BREAKS and brk not in ('motion', 'counters', 'search', 'coverage', 'theme', 'a11y'):
+            if brk in BREAKS and brk not in ('motion', 'counters', 'search', 'coverage', 'theme', 'a11y', 'totop', 'rings'):
                 await pg.evaluate(BREAKS[brk])
             sw = await pg.evaluate('document.documentElement.scrollWidth')
             if sw > w:
@@ -157,6 +160,31 @@ async def run(brk):
         ctl = await pg.locator('.js-only:visible').count()
         if vis != nprojects or ctl:
             found.append(f'B11 without JavaScript {vis} of {nprojects} projects show and {ctl} script-only controls appear')
+        await ctx.close()
+        # B14: back to top appears after scrolling and returns to the top
+        ctx, pg, errs = await page(b)
+        await pg.goto(base + 'index.html', wait_until='load')
+        if brk == 'totop':
+            await pg.evaluate(BREAKS[brk])
+        await pg.evaluate('window.scrollTo(0, document.documentElement.scrollHeight)')
+        await pg.wait_for_timeout(500)
+        try:
+            await pg.click('#toTop', timeout=2000)
+            await pg.wait_for_timeout(1500)
+            y = await pg.evaluate('window.scrollY')
+        except Exception:
+            y = -1
+        if not 0 <= y < 50:
+            found.append(f'B14 back to top left the page at {y}')
+        await ctx.close()
+        # B15 (D-16): the ways-in rings show their share (a colour and a non-zero arc)
+        ctx, pg, errs = await page(b, reduced_motion='reduce')
+        await pg.goto(base + 'index.html', wait_until='load')
+        if brk == 'rings':
+            await pg.evaluate(BREAKS[brk])
+        bad = await pg.evaluate("Array.from(document.querySelectorAll('.ring .rv')).filter(function(r){var c=getComputedStyle(r);return c.stroke==='none'||!(parseFloat(c.strokeDasharray)>0);}).length")
+        if bad:
+            found.append(f'B15 {bad} ways-in ring(s) drawn empty')
         await ctx.close()
         # B13 (D-11): automated accessibility rules pass in every view, and on the 404 page
         for view, w, scheme, path in (('light', 1280, 'light', 'index.html'), ('dark', 1280, 'dark', 'index.html'),

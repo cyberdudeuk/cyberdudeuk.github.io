@@ -1,6 +1,8 @@
 {
   "display_name": "cyberdudeuk",
+  "site_name": "Public Good Works",
+  "tagline": "Open tools and guidance for data and AI in public services",
   "role": "",
   "about": "Projects from the cyberdudeuk GitHub account, most of them about data and AI in UK public services, plus some personal work. Each project is built in the open, checked automatically before it is published, and says plainly what it is and is not.",
-  "_note": "The owner can set display_name and role here. Nothing personal is published unless it is written in this file."
+  "_note": "The owner can set display_name (the account), site_name (the portal's name), tagline and role here. Nothing personal is published unless it is written in this file."
 }

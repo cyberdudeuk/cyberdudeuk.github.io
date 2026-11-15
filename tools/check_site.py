@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static checks for the launchpad (L1 to L22). Each names the defect or risk it guards against (docs/defect-register.md);
+"""Static checks for the launchpad (L1 to L23). Each names the defect or risk it guards against (docs/defect-register.md);
 tests/test_site.py proves every check fails on a deliberate break.
 
 Run: python3 tools/check_site.py [root]   (exit 1 on any failure)
@@ -188,6 +188,17 @@ def problems(root):
         for f in ('styles.css', 'app.js') if name == 'index.html' else ('styles.css',):
             want = hashlib.sha256((root / f).read_bytes()).hexdigest()[:10]
             check(re.search(re.escape(f) + r'\?v=' + want + '"', text) is not None, f'L22 {name} does not link {f} with its current fingerprint: run python3 tools/build.py')
+    # L23 (D-17): every project card carries its own generated signature, drawn without cropping, and every section
+    # heading has its icon; the portal's name comes from data/owner.json.
+    for p in d['projects']:
+        check(f'data-sig="{p["id"]}"' in s, f'L23 {p["id"]} has no signature art on its card')
+    check('preserveAspectRatio="xMidYMid slice"' not in s.split('<main')[1], 'L23 signature art is cropped (slice); use meet')
+    main = s[s.find('<main'):s.find('</main>')]
+    for hid, h in re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', main):
+        check('class="h-ico"' in h or hid == 'h-featured', f'L23 section heading {hid} has no icon')
+    owner = json.loads((root / 'data' / 'owner.json').read_text(encoding='utf-8'))
+    if owner.get('site_name'):
+        check(f'<title>{htmllib.escape(owner["site_name"])}' in s, 'L23 the page title does not start with site_name from data/owner.json')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -199,7 +210,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 22 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 23 checks, {n} projects')
     return 1 if p else 0
 
 

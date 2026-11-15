@@ -135,5 +135,55 @@
       });
     }
   }
+  /* Back to top: appears after the first screen; its ring shows how far down the page you are */
+  var top = $('#toTop'), topRing = $('#toTopRing');
+  if (top) {
+    var tick = function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var k = h > 0 ? Math.min(1, window.scrollY / h) : 0;
+      top.classList.toggle('show', window.scrollY > 600);
+      if (topRing) topRing.style.strokeDashoffset = String(144.5 * (1 - k));
+    };
+    window.addEventListener('scroll', tick, { passive: true });
+    tick();
+    top.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      var h1 = $('#top'); if (h1) h1.setAttribute('tabindex', '-1');
+      setTimeout(function () { if (h1) h1.focus({ preventScroll: true }); }, reduced ? 0 : 600);
+    });
+  }
+
+  /* Sections mark themselves seen, so their heading icon draws in and charts grow (CSS does the rest) */
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('seen'); so.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -15% 0px' });
+    $$('main > section').forEach(function (s2) { so.observe(s2); });
+  } else {
+    $$('main > section').forEach(function (s2) { s2.classList.add('seen'); });
+  }
+
+  /* Pointer effects: a spotlight on cards and a gentle parallax on the hero illustration. Fine pointers only, never
+     under reduced motion. */
+  var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+  if (fine && !reduced) {
+    $$('.card, .wcard, .way').forEach(function (el) {
+      el.addEventListener('pointermove', function (ev) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+      });
+    });
+    var hero = $('#top'), art = $('.hero-art .constellation');
+    if (hero && art) {
+      hero.addEventListener('pointermove', function (ev) {
+        var r = hero.getBoundingClientRect();
+        var x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
+        art.style.transform = 'translate(' + (x * 14).toFixed(1) + 'px,' + (y * 10).toFixed(1) + 'px)';
+      });
+      hero.addEventListener('pointerleave', function () { art.style.transform = ''; });
+    }
+  }
   apply();
 }());
