@@ -3,6 +3,9 @@ message: If you reuse this launchpad or its project list, please cite it as belo
 title: "cyberdudeuk: projects for better public services"
 type: software
 authors:
+  - given-names: Emanuel
+    family-names: Silva
+    orcid: "https://orcid.org/0009-0000-5880-7219"
   - name: cyberdudeuk
 version: 1.0.0
 date-released: 2026-11-08
