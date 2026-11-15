@@ -1,0 +1,28 @@
+{
+  "upload_type": "software",
+  "title": "cyberdudeuk: projects for better public services",
+  "creators": [
+    {
+      "name": "Silva, Emanuel",
+      "orcid": "0009-0000-5880-7219"
+    }
+  ],
+  "description": "cyberdudeuk: projects for better public services",
+  "keywords": [],
+  "notes": "Prototype or personal project, not an official GOV.UK service or endorsed standard unless its README says otherwise. Status at release: see README.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/cyberdudeuk/cyberdudeuk.github.io",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "version": "1.3.3",
+  "contributors": [
+    {
+      "name": "cyberdudeuk",
+      "type": "Other"
+    }
+  ],
+  "license": "mit"
+}
