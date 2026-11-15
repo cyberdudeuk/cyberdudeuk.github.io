@@ -374,7 +374,8 @@ h2{display:flex;align-items:center;gap:14px}
  background:var(--night);color:#fff;box-shadow:var(--shadow);z-index:20;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
 .totop.show{opacity:1;visibility:visible;transform:none}
 .totop:hover{color:var(--amber)}
-.totop svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.totop .tt-ring{position:absolute;inset:0;transform:rotate(-90deg)}
+.totop .ico{position:relative}
 .totop .rt{fill:none;stroke:var(--night3);stroke-width:3}
 .totop .rv{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-dasharray:144.5;stroke-dashoffset:144.5}
 

@@ -419,7 +419,7 @@ def build():
   </section>
  </main>
 </div>
-<a href="#top" class="totop js-only" id="toTop" aria-label="Back to top"><svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" focusable="false"><circle cx="26" cy="26" r="23" class="rt"/><circle cx="26" cy="26" r="23" class="rv" id="toTopRing"/></svg>{icon("up", 20)}</a>
+<a href="#top" class="totop js-only" id="toTop" aria-label="Back to top"><svg class="tt-ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true" focusable="false"><circle cx="26" cy="26" r="23" class="rt"/><circle cx="26" cy="26" r="23" class="rv" id="toTopRing"/></svg>{icon("up", 20)}</a>
 <footer class="footer">
  <div class="footer-art" aria-hidden="true">{constellation(cats, count, newc, len(projects))}</div>
  <div class="wrap foot">
