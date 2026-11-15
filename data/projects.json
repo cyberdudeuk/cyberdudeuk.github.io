@@ -1,6 +1,6 @@
 {
   "launchpad": "cyberdudeuk projects",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "updated": "2026-11-15",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
@@ -167,16 +167,15 @@
       "category": "knowledge",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-15",
       "summary": "A navigable, ontology-backed map of a body of work on UK government data standards, governance and knowledge management, delivered as one self-contained file that works offline.",
       "audience": "People mapping or navigating a large body of knowledge",
       "levels": [
         "Intermediate",
         "Advanced"
       ],
-      "site": "",
+      "site": "https://cyberdudeuk.github.io/knowledge-web/dist/the-web.html",
       "repo": "https://github.com/cyberdudeuk/knowledge-web",
-      "how": "Download dist/the-web.html from the repository and open it in a browser",
       "licence": "Apache 2.0",
       "new": false
     },
@@ -235,17 +234,16 @@
       "id": "uk-youth-parliament-amplify",
       "name": "UK Youth Parliament: Amplify portal",
       "category": "youth",
-      "status": "Prototype: in its repository, no public site yet",
+      "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-15",
       "summary": "A youth voice portal: young people's issues, a local routes map, and a dated snapshot of a UK Parliament petition. Public and written for young people.",
       "audience": "Young people, and those who work with them",
       "levels": [
         "Beginner"
       ],
-      "site": "",
+      "site": "https://cyberdudeuk.github.io/uk-youth-parliament-amplify/",
       "repo": "https://github.com/cyberdudeuk/uk-youth-parliament-amplify",
-      "how": "Run it on your own computer: the README shows how (no public site yet)",
       "licence": "MIT code, OGL v3.0 content",
       "new": true
     }
