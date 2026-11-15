@@ -1,6 +1,6 @@
 {
   "launchpad": "cyberdudeuk projects",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "updated": "2026-11-15",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
@@ -216,21 +216,20 @@
     },
     {
       "id": "ndl-pubsec-mcp",
-      "name": "Public sector MCP server",
+      "name": "NDL PubSec MCP",
       "category": "experiments",
-      "status": "Experiment",
+      "status": "Prototype: alpha, official GDS work",
       "since": "2026",
-      "updated": "2026-11-13",
-      "summary": "An experiment in building a Model Context Protocol server for public sector data.",
-      "audience": "Developers exploring AI tool integration",
+      "updated": "2026-11-15",
+      "summary": "An open-source Model Context Protocol server that lets any MCP-capable AI assistant find UK public sector data and check its metadata against the UK Cross-Government Metadata Exchange Model (xGov MEM).",
+      "audience": "Developers, data publishers and metadata leads exploring AI assistants and data discovery",
       "levels": [
         "Advanced"
       ],
-      "site": "",
+      "site": "https://cyberdudeuk.github.io/ndl-pubsec-mcp/",
       "repo": "https://github.com/cyberdudeuk/ndl-pubsec-mcp",
-      "licence": "No licence stated",
-      "new": false,
-      "how": "An early experiment with no published site: see the repository"
+      "licence": "MIT code, OGL v3.0 documentation",
+      "new": false
     },
     {
       "id": "uk-youth-parliament-amplify",
