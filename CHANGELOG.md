@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.4 — 15 November 2026
+
+- Checks now run two linters, Ruff for Python and ESLint for JavaScript, and fail on any finding (D-21). The two
+  findings they raised are fixed. Part of applying the secure development standard to every project.
+
 ## 1.3.3 — 15 November 2026
 
 - The Knowledge Web and the UK Youth Parliament Amplify portal now have live sites on GitHub Pages (the owner's
