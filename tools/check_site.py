@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static checks for the launchpad (L1 to L21). Each names the defect or risk it guards against (docs/defect-register.md);
+"""Static checks for the launchpad (L1 to L22). Each names the defect or risk it guards against (docs/defect-register.md);
 tests/test_site.py proves every check fails on a deliberate break.
 
 Run: python3 tools/check_site.py [root]   (exit 1 on any failure)
@@ -39,6 +39,8 @@ def problems(root):
     try:
         for f in ('data', 'tools'):
             shutil.copytree(root / f, tmp / f)
+        for f in ('styles.css', 'app.js'):
+            shutil.copy(root / f, tmp / f)
         r = subprocess.run([sys.executable, str(tmp / 'tools' / 'build.py')], capture_output=True, text=True)
         check(r.returncode == 0, f'L2 build failed: {r.stderr[-200:]}')
         if r.returncode == 0:
@@ -179,6 +181,13 @@ def problems(root):
         refs.update(re.findall(r'url\("?(?!https?:|data:)([^")]+)', css))
         for r in sorted(refs):
             check(r.split('/')[0] in shipped, f'L21 {r} is used by the page but pages.yml does not publish it')
+    # L22 (D-15): the stylesheet and script are linked with a fingerprint of their current contents, so a changed file
+    # gets a new address and no browser pairs the new page with an old cached copy.
+    import hashlib
+    for name, text in (('index.html', s), ('404.html', nf)):
+        for f in ('styles.css', 'app.js') if name == 'index.html' else ('styles.css',):
+            want = hashlib.sha256((root / f).read_bytes()).hexdigest()[:10]
+            check(re.search(re.escape(f) + r'\?v=' + want + '"', text) is not None, f'L22 {name} does not link {f} with its current fingerprint: run python3 tools/build.py')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -190,7 +199,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 21 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 22 checks, {n} projects')
     return 1 if p else 0
 
 

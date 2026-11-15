@@ -6,6 +6,7 @@ app.js only adds search, filtering, sorting, the view and menu switches, the the
 Run: python3 tools/build.py  (then python3 tools/check_site.py)
 """
 import datetime as dt
+import hashlib
 import html
 import io
 import json
@@ -49,6 +50,12 @@ ICONS = {  # simple 24px line icons, drawn here so the page makes no third-party
     'chat': '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
 }
 KINDS = [('tool', 'Working tool'), ('proto', 'Prototype'), ('proposed', 'Proposed, not endorsed'), ('personal', 'Personal project'), ('exp', 'Experiment')]
+
+
+def asset(name):
+    """The file's address with a fingerprint of its contents, so a browser never pairs a new page with an old cached
+    stylesheet or script (D-15). GitHub Pages lets browsers keep files for 10 minutes."""
+    return f'{name}?v={hashlib.sha256((ROOT / name).read_bytes()).hexdigest()[:10]}'
 
 
 def icon(name, size=20, label=None):
@@ -247,7 +254,7 @@ def build():
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="{favicon}">
 <link rel="preload" href="fonts/space-grotesk-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="{asset("styles.css")}">
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False).replace("</", "<\\/")}</script>
 <script>/* Old links to the Public AI Utility Toolkit (which lived here until November 2026) go to its new address. */
 (function(){{var h=(location.hash||'').slice(1);var old={json.dumps(OLD_TOOLKIT_SECTIONS)};if(old.indexOf(h)>-1){{location.replace('{NEW_TOOLKIT}#'+h);}}}})();
@@ -375,14 +382,14 @@ def build():
   <div class="colophon" aria-label="Colophon">{qr_svg(SITE)}<div class="bc">{barcode_svg("CYBERDUDEUK-" + d["version"])}<span>cyberdudeuk · v{e(d["version"])} · {e(d["updated"])}</span></div></div>
  </div>
 </footer>
-<script src="app.js"></script>
+<script src="{asset("app.js")}"></script>
 </body>
 </html>
 '''
     (ROOT / 'index.html').write_text(page, encoding='utf-8')
     notfound = f'''<!DOCTYPE html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found: {e(owner["display_name"])}</title><link rel="stylesheet" href="/styles.css">
+<title>Page not found: {e(owner["display_name"])}</title><link rel="stylesheet" href="/{asset("styles.css")}">
 <script>/* Old toolkit links: send them to its new address with the same section. */
 (function(){{var h=(location.hash||'').slice(1);var old={json.dumps(OLD_TOOLKIT_SECTIONS)};if(location.pathname==='/'&&old.indexOf(h)>-1){{location.replace('{NEW_TOOLKIT}#'+h);}}}})();</script>
 </head><body><main class="wrap nf" id="main"><p class="eyebrow">Error 404</p><h1>Page not found</h1>

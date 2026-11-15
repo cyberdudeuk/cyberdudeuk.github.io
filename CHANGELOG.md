@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1 — 15 November 2026
+
+- The stylesheet and script are linked with a fingerprint of their contents, so after an update no browser shows the new
+  page with an old cached stylesheet (D-15).
+
 ## 1.2.0 — 14 November 2026
 
 - A redesign, held to the standards that award juries weight most (design and usability first): a dark hero with a
