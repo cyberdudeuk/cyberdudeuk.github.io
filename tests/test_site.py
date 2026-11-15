@@ -134,7 +134,9 @@ class Site(unittest.TestCase):
         self.fails_with('L17')
 
     def test_L18_headline_number_typed_by_hand(self):
-        self.edit('index.html', 'class="num" data-count="7">7<', 'class="num" data-count="8">8<')
+        # D-19: the anchor is read from the data, not typed, so a project gaining a site cannot break the vaccine.
+        live = sum(1 for p in json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'] if p.get('site'))
+        self.edit('index.html', f'class="num" data-count="{live}">{live}<', f'class="num" data-count="{live + 1}">{live + 1}<')
         self.fails_with('L18')
 
     def test_L19_coverage_cell_wrong(self):
@@ -213,6 +215,22 @@ class Discover(unittest.TestCase):
         # D-07: a Dependabot merge after the card's date is not a change to the project.
         f = discover.findings([repo('alpha', pushed='2026-11-07T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-04')
         self.assertEqual(f, [])
+
+    def test_negative_card_missing_live_site_or_licence_is_flagged(self):
+        # D-19: the card said no site and no licence while the repository had both.
+        stale = {'projects': [dict(self.DATA['projects'][0], site='', licence='No licence stated')], 'excluded': {}}
+        r = repo('alpha', has_pages=True, homepage='https://cyberdudeuk.github.io/alpha/', license={'spdx_id': 'MIT'})
+        f = discover.findings([r], stale)
+        self.assertTrue(any('has a site at https://cyberdudeuk.github.io/alpha/' in x for x in f))
+        self.assertTrue(any('is licensed MIT' in x for x in f))
+
+    def test_card_matching_repository_facts_is_not_flagged(self):
+        ok = {'projects': [dict(self.DATA['projects'][0], site='https://cyberdudeuk.github.io/alpha/', licence='MIT')], 'excluded': {}}
+        r = repo('alpha', has_pages=True, homepage='https://cyberdudeuk.github.io/alpha/', license={'spdx_id': 'MIT'})
+        self.assertEqual(discover.findings([r], ok), [])
+        # NOASSERTION is GitHub's "a licence file it cannot classify": not proof of a licence, so not flagged.
+        unclear = {'projects': [dict(self.DATA['projects'][0], licence='No licence stated')], 'excluded': {}}
+        self.assertEqual(discover.findings([repo('alpha', license={'spdx_id': 'NOASSERTION'})], unclear), [])
 
     def test_negative_change_by_person_is_flagged(self):
         f = discover.findings([repo('alpha', pushed='2026-11-07T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-06')

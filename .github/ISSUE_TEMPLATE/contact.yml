@@ -29,7 +29,7 @@ body:
         - Plainspoken
         - Black History and Heritage Hub
         - UK Youth Parliament: Amplify portal
-        - Public sector MCP server
+        - NDL PubSec MCP
         - Something else
     validations:
       required: true

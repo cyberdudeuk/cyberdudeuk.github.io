@@ -48,6 +48,19 @@ def last_change_by_person(name):
     return None
 
 
+def fact_drift(r, card):
+    """Facts the repository itself states that the card contradicts (D-19). Dates alone missed these: the card for
+    ndl-pubsec-mcp kept 'no published site' and 'No licence stated' while its Pages site was live and its licence MIT."""
+    out = []
+    home = (r.get('homepage') or '').strip()
+    if r.get('has_pages') and home and not card.get('site'):
+        out.append(f"{r['name']} has a site at {home}; its card lists none")
+    spdx = ((r.get('license') or {}).get('spdx_id') or '')
+    if spdx and spdx != 'NOASSERTION' and 'no licence' in card.get('licence', '').lower():
+        out.append(f"{r['name']} is licensed {spdx}; its card says {card['licence']!r}")
+    return out
+
+
 def findings(repos, data, last_change=None):
     """Plain-English findings. repos: GitHub API repository objects; data: projects.json.
     last_change(name) gives the date of the last change by a person; without it, the push date is used."""
@@ -60,10 +73,12 @@ def findings(repos, data, last_change=None):
             continue
         if name not in listed:
             out.append(f"New public repository not on the launchpad: {r['name']} ({r['html_url']})")
-        elif r.get('pushed_at', '')[:10] > listed[name]['updated']:
-            when = last_change(r['name']) if last_change else r['pushed_at'][:10]
-            if when and when > listed[name]['updated']:
-                out.append(f"{r['name']} was updated on {when}; its card says {listed[name]['updated']}")
+        else:
+            out.extend(fact_drift(r, listed[name]))
+            if r.get('pushed_at', '')[:10] > listed[name]['updated']:
+                when = last_change(r['name']) if last_change else r['pushed_at'][:10]
+                if when and when > listed[name]['updated']:
+                    out.append(f"{r['name']} was updated on {when}; its card says {listed[name]['updated']}")
     for name, p in sorted(listed.items()):
         if name not in live:
             out.append(f"Listed project {p['name']} has no public repository any more ({p['repo']})")

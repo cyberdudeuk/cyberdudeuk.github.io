@@ -42,7 +42,7 @@ the public sector, and some personal projects. Each lives in its own repository 
 | Skills and development | [Plainspoken](https://cyberdudeuk.github.io/plainspoken/) |
 | Community and heritage | [Black History and Heritage Hub](https://cyberdudeuk.github.io/black-mixed-heritage/) |
 | Youth voice | [UK Youth Parliament: Amplify portal](https://github.com/cyberdudeuk/uk-youth-parliament-amplify) (in progress) |
-| Experiments | [Public sector MCP server](https://github.com/cyberdudeuk/ndl-pubsec-mcp) |
+| Experiments | [NDL PubSec MCP](https://github.com/cyberdudeuk/ndl-pubsec-mcp) |
 
 Status is as each project states it. *Prototype* and *proposed* mean not finished and not official. To use a project at
 work, read its own README and status first.
