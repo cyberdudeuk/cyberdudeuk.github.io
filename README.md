@@ -54,14 +54,17 @@ work, read its own README and status first.
 | Path | What it is |
 |---|---|
 | `data/projects.json` | The list: every project, its category, status, levels, links and licence. Also the suggested starting points |
+| `data/workshop.json` | Work in development elsewhere that is not public yet. Never linked; moves to `projects.json` when it gets its own repository |
 | `data/owner.json` | What the page says about its owner. Nothing personal is published unless it is written here |
 | `tools/build.py` | Builds `index.html` and `404.html` from the data. Never edit those by hand |
-| `tools/check_site.py` | 15 static checks, including a rebuild that must match the committed page |
-| `tools/check_browser.py` | Browser checks in Chrome at 1280, 390 and 320px: no sideways scroll, no console errors, filters, the menu switch, and old toolkit links |
+| `tools/check_site.py` | 21 static checks, including a rebuild that must match the committed page, no third-party requests, and every asset published |
+| `tools/check_browser.py` | 13 browser checks in Chrome at 1280, 390 and 320px: no sideways scroll, no console errors, filters, search, the menu and dark mode switches, the coverage map, reduced motion, the page without JavaScript, old toolkit links, and automated accessibility rules (axe-core) in light, dark and phone views |
+| `tools/og.py` | Makes `og.jpg`, the picture shown when the page is shared, from the same data |
+| `fonts/` | The self-hosted typeface (Space Grotesk, SIL Open Font License) so the page makes no third-party requests |
 | `tools/discover.py` | Weekly: lists public repositories missing from the list, gone from it, or newer than their card |
 | `tests/` | Vaccination tests: every check must fail on a deliberate break |
 | `ops/automation.yaml` | Every workflow, its tier, when it runs and what it may change |
-| `docs/` | [Decisions](docs/adr/0001-launchpad.md), [defect register](docs/defect-register.md), [settings checklist](docs/repo-settings.md) |
+| `docs/` | [Decisions](docs/adr/0001-launchpad.md) ([design](docs/adr/0003-design.md)), [defect register](docs/defect-register.md), [settings checklist](docs/repo-settings.md) |
 
 ### Add a new project
 
@@ -79,6 +82,7 @@ python3 tools/build.py
 python3 tools/check_site.py
 python3 -m unittest discover -s tests -v
 python3 tools/check_browser.py   # needs Chrome; set CHROME to its path
+python3 tools/og.py              # after changing the projects: refresh the share picture
 ```
 
 ### Reuse the list

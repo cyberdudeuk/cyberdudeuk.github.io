@@ -1,53 +1,62 @@
 {
   "launchpad": "cyberdudeuk projects",
-  "version": "1.1.1",
-  "updated": "2026-11-13",
+  "version": "1.2.0",
+  "updated": "2026-11-14",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
     {
       "id": "ai",
       "label": "AI governance",
-      "icon": "shield"
+      "icon": "shield",
+      "short": "AI governance"
     },
     {
       "id": "standards",
       "label": "Data standards and metadata",
-      "icon": "schema"
+      "icon": "schema",
+      "short": "Standards"
     },
     {
       "id": "data",
       "label": "Data management and quality",
-      "icon": "database"
+      "icon": "database",
+      "short": "Data quality"
     },
     {
       "id": "reuse",
       "label": "Finding and reusing code",
-      "icon": "search"
+      "icon": "search",
+      "short": "Code reuse"
     },
     {
       "id": "knowledge",
       "label": "Knowledge mapping",
-      "icon": "hub"
+      "icon": "hub",
+      "short": "Knowledge"
     },
     {
       "id": "skills",
       "label": "Skills and development",
-      "icon": "mic"
+      "icon": "mic",
+      "short": "Skills"
     },
     {
       "id": "community",
       "label": "Community and heritage",
-      "icon": "groups"
+      "icon": "groups",
+      "short": "Heritage"
     },
     {
       "id": "youth",
       "label": "Youth voice",
-      "icon": "mic"
+      "icon": "megaphone",
+      "short": "Youth voice"
     },
     {
       "id": "experiments",
       "label": "Experiments",
-      "icon": "science"
+      "icon": "science",
+      "short": "Experiments"
     }
   ],
   "projects": [
@@ -68,7 +77,13 @@
       "site": "https://cyberdudeuk.github.io/ai-capability-governance/",
       "repo": "https://github.com/cyberdudeuk/ai-capability-governance",
       "licence": "MIT code, OGL v3.0 content",
-      "new": true
+      "new": true,
+      "highlights": [
+        "Six-level human review model",
+        "Evidence and transparency record generators",
+        "Agent registry pattern",
+        "Weekly signals scan"
+      ]
     },
     {
       "id": "dcat-ap-uk",

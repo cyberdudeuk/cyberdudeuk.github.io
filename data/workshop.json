@@ -1,0 +1,69 @@
+{
+  "_note": "Work in development elsewhere that is not public yet. Nothing here links anywhere: private workspaces are never linked. When an item gets its own public repository, move it to projects.json. tools/check_site.py (L17) checks this file.",
+  "status": "In development, not yet public",
+  "items": [
+    {
+      "id": "data-portals-compass",
+      "name": "Data portals compass",
+      "area": "Finding your way",
+      "icon": "compass",
+      "summary": "Answer four questions and get a suggested route across the DAM playbooks, the Data Quality Commons, the Repos Asset Catalogue and DCAT-AP-UK, with why each step matters."
+    },
+    {
+      "id": "raidu",
+      "name": "RAIDU: Responsible AI and Data Use",
+      "area": "AI governance",
+      "icon": "shield",
+      "summary": "One portal for responsible AI and data use in UK government: implementation guidance, safeguards, guardrails, oversight tools, evidence and delivery."
+    },
+    {
+      "id": "share-observatory",
+      "name": "SHARE: Data Sharing Observatory and Barometer",
+      "area": "Data sharing",
+      "icon": "schema",
+      "summary": "An observatory and barometer for data sharing across the public sector."
+    },
+    {
+      "id": "my-360",
+      "name": "My 360º view of the state",
+      "area": "Public services",
+      "icon": "person",
+      "summary": "A prototype showing one person's interactions with the state, cradle to grave, across the public sector."
+    },
+    {
+      "id": "young-person-360",
+      "name": "Young Person 360º",
+      "area": "Youth voice",
+      "icon": "megaphone",
+      "summary": "The same 360º view of the state, built for and around young people."
+    },
+    {
+      "id": "earning-or-learning",
+      "name": "Earning or learning",
+      "area": "Youth and skills",
+      "icon": "megaphone",
+      "summary": "The Milburn Review on young people not in education, employment or training, and every UK government strategy, programme, duty and target that bears on it."
+    },
+    {
+      "id": "start-a-business",
+      "name": "Start a business in the UK",
+      "area": "Public services",
+      "icon": "layers",
+      "summary": "A family of pages for someone starting a business: their plan, their circumstances, every way in, and the whole business lifecycle."
+    },
+    {
+      "id": "recognition-opportunities",
+      "name": "Recognition Opportunities Portal",
+      "area": "Community and people",
+      "icon": "award",
+      "summary": "Verified award dates, fair ways to recognise people and teams, and tools to send recognition where people work."
+    },
+    {
+      "id": "govukos",
+      "name": "govukOS",
+      "area": "Platforms",
+      "icon": "layers",
+      "summary": "A multi-app ecosystem concept for public sector work, spanning the HIVE navigator, the govukOS platform and govukOS Studio."
+    }
+  ]
+}

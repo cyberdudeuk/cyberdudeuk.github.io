@@ -34,4 +34,4 @@ jobs:
       - run: node --check app.js
       - run: python tools/check_browser.py
       - name: Browser check vaccinations
-        run: for b in overflow consoleerror filters drawer redirect; do python tools/check_browser.py --break "$b"; done
+        run: for b in overflow consoleerror filters drawer redirect search theme motion density coverage nojs counters a11y; do python tools/check_browser.py --break "$b"; done

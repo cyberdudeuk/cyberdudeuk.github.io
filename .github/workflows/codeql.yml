@@ -43,7 +43,7 @@ jobs:
           tar -xzf "$RUNNER_TEMP/$asset" -C "$RUNNER_TEMP"
       - name: Analyse
         run: |
-          "$RUNNER_TEMP/codeql/codeql" database create "$RUNNER_TEMP/db" --language="${{ matrix.language }}" --source-root . --overwrite
+          "$RUNNER_TEMP/codeql/codeql" database create "$RUNNER_TEMP/db" --language="${{ matrix.language }}" --source-root . --overwrite --codescanning-config=.github/codeql/codeql-config.yml
           "$RUNNER_TEMP/codeql/codeql" database analyze "$RUNNER_TEMP/db" "codeql/${{ matrix.language }}-queries:codeql-suites/${{ matrix.language }}-security-and-quality.qls" \
             --format=sarif-latest --output="$RUNNER_TEMP/results.sarif" --sarif-category="/language:${{ matrix.language }}"
       - name: Upload results to code scanning

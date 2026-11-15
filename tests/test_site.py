@@ -15,7 +15,7 @@ import check_site  # noqa: E402
 import discover  # noqa: E402
 
 FILES = ['requirements.txt', 'index.html', '404.html', 'app.js', 'styles.css', 'README.md', 'LICENSE', 'CHANGELOG.md', 'ACCESSIBILITY.md', 'SECURITY.md',
-         'CONTRIBUTING.md', 'SUPPORT.md', 'CODE_OF_CONDUCT.md', 'CITATION.cff', 'data', 'tools', '.github', 'docs', 'ops']
+         'CONTRIBUTING.md', 'SUPPORT.md', 'CODE_OF_CONDUCT.md', 'CITATION.cff', 'data', 'tools', '.github', 'docs', 'ops', 'fonts', 'og.jpg']
 
 
 class Site(unittest.TestCase):
@@ -55,7 +55,7 @@ class Site(unittest.TestCase):
         self.fails_with('L1')
 
     def test_L2_page_edited_by_hand(self):
-        self.edit('index.html', 'Projects for better public services</h1>', 'Hand-edited</h1>')
+        self.edit('index.html', 'data and AI in public services</h1>', 'Hand-edited</h1>')
         self.fails_with('L2')
 
     def test_L3_incomplete_project(self):
@@ -112,6 +112,42 @@ class Site(unittest.TestCase):
     def test_L15_contact_form_out_of_step(self):
         self.edit('.github/ISSUE_TEMPLATE/contact.yml', '        - Black History and Heritage Hub\n', '        - BHM 2026 Hub\n')
         self.fails_with('L15')
+
+    def test_L16_third_party_font(self):
+        self.edit('index.html', '<link rel="stylesheet" href="styles.css">', '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter">')
+        self.fails_with('L16')
+
+    def test_L16_third_party_css_url(self):
+        self.edit('styles.css', 'url("fonts/space-grotesk-latin-wght.woff2")', 'url("https://example.com/font.woff2")')
+        self.fails_with('L16')
+
+    def test_L17_workshop_link(self):
+        self.edit('data/workshop.json', '"name": "govukOS",', '"name": "govukOS", "url": "https://claude.ai/artifact/x",')
+        self.fails_with('L17')
+
+    def test_L17_workshop_repeats_a_project(self):
+        self.edit('data/workshop.json', '"name": "govukOS",', '"name": "Plainspoken",')
+        self.fails_with('L17')
+
+    def test_L18_headline_number_typed_by_hand(self):
+        self.edit('index.html', 'class="num" data-count="7">7<', 'class="num" data-count="8">8<')
+        self.fails_with('L18')
+
+    def test_L19_coverage_cell_wrong(self):
+        self.edit('index.html', 'Data management and quality, Beginner: 2 projects', 'Data management and quality, Beginner: 3 projects')
+        self.fails_with('L19')
+
+    def test_L20_share_image_missing(self):
+        (self.tmp / 'og.jpg').unlink()
+        self.fails_with('L20')
+
+    def test_L20_font_missing(self):
+        (self.tmp / 'fonts' / 'space-grotesk-latin-wght.woff2').unlink()
+        self.fails_with('L20')
+
+    def test_L21_asset_not_published(self):
+        self.edit('.github/workflows/pages.yml', 'data fonts og.jpg .nojekyll', 'data .nojekyll')
+        self.fails_with('L21')
 
     def test_L11_truncated_licence(self):
         self.edit('LICENSE', 'Copyright (c) 2026 cyberdudeuk and contributors', 'Copyright (c) 2026 Em')
