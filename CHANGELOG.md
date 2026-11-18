@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.4.0 — 18 November 2026
+
+- Discovery now runs daily and proposes, not only reports (tier 2): for each new public repository it drafts a card
+  from what the repository states (name, description, licence, topics, site), labels what the repository does not say
+  ("To be confirmed by the owner", status "Experiment: new, not yet reviewed"), moves each card's date to the last
+  change by a person, rebuilds the page and pushes the result to the `routine/discover` branch. The routine issue
+  links to open the pull request. It never changes main and never removes or rewords a card; the AUTOMATION kill
+  switch stops it. The profile README follows the merged list. The owner's request of 18 November 2026.
+
 ## 1.3.4 — 15 November 2026
 
 - Checks now run two linters, Ruff for Python and ESLint for JavaScript, and fail on any finding (D-21). The two

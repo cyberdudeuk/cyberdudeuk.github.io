@@ -19,8 +19,9 @@ Open a pull request. The publish workflow runs every check again before it deplo
 
 ## Routines
 
-Every workflow is in `ops/automation.yaml` with its tier. Discovery (Mondays) reports new public repositories, gone ones
-and stale cards in one issue; it never edits the list. The kill switch is the repository variable `AUTOMATION` set to
+Every workflow is in `ops/automation.yaml` with its tier. Discovery (daily) reports new public repositories, gone ones
+and stale cards in one issue, and prepares draft cards and updated dates on the `routine/discover` branch; it never
+changes main, so the list changes only when a person merges that branch. The kill switch is the repository variable `AUTOMATION` set to
 `off`. Nothing merges itself.
 
 Back: [the intermediate guide](intermediate.md).
