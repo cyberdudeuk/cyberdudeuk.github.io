@@ -1,5 +1,13 @@
 # Changelog
 
+
+## 1.4.1 — 18 November 2026
+
+- The projects routine's first real run stopped after creating the board and one item: two of its fields were named
+  Status and Repository, which every GitHub Project already has as built-in fields (D-23). They are now Project status
+  and Repository link, the routine refuses to start if a field name clashes with a built-in one, and the tests' fake
+  GitHub service now has the built-in fields too, so the tests fail the way the real run did.
+
 ## 1.4.0 — 18 November 2026
 
 - Discovery now runs daily and proposes, not only reports (tier 2): for each new public repository it drafts a card

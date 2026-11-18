@@ -22,9 +22,16 @@ ACT = {'last_change': '2026-11-17', 'recent': ['Add publiccode.yml', 'Fix a link
 class FakeGraphQL:
     """Enough of GitHub's Projects API to record what the routine asks for."""
 
+    # D-23: every new GitHub Project already has these built-in fields. "Status" offers only Todo, In progress and Done,
+    # and "Repository" is a repository-type field that updateProjectV2ItemFieldValue refuses.
+    BUILT_IN = {'Title': [], 'Assignees': [], 'Status': ['Todo', 'In progress', 'Done'], 'Labels': [], 'Linked pull requests': [],
+                'Milestone': [], 'Repository': [], 'Reviewers': [], 'Parent issue': [], 'Sub-issues progress': []}
+
     def __init__(self, project=True, items=()):
-        self.calls, self.fields, self.items = [], {}, {t: {'id': f'I{n}', 'content': {'id': f'D{n}', 'title': t}} for n, t in enumerate(items)}
+        self.calls, self.items = [], {t: {'id': f'I{n}', 'content': {'id': f'D{n}', 'title': t}} for n, t in enumerate(items)}
+        self.fields = {n: {'id': f'B-{n}', 'name': n, 'options': [{'id': f'O-{o}', 'name': o} for o in opts]} for n, opts in self.BUILT_IN.items()}
         self.has_project = project
+        self.values = []
 
     def __call__(self, query, v):
         self.calls.append((query.split('(')[0].split('{')[0].strip() + ' ' + query.split('{')[1].split('(')[0], v))
@@ -43,6 +50,10 @@ class FakeGraphQL:
             return {'node': {'items': {'nodes': list(self.items.values())}}}
         if 'addProjectV2DraftIssue' in query:
             return {'addProjectV2DraftIssue': {'projectItem': {'id': 'NEW'}}}
+        if 'updateProjectV2ItemFieldValue' in query:
+            if v['f'] == 'B-Repository':
+                raise SystemExit('GraphQL failed: The field of type repository is currently not supported.')
+            self.values.append((v['f'], v['v']))
         return {}
 
     def named(self, op):
@@ -59,7 +70,7 @@ class ItemContent(unittest.TestCase):
                 self.assertIn(card['repo'], item['body'])
                 self.assertEqual(set(item['fields']), set(ps.FIELDS))
                 options = ps.wanted_options(DATA)
-                self.assertIn(item['fields']['Status'], options['Status'])  # groups exactly as the launchpad does
+                self.assertIn(item['fields']['Project status'], options['Project status'])  # groups exactly as the launchpad does
                 self.assertIn(item['fields']['Area'], options['Area'])
 
     def test_activity_from_the_repository_is_shown(self):
@@ -93,6 +104,18 @@ class BoardWrites(unittest.TestCase):
         self.assertEqual({v['n'] for v in fake.named('createProjectV2Field')}, set(ps.FIELDS))
         self.assertEqual(len(fake.named('addProjectV2DraftIssue')), len(DATA['projects']))
         self.assertEqual(len(items), len(DATA['projects']))
+
+    def test_negative_built_in_fields_are_never_written_and_every_value_lands(self):
+        # D-23: the first real run stopped on the built-in Repository field, and every status was refused by the
+        # built-in Status field's options. Each item's values must land in fields the routine created.
+        fake = FakeGraphQL(project=False)
+        logged = []
+        ps.sync(ps.Board(fake, log=logged.append), DATA, lambda n: ACT)
+        self.assertFalse(set(ps.FIELDS) & set(FakeGraphQL.BUILT_IN), 'a field name clashes with a built-in field')
+        self.assertTrue(set(FakeGraphQL.BUILT_IN) <= ps.BUILT_IN, 'the routine must know every built-in the fake models')
+        self.assertFalse([f for f, _ in fake.values if f.startswith('B-')], 'wrote to a built-in field')
+        self.assertEqual(len(fake.values), len(DATA['projects']) * len(ps.FIELDS))
+        self.assertFalse([m for m in logged if 'is not an option' in m])
 
     def test_existing_items_are_updated_not_duplicated(self):
         fake = FakeGraphQL(items=[DATA['projects'][0]['name']])
