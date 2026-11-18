@@ -51,6 +51,21 @@ class Site(unittest.TestCase):
     def test_the_real_site_passes(self):
         self.assertEqual(check_site.problems(ROOT), [])
 
+    def test_L24_profile_link_missing(self):
+        # D-24: a public profile listed in owner.json but not linked from the page breaks the cross-links.
+        self.edit('index.html', '<a rel="me" href="https://dev.to/cyberdudeuk">', '<a href="https://dev.to/cyberdudeuk">')
+        self.fails_with('L24')
+
+    def test_L24_profile_missing_from_same_as(self):
+        self.edit('index.html', '"https://dev.to/cyberdudeuk"', '"https://dev.to/someone-else"')
+        self.fails_with('L24')
+
+    def test_L24_build_refuses_unsafe_profile_link(self):
+        # Fail closed: only https links to known hosts reach the page.
+        for bad in ('javascript:alert(1)', 'http://dev.to/cyberdudeuk', 'https://evil.example/cyberdudeuk'):
+            with self.assertRaises(SystemExit):
+                build.profiles({'profiles': [{'name': 'X', 'url': bad}]})
+
     def test_L1_email(self):
         self.edit('index.html', '<p><strong>Disclaimer.</strong>', '<p>someone@example.gov.uk <strong>Disclaimer.</strong>')
         self.fails_with('L1')

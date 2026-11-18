@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 18 November 2026: profiles linked both ways
+
+- The About panel now links the owner's public profiles (GitHub, DEV Community, ORCID, LinkedIn) with `rel="me"`, and
+  the page's schema.org data names them in `sameAs`, so search engines and other sites can tie them together. They
+  are listed in data/owner.json; the build publishes only https links to known hosts. New check L24 fails if a listed
+  profile is missing from the page or the schema.org data (D-24).
+
 ## 1.4.1 — 18 November 2026
 
 - The projects routine's first real run stopped after creating the board and one item: two of its fields were named

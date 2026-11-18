@@ -199,6 +199,13 @@ def problems(root):
     owner = json.loads((root / 'data' / 'owner.json').read_text(encoding='utf-8'))
     if owner.get('site_name'):
         check(f'<title>{htmllib.escape(owner["site_name"])}' in s, 'L23 the page title does not start with site_name from data/owner.json')
+    # L24: every public profile in data/owner.json is linked from the page with rel="me" and named in schema.org sameAs,
+    # so the launchpad, GitHub, DEV, ORCID and LinkedIn point at each other (D-24).
+    ld = re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
+    same_as = json.loads(ld.group(1)).get('creator', {}).get('sameAs', []) if ld else []
+    for p in owner.get('profiles', []):
+        check(f'<a rel="me" href="{htmllib.escape(p["url"])}">' in s, f'L24 profile {p["name"]} is not linked from the page with rel="me"')
+        check(p['url'] in same_as, f'L24 profile {p["name"]} is not in the page\'s schema.org sameAs')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
