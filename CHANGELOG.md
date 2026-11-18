@@ -11,6 +11,11 @@
 - Two cards had the wrong content licence and are corrected: Public Sector Data Quality Commons (MIT code, CC BY 4.0
   content) and GitHub Repos Asset Catalogue (MIT code, OGL v3.0 content). Discovery now compares each card's licence
   with the licences the project states in its publiccode.yml, so this is caught next time (D-22).
+- New projects routine (tier 1): every day, and whenever the project list changes on main, it keeps the GitHub Project
+  "Public Good Works" in step. Each project is one item with its status and area (grouped as on the launchpad), licence
+  and links, plus what its repository shows: the last change by a person, the latest release, open issues and pull
+  requests, and the last five changes by a person. It adds and refreshes, never deletes. It needs a classic personal
+  access token with the "project" scope in the PROJECTS_TOKEN secret; without one it warns and changes nothing.
 
 ## 1.3.4 — 15 November 2026
 
