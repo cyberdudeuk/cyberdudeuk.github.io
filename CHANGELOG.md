@@ -8,6 +8,9 @@
   change by a person, rebuilds the page and pushes the result to the `routine/discover` branch. The routine issue
   links to open the pull request. It never changes main and never removes or rewords a card; the AUTOMATION kill
   switch stops it. The profile README follows the merged list. The owner's request of 18 November 2026.
+- Two cards had the wrong content licence and are corrected: Public Sector Data Quality Commons (MIT code, CC BY 4.0
+  content) and GitHub Repos Asset Catalogue (MIT code, OGL v3.0 content). Discovery now compares each card's licence
+  with the licences the project states in its publiccode.yml, so this is caught next time (D-22).
 
 ## 1.3.4 — 15 November 2026
 

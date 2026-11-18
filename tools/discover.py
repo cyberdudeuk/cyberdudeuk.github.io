@@ -52,7 +52,28 @@ def last_change_by_person(name):
     return None
 
 
-def fact_drift(r, card):
+CARD_SPDX = {'MIT': 'MIT', 'OGL v3.0': 'OGL-UK-3.0', 'CC BY 4.0': 'CC-BY-4.0', 'Apache 2.0': 'Apache-2.0',
+             'PolyForm Noncommercial': 'PolyForm-Noncommercial-1.0.0'}
+
+
+def card_licences(text):
+    """The SPDX identifiers a card's licence text names, e.g. 'MIT code, OGL v3.0 content' -> {'MIT', 'OGL-UK-3.0'}."""
+    return {spdx for words, spdx in CARD_SPDX.items() if words.lower() in text.lower()}
+
+
+def publiccode_licences(name):
+    """The SPDX identifiers in the repository's own publiccode.yml (legal.license), or None if it has none (D-22)."""
+    r = subprocess.run(['gh', 'api', f'repos/{OWNER}/{name}/contents/publiccode.yml', '-H', 'Accept: application/vnd.github.raw'],
+                       capture_output=True, text=True)
+    if r.returncode:
+        return None
+    for line in r.stdout.splitlines():
+        if line.strip().startswith('license:'):
+            return {x.strip() for x in line.split(':', 1)[1].replace("'", '').split(' AND ') if x.strip()}
+    return None
+
+
+def fact_drift(r, card, stated_licences=None):
     """Facts the repository itself states that the card contradicts (D-19). Dates alone missed these: the card for
     ndl-pubsec-mcp kept 'no published site' and 'No licence stated' while its Pages site was live and its licence MIT."""
     out = []
@@ -62,12 +83,17 @@ def fact_drift(r, card):
     spdx = ((r.get('license') or {}).get('spdx_id') or '')
     if spdx and spdx != 'NOASSERTION' and 'no licence' in card.get('licence', '').lower():
         out.append(f"{r['name']} is licensed {spdx}; its card says {card['licence']!r}")
+    # D-22: the GitHub API names only the code licence, so a card wrong about the content licence went unseen.
+    if stated_licences and card_licences(card.get('licence', '')) != stated_licences:
+        out.append(f"{r['name']} states its licences as {' AND '.join(sorted(stated_licences))} in publiccode.yml; "
+                   f"its card says {card['licence']!r}")
     return out
 
 
-def findings(repos, data, last_change=None):
+def findings(repos, data, last_change=None, licences=None):
     """Plain-English findings. repos: GitHub API repository objects; data: projects.json.
-    last_change(name) gives the date of the last change by a person; without it, the push date is used."""
+    last_change(name) gives the date of the last change by a person; without it, the push date is used.
+    licences(name) gives the licences the repository states in its publiccode.yml, or None."""
     listed = {p['repo'].rstrip('/').split('/')[-1].lower(): p for p in data['projects']}
     excluded = {x.split(' ')[0].lower() for x in data.get('excluded', {}).get('repos', [])}
     live = {r['name'].lower(): r for r in repos if not r.get('fork') and not r.get('private') and not r.get('archived')}
@@ -78,7 +104,7 @@ def findings(repos, data, last_change=None):
         if name not in listed:
             out.append(f"New public repository not on the launchpad: {r['name']} ({r['html_url']})")
         else:
-            out.extend(fact_drift(r, listed[name]))
+            out.extend(fact_drift(r, listed[name], licences(r['name']) if licences else None))
             if r.get('pushed_at', '')[:10] > listed[name]['updated']:
                 when = last_change(r['name']) if last_change else r['pushed_at'][:10]
                 if when and when > listed[name]['updated']:
@@ -156,7 +182,7 @@ def main(argv=None):
     ap.add_argument('--propose', action='store_true', help='also push a proposed change to the routine/discover branch')
     a = ap.parse_args(argv)
     repos, data = public_repos(), load()
-    found = findings(repos, data, last_change_by_person)
+    found = findings(repos, data, last_change_by_person, publiccode_licences)
     proposal = ''
     if a.propose and not a.dry_run and os.environ.get('AUTOMATION') != 'off':
         new, changes = propose(repos, data, last_change_by_person)

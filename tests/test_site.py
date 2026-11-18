@@ -242,6 +242,31 @@ class Discover(unittest.TestCase):
         self.assertTrue(any('updated on 2026-11-06' in x for x in f))
 
 
+class LicenceDrift(unittest.TestCase):
+    """D-22: the dq-commons card said OGL v3.0 content after the project moved to CC BY 4.0, and the catalogue card said
+    MIT only while its content is OGL v3.0. The GitHub API names the code licence only, so neither was seen."""
+    CARD = {'name': 'Alpha', 'repo': 'https://github.com/cyberdudeuk/alpha', 'updated': '2026-11-05', 'licence': 'MIT code, OGL v3.0 content'}
+
+    def test_card_text_maps_to_spdx(self):
+        self.assertEqual(discover.card_licences('MIT code, CC BY 4.0 content'), {'MIT', 'CC-BY-4.0'})
+        self.assertEqual(discover.card_licences('Apache 2.0'), {'Apache-2.0'})
+
+    def test_matching_licences_are_not_flagged(self):
+        self.assertEqual(discover.fact_drift(repo('alpha'), self.CARD, {'MIT', 'OGL-UK-3.0'}), [])
+        self.assertEqual(discover.fact_drift(repo('alpha'), self.CARD, None), [])  # no publiccode.yml: nothing to compare
+
+    def test_negative_content_licence_drift_is_flagged(self):
+        f = discover.fact_drift(repo('alpha'), self.CARD, {'MIT', 'CC-BY-4.0'})
+        self.assertTrue(any('CC-BY-4.0 AND MIT in publiccode.yml' in x for x in f))
+        f = discover.fact_drift(repo('alpha'), dict(self.CARD, licence='MIT'), {'MIT', 'OGL-UK-3.0'})
+        self.assertTrue(any("its card says 'MIT'" in x for x in f))
+
+    def test_findings_use_the_licence_lookup(self):
+        data = {'projects': [self.CARD], 'excluded': {}}
+        self.assertTrue(discover.findings([repo('alpha')], data, licences=lambda n: {'MIT', 'CC-BY-4.0'}))
+        self.assertEqual(discover.findings([repo('alpha')], data, licences=lambda n: {'MIT', 'OGL-UK-3.0'}), [])
+
+
 class Propose(unittest.TestCase):
     """Tier 2 discovery (18 Nov 2026): the owner asked for new repositories to reach the launchpad and profile without
     retyping them. The routine drafts; a person merges. These pin what it may and may not do to the list."""
