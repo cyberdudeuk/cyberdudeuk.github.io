@@ -29,8 +29,13 @@ import discover  # noqa: E402  (the same "last change by a person" rule, D-07)
 OWNER = 'cyberdudeuk'
 TITLE = 'Public Good Works'
 SHORT = 'Every public cyberdudeuk project, kept in step with the launchpad and each repository by a daily routine.'
-FIELDS = {'Status': 'SINGLE_SELECT', 'Area': 'SINGLE_SELECT', 'Last change': 'DATE', 'Latest release': 'TEXT',
-          'Open issues': 'NUMBER', 'Open pull requests': 'NUMBER', 'Licence': 'TEXT', 'Site': 'TEXT', 'Repository': 'TEXT'}
+FIELDS = {'Project status': 'SINGLE_SELECT', 'Area': 'SINGLE_SELECT', 'Last change': 'DATE', 'Latest release': 'TEXT',
+          'Open issues': 'NUMBER', 'Open pull requests': 'NUMBER', 'Licence': 'TEXT', 'Site': 'TEXT', 'Repository link': 'TEXT'}
+# D-23: every GitHub Project has these built-in fields. Writing to them fails ("Repository") or is refused by their fixed
+# options ("Status"), so the routine never uses these names; tests/test_projects.py checks FIELDS stays clear of them.
+BUILT_IN = {'Title', 'Assignees', 'Status', 'Labels', 'Linked pull requests', 'Milestone', 'Repository', 'Reviewers',
+            'Parent issue', 'Sub-issues progress', 'Type', 'Iteration'}
+assert not set(FIELDS) & BUILT_IN, 'a board field name clashes with a GitHub built-in field (D-23)'
 RECENT = 5
 
 
@@ -63,16 +68,16 @@ def item_for(card, areas, act):
             + '\n'.join(links) + f"\n\n### Recent changes by a person\n{recent}\n\n"
             "_Kept up to date daily by the projects routine in cyberdudeuk/cyberdudeuk.github.io. Edits here are overwritten; "
             "change the launchpad card or the repository instead._")
-    fields = {'Status': dict(build.KINDS)[kind], 'Area': areas.get(card['category'], card['category']),
+    fields = {'Project status': dict(build.KINDS)[kind], 'Area': areas.get(card['category'], card['category']),
               'Latest release': act['release'], 'Open issues': act['open_issues'], 'Open pull requests': act['open_pulls'],
-              'Licence': card['licence'], 'Site': card.get('site') or 'None', 'Repository': card['repo']}
+              'Licence': card['licence'], 'Site': card.get('site') or 'None', 'Repository link': card['repo']}
     if act['last_change'] or card.get('updated'):
         fields['Last change'] = act['last_change'] or card['updated']
     return {'title': card['name'], 'body': body, 'fields': fields}
 
 
 def wanted_options(data):
-    return {'Status': [label for _, label in build.KINDS], 'Area': [c['label'] for c in data['categories']]}
+    return {'Project status': [label for _, label in build.KINDS], 'Area': [c['label'] for c in data['categories']]}
 
 
 class Board:
