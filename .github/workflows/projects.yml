@@ -1,0 +1,37 @@
+name: Projects board
+# Tier 1 (ops/automation.yaml): daily, keeps the owner's GitHub Project "Public Good Works" in step with the launchpad
+# and each repository's activity (tools/projects_sync.py). Adds and refreshes items; never deletes an item or a field.
+# Needs the secret PROJECTS_TOKEN (a classic personal access token with the "project" scope); without it the run warns
+# and changes nothing. Honours the kill switch. Plain commands only (ADR 0002).
+on:
+  schedule: [{cron: '43 7 * * *'}]   # every day 07:43 UTC, after discovery
+  push: {branches: [main], paths: ['data/projects.json']}
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  projects:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the commit (plain git)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q .
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth 1 origin "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
+          git remote set-url origin "https://github.com/${GITHUB_REPOSITORY}.git"
+      - name: Python environment (takes effect from the next step)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+      - name: Install pinned tools into the environment
+        run: pip install -r requirements.txt
+      - name: Sync the Projects board
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+          AUTOMATION: ${{ vars.AUTOMATION }}
+        run: python tools/projects_sync.py

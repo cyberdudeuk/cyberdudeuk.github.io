@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
 import check_site  # noqa: E402
+import build  # noqa: E402
 import discover  # noqa: E402
 
 FILES = ['requirements.txt', 'index.html', '404.html', 'app.js', 'styles.css', 'README.md', 'LICENSE', 'CHANGELOG.md', 'ACCESSIBILITY.md', 'SECURITY.md',
@@ -239,6 +240,82 @@ class Discover(unittest.TestCase):
     def test_negative_change_by_person_is_flagged(self):
         f = discover.findings([repo('alpha', pushed='2026-11-07T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-06')
         self.assertTrue(any('updated on 2026-11-06' in x for x in f))
+
+
+class LicenceDrift(unittest.TestCase):
+    """D-22: the dq-commons card said OGL v3.0 content after the project moved to CC BY 4.0, and the catalogue card said
+    MIT only while its content is OGL v3.0. The GitHub API names the code licence only, so neither was seen."""
+    CARD = {'name': 'Alpha', 'repo': 'https://github.com/cyberdudeuk/alpha', 'updated': '2026-11-05', 'licence': 'MIT code, OGL v3.0 content'}
+
+    def test_card_text_maps_to_spdx(self):
+        self.assertEqual(discover.card_licences('MIT code, CC BY 4.0 content'), {'MIT', 'CC-BY-4.0'})
+        self.assertEqual(discover.card_licences('Apache 2.0'), {'Apache-2.0'})
+
+    def test_matching_licences_are_not_flagged(self):
+        self.assertEqual(discover.fact_drift(repo('alpha'), self.CARD, {'MIT', 'OGL-UK-3.0'}), [])
+        self.assertEqual(discover.fact_drift(repo('alpha'), self.CARD, None), [])  # no publiccode.yml: nothing to compare
+
+    def test_negative_content_licence_drift_is_flagged(self):
+        f = discover.fact_drift(repo('alpha'), self.CARD, {'MIT', 'CC-BY-4.0'})
+        self.assertTrue(any('CC-BY-4.0 AND MIT in publiccode.yml' in x for x in f))
+        f = discover.fact_drift(repo('alpha'), dict(self.CARD, licence='MIT'), {'MIT', 'OGL-UK-3.0'})
+        self.assertTrue(any("its card says 'MIT'" in x for x in f))
+
+    def test_findings_use_the_licence_lookup(self):
+        data = {'projects': [self.CARD], 'excluded': {}}
+        self.assertTrue(discover.findings([repo('alpha')], data, licences=lambda n: {'MIT', 'CC-BY-4.0'}))
+        self.assertEqual(discover.findings([repo('alpha')], data, licences=lambda n: {'MIT', 'OGL-UK-3.0'}), [])
+
+
+class Propose(unittest.TestCase):
+    """Tier 2 discovery (18 Nov 2026): the owner asked for new repositories to reach the launchpad and profile without
+    retyping them. The routine drafts; a person merges. These pin what it may and may not do to the list."""
+    DATA = {'updated': '2026-11-05', 'projects': [{'id': 'alpha', 'name': 'Alpha', 'repo': 'https://github.com/cyberdudeuk/alpha',
+                                                   'updated': '2026-11-05', 'summary': 'Written by a person.'}],
+            'excluded': {'repos': ['w3id.org (fork)']}}
+
+    def test_new_repository_gets_a_complete_honest_draft(self):
+        r = repo('beta-tool', description='Does beta things.', license={'spdx_id': 'MIT'}, topics=['data', 'uk'], created_at='2026-11-10T00:00:00Z')
+        new, changes = discover.propose([repo('alpha'), r], self.DATA, last_change=lambda n: '2026-11-12' if n == 'beta-tool' else None)
+        card = new['projects'][-1]
+        self.assertEqual((card['id'], card['summary'], card['licence'], card['updated']), ('beta-tool', 'Does beta things.', 'MIT', '2026-11-12'))
+        for f in check_site.FIELDS:  # passes the launchpad's own completeness rule (L3)
+            self.assertTrue(card.get(f), f)
+        self.assertEqual(build.kind(card['status']), 'exp')  # status maps to a known kind, so the page builds
+        self.assertIn('owner', card['audience'])           # what the repository does not say is labelled, not invented
+        self.assertTrue(card.get('how'))                     # no site, so it says how to use it
+        self.assertTrue(any('beta-tool' in c for c in changes))
+
+    def test_negative_never_removes_or_rewords_a_card(self):
+        new, _ = discover.propose([], self.DATA)              # alpha's repository is gone
+        self.assertEqual(new['projects'], self.DATA['projects'])
+        new, _ = discover.propose([repo('alpha')], self.DATA, last_change=lambda n: '2026-11-09')
+        self.assertEqual(new['projects'][0]['summary'], 'Written by a person.')
+
+    def test_negative_only_a_change_by_a_person_moves_the_date(self):
+        new, changes = discover.propose([repo('alpha', pushed='2026-11-09T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-04')
+        self.assertEqual((new['projects'][0]['updated'], changes), ('2026-11-05', []))  # bot-only push (D-07)
+        new, changes = discover.propose([repo('alpha', pushed='2026-11-09T00:00:00Z')], self.DATA, last_change=lambda n: '2026-11-09')
+        self.assertEqual(new['projects'][0]['updated'], '2026-11-09')
+        self.assertEqual(new['updated'], '2026-11-09')
+
+    def test_negative_forks_private_archived_excluded_and_self_get_no_card(self):
+        repos = [repo('x', fork=True), repo('y', private=True), repo('z', archived=True), repo('w3id.org'), repo('cyberdudeuk.github.io')]
+        new, changes = discover.propose(repos, self.DATA)
+        self.assertEqual((len(new['projects']), changes), (1, []))
+
+    def test_does_not_change_the_data_it_was_given(self):
+        before = json.dumps(self.DATA, sort_keys=True)
+        discover.propose([repo('gamma')], self.DATA)
+        self.assertEqual(json.dumps(self.DATA, sort_keys=True), before)
+
+    def test_workflow_proposes_on_its_own_branch_and_honours_the_kill_switch(self):
+        wf = (ROOT / '.github' / 'workflows' / 'discover.yml').read_text(encoding='utf-8')
+        self.assertIn('discover.py --propose', wf)
+        self.assertIn('AUTOMATION: ${{ vars.AUTOMATION }}', wf)
+        src = (ROOT / 'tools' / 'discover.py').read_text(encoding='utf-8')
+        self.assertIn("os.environ.get('AUTOMATION') != 'off'", src)
+        self.assertNotIn("'main'", src.split('def push_proposal')[1].split('def main')[0])  # never pushes main
 
 
 if __name__ == '__main__':

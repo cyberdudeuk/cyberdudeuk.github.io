@@ -14,7 +14,8 @@ oversight:
 routines:
   - {id: publish, workflow: pages.yml, tier: 1, when: 'every push to main, on request', does: 'Runs every check again, then publishes index.html, 404.html, styles.css, app.js and data/ to GitHub Pages.', changes: 'The published site only, after every check passes.'}
   - {id: checks, workflow: checks.yml, tier: 0, when: 'every push to main, every pull request, on request', does: 'Static checks (including a rebuild that must match the committed page), vaccination tests, script syntax, browser checks and their deliberate breaks.', changes: 'Nothing; fails the pull request.'}
-  - {id: discover, workflow: discover.yml, tier: 0, when: 'Mondays 06:37 UTC, on request', does: 'Lists public repositories missing from the launchpad, gone from it, or pushed since their card was updated.', changes: 'One issue labelled routine; never the list.'}
+  - {id: discover, workflow: discover.yml, tier: 2, when: 'daily 06:37 UTC, on request', does: 'Lists public repositories missing from the launchpad, gone from it, or changed by a person since their card was updated, and prepares the change on the routine/discover branch: a draft card per new repository from what the repository states, and updated dates. Honours the kill switch.', changes: 'One issue labelled routine and the routine/discover branch; never main, never removes or rewords a card. A person opens the pull request from the link in the issue and merges.'}
+  - {id: projects, workflow: projects.yml, tier: 1, when: 'daily 07:43 UTC, when data/projects.json changes on main, on request', does: 'Keeps the GitHub Project "Public Good Works" in step: one draft item per launchpad project, with its status, area, licence, links and the activity read from its repository (last change by a person, latest release, open issues and pull requests, recent changes). Needs the PROJECTS_TOKEN secret. Honours the kill switch.', changes: 'The Projects board only: adds and refreshes items and fields; never deletes an item or a field.'}
   - {id: triage, workflow: triage.yml, tier: 0, when: 'weekdays 07:23 UTC, on request', does: 'Labels contact, accessibility, bug and listing issues that have waited too long for a reply (needs-reply) or a decision (overdue).', changes: 'Labels on issues only.'}
   - {id: digest, workflow: digest.yml, tier: 0, when: 'Mondays 08:13 UTC, on request', does: 'Weekly operations digest for the owner.', changes: 'One issue a week (label digest); closes the previous one.'}
   - {id: labels, workflow: labels.yml, tier: 1, when: 'when .github/labels.yml changes on main, on request', does: 'Creates or updates the labels in .github/labels.yml. Never deletes a label.', changes: 'Labels only. Honours the kill switch.'}
@@ -32,7 +33,7 @@ occurrences:
 never:
   - Change repository settings, rulesets, secrets or the kill switch.
   - Delete a branch, tag, release, issue, label or file a person made.
-  - Send anything outside the repository (pull requests or issues elsewhere, email, posts).
-  - Add, remove or reword a project on the launchpad (a person edits data/projects.json).
+  - Send anything outside the repository (pull requests or issues elsewhere, email, posts), except the owner's Projects board, which the projects routine keeps in step.
+  - Add, remove or reword a project on main (discovery only proposes on its own branch; a person merges data/projects.json).
   - Claim conformance, endorsement or approval.
   - Merge a pull request.

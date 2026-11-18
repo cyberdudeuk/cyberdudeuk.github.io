@@ -61,7 +61,8 @@ work, read its own README and status first.
 | `tools/check_browser.py` | 13 browser checks in Chrome at 1280, 390 and 320px: no sideways scroll, no console errors, filters, search, the menu and dark mode switches, the coverage map, reduced motion, the page without JavaScript, old toolkit links, and automated accessibility rules (axe-core) in light, dark and phone views |
 | `tools/og.py` | Makes `og.jpg`, the picture shown when the page is shared, from the same data |
 | `fonts/` | The self-hosted typeface (Space Grotesk, SIL Open Font License) so the page makes no third-party requests |
-| `tools/discover.py` | Weekly: lists public repositories missing from the list, gone from it, or newer than their card |
+| `tools/projects_sync.py` | Daily: keeps the GitHub Project "Public Good Works" in step, one item per project with its status, area and repository activity (needs the `PROJECTS_TOKEN` secret) |
+| `tools/discover.py` | Daily: lists public repositories missing from the list, gone from it, or newer than their card, and prepares a draft card and updated dates on the `routine/discover` branch for the owner to merge |
 | `tests/` | Vaccination tests: every check must fail on a deliberate break |
 | `ops/automation.yaml` | Every workflow, its tier, when it runs and what it may change |
 | `docs/` | [Decisions](docs/adr/0001-launchpad.md) ([design](docs/adr/0003-design.md)), [defect register](docs/defect-register.md), [settings checklist](docs/repo-settings.md) |
@@ -72,7 +73,7 @@ work, read its own README and status first.
 2. Run `python3 tools/build.py`, then the checks below.
 3. Open a pull request. Publishing happens when it is merged and every check passes again.
 
-The weekly discovery routine opens an issue when a new public repository appears, so no project is missed.
+The daily discovery routine opens an issue when a new public repository appears and prepares its draft card on the `routine/discover` branch, with a one-click link to open the pull request, so no project is missed and nothing reaches the launchpad or the profile README without a person merging it.
 
 ### Build and check locally
 
