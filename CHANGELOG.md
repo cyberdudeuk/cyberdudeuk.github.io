@@ -11,7 +11,8 @@
   Without JavaScript it is a strip you can scroll.
 - Have your say: an idea and feature request form joins the bug, accessibility and card-correction forms, all offered
   on the page, not only the contact form. Ideas are tracked by the triage routine like the others.
-- The project board is in the section links; the links fold into the menu below 1080px so they never wrap.
+- The project board is in the section links. The links fold into the menu whenever they would wrap, whatever the
+  font or text size (D-33).
 - The launchpad's own text is now CC BY 4.0, not OGL v3.0: it is personal work, not Crown copyright (D-30).
 - New checks: L26 (gateway, spotlight, feedback forms), L27 (text licence), B17 (spotlight and masthead).
 

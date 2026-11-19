@@ -70,7 +70,7 @@ html:not(.js) .js-only{display:none!important}
 .theme{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid var(--night3);background:transparent;color:#f4f7f9;font:600 .95rem var(--text);cursor:pointer}
 .theme:hover{background:var(--night2)}
 .theme[aria-checked=true]{background:var(--night2);border-color:var(--amber)}
-@media (max-width:1080px){.global{display:none}.navmenu{display:block}.theme span{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+@media (max-width:1180px){.global{display:none}.navmenu{display:block}.theme span{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 
 /* Hero */
 .hero{background:var(--night);color:#f4f7f9;overflow:hidden;position:relative;padding:40px 0 32px}
@@ -485,3 +485,4 @@ main.note-page{display:block;flex:none;max-width:46rem;margin:0 auto;padding:36p
 @media (prefers-reduced-motion:reduce){.door,.sdot::before{transition:none}.door:hover{transform:none}}
 @media print{.spot-ctl{display:none}.strack{display:block;overflow:visible}.slide{margin-bottom:16px;box-shadow:none}}
 .fb{list-style:none;margin:0;padding:0;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.nav-fold .global{display:none}.nav-fold .navmenu{display:block}

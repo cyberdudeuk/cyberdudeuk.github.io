@@ -135,6 +135,25 @@
       });
     }
   }
+  /* Masthead (D-33): the section links fold into the menu whenever they would wrap, whatever the font or text size.
+     The CSS fold point is the fallback without JavaScript. */
+  var navg = $('nav.global'), themeBtn = $('#themeToggle');
+  if (navg && themeBtn) {
+    var fit = function () {
+      root.classList.remove('nav-fold');
+      if (getComputedStyle(navg).display === 'none') return;
+      var a = navg.getBoundingClientRect(), t = themeBtn.getBoundingClientRect();
+      if (Math.abs((a.top + a.bottom) / 2 - (t.top + t.bottom) / 2) > 8 || a.right > window.innerWidth) root.classList.add('nav-fold');
+    };
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    if (document.fonts) {
+      if (document.fonts.ready) document.fonts.ready.then(fit);
+      if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fit);
+    }
+    fit();
+  }
+
   /* Spotlight carousel (D-29): previous, next and dots move the strip; it rotates only when the reader presses Play,
      never under reduced motion, and pauses while the pointer or keyboard focus is inside it (WCAG 2.2.2). */
   var strack = $('#spotTrack');

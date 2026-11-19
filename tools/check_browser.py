@@ -49,7 +49,7 @@ BREAKS = {
     'arrow': "document.head.insertAdjacentHTML('beforeend','<style>.totop .ico{position:absolute;left:0;top:0;transform:rotate(-90deg)}</style>')",
     'rings': "document.querySelectorAll('.ring .rv').forEach(function(r){r.style.setProperty('--len','0');})",
     'spotlight': "var n=document.getElementById('spotNext'); n.replaceWith(n.cloneNode(true));",
-    'masthead': "document.head.insertAdjacentHTML('beforeend','<style>.global{display:flex!important}.navmenu{display:none!important}</style>')",
+    'masthead': "document.documentElement.classList.remove('nav-fold');document.head.insertAdjacentHTML('beforeend','<style>.global{display:flex!important}.navmenu{display:none!important}</style>')",
     'notegap': "document.head.insertAdjacentHTML('beforeend','<style>main.note-page .prose{display:flex;flex-direction:column;gap:64px}</style>')",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
@@ -222,16 +222,25 @@ async def run(brk):
             found.append('B17 the spotlight offers rotation under reduced motion')
         await ctx.close()
         # B17 (D-29): the masthead stays on one row; links fold into the menu before they would wrap
-        for w in (320, 390, 901, 1000, 1081, 1280):
+        # D-33: it held with one font and failed on the CI runner's wider one, so it runs with the wide font and larger text.
+        for w, font, zoom in ((320, '', 1), (390, '', 1), (901, '', 1), (1000, '', 1), (1081, '', 1), (1181, '', 1), (1280, '', 1),
+                              (1081, 'DejaVu Sans', 1), (1181, 'DejaVu Sans', 1), (1240, 'DejaVu Sans', 1), (1280, 'DejaVu Sans', 1), (1280, '', 1.25)):
             ctx, pg, errs = await page(b, w, 800)
+            if font or zoom != 1:
+                css = (f'body,button,.global a{{font-family:"{font}",sans-serif!important}}' if font else '') + f'html{{font-size:{zoom * 100:.0f}%}}'
+                await pg.add_init_script('document.addEventListener("DOMContentLoaded",function(){var st=document.createElement("style");'
+                                         f'st.textContent={json.dumps(css)};document.head.appendChild(st);}});')
             await pg.goto(base + 'index.html', wait_until='load')
+            await pg.wait_for_timeout(150)
+            if font and font not in await pg.evaluate("getComputedStyle(document.querySelector('.global a')).fontFamily"):
+                found.append(f'B17 the {font} test font was not applied')
             if brk == 'masthead':
                 await pg.evaluate(BREAKS[brk])
             geo = await pg.evaluate("""(() => { const vis = q => { const el = document.querySelector(q); const r = el && el.getBoundingClientRect(); return r && r.width ? r : null; };
                 const n = vis('nav.global') || vis('.navmenu'), t = vis('#themeToggle');
                 return {gap: n && t ? Math.abs((n.top + n.bottom) / 2 - (t.top + t.bottom) / 2) : 999, right: t ? t.right : 999}; })()""")
             if geo['gap'] > 8 or geo['right'] > w:
-                found.append(f'B17 the masthead links and the theme switch are not on one row at {w}px: {geo}')
+                found.append(f'B17 the masthead links and the theme switch are not on one row at {w}px{" with " + font if font else ""}{f" at {zoom:.0%} text" if zoom != 1 else ""}: {geo}')
             await ctx.close()
         # B13 (D-11): automated accessibility rules pass in every view, and on the 404 page
         for view, w, scheme, path in (('light', 1280, 'light', 'index.html'), ('dark', 1280, 'dark', 'index.html'),
