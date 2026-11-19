@@ -12,6 +12,7 @@ import io
 import json
 import math
 import re
+import urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -196,6 +197,20 @@ def card(p, cats):
 </article>'''
 
 
+PROFILE_HOSTS = {'github.com', 'dev.to', 'orcid.org', 'www.linkedin.com'}
+
+
+def profiles(owner):
+    """The owner's public profile links. Fails closed: only https links to known hosts are published (L24)."""
+    out = []
+    for p in owner.get('profiles', []):
+        u = urllib.parse.urlsplit(p.get('url', ''))
+        if u.scheme != 'https' or u.hostname not in PROFILE_HOSTS or not p.get('name'):
+            raise SystemExit(f'owner.json profile refused (https and a known host only): {p}')
+        out.append(p)
+    return out
+
+
 def build():
     d = json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))
     w = json.loads((ROOT / 'data' / 'workshop.json').read_text(encoding='utf-8'))
@@ -270,13 +285,14 @@ def build():
         f'<h3>{e(i["name"])}</h3><p>{e(i["summary"])}</p><span class="pill k-wip">{icon("tool", 14)}{e(w["status"])}<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></span></article>'
         for i in items)
 
-    jsonld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': owner.get('site_name') or f'{owner["display_name"]}: projects', 'creator': {'@type': 'Person', 'name': owner['display_name']}, 'url': SITE,
+    jsonld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': owner.get('site_name') or f'{owner["display_name"]}: projects', 'creator': {'@type': 'Person', 'name': owner['display_name'], 'sameAs': [p['url'] for p in profiles(owner)]}, 'url': SITE,
               'dateModified': d['updated'], 'inLanguage': 'en-GB',
               'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(projects), 'itemListElement': [
                   {'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'CreativeWork', 'name': p['name'], 'url': p.get('site') or p['repo'],
                                                                     'codeRepository': p['repo'], 'abstract': p['summary'], 'genre': cats[p['category']]['label']}}
                   for i, p in enumerate(projects)]}}
     about_role = f'<p class="role">{e(owner["role"])}</p>' if owner.get('role') else ''
+    about_profiles = ('<p class="profiles">Elsewhere: ' + ' · '.join(f'<a rel="me" href="{e(p["url"])}">{e(p["name"])}</a>' for p in profiles(owner)) + '</p>') if owner.get('profiles') else ''
     navlinks = '<a href="#projects">Projects</a><a href="#ways-in">Ways in</a><a href="#coverage">Coverage</a><a href="#workshop">Workshop</a><a href="#about">About</a><a href="#contact">Contact</a>'
     favicon = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e9a23b'/%3E"
                "%3Cpath d='M10 11L22 11L16 22Z' fill='none' stroke='%230a1824' stroke-width='2'/%3E%3Ccircle cx='10' cy='11' r='3' fill='%230a1824'/%3E"
@@ -402,7 +418,7 @@ def build():
   <section id="about" aria-labelledby="h-about">
    {h2('h-about', 'About', 'info')}
    <div class="grid two">
-    <article class="panel"><h3><span class="tile sm" aria-hidden="true">{icon("person", 16)}</span>Who makes these</h3>{about_role}<p>{e(owner["about"])}</p></article>
+    <article class="panel"><h3><span class="tile sm" aria-hidden="true">{icon("person", 16)}</span>Who makes these</h3>{about_role}<p>{e(owner["about"])}</p>{about_profiles}</article>
     <article class="panel"><h3><span class="tile sm" aria-hidden="true">{icon("book", 16)}</span>How to read this page</h3><ul>
      <li>Status is as each project states it. <strong>Prototype</strong> and <strong>proposed</strong> mean not finished and not official.</li>
      <li>Summaries are written from each project's own README.</li>
