@@ -140,6 +140,48 @@ class Site(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 build.profiles({'profiles': [{'name': 'X', 'url': bad}]})
 
+    def test_L26_board_missing_from_gateway(self):
+        # D-29: the project board and the notes were not reachable from the top of the page.
+        self.edit('index.html', '<li><a class="door" href="https://github.com/users/cyberdudeuk/projects/4">', '<li><a class="door" href="#about">')
+        self.fails_with('L26')
+
+    def test_L26_notes_missing_from_gateway(self):
+        self.edit('index.html', '<a class="door" href="#notes">', '<a class="door" href="#about">')
+        self.fails_with('L26')
+
+    def test_L26_no_board_in_owner_file(self):
+        p = self.tmp / 'data' / 'owner.json'
+        d = json.loads(p.read_text(encoding='utf-8'))
+        d.pop('board')
+        p.write_text(json.dumps(d), encoding='utf-8')
+        self.fails_with('L26')
+
+    def test_L26_feedback_form_missing(self):
+        # D-29: the page offered only the contact form, while each project offers ideas, bugs and accessibility forms.
+        self.edit('index.html', 'issues/new?template=idea.yml', 'issues/new?template=contact.yml')
+        self.fails_with('L26')
+
+    def test_L26_spotlight_without_note_slide(self):
+        self.edit('index.html', 'id="s-note"', 'id="s-other"')
+        self.fails_with('L26')
+
+    def test_L26_build_refuses_unsafe_board_link(self):
+        # Fail closed: only a GitHub Projects address reaches the page.
+        for bad in ('javascript:alert(1)', 'http://github.com/users/cyberdudeuk/projects/4', 'https://evil.example/users/x/projects/4',
+                    'https://github.com/users/cyberdudeuk/projects/4?x=1', 'https://github.com/cyberdudeuk'):
+            with self.assertRaises(SystemExit):
+                build.board({'board': {'name': 'Board', 'url': bad}})
+        self.assertIsNone(build.board({}))
+
+    def test_L27_footer_back_to_ogl(self):
+        # D-30: the footer put the launchpad's own text under OGL v3.0, which fits Crown copyright, not personal work.
+        self.edit('index.html', 'text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.', 'text OGL v3.0.')
+        self.fails_with('L27')
+
+    def test_L27_readme_disagrees(self):
+        self.edit('README.md', '| Text | [CC BY 4.0]', '| Text | [CC BY-SA 4.0]')
+        self.fails_with('L27')
+
     def test_L1_email(self):
         self.edit('index.html', '<p><strong>Disclaimer.</strong>', '<p>someone@example.gov.uk <strong>Disclaimer.</strong>')
         self.fails_with('L1')

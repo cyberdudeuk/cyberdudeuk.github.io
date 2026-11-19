@@ -4,7 +4,7 @@
   "tagline": "Open tools and guidance for data and AI in public services",
   "role": "",
   "about": "Projects from the cyberdudeuk GitHub account, most of them about data and AI in UK public services, plus some personal work. Each project is built in the open, checked automatically before it is published, and says plainly what it is and is not.",
-  "_note": "The owner can set display_name (the account), site_name (the portal's name), tagline and role here. Nothing personal is published unless it is written in this file. profiles lists the owner's public profile pages; each is linked from the About panel with rel=\"me\" and named in the page's schema.org sameAs.",
+  "_note": "The owner can set display_name (the account), site_name (the portal's name), tagline and role here. Nothing personal is published unless it is written in this file. profiles lists the owner's public profile pages; each is linked from the About panel with rel=\"me\" and named in the page's schema.org sameAs. board is the public GitHub Project that tracks every project (kept in step by tools/projects_sync.py); it is linked from the gateway and the spotlight.",
   "profiles": [
     {
       "name": "GitHub",
@@ -26,5 +26,9 @@
       "name": "Zenodo community",
       "url": "https://zenodo.org/communities/public-good-works"
     }
-  ]
+  ],
+  "board": {
+    "name": "Public Good Works project board",
+    "url": "https://github.com/users/cyberdudeuk/projects/4"
+  }
 }
