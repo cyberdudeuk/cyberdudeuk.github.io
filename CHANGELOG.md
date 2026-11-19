@@ -1,6 +1,16 @@
 # Changelog
 
 
+## 19 November 2026: board status from activity, and weekly status updates
+
+- The projects routine now sets each item's Status on the Public Good Works board from its repository's activity:
+  In progress after a change by a person in the last 30 days; otherwise Done if it has a release, or Todo if not.
+- Once a week it posts a project status update: overall health (on track, at risk if any project is waiting,
+  inactive if nothing moved in 30 days) and a table of each project's status, changes in the last 7 days, last
+  change, latest release, open issues and open pull requests. Earlier updates are never edited or deleted.
+- Each item's description now says how busy the project has been: changes by a person in the last 7 and 30 days,
+  last change, latest release, open issues and pull requests (D-29).
+
 ## 19 November 2026: note pages redesigned
 
 - Note pages have their own reading layout in the launchpad's brand: the night-sky header with the brand mark, a

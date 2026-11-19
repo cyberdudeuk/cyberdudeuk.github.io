@@ -4,8 +4,13 @@ with the launchpad and with what is happening in each repository.
 
 One draft item per launchpad project. Its fields hold the status and area from the launchpad card, and the activity
 read from the repository: the date of the last change by a person, the latest release, open issues and open pull
-requests. Its body holds the card's summary and links, plus the last few changes by a person (commit subjects). The
-routine adds items and refreshes them; it never deletes an item or a field, so anything the owner adds is kept.
+requests. Its body holds the card's summary and links, how busy the repository has been, and the last few changes by
+a person (commit subjects). The routine adds items and refreshes them; it never deletes an item or a field, so anything
+the owner adds is kept.
+
+From activity alone it also sets each item's built-in Status (Todo, In progress or Done; board_status), and once a week
+it posts a project status update: overall health plus one line per project (status_update_for). The owner's request of
+19 November 2026 (D-29).
 
 GitHub's Projects API is GraphQL only and the workflow token cannot reach a user's project, so it needs a classic
 personal access token with the "project" scope in the repository secret PROJECTS_TOKEN. Without it, the routine says
@@ -19,6 +24,7 @@ import json
 import os
 import subprocess
 import sys
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -37,6 +43,9 @@ BUILT_IN = {'Title', 'Assignees', 'Status', 'Labels', 'Linked pull requests', 'M
             'Parent issue', 'Sub-issues progress', 'Type', 'Iteration'}
 assert not set(FIELDS) & BUILT_IN, 'a board field name clashes with a GitHub built-in field (D-23)'
 RECENT = 5
+ACTIVE_DAYS = 30        # a change by a person within this many days means the project is being worked on
+UPDATE_EVERY_DAYS = 7   # how often the routine posts a project status update
+STATUS_OPTIONS = ('Todo', 'In progress', 'Done')  # the built-in Status field's fixed options (D-23)
 
 
 def gh_json(path):
@@ -44,28 +53,54 @@ def gh_json(path):
     return json.loads(r.stdout) if r.returncode == 0 and r.stdout.strip() else None
 
 
-def activity(name, get=gh_json):
+def activity(name, get=gh_json, today=None):
     """What the repository shows about its own activity, read through the REST API with the workflow token."""
+    today = today or date.today()
     repo = get(f'repos/{OWNER}/{name}') or {}
     pulls = get(f'repos/{OWNER}/{name}/pulls?state=open&per_page=100') or []
     rel = get(f'repos/{OWNER}/{name}/releases/latest') or {}
     commits = get(f'repos/{OWNER}/{name}/commits?per_page=50') or []
     by_people = [c for c in commits if (c.get('author') or {}).get('login') not in discover.BOTS
                  and c['commit']['author']['name'] not in discover.BOTS]
+    days = [(today - date.fromisoformat(c['commit']['committer']['date'][:10])).days for c in by_people]
     return {'last_change': by_people[0]['commit']['committer']['date'][:10] if by_people else None,
+            'week': sum(1 for d in days if d < 7), 'month': sum(1 for d in days if d < ACTIVE_DAYS),
+            'has_release': bool(rel.get('tag_name')),
             'recent': [c['commit']['message'].splitlines()[0][:120] for c in by_people[:RECENT]],
             'release': f"{rel['tag_name']} ({rel['published_at'][:10]})" if rel.get('tag_name') else 'No release yet',
             'open_issues': max(0, (repo.get('open_issues_count') or 0) - len(pulls)),  # the API counts pull requests as issues
             'open_pulls': len(pulls)}
 
 
-def item_for(card, areas, act):
+def board_status(card, act, today):
+    """The built-in Status for one project, from activity alone. Returns one of STATUS_OPTIONS.
+
+    In progress: a change by a person within ACTIVE_DAYS. Done: quiet for longer, with a release published, so what
+    was built is out. Todo: quiet and nothing released yet, so it is waiting to be picked up.
+    """
+    last = act.get('last_change')
+    if last and (today - date.fromisoformat(last)).days < ACTIVE_DAYS:
+        return 'In progress'
+    return 'Done' if act.get('has_release') else 'Todo'
+
+
+def busy_line(act):
+    week, month = act.get('week', 0), act.get('month', 0)
+    if not week and not month:
+        return f'Quiet: no changes by a person in the last {ACTIVE_DAYS} days.'
+    return f'{week} changes by a person in the last 7 days, {month} in the last {ACTIVE_DAYS} days.'
+
+
+def item_for(card, areas, act, today=None):
     """The draft item for one project: title, body and field values. Pure, so it is tested without the network."""
+    today = today or date.today()
     kind = build.kind(card['status'])
     links = [f"- Repository: {card['repo']}"] + ([f"- Site: {card['site']}"] if card.get('site') else [])
     recent = '\n'.join(f'- {m}' for m in act['recent']) or '- No changes by a person in the last 50 commits.'
     body = (f"{card['summary']}\n\n**For:** {card['audience']}\n**Status, as the project states it:** {card['status']}\n\n"
-            + '\n'.join(links) + f"\n\n### Recent changes by a person\n{recent}\n\n"
+            + '\n'.join(links) + f"\n\n### Activity\n{busy_line(act)} Last change: {act['last_change'] or 'none found'}. "
+            f"Latest release: {act['release']}. Open issues: {act['open_issues']}. Open pull requests: {act['open_pulls']}.\n\n"
+            f"### Recent changes by a person\n{recent}\n\n"
             "_Kept up to date daily by the projects routine in cyberdudeuk/cyberdudeuk.github.io. Edits here are overwritten; "
             "change the launchpad card or the repository instead._")
     fields = {'Project status': dict(build.KINDS)[kind], 'Area': areas.get(card['category'], card['category']),
@@ -73,7 +108,33 @@ def item_for(card, areas, act):
               'Licence': card['licence'], 'Site': card.get('site') or 'None', 'Repository link': card['repo']}
     if act['last_change'] or card.get('updated'):
         fields['Last change'] = act['last_change'] or card['updated']
-    return {'title': card['name'], 'body': body, 'fields': fields}
+    return {'title': card['name'], 'body': body, 'fields': fields, 'status': board_status(card, act, today), 'act': act}
+
+
+def status_update_for(items, today):
+    """The weekly project status update: overall health and one line per project. Pure, so it is tested offline.
+
+    On track: every project is in progress or done. At risk: one or more is waiting (Todo). Inactive: nothing has had a
+    change by a person in the last ACTIVE_DAYS days.
+    """
+    counts = {s: sum(1 for i in items if i['status'] == s) for s in STATUS_OPTIONS}
+    if not counts['In progress']:
+        health = 'INACTIVE'
+    elif counts['Todo']:
+        health = 'AT_RISK'
+    else:
+        health = 'ON_TRACK'
+    week = sum(i['act'].get('week', 0) for i in items)
+    rows = '\n'.join(f"| {i['title']} | {i['status']} | {i['act'].get('week', 0)} | {i['act']['last_change'] or 'none'} | "
+                     f"{i['act']['release']} | {i['act']['open_issues']} | {i['act']['open_pulls']} |" for i in items)
+    body = (f"Week to {today.isoformat()}: {counts['In progress']} in progress, {counts['Done']} done, {counts['Todo']} waiting. "
+            f"{week} changes by a person across all projects in the last 7 days.\n\n"
+            "| Project | Status | Changes, 7 days | Last change | Latest release | Open issues | Open PRs |\n"
+            "|---|---|---|---|---|---|---|\n" + rows +
+            f"\n\n_Written from repository activity by the projects routine in cyberdudeuk/cyberdudeuk.github.io. "
+            f"Status rule: in progress if a person changed it in the last {ACTIVE_DAYS} days; otherwise done if it has a "
+            "release, or waiting if not._")
+    return {'status': health, 'body': body}
 
 
 def wanted_options(data):
@@ -146,20 +207,57 @@ class Board:
                 v = {'singleSelectOptionId': opt}
             else:
                 v = {{'DATE': 'date', 'NUMBER': 'number', 'TEXT': 'text'}[FIELDS[name]]: value}
-            self.gql('mutation($p:ID!,$i:ID!,$f:ID!,$v:ProjectV2FieldValue!){updateProjectV2ItemFieldValue(input:'
-                     '{projectId:$p,itemId:$i,fieldId:$f,value:$v}){projectV2Item{id}}}', {'p': pid, 'i': item_id, 'f': f['id'], 'v': v})
+            self.set_value(pid, item_id, f['id'], v)
+        self.set_status(pid, fields, item_id, item)
+
+    def set_value(self, pid, item_id, field_id, v):
+        self.gql('mutation($p:ID!,$i:ID!,$f:ID!,$v:ProjectV2FieldValue!){updateProjectV2ItemFieldValue(input:'
+                 '{projectId:$p,itemId:$i,fieldId:$f,value:$v}){projectV2Item{id}}}', {'p': pid, 'i': item_id, 'f': field_id, 'v': v})
+
+    def set_status(self, pid, fields, item_id, item):
+        """The built-in Status: written only with one of its own options, matched without regard to case, because GitHub
+        names it "In Progress" on some boards and "In progress" on others (D-23, D-29)."""
+        f = fields.get('Status')
+        if not f or not item.get('status') or self.dry:
+            return
+        opt = next((o['id'] for o in f.get('options', []) if o['name'].casefold() == item['status'].casefold()), None)
+        if not opt:
+            self.log(f'"{item["status"]}" is not an option of the built-in Status: left as it is')
+            return
+        self.set_value(pid, item_id, f['id'], {'singleSelectOptionId': opt})
+
+    def status_update(self, pid, update, today):
+        """Posts the project status update if the newest one is UPDATE_EVERY_DAYS old or more (newest first is
+        GitHub's default order). Never edits or deletes an earlier update."""
+        q = 'query($p:ID!){node(id:$p){... on ProjectV2{statusUpdates(first:1){nodes{createdAt}}}}}'
+        nodes = self.gql(q, {'p': pid})['node']['statusUpdates']['nodes']
+        if nodes:
+            last = datetime.fromisoformat(nodes[0]['createdAt'].replace('Z', '+00:00')).date()
+            if today - last < timedelta(days=UPDATE_EVERY_DAYS):
+                self.log(f'Latest status update is from {last}: next one due {last + timedelta(days=UPDATE_EVERY_DAYS)}')
+                return False
+        self.log(f'Posting a status update: {update["status"]}')
+        if self.dry:
+            return False
+        self.gql('mutation($p:ID!,$s:ProjectV2StatusUpdateStatus!,$b:String!,$d:Date!){createProjectV2StatusUpdate(input:'
+                 '{projectId:$p,status:$s,body:$b,startDate:$d}){statusUpdate{id}}}',
+                 {'p': pid, 's': update['status'], 'b': update['body'], 'd': today.isoformat()})
+        return True
 
 
-def sync(board, data, act_for):
+def sync(board, data, act_for, today=None):
+    today = today or date.today()
     options = wanted_options(data)
     areas = {c['id']: c['label'] for c in data['categories']}
     pid = board.project(options)
     fields = board.fields(pid, options) if pid else {}
     existing = board.items(pid) if pid else {}
-    items = [item_for(card, areas, act_for(card['repo'].rstrip('/').split('/')[-1])) for card in data['projects']]
+    items = [item_for(card, areas, act_for(card['repo'].rstrip('/').split('/')[-1]), today) for card in data['projects']]
     for item in items:
         if pid:
             board.upsert(pid, fields, existing, item)
+    if pid:
+        board.status_update(pid, status_update_for(items, today), today)
     for title in sorted(set(existing) - {i['title'] for i in items}):
         board.log(f'"{title}" is on the board but not on the launchpad: left as it is (the routine never deletes)')
     return items
@@ -192,9 +290,11 @@ def main(argv=None):
     if off:
         print('Kill switch is off: reporting only, changing nothing.')
     if not token:
-        for item in [item_for(c, {x['id']: x['label'] for x in data['categories']}, activity(c['repo'].rstrip('/').split('/')[-1]))
-                     for c in data['projects']]:
+        items = [item_for(c, {x['id']: x['label'] for x in data['categories']}, activity(c['repo'].rstrip('/').split('/')[-1]))
+                 for c in data['projects']]
+        for item in items:
             print(json.dumps(item, indent=1, ensure_ascii=False))
+        print(json.dumps(status_update_for(items, date.today()), indent=1, ensure_ascii=False))
         return 0
     sync(Board(gql_with(token), dry_run=dry), data, activity)
     return 0

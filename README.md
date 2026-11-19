@@ -61,7 +61,7 @@ work, read its own README and status first.
 | `tools/check_browser.py` | 13 browser checks in Chrome at 1280, 390 and 320px: no sideways scroll, no console errors, filters, search, the menu and dark mode switches, the coverage map, reduced motion, the page without JavaScript, old toolkit links, and automated accessibility rules (axe-core) in light, dark and phone views |
 | `tools/og.py` | Makes `og.jpg`, the picture shown when the page is shared, from the same data |
 | `fonts/` | The self-hosted typeface (Space Grotesk, SIL Open Font License) so the page makes no third-party requests |
-| `tools/projects_sync.py` | Daily: keeps the GitHub Project "Public Good Works" in step, one item per project with its status, area and repository activity (needs the `PROJECTS_TOKEN` secret) |
+| `tools/projects_sync.py` | Daily: keeps the GitHub Project "Public Good Works" in step, one item per project with its status, area and repository activity, Status set from that activity, and a weekly status update (needs the `PROJECTS_TOKEN` secret) |
 | `tools/discover.py` | Daily: lists public repositories missing from the list, gone from it, or newer than their card, and prepares a draft card and updated dates on the `routine/discover` branch for the owner to merge |
 | `tests/` | Vaccination tests: every check must fail on a deliberate break |
 | `ops/automation.yaml` | Every workflow, its tier, when it runs and what it may change |
