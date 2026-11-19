@@ -12,3 +12,4 @@
 - {name: bug, color: 'd4351c', description: Something on the site is broken}
 - {name: accessibility, color: '00703c', description: An accessibility barrier; treated as a priority defect}
 - {name: listing, color: '28a197', description: A project to add to the launchpad, or a card to correct}
+- {name: idea, color: '912b88', description: An idea or feature request from a reader (idea form)}

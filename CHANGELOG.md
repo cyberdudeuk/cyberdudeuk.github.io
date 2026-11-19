@@ -10,6 +10,20 @@
   the Open Government Licence: they are personal projects, not government work.
 - A vaccine test hard-coded a coverage count and broke when the project was listed; it now reads the count from the
   data (D-30).
+## 19 November 2026 (1.4.0): one gateway to all the work
+
+- A gateway at the top of the page reaches every place the work lives: the projects, the notes, the public project
+  board on GitHub Projects, and every repository (D-29).
+- Spotlight replaces the single Featured panel: a carousel of the newest projects, the latest note and the project
+  board, chosen from the data. It moves only when asked (buttons, dots, arrow keys), offers Play with a 7-second
+  rotation that pauses while the pointer or keyboard focus is in the slides, and never rotates under reduced motion.
+  Without JavaScript it is a strip you can scroll.
+- Have your say: an idea and feature request form joins the bug, accessibility and card-correction forms, all offered
+  on the page, not only the contact form. Ideas are tracked by the triage routine like the others.
+- The project board is in the section links. The links fold into the menu whenever they would wrap, whatever the
+  font or text size (D-33).
+- The launchpad's own text is now CC BY 4.0, not OGL v3.0: it is personal work, not Crown copyright (D-30).
+- New checks: L26 (gateway, spotlight, feedback forms), L27 (text licence), B17 (spotlight and masthead).
 
 ## 19 November 2026: note pages redesigned
 

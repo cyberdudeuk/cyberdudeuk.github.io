@@ -201,7 +201,7 @@ def problems(root):
     check('preserveAspectRatio="xMidYMid slice"' not in s.split('<main')[1], 'L23 signature art is cropped (slice); use meet')
     main = s[s.find('<main'):s.find('</main>')]
     for hid, h in re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', main):
-        check('class="h-ico"' in h or hid == 'h-featured', f'L23 section heading {hid} has no icon')
+        check('class="h-ico"' in h, f'L23 section heading {hid} has no icon')
     owner = json.loads((root / 'data' / 'owner.json').read_text(encoding='utf-8'))
     if owner.get('site_name'):
         check(f'<title>{htmllib.escape(owner["site_name"])}' in s, 'L23 the page title does not start with site_name from data/owner.json')
@@ -242,6 +242,30 @@ def problems(root):
     for p in owner.get('profiles', []):
         check(f'<a rel="me" href="{htmllib.escape(p["url"])}">' in s, f'L24 profile {p["name"]} is not linked from the page with rel="me"')
         check(p['url'] in same_as, f'L24 profile {p["name"]} is not in the page\'s schema.org sameAs')
+    # L26 (D-29): the page is the gateway to all the work. The gateway reaches the projects, the notes, the project board
+    # and every repository; the spotlight has slides; every feedback form is offered, not only the contact form.
+    main_html = s.split('<main', 1)[1] if '<main' in s else ''
+    doors = re.search(r'<nav class="doors".*?</nav>', main_html, re.S)
+    doors = doors.group(0) if doors else ''
+    brd = owner.get('board') or {}
+    for want in ('href="#projects"', 'href="#notes"', 'href="https://github.com/cyberdudeuk?tab=repositories"'):
+        check(want in doors, f'L26 the gateway lacks {want}')
+    check(bool(brd.get('url')), 'L26 data/owner.json has no board (the public GitHub Project)')
+    if brd.get('url'):
+        check(f'href="{htmllib.escape(brd["url"])}"' in doors, 'L26 the gateway does not link the project board')
+        check('id="s-board"' in main_html, 'L26 the spotlight has no project board slide')
+    check(main_html.count('aria-roledescription="slide"') >= 2, 'L26 the spotlight has fewer than two slides')
+    check(not posts or 'id="s-note"' in main_html, 'L26 the spotlight does not show the latest note')
+    fb = re.search(r'<section id="feedback".*?</section>', main_html, re.S)
+    fb = fb.group(0) if fb else ''
+    for t in ('idea.yml', 'bug_report.yml', 'accessibility_issue.yml', 'listing.yml'):
+        check(f'issues/new?template={t}' in fb, f'L26 Have your say does not offer the {t} form')
+    # L27 (D-30): the launchpad's own text licence is the same in the footer and the README, and is not the Open Government
+    # Licence: this is personal work, not Crown copyright (OGL fits only work-related or GOV.UK content).
+    foot = re.search(r'This launchpad: code MIT, text (?:<a [^>]*>)?([^<.]+)', s)
+    rd = re.search(r'\| Text \| \[?([^\]|.]+)', readme)
+    check(bool(foot) and bool(rd) and foot.group(1).strip() == rd.group(1).strip(), 'L27 the footer and README name different text licences for the launchpad')
+    check(not foot or 'OGL' not in foot.group(1) and 'Open Government' not in foot.group(1), 'L27 the launchpad text is personal work and must not be under OGL')
     # L11: the licence names its holder in full (D-01: it read "Copyright (c) 2026 Em").
     lic = (root / 'LICENSE').read_text(encoding='utf-8')
     m = re.search(r'Copyright \(c\) \d{4} (.+)', lic)
@@ -253,7 +277,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 23 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 25 checks, {n} projects')
     return 1 if p else 0
 
 
