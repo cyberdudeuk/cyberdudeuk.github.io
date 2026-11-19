@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build index.html and 404.html from data/projects.json, data/workshop.json and data/owner.json.
+"""Build index.html, 404.html, notes/*.html and feed.xml from data/projects.json, workshop.json, owner.json and posts.json.
 
 The page is static: every project, the coverage map and the workshop are in the HTML and readable without JavaScript.
 app.js only adds search, filtering, sorting, the view and menu switches, the theme switch and motion.
@@ -14,6 +14,8 @@ import math
 import re
 import urllib.parse
 from pathlib import Path
+
+import notes
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = 'https://cyberdudeuk.github.io/'
@@ -215,6 +217,7 @@ def build():
     d = json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))
     w = json.loads((ROOT / 'data' / 'workshop.json').read_text(encoding='utf-8'))
     owner = json.loads((ROOT / 'data' / 'owner.json').read_text(encoding='utf-8'))
+    posts = notes.load(ROOT)
     cats = {c['id']: c for c in d['categories']}
     projects = sorted(d['projects'], key=lambda p: p['updated'], reverse=True)
     count = {c: sum(1 for p in projects if p['category'] == c) for c in cats}
@@ -293,7 +296,7 @@ def build():
                   for i, p in enumerate(projects)]}}
     about_role = f'<p class="role">{e(owner["role"])}</p>' if owner.get('role') else ''
     about_profiles = ('<p class="profiles">Elsewhere: ' + ' · '.join(f'<a rel="me" href="{e(p["url"])}">{e(p["name"])}</a>' for p in profiles(owner)) + '</p>') if owner.get('profiles') else ''
-    navlinks = '<a href="#projects">Projects</a><a href="#ways-in">Ways in</a><a href="#coverage">Coverage</a><a href="#workshop">Workshop</a><a href="#about">About</a><a href="#contact">Contact</a>'
+    navlinks = '<a href="#projects">Projects</a><a href="#ways-in">Ways in</a><a href="#coverage">Coverage</a><a href="#workshop">Workshop</a><a href="#notes">Notes</a><a href="#about">About</a><a href="#contact">Contact</a>'
     favicon = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e9a23b'/%3E"
                "%3Cpath d='M10 11L22 11L16 22Z' fill='none' stroke='%230a1824' stroke-width='2'/%3E%3Ccircle cx='10' cy='11' r='3' fill='%230a1824'/%3E"
                "%3Ccircle cx='22' cy='11' r='3' fill='%230a1824'/%3E%3Ccircle cx='16' cy='22' r='3' fill='%230a1824'/%3E%3C/svg%3E")
@@ -308,6 +311,7 @@ def build():
 <meta name="description" content="Open tools, standards and guidance for data and AI in UK public services, plus personal public-good projects: every project by {e(owner["display_name"])} in one place.">
 <meta name="version" content="{e(d["version"])}">
 <link rel="canonical" href="{SITE}">
+<link rel="alternate" type="application/atom+xml" href="feed.xml" title="{e(owner.get("site_name") or owner["display_name"])}: notes">
 <meta property="og:type" content="website"><meta property="og:title" content="{e(owner.get("site_name") or owner["display_name"])}: open tools for public services"><meta property="og:url" content="{SITE}">
 <meta property="og:description" content="Open tools, standards and guidance for data and AI in UK public services.">
 <meta property="og:image" content="{SITE}og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{len(projects)} projects across {areas} areas of work, drawn as a constellation">
@@ -415,6 +419,12 @@ def build():
    <div class="grid wgrid">{workshop}</div>
   </section>
 
+  <section id="notes" aria-labelledby="h-notes">
+   <div class="sec-head"><p class="eyebrow">Written here first</p>{h2('h-notes', 'Notes', 'book')}
+   <p class="intro">Short notes about the work. Notes published here are copied to other sites with a link back to the original. Follow them with the <a href="feed.xml">notes feed</a> (Atom).</p></div>
+   <div class="grid two">{notes.cards(SITE, posts)}</div>
+  </section>
+
   <section id="about" aria-labelledby="h-about">
    {h2('h-about', 'About', 'info')}
    <div class="grid two">
@@ -464,6 +474,16 @@ def build():
 </main></body></html>
 '''
     (ROOT / '404.html').write_text(notfound, encoding='utf-8')
+    nd = ROOT / 'notes'
+    nd.mkdir(exist_ok=True)
+    keep = {f'{n["id"]}.html' for n in posts if 'body' in n}
+    for old in nd.glob('*.html'):
+        if old.name not in keep:
+            old.unlink()
+    for n in posts:
+        if 'body' in n:
+            (nd / f'{n["id"]}.html').write_text(notes.page(SITE, n, owner, asset('styles.css'), CONTACT), encoding='utf-8')
+    (ROOT / 'feed.xml').write_text(notes.feed(SITE, posts, owner), encoding='utf-8')
     return len(projects)
 
 

@@ -13,10 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / 'tools'))
 import check_site  # noqa: E402
 import build  # noqa: E402
+import notes  # noqa: E402
 import discover  # noqa: E402
 
 FILES = ['requirements.txt', 'index.html', '404.html', 'app.js', 'styles.css', 'README.md', 'LICENSE', 'CHANGELOG.md', 'ACCESSIBILITY.md', 'SECURITY.md',
-         'CONTRIBUTING.md', 'SUPPORT.md', 'CODE_OF_CONDUCT.md', 'CITATION.cff', 'data', 'tools', '.github', 'docs', 'ops', 'fonts', 'og.jpg']
+         'CONTRIBUTING.md', 'SUPPORT.md', 'CODE_OF_CONDUCT.md', 'CITATION.cff', 'data', 'tools', '.github', 'docs', 'ops', 'fonts', 'og.jpg', 'notes', 'feed.xml']
 
 
 class Site(unittest.TestCase):
@@ -50,6 +51,47 @@ class Site(unittest.TestCase):
 
     def test_the_real_site_passes(self):
         self.assertEqual(check_site.problems(ROOT), [])
+
+    def test_L25_note_missing_from_feed(self):
+        # D-25: a note written here but missing from the feed never reaches the sites that import it.
+        self.edit('feed.xml', '<id>https://cyberdudeuk.github.io/notes/one-home-for-my-open-work.html</id>', '<id>gone</id>')
+        self.fails_with('L25')
+
+    def test_L25_note_published_elsewhere_must_stay_out_of_the_feed(self):
+        self.edit('feed.xml', '</feed>', '<entry><id>https://dev.to/cyberdudeuk/making-a-portfolio-of-open-public-sector-projects-that-keeps-itself-honest-3l4a</id></entry></feed>')
+        self.fails_with('L25')
+
+    def test_L25_note_page_missing(self):
+        (self.tmp / 'notes' / 'one-home-for-my-open-work.html').unlink()
+        self.fails_with('L25')
+
+    def test_L25_note_page_not_its_own_canonical(self):
+        self.edit('notes/one-home-for-my-open-work.html', '<link rel="canonical" href="https://cyberdudeuk.github.io/notes/', '<link rel="canonical" href="https://dev.to/x/')
+        self.fails_with('L25')
+
+    def test_L25_feed_not_published(self):
+        self.edit('.github/workflows/pages.yml', ' notes feed.xml ', ' ')
+        self.fails_with('L25')
+
+    def test_L25_build_refuses_unsafe_notes(self):
+        # Fail closed: bad ids, unknown block types (no HTML), off-list or http links, and notes that are both
+        # published here and elsewhere are refused before anything is written.
+        good = {'id': 'ok', 'title': 'T', 'summary': 'S', 'date': '2026-11-19', 'body': [{'p': 'x'}]}
+        bad = [dict(good, id='Bad Id'), dict(good, body=[{'script': 'x'}]), dict(good, body=[{'p': {'html': 1}}]),
+               dict(good, date='19/11/2026'), dict(good, home='https://dev.to/x'),
+               {k: v for k, v in good.items() if k != 'body'} | {'home': 'http://dev.to/x'},
+               {k: v for k, v in good.items() if k != 'body'} | {'home': 'https://evil.example/x'},
+               dict(good, links=[{'text': 'x', 'url': 'javascript:alert(1)'}])]
+        for n in bad:
+            (self.tmp / 'data' / 'posts.json').write_text(json.dumps({'posts': [n]}), encoding='utf-8')
+            with self.assertRaises((SystemExit, ValueError), msg=n):
+                notes.load(self.tmp)
+
+    def test_L25_note_text_is_escaped(self):
+        n = {'id': 'x', 'title': '<b>T</b>', 'summary': 'S', 'date': '2026-11-19', 'body': [{'p': '<script>alert(1)</script>'}]}
+        html_out = notes.body_html(n) + notes.cards('https://cyberdudeuk.github.io/', [n])
+        self.assertNotIn('<script>', html_out)
+        self.assertNotIn('<b>T</b>', html_out)
 
     def test_L24_profile_link_missing(self):
         # D-24: a public profile listed in owner.json but not linked from the page breaks the cross-links.
