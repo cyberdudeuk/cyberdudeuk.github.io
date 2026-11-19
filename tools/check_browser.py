@@ -10,7 +10,10 @@ B13 an automated accessibility rule failing (axe-core, vendored in tools/vendor)
 and on the 404 page (D-11: the 404 heading was white on white),
 B14 the back-to-top button not returning to the top, or its arrow not centred and upright (D-18), B15 a ways-in ring drawn empty (D-16),
 B16 a note page losing its reading layout: paragraphs more than 32px apart (D-27: the homepage's 64px flex gap fell between
-every paragraph), text lines wider than 80 characters, or the page scrolling sideways at 320px.
+every paragraph), text lines wider than 80 characters, or the page scrolling sideways at 320px,
+B17 (D-29) the spotlight's next button or dots not moving to the next slide, its Play button offered under reduced
+motion, or the section links and the theme switch falling onto different rows (or off screen) at any width from
+320 to 1280px: links fold into the menu before they would wrap.
 
 Run: python3 tools/check_browser.py [--break NAME]
 --break injects a deliberate fault so CI proves each check fails when it should. Uses the runner's Chrome (CHROME).
@@ -45,10 +48,12 @@ BREAKS = {
     'totop': "var t=document.getElementById('toTop'); var c=t.cloneNode(true); c.removeAttribute('href'); t.replaceWith(c);",
     'arrow': "document.head.insertAdjacentHTML('beforeend','<style>.totop .ico{position:absolute;left:0;top:0;transform:rotate(-90deg)}</style>')",
     'rings': "document.querySelectorAll('.ring .rv').forEach(function(r){r.style.setProperty('--len','0');})",
+    'spotlight': "var n=document.getElementById('spotNext'); n.replaceWith(n.cloneNode(true));",
+    'masthead': "document.documentElement.classList.remove('nav-fold');document.head.insertAdjacentHTML('beforeend','<style>.global{display:flex!important}.navmenu{display:none!important}</style>')",
     'notegap': "document.head.insertAdjacentHTML('beforeend','<style>main.note-page .prose{display:flex;flex-direction:column;gap:64px}</style>')",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
-         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16'}
+         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16', 'spotlight': 'B17', 'masthead': 'B17'}
 
 
 def serve():
@@ -196,6 +201,47 @@ async def run(brk):
         if bad:
             found.append(f'B15 {bad} ways-in ring(s) drawn empty')
         await ctx.close()
+        # B17 (D-29): the spotlight moves on request and never rotates by itself under reduced motion
+        ctx, pg, errs = await page(b)
+        await pg.goto(base + 'index.html', wait_until='load')
+        if brk == 'spotlight':
+            await pg.evaluate(BREAKS[brk])
+        cur = "Array.from(document.querySelectorAll('.sdot')).findIndex(function(d){return d.getAttribute('aria-current')==='true';})"
+        await pg.click('#spotNext')
+        await pg.wait_for_timeout(900)
+        if await pg.evaluate(cur) != 1:
+            found.append('B17 the spotlight next button did not move to slide 2')
+        await pg.click('.sdot[data-slide="0"]')
+        await pg.wait_for_timeout(900)
+        if await pg.evaluate(cur) != 0:
+            found.append('B17 the spotlight dots did not move to slide 1')
+        await ctx.close()
+        ctx, pg, errs = await page(b, reduced_motion='reduce')
+        await pg.goto(base + 'index.html', wait_until='load')
+        if await pg.locator('#spotPlay:visible').count():
+            found.append('B17 the spotlight offers rotation under reduced motion')
+        await ctx.close()
+        # B17 (D-29): the masthead stays on one row; links fold into the menu before they would wrap
+        # D-33: it held with one font and failed on the CI runner's wider one, so it runs with the wide font and larger text.
+        for w, font, zoom in ((320, '', 1), (390, '', 1), (901, '', 1), (1000, '', 1), (1081, '', 1), (1181, '', 1), (1280, '', 1),
+                              (1081, 'DejaVu Sans', 1), (1181, 'DejaVu Sans', 1), (1240, 'DejaVu Sans', 1), (1280, 'DejaVu Sans', 1), (1280, '', 1.25)):
+            ctx, pg, errs = await page(b, w, 800)
+            if font or zoom != 1:
+                css = (f'body,button,.global a{{font-family:"{font}",sans-serif!important}}' if font else '') + f'html{{font-size:{zoom * 100:.0f}%}}'
+                await pg.add_init_script('document.addEventListener("DOMContentLoaded",function(){var st=document.createElement("style");'
+                                         f'st.textContent={json.dumps(css)};document.head.appendChild(st);}});')
+            await pg.goto(base + 'index.html', wait_until='load')
+            await pg.wait_for_timeout(150)
+            if font and font not in await pg.evaluate("getComputedStyle(document.querySelector('.global a')).fontFamily"):
+                found.append(f'B17 the {font} test font was not applied')
+            if brk == 'masthead':
+                await pg.evaluate(BREAKS[brk])
+            geo = await pg.evaluate("""(() => { const vis = q => { const el = document.querySelector(q); const r = el && el.getBoundingClientRect(); return r && r.width ? r : null; };
+                const n = vis('nav.global') || vis('.navmenu'), t = vis('#themeToggle');
+                return {gap: n && t ? Math.abs((n.top + n.bottom) / 2 - (t.top + t.bottom) / 2) : 999, right: t ? t.right : 999}; })()""")
+            if geo['gap'] > 8 or geo['right'] > w:
+                found.append(f'B17 the masthead links and the theme switch are not on one row at {w}px{" with " + font if font else ""}{f" at {zoom:.0%} text" if zoom != 1 else ""}: {geo}')
+            await ctx.close()
         # B13 (D-11): automated accessibility rules pass in every view, and on the 404 page
         for view, w, scheme, path in (('light', 1280, 'light', 'index.html'), ('dark', 1280, 'dark', 'index.html'),
                                       ('phone', 390, 'light', 'index.html'), ('404', 1280, 'light', '404.html')):

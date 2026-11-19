@@ -128,13 +128,74 @@
       var io = new IntersectionObserver(function (es) {
         es.forEach(function (en) { if (en.isIntersecting) { var el = en.target; el.classList.add('in'); io.unobserve(el); setTimeout(function () { el.style.transitionDelay = ''; }, 900); } });
       }, { rootMargin: '0px 0px -8% 0px' });
-      $$('.featured, .way, .card, .wcard, .panel, .contact').forEach(function (el, i) {
+      $$('.spotlight, .door, .way, .card, .wcard, .panel, .contact').forEach(function (el, i) {
         el.classList.add('reveal');
         el.style.transitionDelay = (i % 3) * 60 + 'ms';
         io.observe(el);
       });
     }
   }
+  /* Masthead (D-33): the section links fold into the menu whenever they would wrap, whatever the font or text size.
+     The CSS fold point is the fallback without JavaScript. */
+  var navg = $('nav.global'), themeBtn = $('#themeToggle');
+  if (navg && themeBtn) {
+    var fit = function () {
+      root.classList.remove('nav-fold');
+      if (getComputedStyle(navg).display === 'none') return;
+      var a = navg.getBoundingClientRect(), t = themeBtn.getBoundingClientRect();
+      if (Math.abs((a.top + a.bottom) / 2 - (t.top + t.bottom) / 2) > 8 || a.right > window.innerWidth) root.classList.add('nav-fold');
+    };
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    if (document.fonts) {
+      if (document.fonts.ready) document.fonts.ready.then(fit);
+      if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fit);
+    }
+    fit();
+  }
+
+  /* Spotlight carousel (D-29): previous, next and dots move the strip; it rotates only when the reader presses Play,
+     never under reduced motion, and pauses while the pointer or keyboard focus is inside it (WCAG 2.2.2). */
+  var strack = $('#spotTrack');
+  if (strack) {
+    var slides = $$('#spotTrack .slide'), sdots = $$('.sdot'), play = $('#spotPlay'), timer = null, held = false;
+    var cur = function () { return Math.round(strack.scrollLeft / Math.max(1, strack.clientWidth)); };
+    var go = function (i) {
+      var n = (i + slides.length) % slides.length;
+      strack.scrollTo({ left: slides[n].offsetLeft - slides[0].offsetLeft, behavior: reduced ? 'auto' : 'smooth' });
+    };
+    var mark = function () {
+      var i = cur();
+      sdots.forEach(function (d, k) { if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+      slides.forEach(function (sl, k) { sl.setAttribute('aria-hidden', String(k !== i)); sl.inert = k !== i; });
+    };
+    var stop = function () { if (timer) { clearInterval(timer); timer = null; } };
+    var start = function () { stop(); timer = setInterval(function () { if (!held) go(cur() + 1); }, 7000); };
+    var setPlay = function (on) {
+      if (!play) return;
+      play.setAttribute('aria-pressed', String(on));
+      play.textContent = on ? 'Pause' : 'Play';
+      strack.setAttribute('aria-live', on ? 'off' : 'polite');
+      if (on) start(); else stop();
+    };
+    var st = null;
+    strack.addEventListener('scroll', function () { clearTimeout(st); st = setTimeout(mark, 80); }, { passive: true });
+    $('#spotPrev').addEventListener('click', function () { go(cur() - 1); });
+    $('#spotNext').addEventListener('click', function () { go(cur() + 1); });
+    sdots.forEach(function (d) { d.addEventListener('click', function () { go(Number(d.getAttribute('data-slide'))); }); });
+    strack.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowRight') { ev.preventDefault(); go(cur() + 1); } else if (ev.key === 'ArrowLeft') { ev.preventDefault(); go(cur() - 1); }
+    });
+    var area = strack;
+    area.addEventListener('pointerenter', function () { held = true; });
+    area.addEventListener('pointerleave', function () { held = false; });
+    area.addEventListener('focusin', function () { held = true; });
+    area.addEventListener('focusout', function () { held = false; });
+    if (play) play.addEventListener('click', function () { setPlay(play.getAttribute('aria-pressed') !== 'true'); });
+    if (reduced && play) play.hidden = true;
+    mark();
+  }
+
   /* Back to top: appears after the first screen; its ring shows how far down the page you are */
   var top = $('#toTop'), topRing = $('#toTopRing');
   if (top) {

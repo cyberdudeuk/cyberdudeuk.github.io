@@ -19,7 +19,7 @@ import urllib.parse
 
 # Working days to a first reply and to a decision, by issue label (the labels the issue forms apply).
 # A person sets these; the routine only applies them.
-SLA = {"contact": (2, 10), "accessibility": (2, 10), "bug": (2, 10), "listing": (5, 20)}
+SLA = {"contact": (2, 10), "accessibility": (2, 10), "bug": (2, 10), "listing": (5, 20), "idea": (5, 20)}
 
 
 def gh(*args):

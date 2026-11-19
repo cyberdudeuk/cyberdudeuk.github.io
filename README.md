@@ -96,7 +96,7 @@ can read it.
 | | |
 |---|---|
 | Code licence | [MIT](LICENSE) |
-| Text | Open Government Licence v3.0. Each project has its own licence, shown on its card |
+| Text | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). This is personal work, not Crown copyright, so the Open Government Licence does not apply. Each project has its own licence, shown on its card |
 | Accessibility | [Accessibility statement](ACCESSIBILITY.md) |
 | Security | [SECURITY.md](SECURITY.md) |
 | Support | [SUPPORT.md](SUPPORT.md) |
