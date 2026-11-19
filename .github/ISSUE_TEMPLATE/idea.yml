@@ -1,0 +1,39 @@
+name: An idea or a feature request
+description: Suggest something this launchpad should do, show or link to. For one project, use that project's own form.
+title: "[Idea] "
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is public. Do not include personal data, names of colleagues, case details or anything above OFFICIAL.
+        There is no email route: this form is the way to contact the maintainer. Every idea gets a reply, even when the answer is no.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of idea?
+      options:
+        - A new feature or section on the launchpad
+        - A change to something that is already here
+        - A new project or topic worth building
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: What do you need, and why?
+      description: Describe the problem or the job you are trying to do, not only the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea (optional)
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: I have not included personal data, case details or anything above OFFICIAL
+          required: true

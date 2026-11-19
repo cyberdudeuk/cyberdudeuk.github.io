@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = 'https://cyberdudeuk.github.io/'
 REPO = 'https://github.com/cyberdudeuk/cyberdudeuk.github.io'
 CONTACT = REPO + '/issues/new?template=contact.yml'
+REPOS = 'https://github.com/cyberdudeuk?tab=repositories'
 OLD_TOOLKIT_SECTIONS = ['start-here', 'knowledge', 'toolkit', 'tools', 'assurance', 'catalogue', 'ucd', 'practice', 'resources',
                         'signals', 'transparency', 'roadmap', 'glossary', 'contact', 'tool-triage', 'tool-evidence', 'tool-deia',
                         'tool-atrs', 'tool-pqc', 'tool-plain']
@@ -213,6 +214,33 @@ def profiles(owner):
     return out
 
 
+BOARD_PATH = re.compile(r'/(users|orgs)/[A-Za-z0-9-]+/projects/\d+')
+
+
+def board(owner):
+    """The owner's public GitHub Project board. Fails closed (L26): https on github.com, a project path, nothing else."""
+    b = owner.get('board')
+    if not b:
+        return None
+    u = urllib.parse.urlsplit(b.get('url', ''))
+    if u.scheme != 'https' or u.hostname != 'github.com' or not BOARD_PATH.fullmatch(u.path) or u.query or u.fragment or not b.get('name'):
+        raise SystemExit(f'owner.json board refused (https://github.com/users/<name>/projects/<n> only): {b}')
+    return b
+
+
+def spotlight(projects, posts, brd):
+    """Choose what the spotlight shows, in order. Returns a list of (kind, item) where kind is 'project', 'note' or 'board'.
+
+    The spotlight is the front door: the newest things worth a first visit, then the ways to follow the work.
+    """
+    picks = [('project', p) for p in projects if p.get('new') and p.get('site')][:3]
+    if posts:
+        picks.append(('note', posts[0]))
+    if brd:
+        picks.append(('board', brd))
+    return picks
+
+
 def build():
     d = json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))
     w = json.loads((ROOT / 'data' / 'workshop.json').read_text(encoding='utf-8'))
@@ -247,23 +275,94 @@ def build():
     def pick(level):
         return ''.join(f'<li><a href="#p-{e(i)}">{e(byid[i]["name"])}</a></li>' for i in d['ways_in'][level])
 
-    # Featured: the most recently updated new project that has a live site and highlights.
-    feat = next((p for p in projects if p.get('new') and p.get('site') and p.get('highlights')), None)
+    # Spotlight (D-29): a carousel of the newest projects, the latest note and the project board, chosen by spotlight().
+    # It is a scroll-snap strip, so without JavaScript every slide is still there and can be scrolled; app.js adds the
+    # buttons and the optional rotation.
+    brd = board(owner)
+    hl_icons = ('layers', 'schema', 'database', 'hub')
+
+    def hls(items):
+        return ''.join(f'<li class="hl hl-{i}">{icon(n, 24)}<span>{e(t)}</span></li>' for i, (t, n) in enumerate(zip(items, hl_icons, strict=False)))
+
+    def day(iso):
+        x = dt.date.fromisoformat(iso)
+        return f'{x.day} {x:%B %Y}'
+
+    picks = spotlight(projects, posts, brd)
+    slides = []
+    for i, (k, it) in enumerate(picks):
+        pos = f'{i + 1} of {len(picks)}'
+        if k == 'project':
+            fk = kind(it['status'])
+            art = it.get('highlights') or [f'Area: {cats[it["category"]]["label"]}', 'Levels: ' + ', '.join(it['levels']),
+                                            f'Licence: {it["licence"]}', 'Live site, no account needed']
+            sid = 'featured' if i == 0 else f's-{it["id"]}'
+            slides.append(f'''<div class="slide c-{e(it["category"])}" id="{e(sid)}" role="group" aria-roledescription="slide" aria-label="{pos}: {e(it["name"])}">
+    <div class="feat-body">
+     <p class="feat-meta"><span class="flag">New</span><span class="pill k-{fk}"><span class="dot" aria-hidden="true"></span>{e(it["status"])}</span><span class="muted">Updated {day(it["updated"])}</span></p>
+     <p class="eyebrow">New project · {e(cats[it["category"]]["label"])}</p>
+     <h3>{e(it["name"])}</h3>
+     <p class="feat-sum">{e(it["summary"])}</p>
+     <p class="feat-for"><strong>For:</strong> {e(it["audience"])}</p>
+     <div class="actions"><a class="btn btn-primary" href="{e(it["site"])}">Open the site{icon("out", 16)}<span class="visually-hidden">: {e(it["name"])}</span></a><a class="btn" href="{e(it["repo"])}">{icon("code", 16)}Repository<span class="visually-hidden">: {e(it["name"])}</span></a></div>
+    </div>
+    <div class="feat-art"><p class="visually-hidden">What it includes:</p><ul class="hls">{hls(art)}</ul></div>
+   </div>''')
+        elif k == 'note':
+            href = notes.url(SITE, it) if 'body' in it else it['home']
+            words = sum(len((b if isinstance(b, str) else ' '.join(b)).split()) for blk in it.get('body', []) for b in blk.values())
+            where = 'Published here' if 'body' in it else 'Published on DEV'
+            art = [f'{where}, {day(it["date"])}', f'About {max(1, round(words / 200))} minute read' if words else 'Short read',
+                   f'{len(posts)} {"note" if len(posts) == 1 else "notes"} so far', 'Follow with the Atom feed']
+            slides.append(f'''<div class="slide c-notes" id="s-note" role="group" aria-roledescription="slide" aria-label="{pos}: latest note">
+    <div class="feat-body">
+     <p class="feat-meta"><span class="flag">Latest note</span><span class="muted"><time datetime="{e(it["date"])}">{day(it["date"])}</time></span></p>
+     <p class="eyebrow">Notes · written here first</p>
+     <h3>{e(it["title"])}</h3>
+     <p class="feat-sum">{e(it["summary"])}</p>
+     <div class="actions"><a class="btn btn-primary" href="{e(href)}">{icon("book", 16)}Read the note<span class="visually-hidden">: {e(it["title"])}</span></a><a class="btn" href="#notes">All notes</a><a class="btn" href="feed.xml">Notes feed</a></div>
+    </div>
+    <div class="feat-art"><p class="visually-hidden">About this note:</p><ul class="hls">{hls(art)}</ul></div>
+   </div>''')
+        else:
+            slides.append(f'''<div class="slide c-board" id="s-board" role="group" aria-roledescription="slide" aria-label="{pos}: project board">
+    <div class="feat-body">
+     <p class="feat-meta"><span class="flag">Live</span><span class="muted">Refreshed by a daily routine</span></p>
+     <p class="eyebrow">Project board · GitHub Projects</p>
+     <h3>Follow the work as it happens</h3>
+     <p class="feat-sum">Every project on this page is an item on a public GitHub Project board, with where it stands and what is happening in its repository.</p>
+     <div class="actions"><a class="btn btn-primary" href="{e(it["url"])}">{icon("grid", 16)}Open the project board{icon("out", 16)}</a><a class="btn" href="{e(REPOS)}">{icon("code", 16)}All repositories</a></div>
+    </div>
+    <div class="feat-art"><p class="visually-hidden">What each item shows:</p><ul class="hls">{hls([f"{len(projects)} projects, one item each", "Status and area, as on this page", "Last change by a person, latest release", "Open issues and pull requests"])}</ul></div>
+   </div>''')
     featured = ''
-    if feat:
-        fk = kind(feat['status'])
-        hl = ''.join(f'<li class="hl hl-{i}">{icon(n, 24)}<span>{e(t)}</span></li>' for i, (t, n) in enumerate(zip(feat['highlights'], ('layers', 'schema', 'database', 'hub'), strict=False)))
-        featured = f'''<section class="featured c-{e(feat["category"])}" id="featured" aria-labelledby="h-featured">
-   <div class="feat-body">
-    <p class="feat-meta"><span class="flag">New</span><span class="pill k-{fk}"><span class="dot" aria-hidden="true"></span>{e(feat["status"])}</span><span class="muted">Updated {dt.date.fromisoformat(feat["updated"]).day} {dt.date.fromisoformat(feat["updated"]):%B %Y}</span></p>
-    <p class="eyebrow">Featured · {e(cats[feat["category"]]["label"])}</p>
-    <h2 id="h-featured">{e(feat["name"])}</h2>
-    <p class="feat-sum">{e(feat["summary"])}</p>
-    <p class="feat-for"><strong>For:</strong> {e(feat["audience"])}</p>
-    <div class="actions"><a class="btn btn-primary" href="{e(feat["site"])}">Open the site{icon("out", 16)}<span class="visually-hidden">: {e(feat["name"])}</span></a><a class="btn" href="{e(feat["repo"])}">{icon("code", 16)}Repository<span class="visually-hidden">: {e(feat["name"])}</span></a></div>
+    if slides:
+        dots = ''.join(f'<button type="button" class="sdot" data-slide="{i}" aria-label="Show slide {i + 1}"{" aria-current=\"true\"" if i == 0 else ""}></button>' for i in range(len(slides)))
+        featured = f'''<section class="spotlight" id="spotlight" aria-roledescription="carousel" aria-labelledby="h-spotlight">
+   <div class="spot-head">{h2('h-spotlight', 'Spotlight', 'star')}
+    <div class="spot-ctl js-only"><button type="button" class="sbtn" id="spotPlay" aria-pressed="false">Play</button><button type="button" class="sbtn" id="spotPrev" aria-controls="spotTrack">{icon("arrow", 16)}<span class="visually-hidden">Previous slide</span></button><span class="sdots">{dots}</span><button type="button" class="sbtn" id="spotNext" aria-controls="spotTrack">{icon("arrow", 16)}<span class="visually-hidden">Next slide</span></button></div></div>
+   <div class="strack" id="spotTrack" tabindex="0" aria-label="Spotlight slides, {len(slides)} in all" aria-live="polite">
+   {"".join(slides)}
    </div>
-   <div class="feat-art"><p class="visually-hidden">What it includes:</p><ul class="hls">{hl}</ul></div>
   </section>'''
+
+    # Gateway (D-29): every place the work lives, one step from the top of the page.
+    door_items = [('grid', 'Use a project', f'{live} live sites, all listed on this page', '#projects', False),
+                  ('book', 'Read the notes', f'{len(posts)} {"note" if len(posts) == 1 else "notes"} about the work, with a feed', '#notes', False)]
+    if brd:
+        door_items.append(('chart', 'Follow the board', 'Status and activity for every project, refreshed daily', brd['url'], True))
+    door_items.append(('code', 'Browse the code', 'Every repository on GitHub', REPOS, True))
+    doors = '<nav class="doors" aria-label="Everything in one place"><ul>' + ''.join(
+        f'<li><a class="door" href="{e(h)}"><span class="tile" aria-hidden="true">{icon(n, 22)}</span><span class="door-t">{e(t)}{icon("out", 14) if ext else icon("arrow", 14)}</span><span class="door-s">{e(sub)}</span></a></li>'
+        for n, t, sub, h, ext in door_items) + '</ul></nav>'
+
+    # Have your say (D-29): every way to give feedback, not only the contact form. Each form exists (L7).
+    fb_items = [('star', 'Suggest an idea', 'A feature, a change or a new project worth building', 'idea.yml'),
+                ('tool', 'Report a bug', 'A broken link, layout or behaviour on this page', 'bug_report.yml'),
+                ('person', 'Report an accessibility barrier', 'Treated as a priority defect', 'accessibility_issue.yml'),
+                ('list', 'Correct a card', 'A project card is wrong, or a project is missing', 'listing.yml')]
+    feedback = ''.join(f'<li><a class="door" href="{REPO}/issues/new?template={f}"><span class="tile" aria-hidden="true">{icon(n, 22)}</span><span class="door-t">{e(t)}{icon("out", 14)}</span><span class="door-s">{e(sub)}</span></a></li>'
+                       for n, t, sub, f in fb_items)
 
     # Coverage map: every area against every level, counted from the data. Each count links to its area.
     rows = []
@@ -297,7 +396,7 @@ def build():
                   for i, p in enumerate(projects)]}}
     about_role = f'<p class="role">{e(owner["role"])}</p>' if owner.get('role') else ''
     about_profiles = ('<p class="profiles">Elsewhere: ' + ' · '.join(f'<a rel="me" href="{e(p["url"])}">{e(p["name"])}</a>' for p in profiles(owner)) + '</p>') if owner.get('profiles') else ''
-    navlinks = '<a href="#projects">Projects</a><a href="#ways-in">Ways in</a><a href="#coverage">Coverage</a><a href="#workshop">Workshop</a><a href="#notes">Notes</a><a href="#about">About</a><a href="#contact">Contact</a>'
+    navlinks = '<a href="#projects">Projects</a><a href="#ways-in">Ways in</a><a href="#coverage">Coverage</a><a href="#workshop">Workshop</a><a href="#notes">Notes</a>' + (f'<a href="{e(brd["url"])}">Board{icon("out", 14)}</a>' if brd else '') + '<a href="#feedback">Have your say</a><a href="#about">About</a><a href="#contact">Contact</a>'
     favicon = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e9a23b'/%3E"
                "%3Cpath d='M10 11L22 11L16 22Z' fill='none' stroke='%230a1824' stroke-width='2'/%3E%3Ccircle cx='10' cy='11' r='3' fill='%230a1824'/%3E"
                "%3Ccircle cx='22' cy='11' r='3' fill='%230a1824'/%3E%3Ccircle cx='16' cy='22' r='3' fill='%230a1824'/%3E%3C/svg%3E")
@@ -369,6 +468,8 @@ def build():
   </div>
  </aside>
  <main id="main" tabindex="-1">
+  {doors}
+
   {featured}
 
   <section id="ways-in" aria-labelledby="h-ways">
@@ -439,6 +540,13 @@ def build():
    </div>
   </section>
 
+  <section id="feedback" aria-labelledby="h-feedback">
+   <div class="sec-head">{h2('h-feedback', 'Have your say', 'chat')}
+   <p class="intro">Each form opens a public GitHub issue, so do not include personal data. Every one gets a reply, and you can follow it on GitHub. For one project, use that project's own forms, linked from its site.</p></div>
+   <ul class="grid fb">{feedback}</ul>
+   <p class="small muted">Found a security problem? <a href="{REPO}/security/advisories/new">Report it privately</a>, never in a public issue.</p>
+  </section>
+
   <section id="contact" class="contact" aria-labelledby="h-contact">
    <div>{h2('h-contact', 'Contact', 'chat')}
    <p>Use the <a href="{CONTACT}">contact form</a>. It opens a GitHub issue, which is public, so do not include personal data. There is no email route. For a problem with one project, use that project's own contact form, linked from its site.</p></div>
@@ -453,7 +561,7 @@ def build():
   <div class="foot-text">
    <p><strong>Disclaimer.</strong> Made in a personal capacity. These projects are not official government services or policy, and listing a project does not mean any organisation endorses it.</p>
    <p><strong>Transparency.</strong> This page is built from <a href="data/projects.json">projects.json</a> and <a href="data/workshop.json">workshop.json</a> by <code>tools/build.py</code> and checked before it is published. Written with help from Claude (Anthropic). The illustration and icons are drawn in code from the data; there are no photographs and no generated images. No cookies, analytics or third-party requests; the dark mode switch remembers your choice in this browser only if you use it.</p>
-   <p><strong>Licences.</strong> This launchpad: code MIT, text OGL v3.0. Typeface: Space Grotesk, SIL Open Font License 1.1 (<a href="fonts/OFL.txt">licence</a>). Each project has its own licence, shown on its card.</p>
+   <p><strong>Licences.</strong> This launchpad: code MIT, text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Typeface: Space Grotesk, SIL Open Font License 1.1 (<a href="fonts/OFL.txt">licence</a>). Each project has its own licence, shown on its card.</p>
    <p><strong>Contact.</strong> <a href="{CONTACT}">Contact form</a> · <a href="{REPO}">Repository</a> · <a href="{REPO}/blob/main/ACCESSIBILITY.md">Accessibility statement</a></p>
   </div>
   <div class="colophon" aria-label="Colophon">{qr_svg(SITE)}<div class="bc">{barcode_svg("CYBERDUDEUK-" + d["version"])}<span>{e(owner.get("site_name") or owner["display_name"])} · {e(owner["display_name"])} · v{e(d["version"])} · {e(d["updated"])}</span></div></div>

@@ -22,7 +22,7 @@ import check_site  # noqa: E402
 import triage  # noqa: E402
 import trials  # noqa: E402
 
-CONTRACT_LABELS = {'routine', 'digest', 'health', 'review due', 'owner action', 'needs-reply', 'overdue', 'occurrence', 'trial', 'contact', 'accessibility', 'bug', 'listing'}
+CONTRACT_LABELS = {'routine', 'digest', 'health', 'review due', 'owner action', 'needs-reply', 'overdue', 'occurrence', 'trial', 'contact', 'accessibility', 'bug', 'listing', 'idea'}
 
 
 class Linters(unittest.TestCase):
