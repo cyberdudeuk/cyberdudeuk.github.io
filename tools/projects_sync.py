@@ -36,7 +36,8 @@ OWNER = 'cyberdudeuk'
 TITLE = 'Public Good Works'
 SHORT = 'Every public cyberdudeuk project, kept in step with the launchpad and each repository by a daily routine.'
 FIELDS = {'Project status': 'SINGLE_SELECT', 'Area': 'SINGLE_SELECT', 'Last change': 'DATE', 'Latest release': 'TEXT',
-          'Open issues': 'NUMBER', 'Open pull requests': 'NUMBER', 'Licence': 'TEXT', 'Site': 'TEXT', 'Repository link': 'TEXT'}
+          'Open issues': 'NUMBER', 'Open pull requests': 'NUMBER', 'Licence': 'TEXT', 'Site': 'TEXT', 'Repository link': 'TEXT',
+          'Stars': 'NUMBER', 'Forks': 'NUMBER'}  # D-31: use, not only activity
 # D-23: every GitHub Project has these built-in fields. Writing to them fails ("Repository") or is refused by their fixed
 # options ("Status"), so the routine never uses these names; tests/test_projects.py checks FIELDS stays clear of them.
 BUILT_IN = {'Title', 'Assignees', 'Status', 'Labels', 'Linked pull requests', 'Milestone', 'Repository', 'Reviewers',
@@ -69,7 +70,8 @@ def activity(name, get=gh_json, today=None):
             'recent': [c['commit']['message'].splitlines()[0][:120] for c in by_people[:RECENT]],
             'release': f"{rel['tag_name']} ({rel['published_at'][:10]})" if rel.get('tag_name') else 'No release yet',
             'open_issues': max(0, (repo.get('open_issues_count') or 0) - len(pulls)),  # the API counts pull requests as issues
-            'open_pulls': len(pulls)}
+            'open_pulls': len(pulls),
+            'stars': repo.get('stargazers_count') or 0, 'forks': repo.get('forks_count') or 0}
 
 
 def board_status(card, act, today):
@@ -99,13 +101,15 @@ def item_for(card, areas, act, today=None):
     recent = '\n'.join(f'- {m}' for m in act['recent']) or '- No changes by a person in the last 50 commits.'
     body = (f"{card['summary']}\n\n**For:** {card['audience']}\n**Status, as the project states it:** {card['status']}\n\n"
             + '\n'.join(links) + f"\n\n### Activity\n{busy_line(act)} Last change: {act['last_change'] or 'none found'}. "
-            f"Latest release: {act['release']}. Open issues: {act['open_issues']}. Open pull requests: {act['open_pulls']}.\n\n"
+            f"Latest release: {act['release']}. Open issues: {act['open_issues']}. Open pull requests: {act['open_pulls']}. "
+            f"Stars: {act.get('stars', 0)}. Forks: {act.get('forks', 0)}.\n\n"
             f"### Recent changes by a person\n{recent}\n\n"
             "_Kept up to date daily by the projects routine in cyberdudeuk/cyberdudeuk.github.io. Edits here are overwritten; "
             "change the launchpad card or the repository instead._")
     fields = {'Project status': dict(build.KINDS)[kind], 'Area': areas.get(card['category'], card['category']),
               'Latest release': act['release'], 'Open issues': act['open_issues'], 'Open pull requests': act['open_pulls'],
-              'Licence': card['licence'], 'Site': card.get('site') or 'None', 'Repository link': card['repo']}
+              'Licence': card['licence'], 'Site': card.get('site') or 'None', 'Repository link': card['repo'],
+              'Stars': act.get('stars', 0), 'Forks': act.get('forks', 0)}
     if act['last_change'] or card.get('updated'):
         fields['Last change'] = act['last_change'] or card['updated']
     return {'title': card['name'], 'body': body, 'fields': fields, 'status': board_status(card, act, today), 'act': act}
@@ -126,11 +130,12 @@ def status_update_for(items, today):
         health = 'ON_TRACK'
     week = sum(i['act'].get('week', 0) for i in items)
     rows = '\n'.join(f"| {i['title']} | {i['status']} | {i['act'].get('week', 0)} | {i['act']['last_change'] or 'none'} | "
-                     f"{i['act']['release']} | {i['act']['open_issues']} | {i['act']['open_pulls']} |" for i in items)
+                     f"{i['act']['release']} | {i['act']['open_issues']} | {i['act']['open_pulls']} | "
+                     f"{i['act'].get('stars', 0)} | {i['act'].get('forks', 0)} |" for i in items)
     body = (f"Week to {today.isoformat()}: {counts['In progress']} in progress, {counts['Done']} done, {counts['Todo']} waiting. "
             f"{week} changes by a person across all projects in the last 7 days.\n\n"
-            "| Project | Status | Changes, 7 days | Last change | Latest release | Open issues | Open PRs |\n"
-            "|---|---|---|---|---|---|---|\n" + rows +
+            "| Project | Status | Changes, 7 days | Last change | Latest release | Open issues | Open PRs | Stars | Forks |\n"
+            "|---|---|---|---|---|---|---|---|---|\n" + rows +
             f"\n\n_Written from repository activity by the projects routine in cyberdudeuk/cyberdudeuk.github.io. "
             f"Status rule: in progress if a person changed it in the last {ACTIVE_DAYS} days; otherwise done if it has a "
             "release, or waiting if not._")

@@ -10,6 +10,7 @@
   change, latest release, open issues and open pull requests. Earlier updates are never edited or deleted.
 - Each item's description now says how busy the project has been: changes by a person in the last 7 and 30 days,
   last change, latest release, open issues and pull requests (D-29).
+- Stars and forks are now read too, as a first measure of use rather than activity (D-31).
 
 ## 19 November 2026: note pages redesigned
 

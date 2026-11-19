@@ -212,6 +212,20 @@ class StatusRules(unittest.TestCase):
         a = ps.activity('x', get=pages.get, today=TODAY)
         self.assertEqual((a['week'], a['month'], a['has_release']), (1, 2, False))  # the bot and the 49-day-old change excluded
 
+    def test_use_is_measured_not_only_activity(self):
+        # D-31: stars and forks come from the repository and reach the item fields, body and weekly table.
+        pages = {'repos/cyberdudeuk/x': {'stargazers_count': 7, 'forks_count': 2}, 'repos/cyberdudeuk/x/commits?per_page=50': []}
+        a = ps.activity('x', get=pages.get, today=TODAY)
+        self.assertEqual((a['stars'], a['forks']), (7, 2))
+        item = ps.item_for(self.CARD, AREAS, dict(ACT, stars=7, forks=2), TODAY)
+        self.assertEqual((item['fields']['Stars'], item['fields']['Forks']), (7, 2))
+        self.assertIn('Stars: 7. Forks: 2.', item['body'])
+        self.assertIn('| 7 | 2 |', ps.status_update_for([dict(item, title='x')], TODAY)['body'])
+
+    def test_negative_missing_counts_are_zero_not_an_error(self):
+        a = ps.activity('x', get={'repos/cyberdudeuk/x': {}}.get, today=TODAY)
+        self.assertEqual((a['stars'], a['forks']), (0, 0))
+
     def test_body_says_how_busy_the_project_is(self):
         body = ps.item_for(self.CARD, AREAS, ACT, TODAY)['body']
         self.assertIn('4 changes by a person in the last 7 days, 9 in the last 30 days.', body)
