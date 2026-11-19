@@ -199,7 +199,7 @@ def card(p, cats):
 </article>'''
 
 
-PROFILE_HOSTS = {'github.com', 'dev.to', 'orcid.org', 'www.linkedin.com'}
+PROFILE_HOSTS = {'github.com', 'dev.to', 'orcid.org', 'www.linkedin.com', 'zenodo.org'}
 
 
 def profiles(owner):
