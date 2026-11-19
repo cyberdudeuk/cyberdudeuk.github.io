@@ -1,6 +1,14 @@
 # Changelog
 
 
+## 19 November 2026: DAM Policy Explorer listed
+
+- The DAM Policy Explorer, a one-stop shop on the Data Asset Management Policy for coordinators, is now on the
+  launchpad and in the contact form. It was public but unlisted, with no licence; it now has MIT code and OGL v3.0
+  content. Register 1.4.0, 11 projects.
+- A vaccine test hard-coded a coverage count and broke when the project was listed; it now reads the count from the
+  data (D-30).
+
 ## 19 November 2026: note pages redesigned
 
 - Note pages have their own reading layout in the launchpad's brand: the night-sky header with the brand mark, a
