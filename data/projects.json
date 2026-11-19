@@ -76,7 +76,7 @@
       ],
       "site": "https://cyberdudeuk.github.io/ai-capability-governance/",
       "repo": "https://github.com/cyberdudeuk/ai-capability-governance",
-      "licence": "MIT code, OGL v3.0 content",
+      "licence": "MIT code, CC BY 4.0 content",
       "new": true,
       "highlights": [
         "Six-level human review model",
@@ -176,7 +176,7 @@
       ],
       "site": "https://cyberdudeuk.github.io/github-repos-asset-catalogue/",
       "repo": "https://github.com/cyberdudeuk/github-repos-asset-catalogue",
-      "licence": "MIT code, OGL v3.0 content",
+      "licence": "MIT code, CC BY 4.0 content",
       "new": false
     },
     {
@@ -262,7 +262,7 @@
       ],
       "site": "https://cyberdudeuk.github.io/uk-youth-parliament-amplify/",
       "repo": "https://github.com/cyberdudeuk/uk-youth-parliament-amplify",
-      "licence": "MIT code, OGL v3.0 content",
+      "licence": "MIT code, CC BY 4.0 content",
       "new": true
     }
   ],

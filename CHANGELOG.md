@@ -6,6 +6,8 @@
 - The DAM Policy Explorer, a one-stop shop on the Data Asset Management Policy for coordinators, is now on the
   launchpad and in the contact form. It was public but unlisted, with no licence; it now has MIT code and OGL v3.0
   content. Register 1.4.0, 11 projects.
+- AI Capability Governance, the GitHub Repos Asset Catalogue and Amplify now show CC BY 4.0 for their content, not
+  the Open Government Licence: they are personal projects, not government work.
 - A vaccine test hard-coded a coverage count and broke when the project was listed; it now reads the count from the
   data (D-30).
 
