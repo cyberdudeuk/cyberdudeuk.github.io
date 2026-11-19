@@ -1,0 +1,42 @@
+{
+  "_note": "Notes about the work. A note with \"body\" is published here first (its own page plus feed.xml, which other sites import with a link back). A note with \"home\" was first published elsewhere and is only listed. Block types: p, h2, ul. Plain text only; no HTML. Links must be https to a known host (tools/notes.py).",
+  "posts": [
+    {
+      "id": "one-home-for-my-open-work",
+      "title": "One home for my open work, and where else to find it",
+      "date": "2026-11-19",
+      "summary": "My open projects now have one home, Public Good Works. This note lists where else they appear, and which copy to trust.",
+      "tags": ["opensource", "govtech", "opendata"],
+      "body": [
+        {"p": "My open projects on data and AI for UK public services, and my personal public-good projects, now have one home: Public Good Works, at cyberdudeuk.github.io. This note lists where else they appear, and which copy to trust."},
+        {"h2": "Where to find the work"},
+        {"ul": [
+          "The launchpad lists every public project with its status, licence and live site.",
+          "The code is on GitHub, and each repository is preserved in the Software Heritage archive.",
+          "Most projects' releases have a citable DOI through Zenodo, linked to my ORCID record.",
+          "Notes like this one are written here first and copied to DEV, with a link back to this page as the original.",
+          "LinkedIn carries short updates."
+        ]},
+        {"h2": "Which copy to trust"},
+        {"p": "The launchpad is the source. It links to each of my profiles and each profile links back to it, so you can check they belong to the same person. If a copy elsewhere differs, the launchpad is the one kept current."},
+        {"h2": "Getting in touch"},
+        {"p": "Use the contact form linked from the launchpad, or the one on each project's own site. There is no email route."},
+        {"p": "These are personal projects and personal views. None is an official government service, policy or endorsement unless the project says so."}
+      ],
+      "links": [
+        {"text": "Public Good Works (launchpad)", "url": "https://cyberdudeuk.github.io/"},
+        {"text": "GitHub", "url": "https://github.com/cyberdudeuk"},
+        {"text": "ORCID", "url": "https://orcid.org/0009-0000-5880-7219"},
+        {"text": "DEV Community", "url": "https://dev.to/cyberdudeuk"},
+        {"text": "LinkedIn", "url": "https://www.linkedin.com/in/emanuel"}
+      ]
+    },
+    {
+      "id": "portfolio-that-keeps-itself-honest",
+      "title": "Making a portfolio of open public-sector projects that keeps itself honest",
+      "date": "2026-11-18",
+      "summary": "The routines that keep the project list accurate, and the one rule they all follow: they propose, and a person merges.",
+      "home": "https://dev.to/cyberdudeuk/making-a-portfolio-of-open-public-sector-projects-that-keeps-itself-honest-3l4a"
+    }
+  ]
+}

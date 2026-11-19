@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-GB">
+ <title>Public Good Works: notes</title>
+ <subtitle>Notes on open tools for data and AI in public services, written here first.</subtitle>
+ <link rel="self" type="application/atom+xml" href="https://cyberdudeuk.github.io/feed.xml"/>
+ <link rel="alternate" type="text/html" href="https://cyberdudeuk.github.io/#notes"/>
+ <id>https://cyberdudeuk.github.io/feed.xml</id>
+ <updated>2026-11-19T00:00:00Z</updated>
+ <author><name>cyberdudeuk</name><uri>https://cyberdudeuk.github.io/</uri></author>
+ <entry>
+  <title>One home for my open work, and where else to find it</title>
+  <link rel="alternate" type="text/html" href="https://cyberdudeuk.github.io/notes/one-home-for-my-open-work.html"/>
+  <id>https://cyberdudeuk.github.io/notes/one-home-for-my-open-work.html</id>
+  <published>2026-11-19T00:00:00Z</published>
+  <updated>2026-11-19T00:00:00Z</updated>
+  <summary>My open projects now have one home, Public Good Works. This note lists where else they appear, and which copy to trust.</summary>
+  <content type="html">&lt;p&gt;My open projects on data and AI for UK public services, and my personal public-good projects, now have one home: Public Good Works, at cyberdudeuk.github.io. This note lists where else they appear, and which copy to trust.&lt;/p&gt;
+&lt;h2&gt;Where to find the work&lt;/h2&gt;
+&lt;ul&gt;&lt;li&gt;The launchpad lists every public project with its status, licence and live site.&lt;/li&gt;&lt;li&gt;The code is on GitHub, and each repository is preserved in the Software Heritage archive.&lt;/li&gt;&lt;li&gt;Most projects&amp;#x27; releases have a citable DOI through Zenodo, linked to my ORCID record.&lt;/li&gt;&lt;li&gt;Notes like this one are written here first and copied to DEV, with a link back to this page as the original.&lt;/li&gt;&lt;li&gt;LinkedIn carries short updates.&lt;/li&gt;&lt;/ul&gt;
+&lt;h2&gt;Which copy to trust&lt;/h2&gt;
+&lt;p&gt;The launchpad is the source. It links to each of my profiles and each profile links back to it, so you can check they belong to the same person. If a copy elsewhere differs, the launchpad is the one kept current.&lt;/p&gt;
+&lt;h2&gt;Getting in touch&lt;/h2&gt;
+&lt;p&gt;Use the contact form linked from the launchpad, or the one on each project&amp;#x27;s own site. There is no email route.&lt;/p&gt;
+&lt;p&gt;These are personal projects and personal views. None is an official government service, policy or endorsement unless the project says so.&lt;/p&gt;
+&lt;h2&gt;Links&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://cyberdudeuk.github.io/&quot;&gt;Public Good Works (launchpad)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/cyberdudeuk&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://orcid.org/0009-0000-5880-7219&quot;&gt;ORCID&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://dev.to/cyberdudeuk&quot;&gt;DEV Community&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.linkedin.com/in/emanuel&quot;&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content>
+  <category term="opensource"/>
+  <category term="govtech"/>
+  <category term="opendata"/>
+ </entry>
+</feed>

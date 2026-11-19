@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static checks for the launchpad (L1 to L23). Each names the defect or risk it guards against (docs/defect-register.md);
+"""Static checks for the launchpad (L1 to L25). Each names the defect or risk it guards against (docs/defect-register.md);
 tests/test_site.py proves every check fails on a deliberate break.
 
 Run: python3 tools/check_site.py [root]   (exit 1 on any failure)
@@ -32,7 +32,10 @@ def problems(root):
             out.append(msg)
 
     # L1: contact is by form only; no email address anywhere a reader sees.
-    for name, text in (('index.html', s), ('404.html', nf), ('README.md', readme)):
+    feed_path = root / 'feed.xml'
+    feed = feed_path.read_text(encoding='utf-8') if feed_path.exists() else ''
+    note_pages = {p.name: p.read_text(encoding='utf-8') for p in sorted((root / 'notes').glob('*.html'))} if (root / 'notes').is_dir() else {}
+    for name, text in (('index.html', s), ('404.html', nf), ('README.md', readme), ('feed.xml', feed), *((f'notes/{k}', v) for k, v in note_pages.items())):
         check(not EMAIL.search(text), f'L1 email address in {name}')
     # L2: the page is built from the data, never edited by hand. Rebuild in a copy and compare.
     tmp = Path(tempfile.mkdtemp())
@@ -46,6 +49,9 @@ def problems(root):
         if r.returncode == 0:
             check((tmp / 'index.html').read_text(encoding='utf-8') == s, 'L2 index.html is out of step with data/projects.json: run python3 tools/build.py')
             check((tmp / '404.html').read_text(encoding='utf-8') == nf, 'L2 404.html is out of step: run python3 tools/build.py')
+            check((tmp / 'feed.xml').read_text(encoding='utf-8') == feed, 'L2 feed.xml is out of step with data/posts.json: run python3 tools/build.py')
+            built = {p.name: p.read_text(encoding='utf-8') for p in sorted((tmp / 'notes').glob('*.html'))}
+            check(built == note_pages, 'L2 notes/ is out of step with data/posts.json: run python3 tools/build.py')
     finally:
         shutil.rmtree(tmp)
     # L3: every project is complete and honest about where it lives.
@@ -199,6 +205,32 @@ def problems(root):
     owner = json.loads((root / 'data' / 'owner.json').read_text(encoding='utf-8'))
     if owner.get('site_name'):
         check(f'<title>{htmllib.escape(owner["site_name"])}' in s, 'L23 the page title does not start with site_name from data/owner.json')
+    # L25 (D-25): every note is published consistently. A note written here has its own page with itself as canonical
+    # and one entry in feed.xml; a note published elsewhere is listed with a link out and kept out of the feed, so
+    # sites that import the feed never get a duplicate. The feed and note pages are published (L21 covers the page).
+    try:
+        sys.path.insert(0, str(root / 'tools'))
+        import notes as notes_mod
+        posts = notes_mod.load(root)
+    except (SystemExit, ValueError, KeyError) as exc:
+        posts = []
+        check(False, f'L25 data/posts.json is invalid: {exc}')
+    finally:
+        sys.path.pop(0)
+    check('<link rel="alternate" type="application/atom+xml" href="feed.xml"' in s, 'L25 the page does not advertise feed.xml')
+    check(feed.count('<entry>') == sum(1 for n in posts if 'body' in n), 'L25 feed.xml entry count does not match the notes published here')
+    for n in posts:
+        check(f'id="note-{n["id"]}"' in s, f'L25 note {n["id"]} is not listed in the Notes section')
+        here = f'https://cyberdudeuk.github.io/notes/{n["id"]}.html'
+        if 'body' in n:
+            pg = note_pages.get(f'{n["id"]}.html', '')
+            check(bool(pg), f'L25 note {n["id"]} has no page in notes/')
+            check(f'<link rel="canonical" href="{here}">' in pg, f'L25 note {n["id"]} page is not its own canonical')
+            check(f'<id>{here}</id>' in feed, f'L25 note {n["id"]} is not in feed.xml')
+        else:
+            check(n['home'] not in feed, f'L25 note {n["id"]} was published elsewhere but is in feed.xml (would import a duplicate)')
+    pages_yml = (root / '.github' / 'workflows' / 'pages.yml').read_text(encoding='utf-8')
+    check(' notes ' in pages_yml and ' feed.xml ' in pages_yml, 'L25 pages.yml does not publish notes/ and feed.xml')
     # L24: every public profile in data/owner.json is linked from the page with rel="me" and named in schema.org sameAs,
     # so the launchpad, GitHub, DEV, ORCID and LinkedIn point at each other (D-24).
     ld = re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)

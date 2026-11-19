@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 19 November 2026: Notes and a feed
+
+- New Notes section: short notes about the work, written here first. Each has its own page under notes/ and an
+  entry in feed.xml (Atom), which DEV imports with the note's page as the canonical original. A note first published
+  elsewhere is listed with a link out and left out of the feed, so no site imports a duplicate. The first note says
+  where the work appears and which copy to trust.
+- Notes are plain text in data/posts.json; the build refuses HTML, unknown block types, bad ids and links that are
+  not https to a known host. New check L25; the email (L1) and rebuild (L2) checks now cover notes and the feed (D-25).
+
 ## 18 November 2026: profiles linked both ways
 
 - The About panel now links the owner's public profiles (GitHub, DEV Community, ORCID, LinkedIn) with `rel="me"`, and
