@@ -93,6 +93,38 @@ class Site(unittest.TestCase):
         self.assertNotIn('<script>', html_out)
         self.assertNotIn('<b>T</b>', html_out)
 
+    def test_L25_summary_repeated_in_body(self):
+        # D-27: the note page showed its summary, then the same sentence again as the first paragraph.
+        def repeat(d):
+            d['posts'][0]['body'].insert(0, {'p': d['posts'][0]['summary']})
+        p = self.tmp / 'data' / 'posts.json'
+        d = json.loads(p.read_text(encoding='utf-8'))
+        repeat(d)
+        p.write_text(json.dumps(d), encoding='utf-8')
+        self.fails_with('L25')
+
+    def test_stories_need_evidence_and_consent(self):
+        # D-28: a case study is published only with a source, evidence anyone can open and the date of consent.
+        good = {'id': 's1', 'project': 'dq-commons', 'who': 'A team', 'what': 'Used it.', 'outcome': 'It helped.',
+                'evidence': 'https://example.gov.uk/x', 'consent': '2026-11-19'}
+        ids = {'dq-commons'}
+        p = self.tmp / 'data' / 'stories.json'
+        p.write_text(json.dumps({'stories': [good]}), encoding='utf-8')
+        self.assertEqual(len(notes.load_stories(self.tmp, ids)), 1)
+        for bad in (dict(good, evidence=''), dict(good, evidence='http://x.gov.uk'), {k: v for k, v in good.items() if k != 'consent'},
+                    dict(good, project='nope'), dict(good, outcome=''), dict(good, id='Bad Id')):
+            p.write_text(json.dumps({'stories': [bad]}), encoding='utf-8')
+            with self.assertRaises((SystemExit, ValueError), msg=bad):
+                notes.load_stories(self.tmp, ids)
+
+    def test_note_names_only_listed_projects(self):
+        p = self.tmp / 'data' / 'posts.json'
+        d = json.loads(p.read_text(encoding='utf-8'))
+        d['posts'][0]['projects'] = ['not-a-project']
+        p.write_text(json.dumps(d), encoding='utf-8')
+        with self.assertRaises(SystemExit):
+            notes.load(self.tmp, {'dq-commons'})
+
     def test_L24_profile_link_missing(self):
         # D-24: a public profile listed in owner.json but not linked from the page breaks the cross-links.
         self.edit('index.html', '<a rel="me" href="https://dev.to/cyberdudeuk">', '<a href="https://dev.to/cyberdudeuk">')

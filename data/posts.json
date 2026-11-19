@@ -6,29 +6,76 @@
       "title": "One home for my open work, and where else to find it",
       "date": "2026-11-19",
       "summary": "My open projects now have one home, Public Good Works. This note lists where else they appear, and which copy to trust.",
-      "tags": ["opensource", "govtech", "opendata"],
+      "tags": [
+        "opensource",
+        "govtech",
+        "opendata"
+      ],
       "body": [
-        {"p": "My open projects on data and AI for UK public services, and my personal public-good projects, now have one home: Public Good Works, at cyberdudeuk.github.io. This note lists where else they appear, and which copy to trust."},
-        {"h2": "Where to find the work"},
-        {"ul": [
-          "The launchpad lists every public project with its status, licence and live site.",
-          "The code is on GitHub, and each repository is preserved in the Software Heritage archive.",
-          "Most projects' releases have a citable DOI through Zenodo, linked to my ORCID record.",
-          "Notes like this one are written here first and copied to DEV, with a link back to this page as the original.",
-          "LinkedIn carries short updates."
-        ]},
-        {"h2": "Which copy to trust"},
-        {"p": "The launchpad is the source. It links to each of my profiles and each profile links back to it, so you can check they belong to the same person. If a copy elsewhere differs, the launchpad is the one kept current."},
-        {"h2": "Getting in touch"},
-        {"p": "Use the contact form linked from the launchpad, or the one on each project's own site. There is no email route."},
-        {"p": "These are personal projects and personal views. None is an official government service, policy or endorsement unless the project says so."}
+        {
+          "p": "My open projects on data and AI for UK public services, and my personal public-good projects, are now listed together on one launchpad, with a live site for each."
+        },
+        {
+          "h2": "Where to find the work"
+        },
+        {
+          "ul": [
+            "The launchpad lists every public project with its status, licence and live site.",
+            "The code is on GitHub, and each repository is preserved in the Software Heritage archive.",
+            "Most projects' releases have a citable DOI through Zenodo, linked to my ORCID record.",
+            "Notes like this one are written here first and copied to DEV, with a link back to this page as the original.",
+            "LinkedIn carries short updates."
+          ]
+        },
+        {
+          "h2": "Which copy to trust"
+        },
+        {
+          "p": "The launchpad is the source. It links to each of my profiles and each profile links back to it, so you can check they belong to the same person. If a copy elsewhere differs, the launchpad is the one kept current."
+        },
+        {
+          "h2": "Getting in touch"
+        },
+        {
+          "p": "Use the contact form linked from the launchpad, or the one on each project's own site. There is no email route."
+        },
+        {
+          "p": "These are personal projects and personal views. None is an official government service, policy or endorsement unless the project says so."
+        }
       ],
       "links": [
-        {"text": "Public Good Works (launchpad)", "url": "https://cyberdudeuk.github.io/"},
-        {"text": "GitHub", "url": "https://github.com/cyberdudeuk"},
-        {"text": "ORCID", "url": "https://orcid.org/0009-0000-5880-7219"},
-        {"text": "DEV Community", "url": "https://dev.to/cyberdudeuk"},
-        {"text": "LinkedIn", "url": "https://www.linkedin.com/in/emanuel"}
+        {
+          "text": "Public Good Works (launchpad)",
+          "url": "https://cyberdudeuk.github.io/"
+        },
+        {
+          "text": "GitHub",
+          "url": "https://github.com/cyberdudeuk"
+        },
+        {
+          "text": "ORCID",
+          "url": "https://orcid.org/0009-0000-5880-7219"
+        },
+        {
+          "text": "DEV Community",
+          "url": "https://dev.to/cyberdudeuk"
+        },
+        {
+          "text": "LinkedIn",
+          "url": "https://www.linkedin.com/in/emanuel"
+        }
+      ],
+      "projects": [
+        "ai-capability-governance",
+        "dcat-ap-uk",
+        "dam-capability-playbooks",
+        "dq-commons",
+        "github-repos-asset-catalogue",
+        "knowledge-web",
+        "plainspoken",
+        "black-mixed-heritage",
+        "ndl-pubsec-mcp",
+        "uk-youth-parliament-amplify"
       ]
     },
     {

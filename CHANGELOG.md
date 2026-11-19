@@ -1,6 +1,19 @@
 # Changelog
 
 
+## 19 November 2026: note pages redesigned
+
+- Note pages have their own reading layout in the launchpad's brand: the night-sky header with the brand mark, a
+  signature drawing generated from the note's id, an "In short" summary, "On this page" links, section icons, a
+  reading-progress bar and gentle reveal on scroll (both off under reduced motion), link cards, and the usual footer
+  with disclaimer, transparency note, contact and QR code and barcode colophon. Lines are kept to a readable measure.
+- Paragraphs were 64px apart and the summary appeared twice; both fixed, with a browser check (B16) and a site check
+  (L25) so they stay fixed (D-27).
+- "See it in action": a note can name the projects it is about; its page shows each one with who it is for, what
+  it does and a link to try it live, all from projects.json. Real stories of projects in use can be added in
+  data/stories.json, only with a source, evidence and the person's consent; until then the page asks readers to
+  share theirs (D-28).
+
 ## 19 November 2026: Zenodo community and topic check
 
 - Every Zenodo record is now in one Zenodo community, Public Good Works, linked from the About panel.

@@ -1,0 +1,4 @@
+{
+  "_note": "Real stories of the projects in use (case studies). Each needs: id, project (a launchpad project id), who (the person's name and role, or their organisation, as they agreed to be named), what they did, the outcome, evidence (an https link anyone can open) and consent (the ISO date they agreed to the story being shared). No illustrative or invented stories: the build refuses a story without evidence or consent (tools/notes.py, D-28).",
+  "stories": []
+}

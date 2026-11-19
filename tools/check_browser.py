@@ -8,7 +8,9 @@ B10 a coverage map number not filtering to its projects, B11 a project hidden wh
 B12 an animated headline number not landing on the data's number,
 B13 an automated accessibility rule failing (axe-core, vendored in tools/vendor) on the page in light, dark and phone views
 and on the 404 page (D-11: the 404 heading was white on white),
-B14 the back-to-top button not returning to the top, or its arrow not centred and upright (D-18), B15 a ways-in ring drawn empty (D-16).
+B14 the back-to-top button not returning to the top, or its arrow not centred and upright (D-18), B15 a ways-in ring drawn empty (D-16),
+B16 a note page losing its reading layout: paragraphs more than 32px apart (D-27: the homepage's 64px flex gap fell between
+every paragraph), text lines wider than 80 characters, or the page scrolling sideways at 320px.
 
 Run: python3 tools/check_browser.py [--break NAME]
 --break injects a deliberate fault so CI proves each check fails when it should. Uses the runner's Chrome (CHROME).
@@ -27,6 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 AXE = ROOT / 'tools' / 'vendor' / 'axe.min.js'
 AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
 NEW = 'https://cyberdudeuk.github.io/ai-capability-governance/#tool-triage'
+NOTE = 'notes/one-home-for-my-open-work.html'
 BREAKS = {
     'overflow': "document.querySelector('#main').insertAdjacentHTML('beforeend','<div style=\"width:2000px;height:2px\"></div>')",
     'consoleerror': "console.error('deliberate break')",
@@ -42,9 +45,10 @@ BREAKS = {
     'totop': "var t=document.getElementById('toTop'); var c=t.cloneNode(true); c.removeAttribute('href'); t.replaceWith(c);",
     'arrow': "document.head.insertAdjacentHTML('beforeend','<style>.totop .ico{position:absolute;left:0;top:0;transform:rotate(-90deg)}</style>')",
     'rings': "document.querySelectorAll('.ring .rv').forEach(function(r){r.style.setProperty('--len','0');})",
+    'notegap': "document.head.insertAdjacentHTML('beforeend','<style>main.note-page .prose{display:flex;flex-direction:column;gap:64px}</style>')",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
-         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15'}
+         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16'}
 
 
 def serve():
@@ -199,6 +203,29 @@ async def run(brk):
             await pg.goto(base + path, wait_until='load')
             if brk == 'a11y' and path == 'index.html':
                 await pg.evaluate(BREAKS[brk])
+            await pg.add_script_tag(path=str(AXE))
+            res = await pg.evaluate('(tags) => axe.run(document, {runOnly: {type: "tag", values: tags}}).then(r => r.violations.map(v => v.id + " (" + v.nodes.length + ")"))', AXE_TAGS)
+            if res:
+                found.append(f'B13 {view}: accessibility rules failed: {res}')
+            await ctx.close()
+        # B16 (D-27): note pages keep their reading layout at every width
+        for w in (1280, 390, 320):
+            ctx, pg, errs = await page(b, w, 900, reduced_motion='reduce')
+            await pg.goto(base + NOTE, wait_until='load')
+            if brk == 'notegap':
+                await pg.evaluate(BREAKS[brk])
+            gap = await pg.evaluate("Math.max.apply(null, Array.from(document.querySelectorAll('.prose > p + p')).map(function(p){return p.getBoundingClientRect().top - p.previousElementSibling.getBoundingClientRect().bottom;}))")
+            if gap > 32:
+                found.append(f'B16 note paragraphs are {gap:.0f}px apart at {w}px (max 32)')
+            chars = await pg.evaluate("(function(){var p=document.querySelector('.prose p');var cs=getComputedStyle(p);var c=document.createElement('canvas').getContext('2d');c.font=cs.fontSize+' '+cs.fontFamily;return p.clientWidth/c.measureText('abcdefghijklmnopqrstuvwxyz ').width*27;})()")
+            if chars > 80:
+                found.append(f'B16 note lines are about {chars:.0f} characters at {w}px (max 80)')
+            if await pg.evaluate('document.documentElement.scrollWidth > innerWidth + 1'):
+                found.append(f'B16 note page scrolls sideways at {w}px')
+            await ctx.close()
+        for view, w, scheme in (('note light', 1280, 'light'), ('note dark', 1280, 'dark'), ('note phone', 390, 'light')):
+            ctx, pg, errs = await page(b, w, 900, color_scheme=scheme, reduced_motion='reduce')
+            await pg.goto(base + NOTE, wait_until='load')
             await pg.add_script_tag(path=str(AXE))
             res = await pg.evaluate('(tags) => axe.run(document, {runOnly: {type: "tag", values: tags}}).then(r => r.violations.map(v => v.id + " (" + v.nodes.length + ")"))', AXE_TAGS)
             if res:
