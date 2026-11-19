@@ -223,6 +223,10 @@ def problems(root):
         check(f'id="note-{n["id"]}"' in s, f'L25 note {n["id"]} is not listed in the Notes section')
         here = f'https://cyberdudeuk.github.io/notes/{n["id"]}.html'
         if 'body' in n:
+            body_text = ' '.join(v if isinstance(v, str) else ' '.join(v) for b in n['body'] for v in b.values())
+            for sentence in re.split(r'(?<=[.!?])\s+', n['summary']):
+                if len(sentence) > 20:
+                    check(sentence not in body_text, f'L25 note {n["id"]} repeats its summary in its body: "{sentence[:50]}"')
             pg = note_pages.get(f'{n["id"]}.html', '')
             check(bool(pg), f'L25 note {n["id"]} has no page in notes/')
             check(f'<link rel="canonical" href="{here}">' in pg, f'L25 note {n["id"]} page is not its own canonical')

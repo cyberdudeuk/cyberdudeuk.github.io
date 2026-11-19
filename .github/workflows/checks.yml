@@ -39,4 +39,4 @@ jobs:
           npx eslint .
       - run: python tools/check_browser.py
       - name: Browser check vaccinations
-        run: for b in overflow consoleerror filters drawer redirect search theme motion density coverage nojs counters a11y totop arrow rings; do python tools/check_browser.py --break "$b"; done
+        run: for b in overflow consoleerror filters drawer redirect search theme motion density coverage nojs counters a11y totop arrow rings notegap; do python tools/check_browser.py --break "$b"; done

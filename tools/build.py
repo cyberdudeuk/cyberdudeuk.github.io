@@ -217,7 +217,8 @@ def build():
     d = json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))
     w = json.loads((ROOT / 'data' / 'workshop.json').read_text(encoding='utf-8'))
     owner = json.loads((ROOT / 'data' / 'owner.json').read_text(encoding='utf-8'))
-    posts = notes.load(ROOT)
+    posts = notes.load(ROOT, {p['id'] for p in d['projects']})
+    stories = notes.load_stories(ROOT, {p['id'] for p in d['projects']})
     cats = {c['id']: c for c in d['categories']}
     projects = sorted(d['projects'], key=lambda p: p['updated'], reverse=True)
     count = {c: sum(1 for p in projects if p['category'] == c) for c in cats}
@@ -480,9 +481,15 @@ def build():
     for old in nd.glob('*.html'):
         if old.name not in keep:
             old.unlink()
+    byid = {p['id']: p for p in d['projects']}
     for n in posts:
         if 'body' in n:
-            (nd / f'{n["id"]}.html').write_text(notes.page(SITE, n, owner, asset('styles.css'), CONTACT), encoding='utf-8')
+            kit = {'stylesheet': asset('styles.css'), 'contact': CONTACT, 'icon': icon, 'art': signature(n['id']), 'mark': mark,
+                   'favicon': favicon, 'starfield': starfield(40), 'qr': qr_svg(notes.url(SITE, n)),
+                   'barcode': barcode_svg('CYBERDUDEUK-NOTE-' + n['date']), 'profiles': profiles(owner), 'cats': cats,
+                   'projects': [byid[i] for i in n.get('projects', [])], 'stories': stories,
+                   'others': [o for o in posts if o['id'] != n['id']]}
+            (nd / f'{n["id"]}.html').write_text(notes.page(SITE, n, owner, kit), encoding='utf-8')
     (ROOT / 'feed.xml').write_text(notes.feed(SITE, posts, owner), encoding='utf-8')
     return len(projects)
 
