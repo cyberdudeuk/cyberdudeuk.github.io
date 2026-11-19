@@ -258,6 +258,12 @@ class Discover(unittest.TestCase):
     DATA = {'projects': [{'name': 'Alpha', 'repo': 'https://github.com/cyberdudeuk/alpha', 'updated': '2026-11-05'}],
             'excluded': {'repos': ['w3id.org (fork)']}}
 
+    def test_too_few_topics_flagged(self):
+        # D-26: a listed repository with fewer than three topics is hard to find on GitHub.
+        f = discover.findings([repo('alpha', topics=['one'])], self.DATA)
+        self.assertTrue(any('GitHub topic' in x for x in f), f)
+        self.assertEqual(discover.findings([repo('alpha', topics=['a', 'b', 'c'])], self.DATA), [])
+
     def test_nothing_to_do(self):
         self.assertEqual(discover.findings([repo('alpha'), repo('cyberdudeuk.github.io')], self.DATA), [])
 

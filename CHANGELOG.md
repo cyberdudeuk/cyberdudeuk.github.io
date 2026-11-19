@@ -1,6 +1,11 @@
 # Changelog
 
 
+## 19 November 2026: Zenodo community and topic check
+
+- Every Zenodo record is now in one Zenodo community, Public Good Works, linked from the About panel.
+- Discovery flags any listed repository with fewer than three GitHub topics, so each stays findable by topic (D-26).
+
 ## 19 November 2026: Notes and a feed
 
 - New Notes section: short notes about the work, written here first. Each has its own page under notes/ and an

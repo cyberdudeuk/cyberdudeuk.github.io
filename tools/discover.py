@@ -90,6 +90,9 @@ def fact_drift(r, card, stated_licences=None):
     return out
 
 
+MIN_TOPICS = 3
+
+
 def findings(repos, data, last_change=None, licences=None):
     """Plain-English findings. repos: GitHub API repository objects; data: projects.json.
     last_change(name) gives the date of the last change by a person; without it, the push date is used.
@@ -105,6 +108,9 @@ def findings(repos, data, last_change=None, licences=None):
             out.append(f"New public repository not on the launchpad: {r['name']} ({r['html_url']})")
         else:
             out.extend(fact_drift(r, listed[name], licences(r['name']) if licences else None))
+            # D-26: topics are how people find a repository on GitHub. Only judged when the API returned them.
+            if 'topics' in r and len(r['topics']) < MIN_TOPICS:
+                out.append(f"{r['name']} has {len(r['topics'])} GitHub topic(s); add at least {MIN_TOPICS} so people can find it")
             if r.get('pushed_at', '')[:10] > listed[name]['updated']:
                 when = last_change(r['name']) if last_change else r['pushed_at'][:10]
                 if when and when > listed[name]['updated']:
