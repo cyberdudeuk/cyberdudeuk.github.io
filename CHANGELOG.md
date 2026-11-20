@@ -1,6 +1,18 @@
 # Changelog
 
 
+## 19 November 2026: DAM Policy Explorer listed
+
+- The DAM Policy Explorer, a one-stop shop on the Data Asset Management Policy for coordinators, is now on the
+  launchpad and in the contact form. It was public but unlisted, with no licence; it now has MIT code and OGL v3.0
+  content. Register 1.4.0, 11 projects.
+- AI Capability Governance, the GitHub Repos Asset Catalogue and Amplify now show CC BY 4.0 for their content, not
+  the Open Government Licence: they are personal projects, not government work.
+- A vaccine test hard-coded a coverage count and broke when the project was listed; it now reads the count from the
+  data (D-34).
+- With eleven projects the spotlight's controls ran 8px off a small phone screen; they now wrap, and a new browser
+  check proves it with 30 extra dots (D-35).
+
 ## 19 November 2026: board status from activity, and weekly status updates
 
 - The projects routine now sets each item's Status on the Public Good Works board from its repository's activity:
@@ -11,6 +23,7 @@
 - Each item's description now says how busy the project has been: changes by a person in the last 7 and 30 days,
   last change, latest release, open issues and pull requests (D-29).
 - Stars and forks are now read too, as a first measure of use rather than activity (D-31).
+
 ## 19 November 2026 (1.4.0): one gateway to all the work
 
 - A gateway at the top of the page reaches every place the work lives: the projects, the notes, the public project

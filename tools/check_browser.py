@@ -13,7 +13,9 @@ B16 a note page losing its reading layout: paragraphs more than 32px apart (D-27
 every paragraph), text lines wider than 80 characters, or the page scrolling sideways at 320px,
 B17 (D-29) the spotlight's next button or dots not moving to the next slide, its Play button offered under reduced
 motion, or the section links and the theme switch falling onto different rows (or off screen) at any width from
-320 to 1280px: links fold into the menu before they would wrap.
+320 to 1280px: links fold into the menu before they would wrap,
+B18 (D-35) the spotlight controls running off a 320px screen once there are many projects (each project adds a dot;
+the eleventh pushed the Next button 8px off screen). It is tested with 30 extra dots, so growth cannot break it.
 
 Run: python3 tools/check_browser.py [--break NAME]
 --break injects a deliberate fault so CI proves each check fails when it should. Uses the runner's Chrome (CHROME).
@@ -50,10 +52,11 @@ BREAKS = {
     'rings': "document.querySelectorAll('.ring .rv').forEach(function(r){r.style.setProperty('--len','0');})",
     'spotlight': "var n=document.getElementById('spotNext'); n.replaceWith(n.cloneNode(true));",
     'masthead': "document.documentElement.classList.remove('nav-fold');document.head.insertAdjacentHTML('beforeend','<style>.global{display:flex!important}.navmenu{display:none!important}</style>')",
+    'spotwrap': "document.head.insertAdjacentHTML('beforeend','<style>.spot-ctl,.sdots{flex-wrap:nowrap!important}</style>')",
     'notegap': "document.head.insertAdjacentHTML('beforeend','<style>main.note-page .prose{display:flex;flex-direction:column;gap:64px}</style>')",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
-         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16', 'spotlight': 'B17', 'masthead': 'B17'}
+         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16', 'spotlight': 'B17', 'masthead': 'B17', 'spotwrap': 'B18'}
 
 
 def serve():
@@ -220,6 +223,16 @@ async def run(brk):
         await pg.goto(base + 'index.html', wait_until='load')
         if await pg.locator('#spotPlay:visible').count():
             found.append('B17 the spotlight offers rotation under reduced motion')
+        await ctx.close()
+        # B18 (D-35): the spotlight controls stay on a 320px screen however many projects there are
+        ctx, pg, errs = await page(b, 320, 640)
+        await pg.goto(base + 'index.html', wait_until='load')
+        await pg.evaluate("var d=document.querySelector('.sdots');for(var i=0;i<30;i++){var x=document.createElement('button');x.type='button';x.className='sdot';x.setAttribute('aria-label','extra '+i);d.appendChild(x);}")
+        if brk == 'spotwrap':
+            await pg.evaluate(BREAKS[brk])
+        geo = await pg.evaluate("[Math.round(document.querySelector('.spot-ctl').getBoundingClientRect().right), document.documentElement.scrollWidth]")
+        if geo[0] > 320 or geo[1] > 320:
+            found.append(f'B18 the spotlight controls run off a 320px screen with many projects (right edge, page width): {geo}')
         await ctx.close()
         # B17 (D-29): the masthead stays on one row; links fold into the menu before they would wrap
         # D-33: it held with one font and failed on the CI runner's wider one, so it runs with the wide font and larger text.

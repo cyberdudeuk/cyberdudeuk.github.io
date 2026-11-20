@@ -276,7 +276,10 @@ class Site(unittest.TestCase):
         self.fails_with('L18')
 
     def test_L19_coverage_cell_wrong(self):
-        self.edit('index.html', 'Data management and quality, Beginner: 2 projects', 'Data management and quality, Beginner: 3 projects')
+        # D-34: the count is read from the data, so listing a new data project cannot break this vaccine (as D-19, D-20).
+        n = sum(1 for p in json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects']
+                if p['category'] == 'data' and 'Beginner' in p['levels'])
+        self.edit('index.html', f'Data management and quality, Beginner: {n} projects', f'Data management and quality, Beginner: {n + 1} projects')
         self.fails_with('L19')
 
     def test_L20_share_image_missing(self):
