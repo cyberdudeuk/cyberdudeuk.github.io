@@ -407,6 +407,24 @@ class LicenceDrift(unittest.TestCase):
         self.assertEqual(discover.findings([repo('alpha')], data, licences=lambda n: {'MIT', 'OGL-UK-3.0'}), [])
 
 
+class MissingPubliccode(unittest.TestCase):
+    """D-36: the ndl-pubsec-mcp card kept 'OGL v3.0 documentation' and 'official GDS work' after the project relicensed
+    its content under CC BY 4.0, because it had no publiccode.yml and discovery skipped the licence check in silence."""
+    CARD = {'name': 'Alpha', 'repo': 'https://github.com/cyberdudeuk/alpha', 'updated': '2026-11-05', 'licence': 'MIT code, OGL v3.0 content'}
+
+    def test_negative_missing_publiccode_is_reported(self):
+        f = discover.findings([repo('alpha')], {'projects': [self.CARD], 'excluded': {}}, licences=lambda n: None)
+        self.assertTrue(any('no publiccode.yml' in x for x in f))
+
+    def test_present_publiccode_is_not_reported_as_missing(self):
+        f = discover.findings([repo('alpha')], {'projects': [self.CARD], 'excluded': {}}, licences=lambda n: {'MIT', 'OGL-UK-3.0'})
+        self.assertFalse(any('no publiccode.yml' in x for x in f))
+
+    def test_without_a_lookup_nothing_is_claimed(self):
+        f = discover.findings([repo('alpha')], {'projects': [self.CARD], 'excluded': {}})
+        self.assertFalse(any('no publiccode.yml' in x for x in f))
+
+
 class Propose(unittest.TestCase):
     """Tier 2 discovery (18 Nov 2026): the owner asked for new repositories to reach the launchpad and profile without
     retyping them. The routine drafts; a person merges. These pin what it may and may not do to the list."""

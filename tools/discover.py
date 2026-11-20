@@ -107,7 +107,11 @@ def findings(repos, data, last_change=None, licences=None):
         if name not in listed:
             out.append(f"New public repository not on the launchpad: {r['name']} ({r['html_url']})")
         else:
-            out.extend(fact_drift(r, listed[name], licences(r['name']) if licences else None))
+            stated = licences(r['name']) if licences else None
+            out.extend(fact_drift(r, listed[name], stated))
+            # D-36: with no publiccode.yml the content licence can't be checked, so say so rather than pass in silence.
+            if licences and stated is None:
+                out.append(f"{r['name']} has no publiccode.yml, so its card's licence ({listed[name].get('licence', '')!r}) can't be checked")
             # D-26: topics are how people find a repository on GitHub. Only judged when the API returned them.
             if 'topics' in r and len(r['topics']) < MIN_TOPICS:
                 out.append(f"{r['name']} has {len(r['topics'])} GitHub topic(s); add at least {MIN_TOPICS} so people can find it")
