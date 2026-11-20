@@ -344,6 +344,16 @@ class Discover(unittest.TestCase):
     def test_nothing_to_do(self):
         self.assertEqual(discover.findings([repo('alpha'), repo('cyberdudeuk.github.io')], self.DATA), [])
 
+    def test_real_exclusions_cover_profile_and_community_repos(self):
+        # Issue 27: the profile README repository and .github are not projects, so the weekly routine must not flag them.
+        import json as _json
+        real = _json.loads((ROOT / 'data' / 'projects.json').read_text(encoding='utf-8'))
+        data = dict(self.DATA, excluded=real['excluded'])
+        self.assertEqual(discover.findings([repo('alpha'), repo('cyberdudeuk'), repo('.github')], data), [])
+        # Negative: without those exclusions both are reported as new.
+        f = discover.findings([repo('alpha'), repo('cyberdudeuk'), repo('.github')], self.DATA)
+        self.assertTrue(any('cyberdudeuk (' in x for x in f) and any('.github' in x for x in f), f)
+
     def test_negative_new_repo_found(self):
         f = discover.findings([repo('alpha'), repo('beta')], self.DATA)
         self.assertTrue(any('New public repository' in x and 'beta' in x for x in f))

@@ -269,9 +269,11 @@
     }
   ],
   "excluded": {
-    "why": "Forks and private repositories are not listed.",
+    "why": "Forks and private repositories are not listed, nor are the repositories that hold the GitHub profile page and the default community files, which are not projects.",
     "repos": [
-      "w3id.org (fork)"
+      "w3id.org (fork)",
+      "cyberdudeuk (GitHub profile page)",
+      ".github (default community health files)"
     ]
   },
   "ways_in": {
