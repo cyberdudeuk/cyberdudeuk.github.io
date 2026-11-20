@@ -13,7 +13,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-EXPECTED_WORKFLOWS = {'pages.yml', 'checks.yml', 'discover.yml', 'triage.yml', 'digest.yml', 'labels.yml', 'codeql.yml', 'scorecard.yml', 'dependency-review.yml', 'projects.yml'}
+EXPECTED_WORKFLOWS = {'pages.yml', 'checks.yml', 'discover.yml', 'triage.yml', 'digest.yml', 'labels.yml', 'codeql.yml', 'scorecard.yml', 'dependency-review.yml', 'artefacts.yml', 'projects.yml'}
 LEVELS = {'Beginner', 'Intermediate', 'Advanced'}
 FIELDS = ('id', 'name', 'category', 'status', 'updated', 'summary', 'audience', 'levels', 'repo', 'licence')
 EMAIL = re.compile(r'[\w.+-]+@[A-Za-z][\w-]*(\.[\w-]+)*\.[A-Za-z]{2,}\b')
