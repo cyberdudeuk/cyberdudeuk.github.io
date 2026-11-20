@@ -1,7 +1,7 @@
 {
   "launchpad": "cyberdudeuk projects",
   "version": "1.4.0",
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
     {
@@ -66,7 +66,7 @@
       "category": "ai",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-19",
       "summary": "Guidance you can act on for governing AI and AI agents in public services: a six-level human review model, evidence and transparency record generators, an agent registry pattern and a weekly signals scan.",
       "audience": "Anyone using, buying, approving or assuring AI in public services",
       "levels": [
@@ -91,7 +91,7 @@
       "category": "standards",
       "status": "Proposed, not endorsed",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-20",
       "summary": "A proposed application profile for describing UK public sector datasets and data services, so they can be found, judged and shared across every catalogue. Under review; the endorsed model remains the cross-government metadata exchange model.",
       "audience": "Catalogue owners, metadata leads and data architects",
       "levels": [
@@ -110,7 +110,7 @@
       "category": "data",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-20",
       "summary": "Step-by-step guidance on data governance, data cataloguing and data quality for critical data assets in UK government, built around the data asset management policy.",
       "audience": "Data owners, stewards, catalogue managers and data leaders",
       "levels": [
@@ -147,7 +147,7 @@
       "category": "data",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-18",
       "summary": "A free, open hub and toolkit for data quality in the public sector: check data, find the frameworks and standards that apply, learn, use AI safely and share what works.",
       "audience": "Anyone responsible for data quality, from first steps to automation",
       "levels": [
@@ -166,7 +166,7 @@
       "category": "reuse",
       "status": "Working tool",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-19",
       "summary": "Before you build it, look for it. Every UK public sector code project on GitHub in one place, explained in plain English, so you can find work that already exists and decide whether to reuse it.",
       "audience": "Policy leads, service owners, data leaders and engineers",
       "levels": [
@@ -185,7 +185,7 @@
       "category": "knowledge",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "summary": "A navigable, ontology-backed map of a body of work on UK government data standards, governance and knowledge management, delivered as one self-contained file that works offline.",
       "audience": "People mapping or navigating a large body of knowledge",
       "levels": [
@@ -203,7 +203,7 @@
       "category": "skills",
       "status": "Personal project",
       "since": "2026",
-      "updated": "2026-11-13",
+      "updated": "2026-11-19",
       "summary": "A phone-first speaking coach for anyone who speaks at work, with situations drawn from public sector settings: a daily 20-minute routine, event preparation, speak-and-score, role-play and a live cue card.",
       "audience": "Anyone who wants to speak more clearly at work",
       "levels": [
@@ -220,7 +220,7 @@
       "category": "community",
       "status": "Personal project, unofficial (name provisional)",
       "since": "2026",
-      "updated": "2026-11-08",
+      "updated": "2026-11-17",
       "summary": "A year-round hub celebrating Black and Black-Mixed history, heritage and cultures, Africa and the African diaspora. Launched as the BHM 2026 Hub for Black History Month 2026 in the UK; every figure links to its source.",
       "audience": "Colleagues across the public sector and the wider community",
       "levels": [
@@ -237,7 +237,7 @@
       "category": "experiments",
       "status": "Prototype: alpha, official GDS work",
       "since": "2026",
-      "updated": "2026-11-15",
+      "updated": "2026-11-20",
       "summary": "An open-source Model Context Protocol server that lets any MCP-capable AI assistant find UK public sector data and check its metadata against the UK Cross-Government Metadata Exchange Model (xGov MEM).",
       "audience": "Developers, data publishers and metadata leads exploring AI assistants and data discovery",
       "levels": [
@@ -254,7 +254,7 @@
       "category": "youth",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-15",
+      "updated": "2026-11-19",
       "summary": "A youth voice portal: young people's issues, a local routes map, and a dated snapshot of a UK Parliament petition. Public and written for young people.",
       "audience": "Young people, and those who work with them",
       "levels": [
