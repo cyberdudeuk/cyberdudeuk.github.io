@@ -235,17 +235,19 @@
       "id": "ndl-pubsec-mcp",
       "name": "NDL PubSec MCP",
       "category": "experiments",
-      "status": "Prototype: alpha, official GDS work",
+      "status": "Prototype: alpha, independent work",
       "since": "2026",
       "updated": "2026-11-20",
-      "summary": "An open-source Model Context Protocol server that lets any MCP-capable AI assistant find UK public sector data and check its metadata against the UK Cross-Government Metadata Exchange Model (xGov MEM).",
-      "audience": "Developers, data publishers and metadata leads exploring AI assistants and data discovery",
+      "summary": "An open-source, read-only MCP server and portal for finding UK public sector data, APIs, MCP servers and open standards, and for mapping data exchanges between public bodies by citizen and business journey. Explained for people with no technical background, with a feed other portals can harvest.",
+      "audience": "Government and the wider public sector, researchers, journalists and civil society, organisations in every sector, and developers of AI models and MCP servers",
       "levels": [
+        "Beginner",
+        "Intermediate",
         "Advanced"
       ],
       "site": "https://cyberdudeuk.github.io/ndl-pubsec-mcp/",
       "repo": "https://github.com/cyberdudeuk/ndl-pubsec-mcp",
-      "licence": "MIT code, OGL v3.0 documentation",
+      "licence": "MIT code, CC BY 4.0 content",
       "new": false
     },
     {

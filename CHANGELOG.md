@@ -1,5 +1,12 @@
 # Changelog
 
+## 20 November 2026: NDL PubSec MCP card corrected
+
+- The NDL PubSec MCP card now says independent work, with MIT code and CC BY 4.0 content, as the project states. It
+  had still said official GDS work under the Open Government Licence. Its summary and audience now cover the
+  exchanges, standards and plain-English guide, and it is marked for all three levels.
+- Discovery now reports a listed project with no publiccode.yml, rather than skipping the licence check in silence
+  (D-36).
 
 ## 19 November 2026: DAM Policy Explorer listed
 
