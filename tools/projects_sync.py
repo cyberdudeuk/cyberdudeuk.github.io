@@ -10,7 +10,7 @@ the owner adds is kept.
 
 From activity alone it also sets each item's built-in Status (Todo, In progress or Done; board_status), and once a week
 it posts a project status update: overall health plus one line per project (status_update_for). The owner's request of
-19 November 2026 (D-29).
+19 November 2026 (D-42).
 
 GitHub's Projects API is GraphQL only and the workflow token cannot reach a user's project, so it needs a classic
 personal access token with the "project" scope in the repository secret PROJECTS_TOKEN. Without it, the routine says
@@ -221,7 +221,7 @@ class Board:
 
     def set_status(self, pid, fields, item_id, item):
         """The built-in Status: written only with one of its own options, matched without regard to case, because GitHub
-        names it "In Progress" on some boards and "In progress" on others (D-23, D-29)."""
+        names it "In Progress" on some boards and "In progress" on others (D-23, D-42)."""
         f = fields.get('Status')
         if not f or not item.get('status') or self.dry:
             return

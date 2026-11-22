@@ -5,7 +5,7 @@ The owner's one place to look each week. Lists the health run's verdict, what ro
 runs failed and what is waiting for a person, then opens one issue labelled digest and closes last week's.
 Reads and reports only: it never changes content. Estate operations control reads these digests across repositories.
 
-Plain commands only (D-018): the standard library and the GitHub CLI that the runner provides.
+Plain commands only (estate decision D-018 in dam-capability-playbooks): the standard library and the GitHub CLI that the runner provides.
 
 Run: python tools/digest.py            (opens the issue; needs GH_TOKEN and GITHUB_REPOSITORY)
      python tools/digest.py --dry-run  (prints the body and changes nothing)

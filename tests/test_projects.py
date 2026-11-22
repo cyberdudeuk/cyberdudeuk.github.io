@@ -3,7 +3,7 @@ service so no network or token is needed. Every rule has a deliberate break.
 
 The owner's request of 18 November 2026: every project on GitHub's Projects feature, fleshed out from each repository's
 activity and kept up to date. And of 19 November 2026: each item's Status set from that activity, with regular project
-status updates (D-29).
+status updates (D-42).
 """
 from datetime import date
 import json
@@ -26,7 +26,7 @@ class FakeGraphQL:
     """Enough of GitHub's Projects API to record what the routine asks for."""
 
     # D-23: every new GitHub Project already has these built-in fields. "Status" offers only Todo, In progress and Done,
-    # and "Repository" is a repository-type field that updateProjectV2ItemFieldValue refuses. D-29: the owner's board
+    # and "Repository" is a repository-type field that updateProjectV2ItemFieldValue refuses. D-42: the owner's board
     # spells the middle option "In Progress", so the fake does too and the routine must match it regardless of case.
     BUILT_IN = {'Title': [], 'Assignees': [], 'Status': ['Todo', 'In Progress', 'Done'], 'Labels': [], 'Linked pull requests': [],
                 'Milestone': [], 'Repository': [], 'Reviewers': [], 'Parent issue': [], 'Sub-issues progress': []}
@@ -128,7 +128,7 @@ class BoardWrites(unittest.TestCase):
         self.assertTrue(set(FakeGraphQL.BUILT_IN) <= ps.BUILT_IN, 'the routine must know every built-in the fake models')
         self.assertFalse([f for f, _ in fake.values if f.startswith('B-') and f != 'B-Status'], 'wrote to a built-in field')
         self.assertEqual(len([f for f, _ in fake.values if not f.startswith('B-')]), len(DATA['projects']) * len(ps.FIELDS))
-        self.assertEqual(len([f for f, _ in fake.values if f == 'B-Status']), len(DATA['projects']))  # D-29
+        self.assertEqual(len([f for f, _ in fake.values if f == 'B-Status']), len(DATA['projects']))  # D-42
         self.assertFalse([m for m in logged if 'is not an option' in m])
 
     def test_existing_items_are_updated_not_duplicated(self):
@@ -151,7 +151,7 @@ class BoardWrites(unittest.TestCase):
             self.assertFalse([q for q, _ in fake.calls if q.startswith('mutation')])
 
     def test_status_is_set_from_activity_with_the_boards_own_option(self):
-        # D-29: the board says "In Progress"; the routine says "In progress". Matched without regard to case.
+        # D-42: the board says "In Progress"; the routine says "In progress". Matched without regard to case.
         fake = FakeGraphQL(items=[p['name'] for p in DATA['projects']])
         ps.sync(ps.Board(fake, log=lambda m: None), DATA, lambda n: ACT, today=TODAY)
         self.assertEqual({v['singleSelectOptionId'] for f, v in fake.values if f == 'B-Status'}, {'O-In Progress'})

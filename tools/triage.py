@@ -4,7 +4,7 @@
 Every working day, labels issues that have waited too long for a maintainer's reply (needs-reply) or for a decision
 (overdue). Adds labels only; never closes, edits or deletes anything.
 
-Plain commands only (D-018): the standard library and the GitHub CLI that the runner provides.
+Plain commands only (estate decision D-018 in dam-capability-playbooks): the standard library and the GitHub CLI that the runner provides.
 
 Run: python tools/triage.py            (adds labels; needs GH_TOKEN and GITHUB_REPOSITORY)
      python tools/triage.py --dry-run  (prints what it would label and changes nothing)
