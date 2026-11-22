@@ -265,6 +265,14 @@ class Site(unittest.TestCase):
         self.edit('styles.css', 'url("fonts/space-grotesk-latin-wght.woff2")', 'url("https://example.com/font.woff2")')
         self.fails_with('L16')
 
+    def test_L29_duplicate_defect_id(self):
+        self.edit('docs/defect-register.md', '| D-41 |', '| D-31 |')
+        self.fails_with('L29')
+
+    def test_L29_cited_defect_not_in_register(self):
+        self.edit('tools/projects_sync.py', '(D-42)', '(D-' + '99)')  # built here so this file does not cite it
+        self.fails_with('L29')
+
     def test_L28_term_without_owner(self):
         self.edit('data/shared-glossary.json', 'once things go well.", "owner": "young-person-360"', 'once things go well.", "owner": "nobody"')
         self.fails_with('L28')

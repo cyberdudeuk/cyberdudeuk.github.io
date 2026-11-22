@@ -161,6 +161,20 @@ def problems(root):
             for t in g.get('terms', []):
                 check(bool(t.get('definition')) and t.get('owner') in portals,
                       f'L28 shared glossary term {t.get("term", "?")} needs a definition and an owner from its portals list')
+    # L29 (D-43): two defects were each numbered twice (D-29, D-31), so a citation could point at the wrong one. Register
+    # IDs are unique, and every D-number cited in the code, tests or changelog is in the register. Zero-padded numbers
+    # (D-018) belong to the estate register in dam-capability-playbooks, not this one.
+    reg = root / 'docs' / 'defect-register.md'
+    if reg.exists():
+        rids = re.findall(r'^\| (D-\d+) \|', reg.read_text(encoding='utf-8'), flags=re.M)
+        dups = sorted({r for r in rids if rids.count(r) > 1})
+        check(not dups, f'L29 defect register numbers more than one defect as {dups}')
+        cited = set()
+        for f in [*(root / 'tools').glob('*.py'), *(root / 'tests').glob('*.py'), root / 'CHANGELOG.md', root / 'app.js', root / 'styles.css']:
+            if f.exists():
+                cited |= set(re.findall(r'\bD-(?!0\d\d)\d{2,}\b', f.read_text(encoding='utf-8')))
+        missing = sorted(cited - set(rids), key=lambda x: int(x[2:]))
+        check(not missing, f'L29 cited defects missing from the register: {missing}')
     # L17: the workshop lists work that is not public yet. Nothing in it may link anywhere (a private workspace link would
     # leak or break), every item is complete and on the page, and none repeats a public project.
     wpath = root / 'data' / 'workshop.json'

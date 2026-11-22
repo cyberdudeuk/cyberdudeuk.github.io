@@ -1,5 +1,12 @@
 # Changelog
 
+## 22 November 2026: defect numbers made unique (D-43)
+
+- Two defects were each numbered twice. The board-status D-29 is now D-42, with its citations in the board routine,
+  its tests and this changelog; the sideways-scroll D-31, cited nowhere, is now D-41. New check L29 keeps register
+  numbers unique and fails if code, tests or the changelog cite a number the register lacks; two tests prove it.
+- The triage and digest routines now say that D-018 is the estate decision in dam-capability-playbooks.
+
 ## 22 November 2026: Young Person 360º and Earning, learning and training are public
 
 - Both 360º portals now have their own public repositories and sites, and move from the workshop to the projects
@@ -80,7 +87,7 @@
   inactive if nothing moved in 30 days) and a table of each project's status, changes in the last 7 days, last
   change, latest release, open issues and open pull requests. Earlier updates are never edited or deleted.
 - Each item's description now says how busy the project has been: changes by a person in the last 7 and 30 days,
-  last change, latest release, open issues and pull requests (D-29).
+  last change, latest release, open issues and pull requests (D-42).
 - Stars and forks are now read too, as a first measure of use rather than activity (D-31).
 
 ## 19 November 2026 (1.4.0): one gateway to all the work
