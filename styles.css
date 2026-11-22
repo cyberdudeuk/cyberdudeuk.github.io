@@ -100,6 +100,9 @@ h1{font-size:clamp(2.3rem,5.4vw,4.1rem);font-weight:700;line-height:1.03;margin:
 .constellation .node .n{fill:var(--night2);stroke:var(--c);stroke-width:2.5}
 .constellation .node{animation:glow 3.6s ease-in-out infinite}
 .constellation text{font:600 12.5px var(--text);fill:#c9d6e0}
+.constellation a{cursor:pointer;outline:none}.constellation a:hover text,.constellation a:focus-visible text{fill:#fff;text-decoration:underline}
+.constellation a:hover .n,.constellation a:focus-visible .n{stroke-width:4.5;fill:var(--night3)}.constellation a:focus-visible .n,.constellation a:focus-visible .core{stroke:var(--amber);stroke-width:4}
+.constellation a:hover .core{fill:#f6c46d}
 .constellation .core{fill:var(--amber)}.constellation .halo{fill:none;stroke:var(--amber);stroke-width:1.5;opacity:.45;animation:glow 3s ease-in-out infinite}
 .constellation .core-n{font:700 30px var(--display);fill:var(--night)}.constellation .core-l{font:600 12px var(--text);fill:var(--night)}
 .hero .c-ai{--c:#8fb3ff}.hero .c-standards{--c:#4fd1b5}.hero .c-data{--c:#6fd69b}.hero .c-reuse{--c:#c3cdd6}.hero .c-knowledge{--c:#c9a8f0}

@@ -1,5 +1,13 @@
 # Changelog
 
+## 22 November 2026: hero diagram labels fit, and every node is a link
+
+- The "Open government" label no longer runs off the edge of the hero diagram: long labels near an edge wrap onto
+  two lines (D-38).
+- Each node in the diagram is now a link. An area with one project opens that project's site; Data management and
+  quality, with three, opens its section of the list; the centre opens all projects. Keyboard focus shows an amber ring.
+- New browser check B19 measures every label against the drawing at three widths and checks every node is a link.
+
 ## 22 November 2026: OpenGovernment UK listed, dates refreshed
 
 - New card: OpenGovernment UK, one register of the UK state (every public body, who it answers to, who pays for it
