@@ -29,6 +29,12 @@
       "short": "Open government"
     },
     {
+      "id": "business",
+      "label": "Starting and running a business",
+      "icon": "briefcase",
+      "short": "Business"
+    },
+    {
       "id": "reuse",
       "label": "Finding and reusing code",
       "icon": "search",
@@ -189,6 +195,31 @@
         "Accountability chains to an elected body",
         "Funding, PFI contracts and ownership",
         "Open feeds: W3C ORG, DCAT 3, BODS 0.4"
+      ]
+    },
+    {
+      "id": "start-a-business-uk",
+      "name": "Starting a business in the UK",
+      "category": "business",
+      "status": "Prototype: release 11.0",
+      "since": "2026",
+      "updated": "2026-11-22",
+      "summary": "Everything you have to do to start a business in the UK, in order: your plan, every step, public body and identifier, the rules your activity triggers, and the four nations, with every claim traced to its source.",
+      "audience": "People starting a business, the people who advise them, and the teams who design the journey",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/start-a-business-uk/",
+      "repo": "https://github.com/cyberdudeuk/start-a-business-uk",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": true,
+      "highlights": [
+        "A founder's plan, in order",
+        "Every step, body and identifier",
+        "Four nations and international comparison",
+        "953 sources in a verification register"
       ]
     },
     {

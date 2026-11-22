@@ -23,14 +23,14 @@
 
 /* Area colours: one hue per area, used for its tile, chip and coverage row */
 .c-ai{--c:#1d4abf}.c-standards{--c:#0b6e61}.c-data{--c:#17663a}.c-reuse{--c:#2f3b47}.c-knowledge{--c:#5b2f91}
-.c-skills{--c:#8a5300}.c-community{--c:#9a3412}.c-youth{--c:#9d174d}.c-experiments{--c:#0e6178}.c-government{--c:#3f4f8a}
+.c-skills{--c:#8a5300}.c-community{--c:#9a3412}.c-youth{--c:#9d174d}.c-experiments{--c:#0e6178}.c-government{--c:#3f4f8a}.c-business{--c:#5c5a11}
 :root[data-theme=dark] :is(.c-ai){--c:#8fb3ff}:root[data-theme=dark] .c-standards{--c:#4fd1b5}:root[data-theme=dark] .c-data{--c:#6fd69b}
 :root[data-theme=dark] .c-reuse{--c:#c3cdd6}:root[data-theme=dark] .c-knowledge{--c:#c9a8f0}:root[data-theme=dark] .c-skills{--c:#f2c76b}
-:root[data-theme=dark] .c-community{--c:#f4a38c}:root[data-theme=dark] .c-youth{--c:#f49bc0}:root[data-theme=dark] .c-experiments{--c:#7dd3e8}:root[data-theme=dark] .c-government{--c:#a9b8f0}
+:root[data-theme=dark] .c-community{--c:#f4a38c}:root[data-theme=dark] .c-youth{--c:#f49bc0}:root[data-theme=dark] .c-experiments{--c:#7dd3e8}:root[data-theme=dark] .c-government{--c:#a9b8f0}:root[data-theme=dark] .c-business{--c:#e1dc76}
 @media (prefers-color-scheme:dark){
  :root:not([data-theme=light]) .c-ai{--c:#8fb3ff}:root:not([data-theme=light]) .c-standards{--c:#4fd1b5}:root:not([data-theme=light]) .c-data{--c:#6fd69b}
  :root:not([data-theme=light]) .c-reuse{--c:#c3cdd6}:root:not([data-theme=light]) .c-knowledge{--c:#c9a8f0}:root:not([data-theme=light]) .c-skills{--c:#f2c76b}
- :root:not([data-theme=light]) .c-community{--c:#f4a38c}:root:not([data-theme=light]) .c-youth{--c:#f49bc0}:root:not([data-theme=light]) .c-experiments{--c:#7dd3e8}:root:not([data-theme=light]) .c-government{--c:#a9b8f0}
+ :root:not([data-theme=light]) .c-community{--c:#f4a38c}:root:not([data-theme=light]) .c-youth{--c:#f49bc0}:root:not([data-theme=light]) .c-experiments{--c:#7dd3e8}:root:not([data-theme=light]) .c-government{--c:#a9b8f0}:root:not([data-theme=light]) .c-business{--c:#e1dc76}
 }
 
 *{box-sizing:border-box}
@@ -106,7 +106,7 @@ h1{font-size:clamp(2.3rem,5.4vw,4.1rem);font-weight:700;line-height:1.03;margin:
 .constellation .core{fill:var(--amber)}.constellation .halo{fill:none;stroke:var(--amber);stroke-width:1.5;opacity:.45;animation:glow 3s ease-in-out infinite}
 .constellation .core-n{font:700 30px var(--display);fill:var(--night)}.constellation .core-l{font:600 12px var(--text);fill:var(--night)}
 .hero .c-ai{--c:#8fb3ff}.hero .c-standards{--c:#4fd1b5}.hero .c-data{--c:#6fd69b}.hero .c-reuse{--c:#c3cdd6}.hero .c-knowledge{--c:#c9a8f0}
-.hero .c-skills{--c:#f2c76b}.hero .c-community{--c:#f4a38c}.hero .c-youth{--c:#f49bc0}.hero .c-experiments{--c:#7dd3e8}.hero .c-government{--c:#a9b8f0}
+.hero .c-skills{--c:#f2c76b}.hero .c-community{--c:#f4a38c}.hero .c-youth{--c:#f49bc0}.hero .c-experiments{--c:#7dd3e8}.hero .c-government{--c:#a9b8f0}.hero .c-business{--c:#e1dc76}
 .moved{margin:28px 0 0;border:1px solid var(--night3);border-left:4px solid var(--amber);background:var(--night2);color:#c9d6e0;padding:12px 16px;border-radius:0 var(--r-sm) var(--r-sm) 0;max-width:80ch;font-size:.95rem}
 .moved a{color:var(--amber)}.moved strong{color:#fff}
 
