@@ -171,10 +171,19 @@ def propose(repos, data, last_change=None):
     return new, changes
 
 
+def dump_like(data, existing):
+    """projects.json text in the same layout as the file it replaces, so the proposal's diff shows only what changed
+    (D-37: the routine wrote one-space indentation over a two-space file, and every line of the list showed as changed)."""
+    second = existing.split('\n', 2)[1] if '\n' in existing else ''
+    indent = (len(second) - len(second.lstrip(' '))) or 2
+    return json.dumps(data, indent=indent, ensure_ascii=False) + ('\n' if existing.endswith('\n') else '')
+
+
 def push_proposal(data, changes):
     """Write the proposal to its own branch, rebuilt and checked. The repository does not let Actions open pull
     requests (docs/repo-settings.md), so the issue carries a one-click link for the owner to open it."""
-    (ROOT / 'data' / 'projects.json').write_text(json.dumps(data, indent=1, ensure_ascii=False) + '\n', encoding='utf-8')
+    path = ROOT / 'data' / 'projects.json'
+    path.write_text(dump_like(data, path.read_text(encoding='utf-8')), encoding='utf-8')
     subprocess.run([sys.executable, str(ROOT / 'tools' / 'build.py')], check=True)
     git = ['git', '-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com']
     subprocess.run(['git', 'checkout', '-q', '-B', PROPOSAL_BRANCH], check=True)

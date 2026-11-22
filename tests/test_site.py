@@ -435,6 +435,28 @@ class MissingPubliccode(unittest.TestCase):
         self.assertFalse(any('no publiccode.yml' in x for x in f))
 
 
+class ProposalLayout(unittest.TestCase):
+    """D-37: the proposal branch rewrote all 586 lines of data/projects.json to change seven dates, because the routine
+    wrote one-space indentation over a two-space file. The owner reviews that diff, so it must show only the change."""
+
+    def test_unchanged_data_writes_back_byte_for_byte(self):
+        raw = (ROOT / 'data' / 'projects.json').read_text(encoding='utf-8')
+        self.assertEqual(discover.dump_like(json.loads(raw), raw), raw)
+
+    def test_negative_a_date_change_is_a_one_line_diff(self):
+        raw = (ROOT / 'data' / 'projects.json').read_text(encoding='utf-8')
+        data = json.loads(raw)
+        data['projects'][0]['updated'] = '2099-01-01'
+        changed = [a for a, b in zip(raw.splitlines(), discover.dump_like(data, raw).splitlines(), strict=True) if a != b]
+        self.assertEqual(len(changed), 1, changed[:3])
+
+    def test_other_layouts_are_kept_too(self):
+        for indent in (1, 2, 4):
+            text = json.dumps({'a': [1, {'b': 2}]}, indent=indent) + '\n'
+            with self.subTest(indent=indent):
+                self.assertEqual(discover.dump_like(json.loads(text), text), text)
+
+
 class Propose(unittest.TestCase):
     """Tier 2 discovery (18 Nov 2026): the owner asked for new repositories to reach the launchpad and profile without
     retyping them. The routine drafts; a person merges. These pin what it may and may not do to the list."""

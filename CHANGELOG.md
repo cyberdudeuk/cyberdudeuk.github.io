@@ -1,5 +1,10 @@
 # Changelog
 
+## 22 November 2026: discovery proposals show only what changed
+
+- The discovery routine's proposal now keeps data/projects.json in the layout it found it, so a date change is a
+  one-line diff. Its proposal for issue #42 had rewritten all 586 lines to change seven dates (D-37).
+
 ## 20 November 2026: NDL PubSec MCP card corrected
 
 - The NDL PubSec MCP card now says independent work, with MIT code and CC BY 4.0 content, as the project states. It
