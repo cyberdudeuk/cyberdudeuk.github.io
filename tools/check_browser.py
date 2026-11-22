@@ -53,10 +53,12 @@ BREAKS = {
     'spotlight': "var n=document.getElementById('spotNext'); n.replaceWith(n.cloneNode(true));",
     'masthead': "document.documentElement.classList.remove('nav-fold');document.head.insertAdjacentHTML('beforeend','<style>.global{display:flex!important}.navmenu{display:none!important}</style>')",
     'spotwrap': "document.head.insertAdjacentHTML('beforeend','<style>.spot-ctl,.sdots{flex-wrap:nowrap!important}</style>')",
+    'nodelabel': "var t=document.querySelector('.hero-art .constellation .node text[text-anchor=start] tspan');t.textContent='A much longer area name than any real one';",
+    'nodelink': "document.querySelectorAll('.hero-art .constellation .node a').forEach(function(a){a.removeAttribute('href');});",
     'notegap': "document.head.insertAdjacentHTML('beforeend','<style>main.note-page .prose{display:flex;flex-direction:column;gap:64px}</style>')",
 }
 CODES = {'overflow': 'B1', 'consoleerror': 'B2', 'filters': 'B3', 'drawer': 'B4', 'redirect': 'B5', 'search': 'B6', 'theme': 'B7',
-         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16', 'spotlight': 'B17', 'masthead': 'B17', 'spotwrap': 'B18'}
+         'motion': 'B8', 'density': 'B9', 'coverage': 'B10', 'nojs': 'B11', 'counters': 'B12', 'a11y': 'B13', 'totop': 'B14', 'arrow': 'B14', 'rings': 'B15', 'notegap': 'B16', 'spotlight': 'B17', 'masthead': 'B17', 'spotwrap': 'B18', 'nodelabel': 'B19', 'nodelink': 'B19'}
 
 
 def serve():
@@ -145,6 +147,17 @@ async def run(brk):
                 bad = await pg.evaluate("Array.from(document.querySelectorAll('.num[data-count]')).filter(function(n){return n.textContent!==n.getAttribute('data-count');}).length")
                 if bad:
                     found.append(f'B12 {bad} headline number(s) did not land on the data')
+            # B19 (D-38): every hero node label is inside the drawing at this width, and every node is a link
+            if brk in ('nodelabel', 'nodelink'):
+                await pg.evaluate(BREAKS[brk])
+            geo = await pg.evaluate("""(() => { const s = document.querySelector('.hero-art .constellation'); if (!s) return {missing: true};
+                const v = s.viewBox.baseVal, out = [];
+                s.querySelectorAll('.node text').forEach(t => { const b = t.getBBox();
+                    if (b.x < v.x - 1 || b.y < v.y - 1 || b.x + b.width > v.x + v.width + 1 || b.y + b.height > v.y + v.height + 1) out.push(t.textContent); });
+                const nodes = s.querySelectorAll('.node').length, linked = s.querySelectorAll('.node a[href]').length;
+                return {out, nodes, linked}; })()""")
+            if geo.get('missing') or geo['out'] or not geo['nodes'] or geo['linked'] != geo['nodes']:
+                found.append(f'B19 {name}: hero node labels outside the drawing {geo.get("out")}, or nodes without a link ({geo.get("linked")} of {geo.get("nodes")})')
             if errs:
                 found.append(f'B2 {name}: console errors: {errs[:3]}')
             await ctx.close()

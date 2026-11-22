@@ -106,9 +106,25 @@ def barcode_svg(text):
     return s.replace(m.group(0), f'width="168" height="48" viewBox="0 0 {m.group(1)} {m.group(2)}" preserveAspectRatio="none" role="img" aria-label="Barcode {e(text)}"', 1)
 
 
-def constellation(cats, count, newc, total):
+VIEW_W = 560  # the constellation's viewBox width
+LABEL_CH = 7.2  # rough width of one label character at 12.5px, used to decide when a label wraps (D-38)
+
+
+def label_lines(text, x, anchor):
+    """One or two lines for a node label, so it never runs past the edge of the drawing (D-38).
+    The browser check B19 measures the real text; this only decides where to break it."""
+    room = {'start': VIEW_W - 8 - x, 'end': x - 8}.get(anchor, 2 * min(x, VIEW_W - x) - 16)
+    if len(text) * LABEL_CH <= room or ' ' not in text:
+        return [text]
+    words = text.split(' ')
+    cut = min(range(1, len(words)), key=lambda i: abs(len(' '.join(words[:i])) - len(' '.join(words[i:]))))
+    return [' '.join(words[:cut]), ' '.join(words[cut:])]
+
+
+def constellation(cats, count, newc, total, hrefs=None):
     """The hero illustration, drawn from the data: one node per area, sized by its number of projects;
-    amber lines lead to areas with something new."""
+    amber lines lead to areas with something new. With hrefs (area id -> (href, name)), each node and the core
+    are links: an area with one project opens that project's site, an area with more opens its section."""
     live = [c for c in cats if count[c]]
     cx, cy, r = 280, 230, 168
     lines, flows, nodes, links = [], [], [], []
@@ -124,21 +140,51 @@ def constellation(cats, count, newc, total):
         lx, ly = cx + (r + 26 + rad) * math.cos(a), cy + (r + 26 + rad) * math.sin(a)
         anchor = 'start' if math.cos(a) > .3 else ('end' if math.cos(a) < -.3 else 'middle')
         ly += 4 + (6 if math.sin(a) > .6 else (-2 if math.sin(a) < -.6 else 0))
-        nodes.append(f'<g class="node c-{e(c)}" style="animation-delay:{i * .4:.1f}s"><circle cx="{x:.1f}" cy="{y:.1f}" r="{rad}" class="n"/>'
-                     f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anchor}">{e(cats[c]["short"])}</text></g>')
+        rows = label_lines(cats[c]['short'], lx, anchor)
+        ly -= 7 * (len(rows) - 1)
+        # the space between lines is collapsed when drawn but keeps the words apart for screen readers (D-38)
+        label = ' '.join(f'<tspan x="{lx:.1f}" dy="{0 if j == 0 else 14}">{e(t)}</tspan>' for j, t in enumerate(rows))
+        node = (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rad}" class="n"/>'
+                f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anchor}">{label}</text>')
+        if hrefs:
+            href, name = hrefs[c]
+            node = f'<a href="{e(href)}" aria-label="{e(name)}">{node}</a>'
+        nodes.append(f'<g class="node c-{e(c)}" style="animation-delay:{i * .4:.1f}s">{node}</g>')
     for i in range(len(pts)):
         (x1, y1), (x2, y2) = pts[i], pts[(i + 1) % len(pts)]
         mx, my = (x1 + x2) / 2, (y1 + y2) / 2
         qx, qy = cx + (mx - cx) * 1.12, cy + (my - cy) * 1.12
         links.append(f'<path d="M{x1:.1f} {y1:.1f} Q{qx:.1f} {qy:.1f} {x2:.1f} {y2:.1f}"/>')
-    return f'''<svg class="constellation" viewBox="0 0 560 460" aria-hidden="true" focusable="false">
+    head = ('role="group" aria-label="Areas of work: choose one to open its project"' if hrefs
+            else 'aria-hidden="true" focusable="false"')
+    core = (f'<circle cx="{cx}" cy="{cy}" r="54" class="core"/>'
+            f'<text x="{cx}" y="{cy + 4}" text-anchor="middle" class="core-n">{total}</text> <text x="{cx}" y="{cy + 24}" text-anchor="middle" class="core-l">projects</text>')
+    if hrefs:
+        core = f'<a href="#projects" aria-label="{total} projects: see them all">{core}</a>'
+    return f'''<svg class="constellation" viewBox="0 0 {VIEW_W} 460" {head}>
 <circle cx="{cx}" cy="{cy}" r="212" class="orbit"/><circle cx="{cx}" cy="{cy}" r="{r}" class="ring"/><circle cx="{cx}" cy="{cy}" r="100" class="orbit"/>
 <g class="spokes">{"".join(lines)}</g><g class="links">{"".join(links)}</g><g class="flows">{"".join(flows)}</g>
 {"".join(nodes)}
-<circle cx="{cx}" cy="{cy}" r="66" class="halo"/><circle cx="{cx}" cy="{cy}" r="54" class="core"/>
-<text x="{cx}" y="{cy + 4}" text-anchor="middle" class="core-n">{total}</text><text x="{cx}" y="{cy + 24}" text-anchor="middle" class="core-l">projects</text>
+<circle cx="{cx}" cy="{cy}" r="66" class="halo"/>{core}
 </svg>'''
 
+
+def area_name(cat):
+    """The node's visible label first, then the full area name when it differs."""
+    return cat['short'] if cat['short'] == cat['label'] else f'{cat["short"]} ({cat["label"]})'
+
+
+def area_links(cats, projects):
+    """Where each hero node leads (D-38); each name starts with the node's visible label, as screen reader users hear it: an area with one project opens that project's site (or its repository
+    when it has none); an area with more opens its section of the project list."""
+    out = {}
+    for c in cats:
+        ps = [p for p in projects if p['category'] == c]
+        if len(ps) == 1:
+            out[c] = (ps[0].get('site') or ps[0]['repo'], f'{area_name(cats[c])}: open {ps[0]["name"]}')
+        elif ps:
+            out[c] = (f'#cat-{c}', f'{area_name(cats[c])}: {len(ps)} projects')
+    return out
 
 def seeded(key, n):
     """n deterministic numbers in 0..1 from a key, so each project's art is the same on every build."""
@@ -454,8 +500,8 @@ def build():
     <div class="s4"><span class="num" data-count="{len(items)}">{len(items)}</span><span class="lbl">in the workshop</span></div>
    </div>
   </div>
-  <figure class="hero-art">{constellation(cats, count, newc, len(projects))}
-   <figcaption>Each node is an area of work, sized by its number of projects. Amber lines lead to areas with something new. Drawn from the data.</figcaption></figure>
+  <figure class="hero-art">{constellation(cats, count, newc, len(projects), area_links(cats, projects))}
+   <figcaption>Each node is an area of work, sized by its number of projects: select one to open its project, or its section when it has several. Amber lines lead to areas with something new. Drawn from the data.</figcaption></figure>
  </div>
  <div class="wrap moved-wrap"><p class="moved">Looking for the <strong>Public AI Utility Toolkit</strong>? It is now <a href="{NEW_TOOLKIT}">AI Capability Governance and Implementation</a>, with its own address.</p></div>
  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 40 C240 10 480 60 720 34 S1200 8 1440 30 V60 H0 Z" class="w1"/><path d="M0 48 C300 24 540 64 780 42 S1180 22 1440 40 V60 H0 Z" class="w2"/></svg>

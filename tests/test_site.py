@@ -508,5 +508,39 @@ class Propose(unittest.TestCase):
         self.assertNotIn("'main'", src.split('def push_proposal')[1].split('def main')[0])  # never pushes main
 
 
+class Constellation(unittest.TestCase):
+    """D-38: the hero node labels stay inside the drawing, and every node leads somewhere."""
+
+    def test_long_label_near_the_edge_wraps(self):
+        self.assertEqual(build.label_lines('Open government', 473.1, 'start'), ['Open', 'government'])
+
+    def test_short_label_stays_on_one_line(self):
+        self.assertEqual(build.label_lines('Code reuse', 399.3, 'start'), ['Code reuse'])
+
+    def test_every_label_line_fits_the_drawing(self):
+        page = (ROOT / 'index.html').read_text(encoding='utf-8')
+        hero = page.split('<svg class="constellation"')[1].split('</svg>')[0]
+        import re
+        for x, anchor, body in re.findall(r'<text x="([\d.]+)" y="[\d.]+" text-anchor="(\w+)">(.*?)</text>', hero):
+            for line in re.findall(r'<tspan[^>]*>([^<]*)</tspan>', body):
+                w, x = len(line) * build.LABEL_CH, float(x)
+                left, right = {'start': (x, x + w), 'end': (x - w, x)}.get(anchor, (x - w / 2, x + w / 2))
+                self.assertTrue(0 <= left and right <= build.VIEW_W, f'{line!r} runs from {left:.0f} to {right:.0f}')
+
+    def test_one_project_area_opens_its_site_and_bigger_areas_their_section(self):
+        cats = {'a': {'label': 'A', 'short': 'A'}, 'b': {'label': 'B', 'short': 'B'}}
+        ps = [{'category': 'a', 'name': 'One', 'site': 'https://example.org/one/', 'repo': 'https://github.com/x/one'},
+              {'category': 'b', 'name': 'Two', 'site': '', 'repo': 'https://github.com/x/two'},
+              {'category': 'b', 'name': 'Three', 'site': '', 'repo': 'https://github.com/x/three'}]
+        links = build.area_links(cats, ps)
+        self.assertEqual(links['a'][0], 'https://example.org/one/')
+        self.assertEqual(links['b'][0], '#cat-b')
+
+    def test_repository_when_there_is_no_site(self):
+        cats = {'a': {'label': 'A', 'short': 'A'}}
+        links = build.area_links(cats, [{'category': 'a', 'name': 'One', 'site': '', 'repo': 'https://github.com/x/one'}])
+        self.assertEqual(links['a'][0], 'https://github.com/x/one')
+
+
 if __name__ == '__main__':
     unittest.main()
