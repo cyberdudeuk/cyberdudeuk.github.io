@@ -9,6 +9,8 @@
   Capability Governance and Implementation; the rest is working material, not for publication.
   Young Person 360º now says what it covers.
 - Contact form, README and share picture updated.
+- The hero diagram is wider, so labels fit with any font; B19 now also measures them with DejaVu Sans, the font that
+  showed the overflow on the CI runner (D-39).
 
 ## 22 November 2026: hero diagram labels fit, and every node is a link
 
