@@ -58,6 +58,7 @@ ICONS = {  # simple 24px line icons, drawn here so the page makes no third-party
     'sprout': '<path d="M12 21v-9M12 12c0-4 3-7 8-7 0 5-3 7-8 7zM12 14c0-3-2.5-5.5-7-5.5 0 4 2.5 5.5 7 5.5z"/>',
     'briefcase': '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
     'up': '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    'landmark': '<path d="M3 21h18M4 10h16M12 3l8 5H4z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/>',
     'book': '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h7"/>',
 }
 KINDS = [('tool', 'Working tool'), ('proto', 'Prototype'), ('proposed', 'Proposed, not endorsed'), ('personal', 'Personal project'), ('exp', 'Experiment')]

@@ -37,6 +37,7 @@ the public sector, and some personal projects. Each lives in its own repository 
 | AI governance | [AI Capability Governance and Implementation](https://cyberdudeuk.github.io/ai-capability-governance/) |
 | Data standards and metadata | [DCAT-AP-UK](https://cyberdudeuk.github.io/dcat-ap-uk/) (proposed, not endorsed) |
 | Data management and quality | [Data Asset Management capability playbooks](https://cyberdudeuk.github.io/dam-capability-playbooks/), [Public Sector Data Quality Commons](https://cyberdudeuk.github.io/dq-commons/) |
+| Open government and public bodies | [OpenGovernment UK](https://cyberdudeuk.github.io/opengovernment-uk/) (pilot) |
 | Finding and reusing code | [GitHub Repos Asset Catalogue](https://cyberdudeuk.github.io/github-repos-asset-catalogue/) |
 | Knowledge mapping | [The Knowledge Web](https://github.com/cyberdudeuk/knowledge-web) (a single file in the repository) |
 | Skills and development | [Plainspoken](https://cyberdudeuk.github.io/plainspoken/) |
