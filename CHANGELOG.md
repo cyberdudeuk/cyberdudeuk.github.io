@@ -1,5 +1,15 @@
 # Changelog
 
+## 22 November 2026: Young Person 360º and Earning, learning and training are public
+
+- Both 360º portals now have their own public repositories and sites, and move from the workshop to the projects
+  list under Youth voice: [Young Person 360º: before the label](https://cyberdudeuk.github.io/young-person-360/) and
+  [Earning, learning and training](https://cyberdudeuk.github.io/earning-learning-training/). Whole-life 360º stays
+  in the workshop.
+- Both are on the contact form.
+- Fixed (D-40): the contact form's Amplify option parsed as a key and value, not text, so GitHub could not use the
+  form as written. L15 now reads the parsed form; a new test proves it fails on the old line.
+
 ## 22 November 2026: one glossary for the 360º portals; Earning, learning and training
 
 - New: `data/shared-glossary.json`, the single place where the 360º portals define the terms they share (BEET,

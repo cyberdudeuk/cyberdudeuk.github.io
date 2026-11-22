@@ -115,9 +115,22 @@ def problems(root):
     # L15 (D-06): the contact form's project list still named the BHM 2026 Hub after the project was renamed, and lacked
     # the new Amplify portal. Every project must be selectable on the form, by its current name.
     cf = root / '.github' / 'ISSUE_TEMPLATE' / 'contact.yml'
+    # D-40: a plain list item with ": " in it (UK Youth Parliament: Amplify portal) parses as a mapping, not a string, so
+    # the text match passed while GitHub could not use the option. Compare the parsed options, which must all be strings.
     form = cf.read_text(encoding='utf-8') if cf.exists() else ''  # a missing form is reported by L7
-    for p in (d['projects'] if form else []):
-        check(f'- {p["name"]}' in form, f'L15 contact form does not list {p["name"]}')
+    if form:
+        import yaml
+        try:
+            body = yaml.safe_load(form).get('body', [])
+        except (yaml.YAMLError, AttributeError) as e:
+            body = []
+            check(False, f'L15 contact form does not parse: {str(e).splitlines()[0]}')
+        drops = [b for b in body if b.get('type') == 'dropdown']
+        options = [o for b in drops for o in b.get('attributes', {}).get('options', [])]
+        bad = [o for o in options if not isinstance(o, str)]
+        check(not bad, f'L15 contact form options must be plain text; these parse as something else: {bad}')
+        for p in d['projects']:
+            check(p['name'] in options, f'L15 contact form does not list {p["name"]}')
     # L16: no third-party requests (the footer promises none). Tags match in any case (D-14). Stylesheets, scripts, images, fonts and CSS urls must be local.
     css = (root / 'styles.css').read_text(encoding='utf-8')
     for name, text in (('index.html', s), ('404.html', nf)):
