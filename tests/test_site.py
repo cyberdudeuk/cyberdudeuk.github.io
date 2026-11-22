@@ -249,6 +249,10 @@ class Site(unittest.TestCase):
         self.edit('.github/ISSUE_TEMPLATE/contact.yml', '        - Black History and Heritage Hub\n', '        - BHM 2026 Hub\n')
         self.fails_with('L15')
 
+    def test_L15_option_that_parses_as_a_mapping(self):
+        self.edit('.github/ISSUE_TEMPLATE/contact.yml', '        - "UK Youth Parliament: Amplify portal"\n', '        - UK Youth Parliament: Amplify portal\n')
+        self.fails_with('L15')
+
     def test_L16_third_party_font(self):
         self.edit('index.html', '<link rel="stylesheet" href="styles.css?v=', '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&v=')
         self.fails_with('L16')

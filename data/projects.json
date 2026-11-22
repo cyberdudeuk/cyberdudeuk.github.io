@@ -328,6 +328,55 @@
       "repo": "https://github.com/cyberdudeuk/uk-youth-parliament-amplify",
       "licence": "MIT code, CC BY 4.0 content",
       "new": true
+    },
+    {
+      "id": "young-person-360",
+      "name": "Young Person 360º: before the label",
+      "category": "youth",
+      "status": "Prototype: release 1.6",
+      "since": "2026",
+      "updated": "2026-11-22",
+      "summary": "Every child and young person the state holds, loses or never sees, across the UK, from birth: who they are, how many there are, the records kept about them, and where the trail breaks. Every figure cites its source.",
+      "audience": "People who design, run or scrutinise services for children and young people, and young people themselves",
+      "levels": [
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/young-person-360/",
+      "repo": "https://github.com/cyberdudeuk/young-person-360",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": true,
+      "highlights": [
+        "Children held, lost or unseen, from birth",
+        "BEET and CHEET: the states before NEET",
+        "The record trail and where it breaks",
+        "107 checks the page runs on itself"
+      ]
+    },
+    {
+      "id": "earning-learning-training",
+      "name": "Earning, learning and training",
+      "category": "youth",
+      "status": "Prototype: release 33",
+      "since": "2026",
+      "updated": "2026-11-22",
+      "summary": "For young people aged 16 to 24 who are not in work, learning or training, and everyone around them: what helps, what government is doing about it, and how to get into work, learning, training or your own business. Every claim cites its source.",
+      "audience": "Young people aged 16 to 24, the people who support them, and the teams who design the services",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/earning-learning-training/",
+      "repo": "https://github.com/cyberdudeuk/earning-learning-training",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": true,
+      "highlights": [
+        "17 routes into work, learning, training or a business",
+        "The Milburn Review and every UK strategy that bears on it",
+        "Which routes are open in each of the four nations",
+        "Formerly Earning or learning"
+      ]
     }
   ],
   "excluded": {
