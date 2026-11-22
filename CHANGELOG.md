@@ -1,5 +1,14 @@
 # Changelog
 
+## 22 November 2026: one glossary for the 360º portals; Earning, learning and training
+
+- New: `data/shared-glossary.json`, the single place where the 360º portals define the terms they share (BEET,
+  CHEET, NEET, held status, departure event, arrival, returner, enterprise route, and the business terms used for
+  starting safely). Each term has one owner portal; the others use the same words and link to it. It also states who
+  owns which question, so a topic lives in one place. Check L28 keeps it consistent; two tests prove the check fails.
+- Workshop: Earning or learning is now *Earning, learning and training*, for young people aged 16 to 24. Adults
+  returning to work or learning belong to Whole-life 360º.
+
 ## 22 November 2026: Starting a business in the UK published; workshop brought up to date
 
 - New card: Starting a business in the UK, now public at its own address, in a new area, *Starting and running a

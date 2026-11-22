@@ -261,6 +261,14 @@ class Site(unittest.TestCase):
         self.edit('styles.css', 'url("fonts/space-grotesk-latin-wght.woff2")', 'url("https://example.com/font.woff2")')
         self.fails_with('L16')
 
+    def test_L28_term_without_owner(self):
+        self.edit('data/shared-glossary.json', 'once things go well.", "owner": "young-person-360"', 'once things go well.", "owner": "nobody"')
+        self.fails_with('L28')
+
+    def test_L28_duplicate_term(self):
+        self.edit('data/shared-glossary.json', '{"term": "NEET"', '{"term": "BEET"')
+        self.fails_with('L28')
+
     def test_L17_workshop_link(self):
         self.edit('data/workshop.json', '"name": "govukOS",', '"name": "govukOS", "url": "https://claude.ai/artifact/x",')
         self.fails_with('L17')

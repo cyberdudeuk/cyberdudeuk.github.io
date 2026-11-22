@@ -1,48 +1,48 @@
 {
-  "_note": "Work in development elsewhere that is not public yet. Nothing here links anywhere: private workspaces are never linked. When an item gets its own public repository, move it to projects.json. tools/check_site.py (L17) checks this file.",
-  "status": "In development, not yet public",
-  "items": [
-    {
-      "id": "data-portals-compass",
-      "name": "Data portals compass",
-      "area": "Finding your way",
-      "icon": "compass",
-      "summary": "Answer four questions and get a suggested route across the DAM playbooks, the Data Quality Commons, the Repos Asset Catalogue and DCAT-AP-UK, with why each step matters."
-    },
-    {
-      "id": "whole-life-360",
-      "name": "Whole-life 360º",
-      "area": "Public services",
-      "icon": "person",
-      "summary": "Your life with the state, cradle to grave: every role you act in, every life event and every seam where people drop out of sight, across the four nations. It takes in the earlier My 360º prototype."
-    },
-    {
-      "id": "young-person-360",
-      "name": "Young Person 360º: before the label",
-      "area": "Youth voice",
-      "icon": "megaphone",
-      "summary": "A young person's own view of the state across the four nations, from birth to adulthood, including the children held, lost or unseen by the system before anyone calls them NEET."
-    },
-    {
-      "id": "earning-or-learning",
-      "name": "Earning or learning",
-      "area": "Youth and skills",
-      "icon": "megaphone",
-      "summary": "The Milburn Review on young people not in education, employment or training, and every UK government strategy, programme, duty and target that bears on it."
-    },
-    {
-      "id": "recognition-opportunities",
-      "name": "Recognition Opportunities Portal",
-      "area": "Community and people",
-      "icon": "award",
-      "summary": "Verified award dates, fair ways to recognise people and teams, and tools to send recognition where people work."
-    },
-    {
-      "id": "govukos",
-      "name": "govukOS",
-      "area": "Platforms",
-      "icon": "layers",
-      "summary": "A multi-app ecosystem concept for public sector work: the HIVE navigator, the govukOS platform and Studio, and SHARE, the data sharing observatory and barometer, which moved into it."
-    }
-  ]
+ "_note": "Work in development elsewhere that is not public yet. Nothing here links anywhere: private workspaces are never linked. When an item gets its own public repository, move it to projects.json. tools/check_site.py (L17) checks this file.",
+ "status": "In development, not yet public",
+ "items": [
+  {
+   "id": "data-portals-compass",
+   "name": "Data portals compass",
+   "area": "Finding your way",
+   "icon": "compass",
+   "summary": "Answer four questions and get a suggested route across the DAM playbooks, the Data Quality Commons, the Repos Asset Catalogue and DCAT-AP-UK, with why each step matters."
+  },
+  {
+   "id": "whole-life-360",
+   "name": "Whole-life 360º",
+   "area": "Public services",
+   "icon": "person",
+   "summary": "Your life with the state, cradle to grave: every role you act in, every life event and every seam where people drop out of sight, across the four nations. It takes in the earlier My 360º prototype."
+  },
+  {
+   "id": "young-person-360",
+   "name": "Young Person 360º: before the label",
+   "area": "Youth voice",
+   "icon": "megaphone",
+   "summary": "A young person's own view of the state across the four nations, from birth to adulthood, including the children held, lost or unseen by the system before anyone calls them NEET."
+  },
+  {
+   "id": "earning-learning-training",
+   "name": "Earning, learning and training",
+   "area": "Youth and skills",
+   "icon": "megaphone",
+   "summary": "For young people aged 16 to 24: getting into work, learning or training, including starting a business, with the Milburn Review and every UK government strategy, programme, duty and target that bears on it. Adults returning to work or learning are covered by Whole-life 360º."
+  },
+  {
+   "id": "recognition-opportunities",
+   "name": "Recognition Opportunities Portal",
+   "area": "Community and people",
+   "icon": "award",
+   "summary": "Verified award dates, fair ways to recognise people and teams, and tools to send recognition where people work."
+  },
+  {
+   "id": "govukos",
+   "name": "govukOS",
+   "area": "Platforms",
+   "icon": "layers",
+   "summary": "A multi-app ecosystem concept for public sector work: the HIVE navigator, the govukOS platform and Studio, and SHARE, the data sharing observatory and barometer, which moved into it."
+  }
+ ]
 }
