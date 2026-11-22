@@ -126,6 +126,28 @@ def problems(root):
                 check(not re.match(r'(https?:)?//', u, re.I) or 'rel="canonical"' in tag.lower(), f'L16 {name} loads a third-party resource: {u}')
     for u in re.findall(r'url\(\s*["\']?([^"\')]+)', css):
         check(not re.match(r'(https?:)?//', u), f'L16 styles.css loads a third-party resource: {u}')
+    # L28 (2026-11-22, the 360º portals plan): the 360º portals must define shared terms once. data/shared-glossary.json is the single
+    # source: every term has one owner, the owner is a known portal, terms are unique, and every workshop or project
+    # portal it names exists in workshop.json or projects.json.
+    gpath = root / 'data' / 'shared-glossary.json'
+    check(gpath.exists(), 'L28 data/shared-glossary.json is missing')
+    if gpath.exists():
+        try:
+            g = json.loads(gpath.read_text(encoding='utf-8'))
+        except ValueError as e:
+            g = None
+            check(False, f'L28 shared-glossary.json is not valid JSON: {e}')
+        if g:
+            portals = set(g.get('portals', {}))
+            known = {i['id'] for i in json.loads((root / 'data' / 'workshop.json').read_text(encoding='utf-8'))['items']}
+            known |= {p_['id'] for p_ in json.loads((root / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects']}
+            for pid in sorted(portals - known):
+                check(False, f'L28 shared glossary names portal {pid}, which is in neither workshop.json nor projects.json')
+            names = [t.get('term', '').lower() for t in g.get('terms', [])]
+            check(len(names) == len(set(names)), 'L28 a shared glossary term is defined more than once')
+            for t in g.get('terms', []):
+                check(bool(t.get('definition')) and t.get('owner') in portals,
+                      f'L28 shared glossary term {t.get("term", "?")} needs a definition and an owner from its portals list')
     # L17: the workshop lists work that is not public yet. Nothing in it may link anywhere (a private workspace link would
     # leak or break), every item is complete and on the page, and none repeats a public project.
     wpath = root / 'data' / 'workshop.json'
@@ -277,7 +299,7 @@ def main(argv=None):
     root = (argv or sys.argv[1:] or ['.'])[0]
     p = problems(root)
     n = len(json.loads((Path(root) / 'data' / 'projects.json').read_text(encoding='utf-8'))['projects'])
-    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 25 checks, {n} projects')
+    print('FAIL\n' + '\n'.join(p) if p else f'PASS: 26 checks, {n} projects')
     return 1 if p else 0
 
 

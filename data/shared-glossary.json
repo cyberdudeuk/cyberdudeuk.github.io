@@ -1,0 +1,46 @@
+{
+  "_note": "Terms shared by the 360º portal family, defined once here. Each term has one owner: the portal that explains it in full. The other portals use the same words and link to the owner. tools/check_site.py (L28) checks this file. Machine-readable: https://cyberdudeuk.github.io/data/shared-glossary.json",
+  "version": "1.0.0",
+  "updated": "2026-11-22",
+  "portals": {
+    "whole-life-360": {
+      "name": "Whole-life 360º",
+      "owns": "What the state does with and for an adult, in every role, from birth to estate, including learning, retraining and returning to work as an adult."
+    },
+    "young-person-360": {
+      "name": "Young Person 360º: before the label",
+      "owns": "Who the state is not seeing or holding, and where a child's or young person's record breaks (ages 0 to 18, up to 25 where a held status continues)."
+    },
+    "earning-learning-training": {
+      "name": "Earning, learning and training",
+      "owns": "How a young person aged 16 to 24 gets into work, learning or training."
+    },
+    "start-a-business-uk": {
+      "name": "Starting a business in the UK",
+      "owns": "Starting, running, changing or closing a business, at any age, including starting safely and starting again."
+    }
+  },
+  "routing": [
+    {"question": "Who is the state not seeing or holding, and where does a young person's record break?", "owner": "young-person-360"},
+    {"question": "How does a 16 to 24 year old get into work, learning or training?", "owner": "earning-learning-training"},
+    {"question": "What does the state do with and for me as an adult, including learning, retraining or going back to work?", "owner": "whole-life-360"},
+    {"question": "How do I start, run, change or close a business, safely?", "owner": "start-a-business-uk"},
+    {"question": "If more than one applies", "owner": "The portal whose lead bodies own the fix. The others link to it and do not restate it."}
+  ],
+  "terms": [
+    {"term": "BEET", "definition": "Being in Education, Employment or Training. The default engaged state: universal, and not tracked individually once things go well.", "owner": "young-person-360"},
+    {"term": "CHEET", "definition": "Child Held in Early years, Education or Training. Held by the state or by someone other than their parents: care, guardianship, treatment, a parent in custody, or licensed work.", "owner": "young-person-360"},
+    {"term": "NEET", "definition": "Not in Education, Employment or Training. The label used for young people aged 16 to 24 who are none of these.", "owner": "earning-learning-training"},
+    {"term": "Held status", "definition": "A period when a child or young person is held by the state or another adult, such as care, guardianship or custody. Some held statuses carry duties up to age 25.", "owner": "young-person-360"},
+    {"term": "Departure event", "definition": "The moment a child or young person leaves oversight or a record breaks, such as leaving care at 18. Published for the NEET and adult portals to pick up.", "owner": "young-person-360"},
+    {"term": "Arrival", "definition": "A departure event as the adult portal receives it: the point at which a young person's story continues in Whole-life 360º.", "owner": "whole-life-360"},
+    {"term": "Returner", "definition": "An adult going back to work, learning or training after time away, for example after raising a family, caring for someone, a sabbatical, illness, custody or military service.", "owner": "whole-life-360"},
+    {"term": "Enterprise route", "definition": "Self-employment or starting a business as a way into work, offered beside jobs, learning and training rather than instead of them.", "owner": "start-a-business-uk"},
+    {"term": "Gainful self-employment", "definition": "Universal Credit's test of whether self-employment is your main job, organised and regular, with the aim of making a profit. It decides whether the start-up period and minimum income floor apply.", "owner": "start-a-business-uk"},
+    {"term": "Start-up period", "definition": "Up to 12 months on Universal Credit when your actual self-employed earnings are used and the minimum income floor does not apply.", "owner": "start-a-business-uk"},
+    {"term": "Minimum income floor", "definition": "An assumed level of earnings Universal Credit uses for gainfully self-employed people once any start-up period ends, if they earn less than it.", "owner": "start-a-business-uk"},
+    {"term": "Service address", "definition": "The address a company director gives Companies House for post. It is public, and does not have to be the director's home.", "owner": "start-a-business-uk"},
+    {"term": "Registered office", "definition": "A company's official address. It is public and must be an 'appropriate address' where delivery can be acknowledged; a PO Box is not allowed.", "owner": "start-a-business-uk"},
+    {"term": "Anonymous registration", "definition": "Being on the electoral register without your name or address being shown, for people whose safety would be at risk. It can affect credit checks.", "owner": "start-a-business-uk"}
+  ]
+}
