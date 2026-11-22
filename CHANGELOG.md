@@ -1,5 +1,13 @@
 # Changelog
 
+## 22 November 2026: OpenGovernment UK listed, dates refreshed
+
+- New card: OpenGovernment UK, one register of the UK state (every public body, who it answers to, who pays for it
+  and who owns it), published today. It sits in a new area, *Open government and public bodies*, with its own icon
+  and colours checked in light and dark mode. Added to the contact form's project list (L15) and the README.
+- Updated dates on seven cards from their repositories' latest activity, superseding the proposal in issue #42.
+- Share picture (og.jpg) regenerated.
+
 ## 22 November 2026: discovery proposals show only what changed
 
 - The discovery routine's proposal now keeps data/projects.json in the layout it found it, so a date change is a
