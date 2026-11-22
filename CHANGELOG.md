@@ -1,5 +1,17 @@
 # Changelog
 
+## 22 November 2026: Starting a business in the UK published; workshop brought up to date
+
+- New card: Starting a business in the UK, now public at its own address, in a new area, *Starting and running a
+  business* (olive, briefcase icon, checked in light and dark and in the hero diagram).
+- Workshop: Start a business left it for Projects. My 360º gave way to Whole-life 360º, which took in its ideas. SHARE
+  moved into govukOS, so it is now part of that card. RAIDU left the workshop: its public guidance lives in AI
+  Capability Governance and Implementation; the rest is working material, not for publication.
+  Young Person 360º now says what it covers.
+- Contact form, README and share picture updated.
+- The hero diagram is wider, so labels fit with any font; B19 now also measures them with DejaVu Sans, the font that
+  showed the overflow on the CI runner (D-39).
+
 ## 22 November 2026: hero diagram labels fit, and every node is a link
 
 - The "Open government" label no longer runs off the edge of the hero diagram: long labels near an edge wrap onto

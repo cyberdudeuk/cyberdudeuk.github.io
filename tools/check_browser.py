@@ -158,6 +158,17 @@ async def run(brk):
                 return {out, nodes, linked}; })()""")
             if geo.get('missing') or geo['out'] or not geo['nodes'] or geo['linked'] != geo['nodes']:
                 found.append(f'B19 {name}: hero node labels outside the drawing {geo.get("out")}, or nodes without a link ({geo.get("linked")} of {geo.get("nodes")})')
+            # D-39: the labels fitted with the local font and overflowed on the CI runner's wider DejaVu Sans, so measure with it too
+            await pg.add_style_tag(content='.hero-art .constellation text{font-family:"DejaVu Sans",sans-serif!important}')
+            wide = await pg.evaluate("""(() => { const s = document.querySelector('.hero-art .constellation'); if (!s) return null;
+                const v = s.viewBox.baseVal, t0 = s.querySelector('.node text'), out = [];
+                s.querySelectorAll('.node text').forEach(t => { const b = t.getBBox();
+                    if (b.x < v.x - 1 || b.x + b.width > v.x + v.width + 1) out.push(t.textContent); });
+                return {out, font: t0 ? getComputedStyle(t0).fontFamily : ''}; })()""")
+            if not wide or 'DejaVu' not in wide['font']:
+                found.append(f'B19 {name}: the wide test font was not applied to the hero labels')
+            elif wide['out']:
+                found.append(f'B19 {name}: with DejaVu Sans, hero node labels run outside the drawing {wide["out"]}')
             if errs:
                 found.append(f'B2 {name}: console errors: {errs[:3]}')
             await ctx.close()

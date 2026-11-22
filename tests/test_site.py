@@ -512,7 +512,7 @@ class Constellation(unittest.TestCase):
     """D-38: the hero node labels stay inside the drawing, and every node leads somewhere."""
 
     def test_long_label_near_the_edge_wraps(self):
-        self.assertEqual(build.label_lines('Open government', 473.1, 'start'), ['Open', 'government'])
+        self.assertEqual(build.label_lines('Open government', build.VIEW_W - 90, 'start'), ['Open', 'government'])
 
     def test_short_label_stays_on_one_line(self):
         self.assertEqual(build.label_lines('Code reuse', 399.3, 'start'), ['Code reuse'])

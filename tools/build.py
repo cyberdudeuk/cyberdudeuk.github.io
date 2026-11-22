@@ -106,8 +106,8 @@ def barcode_svg(text):
     return s.replace(m.group(0), f'width="168" height="48" viewBox="0 0 {m.group(1)} {m.group(2)}" preserveAspectRatio="none" role="img" aria-label="Barcode {e(text)}"', 1)
 
 
-VIEW_W = 560  # the constellation's viewBox width
-LABEL_CH = 7.2  # rough width of one label character at 12.5px, used to decide when a label wraps (D-38)
+VIEW_W = 640  # the constellation's viewBox width: room either side for labels (D-39)
+LABEL_CH = 8.6  # width of one label character at 12.5px in the widest likely font (DejaVu Sans), to decide when a label wraps (D-38, D-39)
 
 
 def label_lines(text, x, anchor):
@@ -126,7 +126,7 @@ def constellation(cats, count, newc, total, hrefs=None):
     amber lines lead to areas with something new. With hrefs (area id -> (href, name)), each node and the core
     are links: an area with one project opens that project's site, an area with more opens its section."""
     live = [c for c in cats if count[c]]
-    cx, cy, r = 280, 230, 168
+    cx, cy, r = VIEW_W // 2, 230, 168
     lines, flows, nodes, links = [], [], [], []
     pts = []
     for i, c in enumerate(live):
