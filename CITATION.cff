@@ -12,3 +12,7 @@ date-released: 2026-11-08
 license: MIT
 repository-code: https://github.com/cyberdudeuk/cyberdudeuk.github.io
 url: https://cyberdudeuk.github.io/
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24243441
+    description: "Concept DOI on Zenodo: resolves to the latest archived release"
