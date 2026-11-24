@@ -296,6 +296,24 @@
       "new": false
     },
     {
+      "id": "awards-and-recognition-hub",
+      "name": "Awards and Recognition Hub",
+      "category": "skills",
+      "status": "Personal project: release 2026.11.22.18",
+      "since": "2026",
+      "updated": "2026-11-22",
+      "summary": "Verified award dates, fair ways to recognise people and teams, and tools to send recognition where people work. A calendar of deadlines and ceremonies for 14 award routes, a finder for which award fits which kind of work, and guidance on everyday recognition. It never submits anything: people always send. Formerly the Recognition Opportunities Portal.",
+      "audience": "Civil servants and managers in central government deciding whether and how to nominate or recognise colleagues",
+      "levels": [
+        "Beginner",
+        "Intermediate"
+      ],
+      "site": "https://cyberdudeuk.github.io/awards-and-recognition-hub/",
+      "repo": "https://github.com/cyberdudeuk/awards-and-recognition-hub",
+      "licence": "MIT code, OGL v3.0 content",
+      "new": true
+    },
+    {
       "id": "black-mixed-heritage",
       "name": "Black History and Heritage Hub",
       "category": "community",
