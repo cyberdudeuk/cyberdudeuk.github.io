@@ -1,7 +1,7 @@
 {
   "launchpad": "cyberdudeuk projects",
   "version": "1.4.0",
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
     {
@@ -78,7 +78,7 @@
       "category": "ai",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-23",
       "summary": "Guidance you can act on for governing AI and AI agents in public services: a six-level human review model, evidence and transparency record generators, an agent registry pattern and a weekly signals scan.",
       "audience": "Anyone using, buying, approving or assuring AI in public services",
       "levels": [
@@ -103,7 +103,7 @@
       "category": "standards",
       "status": "Proposed, not endorsed",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-23",
       "summary": "A proposed application profile for describing UK public sector datasets and data services, so they can be found, judged and shared across every catalogue. Under review; the endorsed model remains the cross-government metadata exchange model.",
       "audience": "Catalogue owners, metadata leads and data architects",
       "levels": [
@@ -159,7 +159,7 @@
       "category": "data",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-20",
+      "updated": "2026-11-23",
       "summary": "A free, open hub and toolkit for data quality in the public sector: check data, find the frameworks and standards that apply, learn, use AI safely and share what works.",
       "audience": "Anyone responsible for data quality, from first steps to automation",
       "levels": [
@@ -228,7 +228,7 @@
       "category": "reuse",
       "status": "Working tool",
       "since": "2026",
-      "updated": "2026-11-20",
+      "updated": "2026-11-23",
       "summary": "Before you build it, look for it. Every UK public sector code project on GitHub in one place, explained in plain English, so you can find work that already exists and decide whether to reuse it.",
       "audience": "Policy leads, service owners, data leaders and engineers",
       "levels": [
@@ -247,7 +247,7 @@
       "category": "knowledge",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-23",
       "summary": "A navigable, ontology-backed map of a body of work on UK government data standards, governance and knowledge management, delivered as one self-contained file that works offline.",
       "audience": "People mapping or navigating a large body of knowledge",
       "levels": [
@@ -265,7 +265,7 @@
       "category": "skills",
       "status": "Personal project",
       "since": "2026",
-      "updated": "2026-11-20",
+      "updated": "2026-11-23",
       "summary": "A phone-first speaking coach for anyone who speaks at work, with situations drawn from public sector settings: a daily 20-minute routine, event preparation, speak-and-score, role-play and a live cue card.",
       "audience": "Anyone who wants to speak more clearly at work",
       "levels": [
