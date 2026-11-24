@@ -78,7 +78,7 @@
       "category": "ai",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-23",
+      "updated": "2026-11-24",
       "summary": "Guidance you can act on for governing AI and AI agents in public services: a six-level human review model, evidence and transparency record generators, an agent registry pattern and a weekly signals scan.",
       "audience": "Anyone using, buying, approving or assuring AI in public services",
       "levels": [
@@ -178,7 +178,7 @@
       "category": "government",
       "status": "Prototype: pilot, version 0.3.0",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-24",
       "summary": "One register of the UK state: every public body the official registers know about, who it answers to, who pays for it and who owns it, with each fact traced to the source it came from.",
       "audience": "Anyone who needs to know how a public body fits into the state: researchers, journalists, data teams and civic technologists",
       "levels": [
@@ -228,7 +228,7 @@
       "category": "reuse",
       "status": "Working tool",
       "since": "2026",
-      "updated": "2026-11-23",
+      "updated": "2026-11-24",
       "summary": "Before you build it, look for it. Every UK public sector code project on GitHub in one place, explained in plain English, so you can find work that already exists and decide whether to reuse it.",
       "audience": "Policy leads, service owners, data leaders and engineers",
       "levels": [
@@ -301,7 +301,7 @@
       "category": "skills",
       "status": "Personal project: release 2026.11.22.18",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-24",
       "summary": "Verified award dates, fair ways to recognise people and teams, and tools to send recognition where people work. A calendar of deadlines and ceremonies for 14 award routes, a finder for which award fits which kind of work, and guidance on everyday recognition. It never submits anything: people always send. Formerly the Recognition Opportunities Portal.",
       "audience": "Civil servants and managers in central government deciding whether and how to nominate or recognise colleagues",
       "levels": [
@@ -372,7 +372,7 @@
       "category": "youth",
       "status": "Prototype: release 1.6",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-23",
       "summary": "Every child and young person the state holds, loses or never sees, across the UK, from birth: who they are, how many there are, the records kept about them, and where the trail breaks. Every figure cites its source.",
       "audience": "People who design, run or scrutinise services for children and young people, and young people themselves",
       "levels": [
@@ -396,7 +396,7 @@
       "category": "youth",
       "status": "Prototype: release 33",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-23",
       "summary": "For young people aged 16 to 24 who are not in work, learning or training, and everyone around them: what helps, what government is doing about it, and how to get into work, learning, training or your own business. Every claim cites its source.",
       "audience": "Young people aged 16 to 24, the people who support them, and the teams who design the services",
       "levels": [
