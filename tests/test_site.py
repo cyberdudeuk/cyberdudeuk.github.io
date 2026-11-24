@@ -333,6 +333,11 @@ class Site(unittest.TestCase):
         self.edit('index.html', '<h2 id="h-coverage"><span class="h-ico"', '<h2 id="h-coverage"><span class="h-none"')
         self.fails_with('L23')
 
+    def test_L28_duplicate_key_in_data(self):
+        # D-44: the shape a line-by-line merge produced on 24 November 2026
+        self.edit('data/projects.json', '  "updated": "', '  "updated": "2026-01-01",\n  "updated": "')
+        self.fails_with('L28')
+
     def test_L11_truncated_licence(self):
         self.edit('LICENSE', 'Copyright (c) 2026 cyberdudeuk and contributors', 'Copyright (c) 2026 Em')
         self.fails_with('L11')
