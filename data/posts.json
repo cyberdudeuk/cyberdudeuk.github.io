@@ -84,6 +84,23 @@
       "date": "2026-11-18",
       "summary": "The routines that keep the project list accurate, and the one rule they all follow: they propose, and a person merges.",
       "home": "https://dev.to/cyberdudeuk/making-a-portfolio-of-open-public-sector-projects-that-keeps-itself-honest-3l4a"
+    },
+    {
+      "id": "mapping-the-old-technology",
+      "title": "Mapping the old technology behind UK public services",
+      "date": "2026-11-24",
+      "summary": "The Legacy Technology Observatory maps where old technology runs across UK public services, what it costs, who can still maintain it and how to move off it, and how it is built to check itself.",
+      "tags": [
+        "opensource",
+        "government",
+        "legacy",
+        "accessibility"
+      ],
+      "home": "https://dev.to/cyberdudeuk/mapping-the-old-technology-behind-uk-public-services-4n4",
+      "projects": [
+        "legacy-technology-observatory",
+        "github-repos-asset-catalogue"
+      ]
     }
   ]
 }
