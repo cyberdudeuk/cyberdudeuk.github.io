@@ -31,6 +31,20 @@ def problems(root):
         if not ok:
             out.append(msg)
 
+    # L28 (D-44): no data file has a key twice. A line-by-line git merge (GitHub's "Update branch" on the routine's
+    # branch) wrote "updated" twice in projects.json; json.loads keeps the last one silently, so nothing else noticed.
+    def no_dupes(pairs):
+        keys = [k for k, _ in pairs]
+        dup = sorted({k for k in keys if keys.count(k) > 1})
+        if dup:
+            raise ValueError(', '.join(dup))
+        return dict(pairs)
+    for jf in sorted((root / 'data').glob('*.json')):
+        try:
+            json.loads(jf.read_text(encoding='utf-8'), object_pairs_hook=no_dupes)
+        except ValueError as e:
+            check(False, f'L28 data/{jf.name} has a key more than once: {e}')
+
     # L1: contact is by form only; no email address anywhere a reader sees.
     feed_path = root / 'feed.xml'
     feed = feed_path.read_text(encoding='utf-8') if feed_path.exists() else ''
