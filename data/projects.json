@@ -261,6 +261,25 @@
       "new": true
     },
     {
+      "id": "pubsec-tech-hub",
+      "name": "Public Sector Tech Hub",
+      "category": "reuse",
+      "status": "Prototype",
+      "since": "2026",
+      "updated": "2026-11-24",
+      "summary": "What UK public bodies make, run and deploy that you can adopt: an open app store of platforms, products and components, harvested weekly from publiccode.yml, with licence, code, live service and a source for every fact. No ratings or reviews.",
+      "audience": "Service teams, product owners, developers and public bodies with products to share",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/pubsec-tech-hub/",
+      "repo": "https://github.com/cyberdudeuk/pubsec-tech-hub",
+      "licence": "MIT code, CC BY 4.0 content",
+      "new": true
+    },
+    {
       "id": "knowledge-web",
       "name": "The Knowledge Web",
       "category": "knowledge",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 24 November 2026: Public Sector Tech Hub joins the launchpad
+
+- New project under Finding and reusing code, next to the GitHub Repos Asset Catalogue and the Legacy Technology
+  Observatory: [Public Sector Tech Hub](https://cyberdudeuk.github.io/pubsec-tech-hub/), an open app store of what UK
+  public bodies make and run, harvested from publiccode.yml. The contact form lists it.
+
 ## 22 November 2026: defect numbers made unique (D-43)
 
 - Two defects were each numbered twice. The board-status D-29 is now D-42, with its citations in the board routine,
