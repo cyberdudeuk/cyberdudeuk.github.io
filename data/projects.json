@@ -417,11 +417,12 @@
     }
   ],
   "excluded": {
-    "why": "Forks and private repositories are not listed, nor are the repositories that hold the GitHub profile page and the default community files, which are not projects.",
+    "why": "Forks and private repositories are not listed, nor are the repositories that hold the GitHub profile page and the default community files, which are not projects, or repositories kept only to redirect a renamed project.",
     "repos": [
       "w3id.org (fork)",
       "cyberdudeuk (GitHub profile page)",
-      ".github (default community health files)"
+      ".github (default community health files)",
+      "legacy-code-observatory (redirect to the Legacy Technology Observatory)"
     ]
   },
   "ways_in": {
