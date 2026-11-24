@@ -1,7 +1,7 @@
 {
   "launchpad": "cyberdudeuk projects",
   "version": "1.4.0",
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
     {
@@ -240,6 +240,25 @@
       "repo": "https://github.com/cyberdudeuk/github-repos-asset-catalogue",
       "licence": "MIT code, CC BY 4.0 content",
       "new": false
+    },
+    {
+      "id": "legacy-technology-observatory",
+      "name": "Legacy Technology Observatory",
+      "category": "reuse",
+      "status": "Prototype",
+      "since": "2026",
+      "updated": "2026-11-24",
+      "summary": "The old technology behind UK public services, from COBOL and mainframes to phone lines, emergency radio, devices and encryption: where it runs, what it costs, who can still maintain it, and how to move off it. Every figure links to its source.",
+      "audience": "Service owners, digital and technology leaders, workforce planners and engineers",
+      "levels": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "site": "https://cyberdudeuk.github.io/legacy-technology-observatory/",
+      "repo": "https://github.com/cyberdudeuk/legacy-technology-observatory",
+      "licence": "MIT code, CC BY 4.0 content",
+      "new": true
     },
     {
       "id": "knowledge-web",
