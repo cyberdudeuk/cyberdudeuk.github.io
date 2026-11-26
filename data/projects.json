@@ -1,7 +1,7 @@
 {
   "launchpad": "cyberdudeuk projects",
   "version": "1.4.0",
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
     {
@@ -228,7 +228,7 @@
       "category": "reuse",
       "status": "Working tool",
       "since": "2026",
-      "updated": "2026-11-24",
+      "updated": "2026-11-25",
       "summary": "Before you build it, look for it. Every UK public sector code project on GitHub in one place, explained in plain English, so you can find work that already exists and decide whether to reuse it.",
       "audience": "Policy leads, service owners, data leaders and engineers",
       "levels": [
