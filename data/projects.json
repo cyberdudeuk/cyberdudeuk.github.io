@@ -1,7 +1,7 @@
 {
   "launchpad": "cyberdudeuk projects",
   "version": "1.4.0",
-  "updated": "2026-11-25",
+  "updated": "2026-11-27",
   "note": "Every public project in github.com/cyberdudeuk. Summaries are written from each project's own README. Status is as each project states it. tools/discover.py flags any public repository missing from this list.",
   "categories": [
     {
@@ -122,7 +122,7 @@
       "category": "data",
       "status": "Prototype",
       "since": "2026",
-      "updated": "2026-11-22",
+      "updated": "2026-11-27",
       "summary": "Step-by-step guidance on data governance, data cataloguing and data quality for critical data assets in UK government, built around the data asset management policy.",
       "audience": "Data owners, stewards, catalogue managers and data leaders",
       "levels": [
@@ -355,7 +355,7 @@
       "category": "experiments",
       "status": "Prototype: alpha, independent work",
       "since": "2026",
-      "updated": "2026-11-20",
+      "updated": "2026-11-27",
       "summary": "An open-source, read-only MCP server and portal for finding UK public sector data, APIs, MCP servers and open standards, and for mapping data exchanges between public bodies by citizen and business journey. Explained for people with no technical background, with a feed other portals can harvest.",
       "audience": "Government and the wider public sector, researchers, journalists and civil society, organisations in every sector, and developers of AI models and MCP servers",
       "levels": [
