@@ -9,7 +9,7 @@
 
 ## Evidence and execution qualification
 
-This is a **checker-equivalent evidence replay**, not a claim that the native CLI command `python3 -I tools/conformance.py --write` was executed inside this source repository. The complete recursive Git tree, all files relevant to the 25 checks, repository metadata, branch-protection state and the latest available commit summaries were retrieved. The statuses below follow the current checker logic and its supplied metadata schema.
+This is a **checker-equivalent evidence replay**, not a claim that the native CLI command `python3 -I tools/conformance.py --write` was executed inside this source repository. The complete recursive Git tree at `39a05f88e554884a9ab6a1975d26114f6e93c3e4`, all files relevant to the 25 checks, repository metadata, main-branch protection state and 2 available recent commit summaries were retrieved. The connected identity permission snapshot is `{"admin":false,"maintain":false,"push":true,"pull":true,"triage":true}`; source branch creation was nevertheless denied to this integration. The statuses below follow the current checker logic and its supplied metadata schema.
 
 The GitHub integration denied branch creation in all three source repositories with HTTP 403 `Resource not accessible by integration`. Therefore these assessment files are recorded in the portfolio migration PR, not committed into the source repositories. No source code, workflow or repository setting was changed. The checker self-test and source-side `--write` still need to be run from an authorised checkout before these reports are treated as source-published conformance artefacts.
 
@@ -61,9 +61,9 @@ The GitHub integration denied branch creation in all three source repositories w
 
 ## Evidence inputs
 
-- Recursive source tree at the current `main` head.
+- Recursive source tree at main head `39a05f88e554884a9ab6a1975d26114f6e93c3e4`.
 - Full contents of README, licence files and all workflow files.
-- GitHub repository metadata: public visibility, default branch, issues and Pages state.
+- GitHub repository metadata: public visibility, default branch `main`, issues enabled, Pages disabled, main protected false. Connected identity permission snapshot: `{"admin":false,"maintain":false,"push":true,"pull":true,"triage":true}`.
 - Main branch protection endpoint.
 - Up to 30 recent commit summaries from GitHub.
 - No exception register was present in the retrieved source tree. No exceptions were invented. The private-vulnerability-reporting setting was not retrievable through this connector; the checker metadata therefore leaves it null, and no SECURITY.md/email/VDP route is evidenced.
