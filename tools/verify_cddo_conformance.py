@@ -12,6 +12,7 @@ import json
 import pathlib
 import subprocess
 import sys
+import shutil
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -65,7 +66,13 @@ def main() -> int:
             ], allowed_codes=(0, 1))
             print(output, end="")
 
-            generated = json.loads((source / "docs" / "conformance" / "result.json").read_text(encoding="utf-8"))
+            generated_dir = source / "docs" / "conformance"
+            canonical_output = ROOT / "docs" / "portfolio" / "conformance" / slug / "canonical-output"
+            canonical_output.mkdir(parents=True, exist_ok=True)
+            for filename in ("report.md", "result.json", "badge.svg", "badge.json"):
+                shutil.copyfile(generated_dir / filename, canonical_output / filename)
+
+            generated = json.loads((generated_dir / "result.json").read_text(encoding="utf-8"))
             if generated["repo"] != full_name:
                 raise AssertionError(f"{slug}: generated repository name mismatch")
             if generated["checks"] != expected["checks"]:
