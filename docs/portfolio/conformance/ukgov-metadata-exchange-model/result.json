@@ -17,7 +17,7 @@
   ],
   "SC-04": [
    "FAIL",
-   "no SECURITY.md; no email or Cabinet Office VDP route documented; private vulnerability reporting setting not retrievable (metadata null)"
+   "no SECURITY.md; no working private route"
   ],
   "SC-05": [
    "FAIL",
