@@ -9,9 +9,16 @@
 
 ## Evidence and execution qualification
 
-This is a **checker-equivalent evidence replay**, not a claim that the native CLI command `python3 -I tools/conformance.py --write` was executed inside this source repository. The complete recursive Git tree, all files relevant to the 25 checks, repository metadata, branch-protection state and 30 recent commit summaries were retrieved. The statuses follow the current checker logic and its supplied metadata schema.
+**Canonical checker execution: passed.** GitHub Actions run [#46160267470](https://github.com/cyberdudeuk/cyberdudeuk.github.io/actions/runs/46160267470) cloned the full source repository at the pinned commit below, ran `python3 -I tools/conformance.py --self-test` (PASS), then ran the canonical checker with `--meta` and `--write` against the full temporary checkout. The generated 25-check results and verdict matched this report for all three repositories.
 
-The GitHub integration denied branch creation with HTTP 403 `Resource not accessible by integration`. These assessment files are therefore recorded in the portfolio migration PR, not committed into the source repository. No source code, workflow or repository setting was changed. The checker self-test and source-side `--write` still need to be run from an authorised checkout before this report is treated as a source-published conformance artefact.
+- **Pinned source commit:** `3e6c6f5eb6dda6e90ca956d0273f3698fd584212`
+- **Pinned checker commit:** `229057ee48f9c7485b7fae49d01438dce3d7cebb`
+- **GDS Way baseline:** `alphagov/gds-way@7bc40fb`
+- **Canonical output artifact:** `cddo-conformance-canonical-output` (artifact ID `15269515207`, retained on the workflow run for 30 days).
+
+The workflow writes only into temporary clones and uploads the four canonical outputs (`report.md`, `result.json`, `badge.svg`, `badge.json`) as an artifact. It does **not** write to the source repository. The GitHub integration denied source branch creation with HTTP 403 `Resource not accessible by integration`; therefore the canonical files are not yet committed under the source repository's own `docs/conformance/` path. No source code, workflow or repository setting was changed.
+
+The checker metadata records private vulnerability reporting as `null` because that setting was not retrievable through the connector. `third_party_impact` is not supplied by the canonical metadata script, so the checker applies its default behaviour. These limitations are recorded rather than silently treated as passes.
 
 ## Check results
 
