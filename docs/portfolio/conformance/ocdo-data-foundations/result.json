@@ -120,9 +120,9 @@
   "manual": [],
   "exceptions": []
  },
- "assessment_mode": "checker-equivalent evidence replay; native CLI not executed in source repository",
- "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating source branch",
- "self_test_status": "not executed in this session",
+ "assessment_mode": "canonical checker executed in a read-only GitHub Actions replay against the full temporary source checkout; checks and verdict matched",
+ "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating a source branch; source repository unchanged",
+ "self_test_status": "passed in workflow run 46160267470",
  "metadata_gaps": [
   "private_vulnerability_reporting setting not retrievable through this connector",
   "third_party_impact not supplied; checker default applies"
@@ -144,5 +144,12 @@
    "pull": true,
    "triage": true
   }
+ },
+ "native_checker_run": {
+  "workflow_run_id": 46160267470,
+  "workflow_url": "https://github.com/cyberdudeuk/cyberdudeuk.github.io/actions/runs/46160267470",
+  "artifact_id": 15269515207,
+  "artifact_name": "cddo-conformance-canonical-output",
+  "catalogue_commit": "229057ee48f9c7485b7fae49d01438dce3d7cebb"
  }
 }
