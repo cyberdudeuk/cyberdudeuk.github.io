@@ -1,0 +1,36 @@
+name: CDDO conformance replay
+
+on:
+  push:
+    branches:
+      - "docs/portfolio-architecture-consolidation-plan"
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    name: Run the canonical checker against pinned source snapshots
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the portfolio evidence
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Run checker self-test and replay all three repositories
+        run: python3 -I tools/verify_cddo_conformance.py
+
+      - name: Upload canonical checker outputs
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: cddo-conformance-canonical-output
+          path: docs/portfolio/conformance/*/canonical-output/
+          if-no-files-found: error
+          retention-days: 30

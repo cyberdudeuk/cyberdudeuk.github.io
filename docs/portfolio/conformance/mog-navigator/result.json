@@ -1,0 +1,153 @@
+{
+ "repo": "co-cddo/MoG-Navigator",
+ "checked": "2026-11-28",
+ "source": "alphagov/gds-way@7bc40fb (25 Nov 2026)",
+ "checks": {
+  "SC-01": [
+   "PASS",
+   "README.md"
+  ],
+  "SC-02": [
+   "PASS",
+   "9 of 9 recent summaries say what changed"
+  ],
+  "SC-03": [
+   "FAIL",
+   "MIT: yes, LICENSE; OGL: no"
+  ],
+  "SC-04": [
+   "FAIL",
+   "no SECURITY.md; no working private route"
+  ],
+  "SC-05": [
+   "FAIL",
+   "changelog: none; semantic version in it: no; public issues: yes"
+  ],
+  "SC-06": [
+   "FAIL",
+   "no CONTRIBUTING file"
+  ],
+  "SC-07": [
+   "PASS",
+   "CI on push or pull request: ci.yml"
+  ],
+  "GT-01": [
+   "PASS",
+   "default branch main"
+  ],
+  "GT-02": [
+   "FAIL",
+   "3 of 9 recent summaries are 50 characters or fewer"
+  ],
+  "UG-01": [
+   "FAIL",
+   "main is not protected"
+  ],
+  "GA-01": [
+   "PASS",
+   "all third-party actions pinned to a SHA"
+  ],
+  "GA-02": [
+   "PASS",
+   "top-level permissions set in every workflow"
+  ],
+  "GA-03": [
+   "PASS",
+   "no risky triggers"
+  ],
+  "GA-04": [
+   "PASS",
+   "no user-controlled fields interpolated into commands"
+  ],
+  "GA-05": [
+   "PASS",
+   "only GITHUB_TOKEN or app tokens"
+  ],
+  "GA-06": [
+   "N/A",
+   "no AWS access keys"
+  ],
+  "GA-07": [
+   "FAIL",
+   "CODEOWNERS missing or does not cover .github/workflows"
+  ],
+  "TD-01": [
+   "FAIL",
+   "no Dependabot or Renovate config"
+  ],
+  "TD-02": [
+   "FAIL",
+   "no cooldown"
+  ],
+  "TD-03": [
+   "FAIL",
+   "default limit of 5"
+  ],
+  "MS-01": [
+   "N/A",
+   "public repository"
+  ],
+  "VD-01": [
+   "N/A",
+   "no published site"
+  ],
+  "AD-01": [
+   "FAIL",
+   "no decision records folder"
+  ],
+  "DX-01": [
+   "FAIL",
+   "no pre-commit detect-secrets hook"
+  ],
+  "DX-02": [
+   "PASS",
+   "third-party actions to allowlist: none"
+  ]
+ },
+ "verdict": {
+  "verdict": "NOT READY",
+  "must_met": 7,
+  "must_total": 10,
+  "should_met": 2,
+  "should_total": 10,
+  "failing": [
+   "SC-03",
+   "SC-04",
+   "SC-05"
+  ],
+  "manual": [],
+  "exceptions": []
+ },
+ "assessment_mode": "canonical checker executed in a read-only GitHub Actions replay against the full temporary source checkout; checks and verdict matched",
+ "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating a source branch; source repository unchanged",
+ "self_test_status": "passed in workflow run 46160267470",
+ "metadata_gaps": [
+  "private_vulnerability_reporting setting not retrievable through this connector",
+  "third_party_impact not supplied; checker default applies"
+ ],
+ "source_head_sha": "fefdc8e98d2f7e58e95483f505dc1046bec6482e",
+ "repository_metadata": {
+  "visibility": "public",
+  "default_branch": "main",
+  "has_pages": false,
+  "has_issues": true,
+  "branch_protected": false,
+  "private_vulnerability_reporting": null,
+  "third_party_impact": null,
+  "commit_summaries_retrieved": 9,
+  "connected_identity_permissions": {
+   "admin": true,
+   "maintain": true,
+   "push": true,
+   "pull": true,
+   "triage": true
+  }
+ },
+ "native_checker_run": {
+  "workflow_run_id": 46160267470,
+  "workflow_url": "https://github.com/cyberdudeuk/cyberdudeuk.github.io/actions/runs/46160267470",
+  "artifact_id": 15269515207,
+  "artifact_name": "cddo-conformance-canonical-output",
+  "catalogue_commit": "229057ee48f9c7485b7fae49d01438dce3d7cebb"
+ }
+}

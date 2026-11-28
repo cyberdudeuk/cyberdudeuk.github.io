@@ -1,0 +1,43 @@
+{
+  "repository": "co-cddo/ocdo-data-foundations",
+  "ref": "main",
+  "head_sha": "39a05f88e554884a9ab6a1975d26114f6e93c3e4",
+  "truncated": false,
+  "files": [
+    {
+      "path": ".github",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "0b77a74ee1fe364e1b7977e5a04607dcc8e79797",
+      "size": null
+    },
+    {
+      "path": ".github/workflows",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "b84c8b735283f932039c23c797134ad6e7480929",
+      "size": null
+    },
+    {
+      "path": ".github/workflows/blank.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "01502b13e19cf0e0a38e7168405fc4a28e65338e",
+      "size": 1140
+    },
+    {
+      "path": "LICENSE",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "74e5445edf38be710616bff371ccd3c5abaeba96",
+      "size": 1059
+    },
+    {
+      "path": "README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b4f8647263ca53f42bfbe599bd4855f8c49e0e75",
+      "size": 23
+    }
+  ]
+}

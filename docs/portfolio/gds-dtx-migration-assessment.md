@@ -1,0 +1,177 @@
+# GDS-DTX migration and organisation-transition assessment
+
+**Status:** Initial evidence-based assessment; migration execution gated on the user's receiving-side organisation and repository permissions  
+**Prepared:** 28 November 2026  
+**Target organisation:** `gds-dtx`  
+**Source estates reviewed:** public `cyberdudeuk` portfolio and discoverable `co-cddo` repositories  
+**Important boundary:** this document covers public repository metadata and public content only. Private and OFFICIAL/OFFICIAL-SENSITIVE work requires a separate restricted migration register and approved handling.
+
+## 1. Executive recommendation
+
+Treat the move to `gds-dtx` as an estate transition, not a bulk GitHub transfer and not a monorepo exercise.
+
+- Preserve distinct products and their histories. Transfer an existing repository where it is the same product and the destination owner accepts it; recreate only where the destination needs a materially different operating model, access boundary or canonical identity.
+- Do not merge unrelated products simply because they share an organisation.
+- Reuse existing `gds-dtx` capabilities where the fit is demonstrated, but do not overwrite or absorb existing repositories without their maintainers' agreement.
+- Keep public, internal, private and OFFICIAL handling boundaries intact. Repository visibility must never be widened as a side effect of migration.
+- Maintain old URLs and a transition period. Update references, workflows, Pages, package consumers, MCP clients, documentation, badges and external links before retiring source locations.
+- The user has clarified that they are the intended receiving-side owner as well as the source-side owner for the three in-scope CDDO repositories. Do not treat a separate GDS-DTX sponsor as a prerequisite. Obtain the necessary organisation/repository rights, plus any formal security, information-governance or standards approvals that apply.
+
+## 2. Access and authority findings
+
+The connected GitHub identity is not currently returned by GitHub's organisation-membership listing. Repository discovery can nevertheless return public `gds-dtx` and `co-cddo` metadata. This is not equivalent to organisation membership or authority to transfer repositories.
+
+- The paginated `co-cddo` search returned 186 repositories: 43 archived, 43 internal/private and 100 public. Only seven of the 186 expose push permission to this connection; only `co-cddo/MoG-Navigator` exposes repository-admin permission. The `gds-dtx` search returned 62 repositories; only one exposes push/admin permission to this connection (`gds-dtx/data-asset-management-hub`). Direct metadata/content reads for that repository and `gds-dtx/legacy-register` returned 404, so those repositories' internal implementation and ownership could not be validated. This is an access snapshot, not a complete inventory of either organisation's ownership or programme responsibilities.
+- `gds-dtx` search exposes repository metadata, including potentially related `data-asset-management-hub` and `legacy-register`. Direct repository metadata/content requests for those internal repositories returned 404 in this connection, so their internal implementation and ownership could not be validated.
+- The available GitHub connector exposes repository reads and ordinary content/PR operations, but no repository-transfer or organisation-administration action. It cannot execute the organisation transfer.
+- Therefore this review can identify candidates, dependencies and migration packs, but cannot complete transfers, create receiving repositories in the organisation, alter team permissions, or validate organisation-level policies.
+
+A transfer must be initiated by the user's account once it has the necessary source-repository administration and target-organisation permissions. Use the existing `gds-dtx/data-asset-management-hub` as the benchmark for the receiving-side access level the user expects to have. Before scheduling, confirm destination naming, visibility, team access, Actions policy, Pages policy, rulesets, secret/environment handling, package permissions and billing limits.
+
+## 3. Evidence-backed `co-cddo` workstream inventory
+
+The organisation search returned a broad estate. The user has explicitly confirmed that the first three repositories below are theirs and are in scope for migration/transfer. That ownership/scope instruction takes precedence over inferences from GitHub collaborator permissions. The remaining visible repositories are not in scope unless separately confirmed. The following classification distinguishes the three confirmed work repositories from other repositories that were only visible or writable.
+
+| Repository | Evidence observed | Initial disposition |
+|---|---|---|
+| `co-cddo/MoG-Navigator` | **User-confirmed in scope.** Public; this account has repository-admin permission. Commit search for `author:cyberdudeuk` returned multiple substantive July 2026 commits, including the autonomous module, source-feed process, standalone app and MOG-1.2.0 release. README explicitly says it is not commissioned by, endorsed by or affiliated with a government department. | **Priority 1 — prepare for transfer.** Prefer direct repository transfer to GDS-DTX if the receiving owner accepts it. Preserve its disclaimer and existing public status unless an approved decision changes them. Revalidate scheduled-workflow state after migration; the existing harvester is a safe dry-run, not a live feed. |
+| `co-cddo/ocdo-data-foundations` | **User-confirmed in scope.** Public; this account has push but not admin permission. Author-filtered commit search found a basic CI workflow commit (3 August 2026). README is only a title stub; repository size is 3 KB. | **Priority 2 — transfer/recreate decision after content check.** It is small and appears to be a placeholder, so inspect its complete public tree, branches, history and consumers before deciding whether to transfer intact or recreate a clean successor while preserving the source history. Source admin approval/permission is still required for a direct transfer. |
+| `co-cddo/ukgov-metadata-exchange-model` | **User-confirmed in scope.** Public; this account has push but not admin permission. The README describes the cross-government metadata model, LinkML source, generated JSON Schema/SHACL and GitHub Pages deployment. Author-filtered commit search found historical 2023 changes, not recent direct ownership evidence. | **Priority 3 — standards-critical migration.** Include in the migration programme, but preserve standards stewardship, canonical model identity, published artefacts and GitHub Pages consumers. Obtain the relevant source admin and receiving GDS-DTX standards owner approvals before transfer. NDL PubSec MCP must continue to respect the currently endorsed model until a formal standards decision. |
+| `co-cddo/federated-api-model` | Public; push but not admin permission. README describes the Data Standards Authority's federated API discovery model and a project backlog. No direct authored commit was returned by the targeted author search. | **Dependency/ownership review.** Move only through the responsible programme/maintainer decision; do not assume repository access equals ownership. |
+| `co-cddo/future-data-architecture` | Public; push but not admin permission. README describes GDS future data architecture resources and a published static site. No direct authored commit was returned by the targeted author search. | **Dependency/ownership review.** If still authoritative, migrate with its site/domain and link dependencies; otherwise preserve as an archive/redirect under the source owner's decision. |
+| `co-cddo/api-standards-linting` and `co-cddo/api-data-exchange-community` | Public; push but not admin permission. Repository visibility and write access were observed, but no direct authored commit was returned by the targeted author search. | **Stakeholder review only.** Confirm current ownership and whether either is in scope before proposing any migration. |
+| Other visible `co-cddo` repositories | Many additional repositories are discoverable, but most are read-only and no evidence establishes them as this portfolio's work. | **Out of scope.** The user has confirmed that only the three repositories above are theirs and included in this migration. Do not transfer or recreate any other CDDO repository. |
+
+The commit search was targeted and is evidence of some contributions, not a complete audit of every historical commit, issue, project board, deployment or external dependency.
+
+## 4. Mapping the public portfolio to GDS-DTX
+
+The following is a first-pass destination assessment. “Candidate” means the work appears relevant to a GDS-DTX public-sector engineering/data portfolio; it does not mean the receiving organisation has accepted it.
+
+| Source repository | Proposed route | Rationale / gate |
+|---|---|---|
+| `ai-capability-governance` | Candidate for transfer or governed recreation | Public-sector AI governance; compare with existing GDS-DTX AI governance/security work before choosing a destination. |
+| `ndl-pubsec-mcp` | Candidate for transfer | Public-sector dataset discovery/metadata validation; retain a distinct MCP product and its standards-version boundary. |
+| `dq-commons` | Candidate for transfer | Reusable data-quality toolkit and provenance/assessment contracts; retain as its own product. |
+| `dam-capability-playbooks` | Candidate for transfer or integration with an existing DAM hub | Guidance/playbooks are distinct from a DAM product runtime. Compare with `gds-dtx/data-asset-management-hub` before creating a duplicate. |
+| `dam-policy-explorer` | Candidate for transfer or controlled recreation | Distinct policy navigation experience; assess whether it should remain an independent product or become a separately deployable module around the DAM hub. |
+| `dcat-ap-uk` | Candidate for transfer, subject to standards sponsorship | Proposed profile only; preserve its explicit proposed/not-endorsed status and decision history. |
+| `legacy-technology-observatory` | Candidate for transfer or integration with the existing legacy register | Observatory evidence and the GDS-DTX `legacy-register` may be complementary or overlapping; compare schema, stewardship, source-of-truth and user tasks before deciding. |
+| `opengovernment-uk` | Candidate for transfer | Public-body/accountability register; establish canonical record ownership, source licences, refresh process and data governance. |
+| `pubsec-tech-hub` | Candidate for transfer | Public-sector technology adoption catalogue; preserve the distinction from the code-reuse catalogue and legacy observatory. |
+| `github-repos-asset-catalogue` | Candidate for transfer | Public-sector code discovery; keep distinct from product/adoption catalogues. |
+| `knowledge-web` | Conditional candidate | Domain-neutral knowledge map; move only if its intended stewardship and audience are GDS-DTX-aligned. |
+| `uk-youth-parliament-amplify`, `young-person-360`, `earning-learning-training`, `start-a-business-uk` | Conditional candidates | Public-facing service experiences; require service owner, safeguarding, user research, privacy, content and hosting approval before migration. Preserve independent product boundaries. |
+| `black-mixed-heritage`, `awards-and-recognition-hub`, `plainspoken` | Retain separately unless explicitly commissioned as GDS-DTX work | Distinct community/editorial, awards and coaching purposes; do not infer organisational ownership from technical relevance. |
+| `cyberdudeuk.github.io`, `cyberdudeuk`, `.github` | Split/recreate selectively; retain personal account surfaces where needed | The launchpad and profile are personal account surfaces, not automatically GDS-DTX properties. Recreate a work-only catalogue under the organisation if accepted; keep personal links/redirects stable. |
+| `w3id.org` | Do not transfer | External W3C Permanent Identifier Community Group governance; retain its independent ownership and decision process. |
+| `legacy-code-observatory` | Keep redirect until verified, then archive only with owner approval | Redirect-only predecessor; verify old GitHub Pages URL and inbound references before any lifecycle action. |
+
+Private repositories are deliberately excluded from this public table. Their migration decisions must be recorded in a restricted register, using the approved information-handling model. In particular, no OFFICIAL/OFFICIAL-SENSITIVE source, data or operational material should be copied into a public destination.
+
+## 5. Existing GDS-DTX repositories to assess before creating destinations
+
+- `gds-dtx/data-asset-management-hub`: likely related to DAM Capability Playbooks and DAM Policy Explorer. Its internal README/content could not be inspected through this connection (repository metadata/content request returned 404). Treat as a potential existing platform, not as a confirmed equivalent or merge target.
+- `gds-dtx/legacy-register`: likely related to Legacy Technology Observatory. Its internal README/content could not be inspected through this connection. Compare scope and ownership before deciding whether the observatory should feed the register, be a separate product, or be recreated.
+- `gds-dtx/engineering-standards`: public README describes 69 draft/MVP engineering standards and a context-aware standards toolchain. This may provide reusable engineering practice, but it is not a substitute for product-specific assurance or a reason to merge repositories.
+- `gds-dtx/schemas`: public README explicitly warns that the proposed schema platform is work in progress and not for production. Do not silently move production schemas or treat it as an approved canonical schema service.
+
+## 6. Transfer versus recreate: decision rules
+
+**Prefer transfer** when the repository remains the same product, its history/issues/PRs/releases are valuable, ownership is accepted by GDS-DTX, and the same security classification and operating model remain appropriate. A GitHub transfer normally preserves the repository identity/history and redirects the old URL, but integrations and permissions still need validation.
+
+**Prefer recreate with controlled migration** when the destination requires a different visibility or security boundary, new service ownership, different CI/CD or deployment, removal of personal/non-work material, a new canonical data model, or a formal product re-baseline. Preserve source commit provenance and document what was intentionally not copied (for example, secrets, private data, obsolete workflows or personal issue discussions). Do not flatten history without a recorded reason.
+
+**Keep separate** when purpose, users, standards governance, licence, data classification, service owner or release lifecycle differ. Integration should use versioned interfaces and stable identifiers.
+
+## 7. Mandatory migration controls and runbook
+
+For each accepted repository, create a migration record containing:
+
+1. **Ownership and authority:** source owner/admin, receiving owner/team, accountable service owner, records owner and required approvals (including a sponsor only if a formal policy requires one).
+2. **Classification and licence:** current visibility, information classification, personal data, special-category data, Crown copyright/licence, third-party licences and data-sharing constraints.
+3. **Technical baseline:** default branch, all branches/tags/releases, LFS usage, submodules, GitHub Pages/custom domains, packages, deployments, environments, Actions workflows, reusable workflow references, secrets/variables (names only), webhooks/apps, Dependabot, CodeQL, rulesets and branch protection.
+4. **Collaboration state:** open issues/PRs, project boards, discussions, milestones, releases, collaborators/teams and required audit/records retention.
+5. **Consumer map:** source-code references, raw GitHub URLs, badges, README/docs links, package coordinates, MCP/client configuration, API consumers, data feeds, DNS, OAuth callbacks and scheduled jobs.
+6. **Target readiness:** receiving repo name, visibility, teams, rulesets, Actions permissions, environments, secrets re-provisioned through approved channels, Pages settings, package access, CODEOWNERS, support route and incident ownership.
+7. **Execution:** freeze window, final source snapshot, transfer/recreation, update consumers, smoke tests, deployment validation and rollback/forward-fix plan.
+8. **Closure:** verify old URLs/redirects, release artefacts, branch protection, permissions, audit trail, monitoring, owner acceptance and source-repo archive/retention decision.
+
+Never copy secrets into Git, issues or this migration document. Recreate secrets and environment values only through approved secret-management channels. Validate GitHub Pages, Actions, packages and webhook integrations explicitly after a transfer; do not assume they all continue unchanged.
+
+## 8. Sequenced programme
+
+### Gate 0 — scope and personal receiving-side ownership confirmed; complete access
+- The migration scope under `co-cddo` is exactly these three user-confirmed repositories: `MoG-Navigator`, `ocdo-data-foundations` and `ukgov-metadata-exchange-model`. No other CDDO repositories are in scope.
+- The user is the intended receiving-side owner. No separate GDS-DTX sponsor is required by this plan; the missing prerequisite is the necessary organisation and repository rights.
+- Match the user's receiving-side rights to the access level available on `gds-dtx/data-asset-management-hub` (including the organisation-level capabilities required to accept/transfer repositories, configure teams and policies, and manage settings).
+- Obtain the deprecation date/plan and transition deadline for `co-cddo`.
+- Secure source-repository admin/owner rights for the two repositories where this connection currently exposes only push permission.
+
+### Gate 1 — complete restricted inventory
+- Build a private migration register for the 11 private repositories in the cyberdudeuk estate and any private/internal co-cddo repositories in scope.
+- Follow the approved handling model; no source inspection of OFFICIAL/OFFICIAL-SENSITIVE repositories without explicit authorisation.
+- Verify open PRs/issues, data classification, deployment, secrets, integrations, and target access.
+
+### Gate 2 — resolve overlaps and destination design
+- Compare DAM products with `data-asset-management-hub`.
+- Compare Legacy Technology Observatory with `legacy-register`.
+- Map DQ Commons, xGov MEM, DCAT-AP-UK, NDL MCP and existing GDS-DTX schema/standards capabilities without conflating endorsed and proposed standards.
+- Confirm destination names, visibility and ownership before any new repository is created.
+
+### Gate 3 — migrate in waves
+1. Low-risk public documentation and standalone tools with no production consumers.
+2. Public data/standards products after source-of-truth and consumer mapping.
+3. Public-facing services after service, safeguarding, privacy and hosting approval.
+4. Private/internal systems only after classification, security and environment approvals.
+5. OFFICIAL/OFFICIAL-SENSITIVE material only through the approved restricted migration route.
+
+### Gate 4 — decommission source locations
+Only after receiving-owner acceptance and successful consumer/deployment checks. Preserve redirect/history and records obligations; do not delete by default.
+
+## 9. Current blockers and outstanding decisions
+
+| Item | Current status | Required action |
+|---|---|---|
+| GDS-DTX organisation access | The user confirms they are the intended receiving-side owner. Current connection still returns no organisation membership; internal repository reads return 404; no transfer action is exposed | Obtain and verify the user's GDS-DTX organisation and repository rights, using `data-asset-management-hub` as the practical access benchmark. No separate sponsor is assumed. |
+| CDDO deprecation | User reports organisation is being deprecated; no authoritative sunset date or repository transfer schedule was available in this review | Obtain the official deprecation timeline and repository disposition list from CDDO administrators. |
+| MoG Navigator | Strong direct-work candidate; source repository admin permission available; explicit non-government disclaimer in README | User can initiate the source-side transfer once target-organisation rights and any required internal policy approvals are in place; retain the non-endorsement disclaimer. |
+| xGov MEM and federated API model | Important standards/integration dependencies; collaborator push access does not establish ownership | Standards/programme owner to determine successor home and consumer transition. |
+| DAM hub and legacy register | Potential existing destinations; internal content could not be reviewed | Obtain access and perform a deeper comparison before creating or merging anything. |
+| Private work | Excluded from public report | Complete restricted inventory and approvals before moving any private or protected content. |
+
+## 10. Non-authorisations
+
+This assessment does not authorise bulk transfer of the `co-cddo` organisation, moving repositories without source/target admin approval, merging products, deleting or archiving source repositories, changing visibility, copying protected data, changing production deployments, changing billing, or transferring any repository into an organisation without a named receiving owner.
+
+**Target principle:** one accountable GDS-DTX home for each accepted workstream, distinct repositories for distinct products, preserved provenance and history, and no loss of service or governance during the transition.
+
+
+## 9A. GDS-DTX conformance pre-assessment
+
+The 25-check GDS Way migration-readiness framework used in the user's other repositories has now been applied as a structured pre-assessment to the three in-scope CDDO repositories. The evidence, check-by-check preliminary statuses, repository-specific migration gates and formal execution procedure are recorded in [GDS-DTX conformance pre-assessment (28 November 2026)](gds-dtx-conformance-preassessment-2026-11-28.md).
+
+**Important:** this is explicitly a pre-assessment, not a formal scored run. The complete source checkouts and all GitHub metadata are not available through the current source-repository integration. No READY/NOT READY verdict or badge has been issued. The four standard artefacts (`docs/conformance/report.md`, `result.json`, `badge.svg`, `badge.json`) must be generated in each source repository by running the catalogue's checker against a complete checkout and metadata file, then reviewed and committed in a source-repository PR. No source repository has been modified.
+
+
+## 9B. Three-repository GDS-DTX conformance results
+
+The exact 25-check GDS Way/GDS-DTX framework in `cyberdudeuk/github-repos-asset-catalogue/tools/conformance.py` has now been replayed against the complete recursive source trees, relevant files, GitHub metadata, main-branch protection state and available recent commit summaries for the three in-scope repositories.
+
+- [Results index](conformance/README.md)
+- [MoG-Navigator result](conformance/mog-navigator/report.md): **NOT READY**, MUST 7/10; SHOULD/CONSIDER 2/10.
+- [OCDO Data Foundations result](conformance/ocdo-data-foundations/report.md): **NOT READY**, MUST 5/10; SHOULD/CONSIDER 3/10.
+- [UK Government Metadata Exchange Model result](conformance/ukgov-metadata-exchange-model/report.md): **NOT READY**, MUST 4/10; SHOULD/CONSIDER 3/11.
+
+Each repository folder contains a Markdown report, checker-shaped JSON result, badge SVG/JSON, metadata input and full source-tree manifest. The canonical checker self-test and `--write` passed in [workflow run #46160267470](https://github.com/cyberdudeuk/cyberdudeuk.github.io/actions/runs/46160267470) against full temporary clones pinned to each source commit; all three 25-check results and verdicts matched. The four canonical output files per repository were uploaded as artifact `cddo-conformance-canonical-output` (ID `15269515207`). The GitHub integration still returned HTTP 403 when creating a source branch, so no source repository was modified and source-side PR commits remain outstanding.
+
+The main MUST failures are:
+- **MoG-Navigator:** both MIT and OGL licence evidence, a documented security-reporting route, and a changelog/release record for its known consumer.
+- **OCDO Data Foundations:** README minimum, both MIT and OGL licence evidence, security reporting, changelog/release record, and explicit least-privilege workflow permissions.
+- **UK Government Metadata Exchange Model:** MIT alongside its existing OGL licence (subject to rights review), security reporting, changelog/release record, full-SHA pinning for `snok/install-poetry`, top-level least-privilege workflow permissions, and review of `pull_request_target`/issues triggers.
+
+Do not resolve licence failures by mechanically adding or changing licence terms. Obtain the relevant rights/ownership decision first. Do not resolve the standards repository's workflow findings by changing its Pages URL, branches, release history or standards status.
+
+## 9C. Receiving-side access request reference
+
+GitHub search surfaced `gds-dtx/gds-dtx-github-users-tf#15`, titled **“Add cyberdudeuk”**, as a likely access-request PR relevant to the user's stated receiving-side rights. The current connection can see the search result but receives 404 when retrieving the PR or issue details, so its approval, merge state and permission effect cannot be verified. Do not treat the search result alone as proof of organisation membership or repository-admin authority. The user's intended receiving-owner role remains the plan assumption; effective rights must be verified through a working connection.

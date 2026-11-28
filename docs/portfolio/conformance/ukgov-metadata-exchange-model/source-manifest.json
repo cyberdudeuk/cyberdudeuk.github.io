@@ -1,0 +1,645 @@
+{
+  "repository": "co-cddo/ukgov-metadata-exchange-model",
+  "ref": "main",
+  "head_sha": "3e6c6f5eb6dda6e90ca956d0273f3698fd584212",
+  "truncated": false,
+  "files": [
+    {
+      "path": ".github",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "efc7e0287b24b6f486c27747a7a769ab768865e4",
+      "size": null
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "297071d972c79764ba659d5a30f16877c96bdeca",
+      "size": null
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dd84ea7824f11be1eeda22377549cbc1aec7f980",
+      "size": 834
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bbcbbe7d61558adde3cbfd0c7a63a67c27ed6d30",
+      "size": 595
+    },
+    {
+      "path": ".github/workflows",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5b962c2edf7b58297fe12eda5463607ad5cae98c",
+      "size": null
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3252603d1bbf49737d121c6f13d2ecb8ecc8535e",
+      "size": 4671
+    },
+    {
+      "path": ".github/workflows/deploy-docs.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8a5dd6f92b6eb7dc99e62a65ceb750e619e1f81c",
+      "size": 738
+    },
+    {
+      "path": ".github/workflows/docker-image.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3f53646d13d79fa69f02dec2b73c625918ad116a",
+      "size": 301
+    },
+    {
+      "path": ".github/workflows/docker-publish.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4aee4a8d5c453faadec489aec87664d8efe09ec1",
+      "size": 3682
+    },
+    {
+      "path": ".github/workflows/greetings.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "46774343e35f223325d8cd57d35643ddaa388a6e",
+      "size": 433
+    },
+    {
+      "path": ".github/workflows/main.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2b6a75d91085a19fe3c43e4aa0f158887e4f2342",
+      "size": 752
+    },
+    {
+      "path": ".gitignore",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6d4a170e3f31f6e6bcacfe3f5c5fd3d38ed4df8f",
+      "size": 73
+    },
+    {
+      "path": "Dockerfile",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "907874b2b7dd9eb976d2fd752cb9a94f49fd3a57",
+      "size": 315
+    },
+    {
+      "path": "LICENSE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "94f6d3f69c4c7e86a6a1dd38d46a8e694c96c5c5",
+      "size": 6467
+    },
+    {
+      "path": "Makefile",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bc7d6390d67198c6b42c8c1c1e5d6516d842044c",
+      "size": 6207
+    },
+    {
+      "path": "README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "753d1fd8ea821459b7577a4224656dce0547f707",
+      "size": 3458
+    },
+    {
+      "path": "mkdocs.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "92a7d2056ea1b786c30232d7c78dbe8a66037b0b",
+      "size": 887
+    },
+    {
+      "path": "poetry.lock",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b63f89594c42cf064b40fa01429af7bd705fa57c",
+      "size": 173754
+    },
+    {
+      "path": "pyproject.toml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5a6d673a8e3bcafafe560c9aa448e234b88c9180",
+      "size": 739
+    },
+    {
+      "path": "src",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5874e839dabf89965fda015aaa7378cf498dcc42",
+      "size": null
+    },
+    {
+      "path": "src/data",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a3c08cea550750e8f4218e5776905c255423fde1",
+      "size": null
+    },
+    {
+      "path": "src/data/ContactPoint",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "60f881309daaf96a85f7db93f64222ecc51f8202",
+      "size": null
+    },
+    {
+      "path": "src/data/ContactPoint/invalid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "fa87884d45aab154cfbad6d3ac000038674cdcfb",
+      "size": null
+    },
+    {
+      "path": "src/data/ContactPoint/invalid/invalid-contact-email.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f46b32d24c7167800a92b3e618304d7928f174b7",
+      "size": 122
+    },
+    {
+      "path": "src/data/ContactPoint/invalid/missing-contact-name.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1ebe5b34ca122e32046547fec92f909d33a93329",
+      "size": 98
+    },
+    {
+      "path": "src/data/ContactPoint/valid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "15e4ad651600e6ccd1298f2d63ab4f81a8f9db58",
+      "size": null
+    },
+    {
+      "path": "src/data/ContactPoint/valid/ContactPoint-fsa-minimal.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "60ece2947fa4c67d9855bf5a88130bb97d5c66ab",
+      "size": 101
+    },
+    {
+      "path": "src/data/DataService",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "0eeeec08dfa6d42a9fd02e84c6f29009020b5101",
+      "size": null
+    },
+    {
+      "path": "src/data/DataService/invalid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "665ac1aa7e11b5a5aeee849e376c3ae0b27752e9",
+      "size": null
+    },
+    {
+      "path": "src/data/DataService/invalid/dwp-address-lookup.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b20d4e03921e1d14d6f72ab3131f123aae6db532",
+      "size": 3519
+    },
+    {
+      "path": "src/data/DataService/invalid/invalid-access-right.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d050d327e0aceac2d6101c679b61dbd82656733c",
+      "size": 3520
+    },
+    {
+      "path": "src/data/DataService/invalid/invalid-date-format.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "34474162e0b69eacfb9a596880c8efb8f694ce1b",
+      "size": 3516
+    },
+    {
+      "path": "src/data/DataService/invalid/invalid-datetime-format.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "395c4ef5aa6a918d9d86ed6ca4cb0499d626dd59",
+      "size": 3527
+    },
+    {
+      "path": "src/data/DataService/invalid/invalid-email.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b6a6da1748658026eaa61c77683362e4fe276574",
+      "size": 3522
+    },
+    {
+      "path": "src/data/DataService/invalid/invalid-security-classification.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c19311db309c7a58526088b9b220eeafc097795c",
+      "size": 3524
+    },
+    {
+      "path": "src/data/DataService/invalid/invalid-serviceStatus.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "91e318add27dbd9f1fa870bd593d2c46d565f79a",
+      "size": 3524
+    },
+    {
+      "path": "src/data/DataService/invalid/licence-attribute-misspelled.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9c0c9935901b7ec617dbe130d5d81d7d7dba7c60",
+      "size": 3519
+    },
+    {
+      "path": "src/data/DataService/invalid/missing-security-classification.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8bc54693528aeb8e8201e253138930421bffcc15",
+      "size": 1083
+    },
+    {
+      "path": "src/data/DataService/valid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "db05f4476c6b5ce6a600946407f02d8329498ec2",
+      "size": null
+    },
+    {
+      "path": "src/data/DataService/valid/DataService-dwp-address-lookup.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1b5c6573cfe4850dd41fee917efed40a01132aee",
+      "size": 3615
+    },
+    {
+      "path": "src/data/DataService/valid/DataService-fsa-food-alertsservice.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9705397c203e5bd7d160111a132b5b2bc5eafb71",
+      "size": 1132
+    },
+    {
+      "path": "src/data/DataService/valid/DataService-hmrc-irr-api.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4c33f1e3aed9a4a7dfb34b9cfb266099a429802c",
+      "size": 2814
+    },
+    {
+      "path": "src/data/DataService/valid/DataService-nhs-os-places-api.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "826549e9a6236702412962b1b722914be2a7ae4d",
+      "size": 829
+    },
+    {
+      "path": "src/data/DataService/valid/DataService-nhs-vaccination-events.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "19f20b4a9fca5aff0688a3a340f7fc0da2bfa9f3",
+      "size": 1012
+    },
+    {
+      "path": "src/data/Dataset",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "00ef0d5718095835cd859b851d5bc2ae285c50a8",
+      "size": null
+    },
+    {
+      "path": "src/data/Dataset/invalid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "452f5cd586dbdb3702d4029122996ef14b3b2271",
+      "size": null
+    },
+    {
+      "path": "src/data/Dataset/invalid/invalid-distribution.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "08aef31280b5ee3568451224c2e41a32f26bebf4",
+      "size": 1233
+    },
+    {
+      "path": "src/data/Dataset/invalid/invalid-frequency.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5ac6b12f503bfe8fccf8bd51119db1c1f85b48d6",
+      "size": 1163
+    },
+    {
+      "path": "src/data/Dataset/invalid/invalid-type.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f240cdd29b93f8892fc8da78d02eaa2f040b7e5e",
+      "size": 1159
+    },
+    {
+      "path": "src/data/Dataset/invalid/missing-frequency.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fddde0221f89303bb2fb8956b02bb14ac838dd8e",
+      "size": 1134
+    },
+    {
+      "path": "src/data/Dataset/invalid/multiple-frequency.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8e04d18a61b654a5255ef4d99f5d9875ded54a68",
+      "size": 1188
+    },
+    {
+      "path": "src/data/Dataset/valid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "9a85671742e809d87fd031cef6366d56af61e863",
+      "size": null
+    },
+    {
+      "path": "src/data/Dataset/valid/Dataset-minimal-datset.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "630c2738fcbde3c67ab60f8775e5d738f8094989",
+      "size": 1162
+    },
+    {
+      "path": "src/data/Dataset/valid/Dataset-os-postcodes-datset.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "39514f78273f67c9212a3059e03591931fe26800",
+      "size": 1638
+    },
+    {
+      "path": "src/data/Distribution",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "da2222a669f1fe1b4b80d30776ec0d7792355f84",
+      "size": null
+    },
+    {
+      "path": "src/data/Distribution/invalid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "ca8875104b108d5ca2319b4f2f0ba3128002c3c0",
+      "size": null
+    },
+    {
+      "path": "src/data/Distribution/invalid/invalid-mediatype-csv.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e889709742ee86e5a5207224dffa5a79c4b3b4b2",
+      "size": 375
+    },
+    {
+      "path": "src/data/Distribution/invalid/invalid-mediatype-uri.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3effaf40980a9b3221def21c8ec1ace912a00e78",
+      "size": 410
+    },
+    {
+      "path": "src/data/Distribution/invalid/multiple-mediatype.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "37406fb77800b33258a2a02c9fadf23e7a9fe894",
+      "size": 420
+    },
+    {
+      "path": "src/data/Distribution/invalid/os-postcodes-csv-distribution.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b406646878143b4d356e3eaa5aa8a38bc9d67660",
+      "size": 703
+    },
+    {
+      "path": "src/data/Distribution/valid",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "c860ce6414a23432e7b89ed981b0b25d72b65a0f",
+      "size": null
+    },
+    {
+      "path": "src/data/Distribution/valid/Distribution-os-postcodes-csv-distribution-minimal.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cd2d7dbbfd2d9c8a613d70196fc3fbccb24956dd",
+      "size": 380
+    },
+    {
+      "path": "src/data/Distribution/valid/Distribution-os-postcodes-csv-distribution.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "35cd510ee7bed214f66af11d87a831c83172fc0e",
+      "size": 797
+    },
+    {
+      "path": "src/data/Distribution/valid/Distribution-os-postcodes-excel-distribution-minimal.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "34f4d4906ff2c7d33c6216eca269a3e019ecb66c",
+      "size": 444
+    },
+    {
+      "path": "src/data/Distribution/valid/Distribution-os-postcodes-geopackage-distribution.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9b5ebf73fe4b1da1e2f13caa9041b8a71ac34016",
+      "size": 862
+    },
+    {
+      "path": "src/data/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "08b50da02246b0406eb89bcae9f2c685de43d84a",
+      "size": 219
+    },
+    {
+      "path": "src/docs",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a924b34268df04385050a256bd5d74d4e0a7d3b5",
+      "size": null
+    },
+    {
+      "path": "src/docs/about.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fe6aef5cf12483e400d7771cbd76fa01e3aa832b",
+      "size": 5661
+    },
+    {
+      "path": "src/docs/extras",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a554006f4931e47f1d50c07e9456a556e0b1828f",
+      "size": null
+    },
+    {
+      "path": "src/docs/extras/404.html",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7aff559ba4a3447d988f6291b724a59ede9f0b21",
+      "size": 1798
+    },
+    {
+      "path": "src/docs/extras/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "eaeaab8a964734d8e0e754b7c632847251c0713a",
+      "size": 83
+    },
+    {
+      "path": "src/docs/extras/assets",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "eb9d0d9fd3dd5e452744afc2bc99e58b24b2b881",
+      "size": null
+    },
+    {
+      "path": "src/docs/extras/assets/favicons",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "870912f04e195f63050a8eae0fb7c3f2cd50f6d5",
+      "size": null
+    },
+    {
+      "path": "src/docs/extras/assets/favicons/favicon.ico",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "28004dd3f813ba4b16b4f72023a94603801ee813",
+      "size": 6318
+    },
+    {
+      "path": "src/docs/miwg.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "88efb138624db463b073ed81200b74bd0e20e369",
+      "size": 4311
+    },
+    {
+      "path": "src/docs/templates",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "fb1ff8e99406edab9739f1a7ab4df78d58679fd9",
+      "size": null
+    },
+    {
+      "path": "src/docs/templates/class.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "afa307337b4aba6b3f515eff0cd8e75ee00b10b8",
+      "size": 3678
+    },
+    {
+      "path": "src/docs/templates/class_diagram.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e708a143cce1ae0758fe438a41e3e08d21c8f7c7",
+      "size": 2782
+    },
+    {
+      "path": "src/docs/templates/common_metadata.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ffe2a36ee7243fecf24d735c9f4b30cd1d3e0454",
+      "size": 1455
+    },
+    {
+      "path": "src/docs/templates/enum.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "96dfa27ac6ba59af77da2832911a846d13efce75",
+      "size": 1208
+    },
+    {
+      "path": "src/docs/templates/feedback_footer.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6fad32456ac977edcd446082c655c0d390ec34d5",
+      "size": 1376
+    },
+    {
+      "path": "src/docs/templates/index.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "91da7b186735b654890c58ab0eddf0b72ef0c90d",
+      "size": 2847
+    },
+    {
+      "path": "src/docs/templates/schema.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3171d79ec9cbcb709b5cbfd704ad2b4bead40d2e",
+      "size": 300
+    },
+    {
+      "path": "src/docs/templates/slot.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0de53e5a45fef2fd7ccd16f003a217bd0db3e745",
+      "size": 3209
+    },
+    {
+      "path": "src/docs/templates/subset.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "73432677bf381cb0b61ce21fe977ff58f8698cfc",
+      "size": 2910
+    },
+    {
+      "path": "src/docs/templates/type.md.jinja2",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "28d374d1206e54ed69cc61eae2f5f9a6a0c07ab2",
+      "size": 908
+    },
+    {
+      "path": "src/model",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "66058cc2de8cb9f036af5e294642c3d294971652",
+      "size": null
+    },
+    {
+      "path": "src/model/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ddc4a5d0835d44cc7d42bff53a90c910d2623b17",
+      "size": 3650
+    },
+    {
+      "path": "src/model/export-gov-uk-orgs.grel",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "852fd592d842e2581f58b223b0f4d88d0c7925f7",
+      "size": 715
+    },
+    {
+      "path": "src/model/uk-gov-orgs.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c6090e11ae3cd1e81e97d2a3de23218ca94ec54b",
+      "size": 512837
+    },
+    {
+      "path": "src/model/uk_cross_government_metadata_exchange_model.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e9c732113de6265585735d1ff9b34891ab4d5cfd",
+      "size": 52881
+    }
+  ]
+}

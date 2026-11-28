@@ -1,0 +1,13 @@
+{
+  "full_name": "co-cddo/ocdo-data-foundations",
+  "visibility": "public",
+  "default_branch": "main",
+  "has_pages": false,
+  "has_issues": true,
+  "branch_protected": false,
+  "private_vulnerability_reporting": null,
+  "commit_summaries": [
+    "Create basic CI workflow with GitHub Actions",
+    "Initial commit"
+  ]
+}

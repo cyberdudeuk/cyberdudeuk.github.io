@@ -1,0 +1,20 @@
+{
+  "full_name": "co-cddo/MoG-Navigator",
+  "visibility": "public",
+  "default_branch": "main",
+  "has_pages": false,
+  "has_issues": true,
+  "branch_protected": false,
+  "private_vulnerability_reporting": null,
+  "commit_summaries": [
+    "Build standalone MoG Navigator app (MOG-2) on the existing solution",
+    "Add ecosystem blueprint (ECO-1.0.0) + record",
+    "Merge auto-initialised remote; keep the module's own README and LICENSE",
+    "Initial commit",
+    "README: record the open-by-default visibility posture",
+    "Add comparative theory of change (v1.0, falsifiable)",
+    "Establish trusted source feeds and a propose-only self-updating routine",
+    "Cut MOG-1.2.0: DSIT dissolution booked from the public record",
+    "Stand up MoG Navigator as an autonomous module"
+  ]
+}
