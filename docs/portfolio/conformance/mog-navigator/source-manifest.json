@@ -1,0 +1,232 @@
+{
+  "repository": "co-cddo/MoG-Navigator",
+  "ref": "main",
+  "head_sha": "fefdc8e98d2f7e58e95483f505dc1046bec6482e",
+  "truncated": false,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b",
+      "size": 66
+    },
+    {
+      "path": ".github",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "76316e719fb0c2b8f849fcf809410852f8672e6d",
+      "size": null
+    },
+    {
+      "path": ".github/workflows",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "8f657f0e409d8b3bdfa588d9c2a1a8ee80c3f1a3",
+      "size": null
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5b60d483ad938eeb4415a9ac02d5a16886a04506",
+      "size": 1156
+    },
+    {
+      "path": ".github/workflows/harvest.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6a09b921724cbeb327b8d662bc405f9717f358eb",
+      "size": 1395
+    },
+    {
+      "path": ".gitignore",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7a9bf6d15a9f6088ec959f0696f7e8e3fcad3761",
+      "size": 43
+    },
+    {
+      "path": "INTERFACE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3412e0d8bf1c9ae07534822d7ec7e6a647299080",
+      "size": 3805
+    },
+    {
+      "path": "LICENSE",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "74e5445edf38be710616bff371ccd3c5abaeba96",
+      "size": 1059
+    },
+    {
+      "path": "README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5baa99a696f7c0fc656a1d47be9565601156cf74",
+      "size": 4096
+    },
+    {
+      "path": "app",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "805e1a825a7203945e678f0dc0dc0391f8180a6f",
+      "size": null
+    },
+    {
+      "path": "app/index.html",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4788367fa54d09742d5c6dcfcf1428351e0d69ea",
+      "size": 74949
+    },
+    {
+      "path": "blueprint",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "d45f6ae1910bb89daafacd6d065a293fdef78a1f",
+      "size": null
+    },
+    {
+      "path": "blueprint/ecosystem-blueprint.html",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ab37cd860d28ce74621be4332f391a15ae647f07",
+      "size": 42507
+    },
+    {
+      "path": "canon",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "2b4dd6f49cd820e2efab02672c8dc06ad7f25de7",
+      "size": null
+    },
+    {
+      "path": "canon/mog-canon.js",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9b78f613163ee81af2d5c941f08d5a8b202fc65c",
+      "size": 55609
+    },
+    {
+      "path": "canon/mog-canon.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5f497c9e8c23378e56efea726de1292ad6ea7eac",
+      "size": 71542
+    },
+    {
+      "path": "canon/mog-ecosystem.js",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "96ce90e11c5a178bced7933963427c1a931b17c8",
+      "size": 18770
+    },
+    {
+      "path": "canon/mog-ecosystem.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e7ebe620fd015d8952b521df3aab5c9194f83f92",
+      "size": 23414
+    },
+    {
+      "path": "canon/mog-feed.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4f58bd125db5144e7a15226e7329763d83866fb8",
+      "size": 4801
+    },
+    {
+      "path": "canon/mog-stamp.js",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fa3e885ac2edf6ee8c3884a7a39455f95031feeb",
+      "size": 978
+    },
+    {
+      "path": "docs",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "0688c1a3290cb8c2cb92ed29dd74c9459cb19adc",
+      "size": null
+    },
+    {
+      "path": "docs/theory-of-change.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e735ccac6a729358eda0954ca1f7e62560fcfa2d",
+      "size": 12292
+    },
+    {
+      "path": "feeds",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "cc032eb14291692705cbf88e38b92caece7dcc84",
+      "size": null
+    },
+    {
+      "path": "feeds/INGEST.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "11903a16206a7dd3b510cac25b6a8b9841edf2fe",
+      "size": 3606
+    },
+    {
+      "path": "feeds/sources.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "eb283a3e9912e361b415b474a759d013400e822a",
+      "size": 4886
+    },
+    {
+      "path": "package.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0d15027dd8346b6816b0a23c90eb7b79580ce1f6",
+      "size": 395
+    },
+    {
+      "path": "scripts",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "65fea2cfd952621debbc89a19d3540ae96d090cb",
+      "size": null
+    },
+    {
+      "path": "scripts/cut-release.js",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "f53952212b73b409644ebe69a86e535e9affa777",
+      "size": 5302
+    },
+    {
+      "path": "scripts/harvest.js",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "0663ab8403271ee365b218acbd6b1e55735af9c6",
+      "size": 4740
+    },
+    {
+      "path": "tests",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "c56efd93bbd75529866ac6deb8a1c42f1b20f718",
+      "size": null
+    },
+    {
+      "path": "tests/conformance.js",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "7d02e51189f77be3023aad12e9acb659471e0eff",
+      "size": 4682
+    },
+    {
+      "path": "tests/feeds-check.js",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "1d1c9ec996243729d6bad18c12b61fad61fbc07e",
+      "size": 2858
+    }
+  ]
+}
