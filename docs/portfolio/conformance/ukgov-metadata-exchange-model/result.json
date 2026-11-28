@@ -1,0 +1,127 @@
+{
+ "repo": "co-cddo/ukgov-metadata-exchange-model",
+ "checked": "2026-11-28",
+ "source": "alphagov/gds-way@7bc40fb (25 Nov 2026)",
+ "checks": {
+  "SC-01": [
+   "PASS",
+   "README.md"
+  ],
+  "SC-02": [
+   "PASS",
+   "29 of 30 recent summaries say what changed"
+  ],
+  "SC-03": [
+   "FAIL",
+   "MIT: no; OGL: yes, LICENSE.md"
+  ],
+  "SC-04": [
+   "FAIL",
+   "no SECURITY.md; no working private route"
+  ],
+  "SC-05": [
+   "FAIL",
+   "changelog: none; semantic version in it: no; public issues: yes"
+  ],
+  "SC-06": [
+   "FAIL",
+   "no CONTRIBUTING file"
+  ],
+  "SC-07": [
+   "PASS",
+   "CI on push or pull request: codeql.yml, deploy-docs.yaml, docker-image.yml, main.yaml"
+  ],
+  "GT-01": [
+   "PASS",
+   "default branch main"
+  ],
+  "GT-02": [
+   "FAIL",
+   "12 of 30 recent summaries are 50 characters or fewer"
+  ],
+  "UG-01": [
+   "PASS",
+   "main is protected (ruleset or branch protection)"
+  ],
+  "GA-01": [
+   "FAIL",
+   "2 not pinned: ['deploy-docs.yaml: snok/install-poetry@v1.3', 'main.yaml: snok/install-poetry@v1.3']"
+  ],
+  "GA-02": [
+   "FAIL",
+   "no top-level permissions: ['codeql.yml', 'docker-image.yml', 'docker-publish.yml', 'greetings.yml', 'main.yaml']; write-all: []"
+  ],
+  "GA-03": [
+   "FAIL",
+   "risky triggers need a recorded security review: ['greetings.yml: issues, pull_request_target']"
+  ],
+  "GA-04": [
+   "PASS",
+   "no user-controlled fields interpolated into commands"
+  ],
+  "GA-05": [
+   "PASS",
+   "only GITHUB_TOKEN or app tokens"
+  ],
+  "GA-06": [
+   "N/A",
+   "no AWS access keys"
+  ],
+  "GA-07": [
+   "FAIL",
+   "CODEOWNERS missing or does not cover .github/workflows"
+  ],
+  "TD-01": [
+   "FAIL",
+   "no Dependabot or Renovate config"
+  ],
+  "TD-02": [
+   "FAIL",
+   "no cooldown"
+  ],
+  "TD-03": [
+   "FAIL",
+   "default limit of 5"
+  ],
+  "MS-01": [
+   "N/A",
+   "public repository"
+  ],
+  "VD-01": [
+   "FAIL",
+   "no security.txt pointing at vdp.cabinetoffice.gov.uk"
+  ],
+  "AD-01": [
+   "FAIL",
+   "no decision records folder"
+  ],
+  "DX-01": [
+   "FAIL",
+   "no pre-commit detect-secrets hook"
+  ],
+  "DX-02": [
+   "MANUAL",
+   "third-party actions to allowlist: docker/build-push-action, docker/login-action, docker/metadata-action, docker/setup-buildx-action, sigstore/cosign-installer, snok/install-poetry"
+  ]
+ },
+ "verdict": {
+  "verdict": "NOT READY",
+  "must_met": 4,
+  "must_total": 10,
+  "should_met": 3,
+  "should_total": 11,
+  "failing": [
+   "SC-03",
+   "SC-04",
+   "SC-05",
+   "GA-01",
+   "GA-02",
+   "GA-03"
+  ],
+  "manual": [],
+  "exceptions": []
+ },
+ "assessment_mode": "checker-equivalent evidence replay; native CLI not executed in source repository",
+ "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating source branch",
+ "self_test_status": "not executed in this session"
+}
