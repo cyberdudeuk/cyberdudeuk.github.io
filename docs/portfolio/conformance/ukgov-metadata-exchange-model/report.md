@@ -54,7 +54,7 @@ The GitHub integration denied branch creation with HTTP 403 `Resource not access
 ## Migration-specific actions
 
 - Resolve licensing before migration: the repository contains OGL-UK-3.0 but no MIT licence, so do not add MIT mechanically or change the existing OGL terms without rights review.
-- Pin `snok/install-poetry` to a reviewed full commit SHA.
+- Pin `snok/install-poetry` to a reviewed full commit SHA. The current `v1.3` tag resolves to `93ada01c735cc8a383ce0ce2ae205a21c415379b`; use this only after confirming the action source and accepting that exact revision.
 - Set least-privilege top-level workflow permissions in every workflow.
 - Review or remove the `pull_request_target` and `issues` greeting workflow triggers; document a security review if retained.
 - Add security disclosure information and a changelog/release notes.
