@@ -150,3 +150,15 @@ Before any repository is merged or archived, verify licence compatibility, issue
 ## 8. What this review does not authorise
 
 No repository has been merged, archived, deleted, made public, had its default branch rewritten or had production code changed as part of this review. This report is an evidence-based proposal only.
+
+## 9. GDS-DTX and CDDO organisation transition
+
+The work-related estate is expected to move to `gds-dtx`, including relevant work currently hosted under `co-cddo`. This is a repository-by-repository transition, not a bulk transfer or monorepo consolidation. The separate [GDS-DTX migration assessment](gds-dtx-migration-assessment.md) records the public-source inventory, access evidence, candidate mappings, transfer-versus-recreate criteria and migration controls.
+
+The paginated GitHub search returned 186 `co-cddo` repositories (43 archived, 43 internal/private, 100 public); only seven exposed push permission to the connected identity and one exposed repository-admin permission (`co-cddo/MoG-Navigator`). The `gds-dtx` search returned 62 repositories; only `gds-dtx/data-asset-management-hub` exposed push/admin permission. The connected identity was not returned by the organisation-membership listing. These permissions and search results do not establish authority to transfer repositories. Direct content reads of internal GDS-DTX candidate repositories returned 404.
+
+Author-filtered commit search identified substantive direct contribution evidence in `co-cddo/MoG-Navigator` and an initial CI workflow contribution in `co-cddo/ocdo-data-foundations`. Other repositories where push access exists are treated as dependencies or stakeholder-owned work until ownership is confirmed. `MoG-Navigator` is a strong migration candidate only if GDS-DTX formally accepts it; its README explicitly disclaims government commissioning, endorsement and affiliation, so organisational placement must not imply official status.
+
+No repository transfer has been performed. The connected GitHub tools expose no organisation-transfer action, and current organisation-level permissions are insufficient to execute or validate a migration. Private and OFFICIAL/OFFICIAL-SENSITIVE repositories remain outside this public report and require a restricted migration register and approved handling.
+
+The launchpad proposal PR now includes the migration assessment and a link from the architecture plan. On the latest commit at the time of this update, Documentation Kit and Dependency Review had passed on earlier commits, while Checks and CodeQL were still running on the newest commit. The glossary integrity PR's Checks run passed; both PRs remain drafts and unmerged.
