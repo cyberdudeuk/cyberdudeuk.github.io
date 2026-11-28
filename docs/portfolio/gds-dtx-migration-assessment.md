@@ -145,3 +145,10 @@ Only after receiving-owner acceptance and successful consumer/deployment checks.
 This assessment does not authorise bulk transfer of the `co-cddo` organisation, moving repositories without source/target admin approval, merging products, deleting or archiving source repositories, changing visibility, copying protected data, changing production deployments, changing billing, or transferring any repository into an organisation without a named receiving owner.
 
 **Target principle:** one accountable GDS-DTX home for each accepted workstream, distinct repositories for distinct products, preserved provenance and history, and no loss of service or governance during the transition.
+
+
+## 9A. GDS-DTX conformance pre-assessment
+
+The 25-check GDS Way migration-readiness framework used in the user's other repositories has now been applied as a structured pre-assessment to the three in-scope CDDO repositories. The evidence, check-by-check preliminary statuses, repository-specific migration gates and formal execution procedure are recorded in [GDS-DTX conformance pre-assessment (28 November 2026)](gds-dtx-conformance-preassessment-2026-11-28.md).
+
+**Important:** this is explicitly a pre-assessment, not a formal scored run. The complete source checkouts and all GitHub metadata are not available through the current source-repository integration. No READY/NOT READY verdict or badge has been issued. The four standard artefacts (`docs/conformance/report.md`, `result.json`, `badge.svg`, `badge.json`) must be generated in each source repository by running the catalogue's checker against a complete checkout and metadata file, then reviewed and committed in a source-repository PR. No source repository has been modified.
