@@ -162,3 +162,7 @@ Author-filtered commit search identified substantive direct contribution evidenc
 No repository transfer has been performed. The connected GitHub tools expose no organisation-transfer action, and current organisation-level permissions are insufficient to execute or validate a migration. Private and OFFICIAL/OFFICIAL-SENSITIVE repositories remain outside this public report and require a restricted migration register and approved handling.
 
 The launchpad proposal PR now includes the migration assessment and a link from the architecture plan. On the latest commit at the time of this update, Documentation Kit and Dependency Review had passed on earlier commits, while Checks and CodeQL were still running on the newest commit. The glossary integrity PR's Checks run passed; both PRs remain drafts and unmerged.
+
+### Confirmed CDDO migration scope
+
+The user has explicitly confirmed that **only the first three repositories in the CDDO workstream list are theirs and in scope for migration/transfer**: `co-cddo/MoG-Navigator`, `co-cddo/ocdo-data-foundations` and `co-cddo/ukgov-metadata-exchange-model`. All other `co-cddo` repositories are out of scope for this programme unless that instruction is later changed. This owner-provided scope confirmation supersedes any inference based on GitHub collaborator permissions. The migration assessment has been updated accordingly, with priorities and different transfer-readiness gates for the three repositories.
