@@ -17,7 +17,7 @@
   ],
   "SC-04": [
    "FAIL",
-   "no SECURITY.md; no working private route"
+   "no SECURITY.md; no email or Cabinet Office VDP route documented; private vulnerability reporting setting not retrievable (metadata null)"
   ],
   "SC-05": [
    "FAIL",
@@ -122,5 +122,6 @@
  },
  "assessment_mode": "checker-equivalent evidence replay; native CLI not executed in source repository",
  "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating source branch",
- "self_test_status": "not executed in this session"
+ "self_test_status": "not executed in this session",
+ "metadata_gaps": ["private_vulnerability_reporting setting not retrievable through this connector", "third_party_impact not supplied; checker default applies"]
 }
