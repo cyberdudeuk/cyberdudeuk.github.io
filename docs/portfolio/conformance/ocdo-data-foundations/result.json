@@ -1,0 +1,126 @@
+{
+ "repo": "co-cddo/ocdo-data-foundations",
+ "checked": "2026-11-28",
+ "source": "alphagov/gds-way@7bc40fb (25 Nov 2026)",
+ "checks": {
+  "SC-01": [
+   "FAIL",
+   "README.md (one word; the checker requires at least 50)"
+  ],
+  "SC-02": [
+   "PASS",
+   "2 of 2 recent summaries say what changed"
+  ],
+  "SC-03": [
+   "FAIL",
+   "MIT: yes, LICENSE; OGL: no"
+  ],
+  "SC-04": [
+   "FAIL",
+   "no SECURITY.md; no working private route"
+  ],
+  "SC-05": [
+   "FAIL",
+   "changelog: none; semantic version in it: no; public issues: yes"
+  ],
+  "SC-06": [
+   "FAIL",
+   "no CONTRIBUTING file"
+  ],
+  "SC-07": [
+   "PASS",
+   "CI on push or pull request: blank.yml"
+  ],
+  "GT-01": [
+   "PASS",
+   "default branch main"
+  ],
+  "GT-02": [
+   "PASS",
+   "2 of 2 recent summaries are 50 characters or fewer"
+  ],
+  "UG-01": [
+   "FAIL",
+   "main is not protected"
+  ],
+  "GA-01": [
+   "PASS",
+   "all third-party actions pinned to a SHA"
+  ],
+  "GA-02": [
+   "FAIL",
+   "no top-level permissions: ['blank.yml']; write-all: []"
+  ],
+  "GA-03": [
+   "PASS",
+   "no risky triggers"
+  ],
+  "GA-04": [
+   "PASS",
+   "no user-controlled fields interpolated into commands"
+  ],
+  "GA-05": [
+   "PASS",
+   "only GITHUB_TOKEN or app tokens"
+  ],
+  "GA-06": [
+   "N/A",
+   "no AWS access keys"
+  ],
+  "GA-07": [
+   "FAIL",
+   "CODEOWNERS missing or does not cover .github/workflows"
+  ],
+  "TD-01": [
+   "FAIL",
+   "no Dependabot or Renovate config"
+  ],
+  "TD-02": [
+   "FAIL",
+   "no cooldown"
+  ],
+  "TD-03": [
+   "FAIL",
+   "default limit of 5"
+  ],
+  "MS-01": [
+   "N/A",
+   "public repository"
+  ],
+  "VD-01": [
+   "N/A",
+   "no published site"
+  ],
+  "AD-01": [
+   "FAIL",
+   "no decision records folder"
+  ],
+  "DX-01": [
+   "FAIL",
+   "no pre-commit detect-secrets hook"
+  ],
+  "DX-02": [
+   "PASS",
+   "third-party actions to allowlist: none"
+  ]
+ },
+ "verdict": {
+  "verdict": "NOT READY",
+  "must_met": 5,
+  "must_total": 10,
+  "should_met": 3,
+  "should_total": 10,
+  "failing": [
+   "SC-01",
+   "SC-03",
+   "SC-04",
+   "SC-05",
+   "GA-02"
+  ],
+  "manual": [],
+  "exceptions": []
+ },
+ "assessment_mode": "checker-equivalent evidence replay; native CLI not executed in source repository",
+ "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating source branch",
+ "self_test_status": "not executed in this session"
+}
