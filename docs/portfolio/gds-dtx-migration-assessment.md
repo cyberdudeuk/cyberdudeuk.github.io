@@ -152,3 +152,26 @@ This assessment does not authorise bulk transfer of the `co-cddo` organisation, 
 The 25-check GDS Way migration-readiness framework used in the user's other repositories has now been applied as a structured pre-assessment to the three in-scope CDDO repositories. The evidence, check-by-check preliminary statuses, repository-specific migration gates and formal execution procedure are recorded in [GDS-DTX conformance pre-assessment (28 November 2026)](gds-dtx-conformance-preassessment-2026-11-28.md).
 
 **Important:** this is explicitly a pre-assessment, not a formal scored run. The complete source checkouts and all GitHub metadata are not available through the current source-repository integration. No READY/NOT READY verdict or badge has been issued. The four standard artefacts (`docs/conformance/report.md`, `result.json`, `badge.svg`, `badge.json`) must be generated in each source repository by running the catalogue's checker against a complete checkout and metadata file, then reviewed and committed in a source-repository PR. No source repository has been modified.
+
+
+## 9B. Three-repository GDS-DTX conformance results
+
+The exact 25-check GDS Way/GDS-DTX framework in `cyberdudeuk/github-repos-asset-catalogue/tools/conformance.py` has now been replayed against the complete recursive source trees, relevant files, GitHub metadata, main-branch protection state and available recent commit summaries for the three in-scope repositories.
+
+- [Results index](conformance/README.md)
+- [MoG-Navigator result](conformance/mog-navigator/report.md): **NOT READY**, MUST 7/10; SHOULD/CONSIDER 2/10.
+- [OCDO Data Foundations result](conformance/ocdo-data-foundations/report.md): **NOT READY**, MUST 5/10; SHOULD/CONSIDER 3/10.
+- [UK Government Metadata Exchange Model result](conformance/ukgov-metadata-exchange-model/report.md): **NOT READY**, MUST 4/10; SHOULD/CONSIDER 3/11.
+
+Each repository folder contains a Markdown report, checker-shaped JSON result and badge SVG/JSON. These are portfolio-side evidence artefacts. They are explicitly labelled checker-equivalent replays, not native source-repository CLI outputs: the integration returned HTTP 403 when attempting to create a branch in each source repository. The native checker self-test and `--write` still need to run from an authorised checkout, and the four canonical artefacts must be committed through source-side PRs.
+
+The main MUST failures are:
+- **MoG-Navigator:** both MIT and OGL licence evidence, a documented security-reporting route, and a changelog/release record for its known consumer.
+- **OCDO Data Foundations:** README minimum, both MIT and OGL licence evidence, security reporting, changelog/release record, and explicit least-privilege workflow permissions.
+- **UK Government Metadata Exchange Model:** MIT alongside its existing OGL licence (subject to rights review), security reporting, changelog/release record, full-SHA pinning for `snok/install-poetry`, top-level least-privilege workflow permissions, and review of `pull_request_target`/issues triggers.
+
+Do not resolve licence failures by mechanically adding or changing licence terms. Obtain the relevant rights/ownership decision first. Do not resolve the standards repository's workflow findings by changing its Pages URL, branches, release history or standards status.
+
+## 9C. Receiving-side access request reference
+
+GitHub search surfaced `gds-dtx/gds-dtx-github-users-tf#15`, titled **“Add cyberdudeuk”**, as a likely access-request PR relevant to the user's stated receiving-side rights. The current connection can see the search result but receives 404 when retrieving the PR or issue details, so its approval, merge state and permission effect cannot be verified. Do not treat the search result alone as proof of organisation membership or repository-admin authority. The user's intended receiving-owner role remains the plan assumption; effective rights must be verified through a working connection.
