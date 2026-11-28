@@ -6,7 +6,7 @@ This supplement records a deeper public-repository inspection for the three expl
 
 | Repository | Current evidence | Migration disposition |
 |---|---|---|
-| `co-cddo/MoG-Navigator` | Public, MIT, one unprotected `main` branch, no releases, no Pages site, 2 workflows, small static/JSON canon application; source-side admin permission is available to the connected identity | First transfer candidate, conditional on receiving-org sponsorship and acceptance |
+| `co-cddo/MoG-Navigator` | Public, MIT, one unprotected `main` branch, no releases, no Pages site, 2 workflows, small static/JSON canon application; source-side admin permission is available to the connected identity | First transfer candidate, conditional on the user's receiving-side organisation/repository authority and target-policy acceptance |
 | `co-cddo/ocdo-data-foundations` | Public, MIT, 3 KB, two unprotected branches at the same commit, README is a 23-byte stub, one placeholder CI workflow, no releases or Pages | Do not transfer as a substantive product yet; classify as a shell/prototype and establish intended successor/ownership before deciding whether to transfer intact or recreate |
 | `co-cddo/ukgov-metadata-exchange-model` | Public, OGL-UK-3.0, protected `main`, 17 visible branches, one prerelease, 32 open issues, active Pages deployment and several CI/deploy workflows; source-side admin permission is not available to the connected identity | Standards-critical; migration must be owner-led with explicit standards and site continuity approval |
 
@@ -24,7 +24,7 @@ Repository metadata at inspection:
 - README identifies GUVNR / Whitehall Connect as the reference consumer, reading `mog/mog-feed.json` from its own origin. This is a concrete integration dependency to validate before and after any transfer.
 
 Transfer checklist:
-1. Obtain receiving GDS-DTX sponsor, repository name, owner/team and public-repository acceptance.
+1. Confirm the user's receiving-side authority, destination repository name, required teams and public-repository acceptance; no separate sponsor is assumed.
 2. Confirm that the receiving organisation will preserve public visibility, MIT licensing and the non-endorsement disclaimer.
 3. Confirm whether any consumers depend on the current repository URL; the documented GUVNR consumer is the first known dependency.
 4. Transfer the repository intact; do not rewrite its history or combine it with another product.
@@ -72,7 +72,7 @@ Standards and continuity controls:
 
 ## Access and execution blockers
 
-The connected GitHub identity currently has source-side repository-admin permission for MoG-Navigator, but only push permission for OCDO Data Foundations and the Metadata Exchange Model. No receiving GDS-DTX sponsor/owner, target repository acceptance, or target organisation admin capability has been established. Consequently:
+The connected GitHub identity currently has source-side repository-admin permission for MoG-Navigator, but only push permission for OCDO Data Foundations and the Metadata Exchange Model. The user is the intended receiving-side owner; target-organisation admin capability and repository acceptance remain unverified in the connected session. Consequently:
 - MoG-Navigator can be prepared for a transfer, but the receiving-side acceptance and policy checks remain outstanding.
 - The other two repositories require source-owner/admin participation for a direct transfer.
 - No transfer, rename, visibility change, workflow arming, Pages cutover, branch deletion, PR merge or standards change is performed by this supplement.
