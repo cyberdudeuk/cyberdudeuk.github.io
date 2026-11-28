@@ -115,7 +115,7 @@ Recent workflow metadata inspected on 28 November showed successful recent main-
 
 The NDL PubSec MCP main-branch push run inspected on 28 November succeeded. A Dependabot pull-request run failed at its dependency-install step. Treat this as a PR-specific dependency issue, not as evidence that the main branch was failing.
 
-The launchpad proposal PR's dependency review, documentation-kit and CodeQL checks passed; the main Checks workflow was still in progress when this report was prepared.
+The launchpad proposal PR's dependency review, documentation-kit, CodeQL and main Checks workflows all completed successfully on 28 November 2026 (run IDs 46153542702, 46153542714, 46153542724 and 46153542786). The separate shared-glossary integrity PR in Starting a Business UK also passed its Checks workflow (run ID 46153719364). Both pull requests remain drafts for maintainer review; passing CI does not itself authorise merging.
 
 These are point-in-time CI observations. They do not establish full production readiness or prove that unconfigured risks are absent.
 
