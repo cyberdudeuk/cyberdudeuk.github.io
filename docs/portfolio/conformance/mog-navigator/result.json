@@ -29,7 +29,7 @@
   ],
   "SC-07": [
    "PASS",
-   "CI on push or pull request: ci.yml, harvest.yml"
+   "CI on push or pull request: ci.yml"
   ],
   "GT-01": [
    "PASS",
