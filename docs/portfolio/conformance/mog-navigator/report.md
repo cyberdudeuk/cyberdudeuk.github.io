@@ -33,7 +33,7 @@ The GitHub integration denied branch creation in all three source repositories w
 | GT-01 | SHOULD | [Default branch is main](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/working-with-git.html#default-branch-name) (reviewed 2025-02-18) | PASS | default branch main |
 | GT-02 | SHOULD | [Commit summaries of 50 characters or fewer](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/working-with-git.html#structure) (reviewed 2025-02-18) | FAIL | 3 of 9 recent summaries are 50 characters or fewer |
 | SC-06 | SHOULD | [Contributing guidelines](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | FAIL | no CONTRIBUTING file |
-| SC-07 | SHOULD | [Tests run in public CI](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | PASS | CI on push or pull request: ci.yml, harvest.yml |
+| SC-07 | SHOULD | [Tests run in public CI](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | PASS | CI on push or pull request: ci.yml |
 | TD-01 | SHOULD | [Automated dependency updates](https://gds-way.digital.cabinet-office.gov.uk/standards/tracking-dependencies.html) (reviewed 2026-09-22) | FAIL | no Dependabot or Renovate config |
 | TD-02 | SHOULD | [Dependency update cooldown](https://gds-way.digital.cabinet-office.gov.uk/standards/tracking-dependencies.html) (reviewed 2026-09-22) | FAIL | no cooldown |
 | TD-03 | SHOULD | [Open update pull request limit of 10 or more](https://gds-way.digital.cabinet-office.gov.uk/standards/tracking-dependencies.html) (reviewed 2026-09-22) | FAIL | default limit of 5 |
