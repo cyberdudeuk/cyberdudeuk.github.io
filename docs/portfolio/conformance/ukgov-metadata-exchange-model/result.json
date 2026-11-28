@@ -9,7 +9,7 @@
   ],
   "SC-02": [
    "PASS",
-   "29 of 30 recent summaries say what changed"
+   "29 of 30 recent summaries say what changed; weak: ['']"
   ],
   "SC-03": [
    "FAIL",
@@ -29,7 +29,7 @@
   ],
   "SC-07": [
    "PASS",
-   "CI on push or pull request: codeql.yml, deploy-docs.yaml, docker-image.yml, main.yaml"
+   "CI on push or pull request: codeql.yml, deploy-docs.yaml, docker-image.yml, docker-publish.yml, main.yaml"
   ],
   "GT-01": [
    "PASS",
