@@ -48,7 +48,7 @@ These products have explicit, complementary roles and should remain distinct.
 | [legacy-technology-observatory](https://github.com/cyberdudeuk/legacy-technology-observatory) | Evidence and analysis about legacy technology beyond code: networks, devices, operational technology, skills and migration | **Keep distinct; integrate links and keys.** It already cross-links to the other discovery products. |
 | [opengovernment-uk](https://github.com/cyberdudeuk/opengovernment-uk) | Sourced register of public bodies, accountability, funding and ownership, with machine-readable feeds | **Keep distinct; integrate by identifiers and feeds.** It is a register domain, not a software catalogue. |
 | [cyberdudeuk.github.io](https://github.com/cyberdudeuk/cyberdudeuk.github.io) | Public launchpad built from `data/projects.json`; also hosts the shared glossary and routing data | **Keep as the portfolio directory.** It is not a replacement for the specialist catalogues. |
-| [legacy-code-observatory](https://github.com/cyberdudeuk/legacy-code-observatory) | README and site files state that it only redirects to Legacy Technology Observatory | **Redirect now; archive later.** Verify inbound links and GitHub Pages behaviour first. |
+| [legacy-code-observatory](https://github.com/cyberdudeuk/legacy-code-observatory) | README and static `index.html` redirect to Legacy Technology Observatory; one `main` branch, one redirect commit and no releases were observed | **Archive candidate, not yet safe to archive.** The repository is explicitly excluded from the launchpad as redirect-only. Inbound-link search found no further account references, but this is not an exhaustive external link audit. Verify the old Pages URL and whether Pages continues serving after archival before changing repository state. |
 
 The three-way distinction between code to reuse, products to adopt and legacy to replace is explicitly documented by the projects themselves. OpenGovernment UK adds public-body accountability and ownership, a different data domain. Combining these would blur rather than simplify the user journeys.
 
@@ -97,13 +97,13 @@ The right integration is through shared concepts, metadata and knowledge exports
 
 These are not interchangeable applications. Their users, subject matter, privacy expectations and editorial/safeguarding requirements differ. Reuse accessible components and build practices, not content or data stores.
 
-The three published life-course portals already define ownership of topics and use a shared glossary/routing model. The launchpad's `data/shared-glossary.json` and the copy in Starting a Business UK had the same Git blob SHA during this review. That proves the copies matched at the review point, not that future updates are automatically propagated. Add a hash/freshness check or generate the copy from the canonical source.
+The three published life-course portals already define ownership of topics and use a shared glossary/routing model. The launchpad's `data/shared-glossary.json` and the copy in Starting a Business UK had the same Git blob SHA during this review. A draft PR (#5) now adds a read-only CI comparison against the canonical raw file; its Checks workflow passed, but the PR is not merged. This prevents unnoticed drift once accepted, while preserving the local copy required by the static/offline build.
 
 ### 3.5 Portfolio foundations and external infrastructure
 
 | Repository | Observed purpose | Decision |
 |---|---|---|
-| [cyberdudeuk](https://github.com/cyberdudeuk/cyberdudeuk) | GitHub profile README generated from the launchpad's project data | **Keep distinct; retain one-way generation.** |
+| [cyberdudeuk](https://github.com/cyberdudeuk/cyberdudeuk) | GitHub profile README generated from the launchpad's project data | **Keep distinct; retain one-way generation.** Its Checks workflow clones the launchpad and runs `tools/build_readme.py --check`; the scheduled README refresh also passed on 27 November. No duplicate synchronisation workflow is needed. |
 | [.github](https://github.com/cyberdudeuk/.github) | Default community health files for repositories without project-specific files | **Keep as defaults.** Do not centralise project-specific licences or security instructions here. |
 | [w3id.org](https://github.com/cyberdudeuk/w3id.org) | Permanent identifier redirect service operated by the W3C Permanent Identifier Community Group | **Keep under its external governance.** It is not an internal service to absorb. |
 
@@ -115,7 +115,7 @@ Recent workflow metadata inspected on 28 November showed successful recent main-
 
 The NDL PubSec MCP main-branch push run inspected on 28 November succeeded. A Dependabot pull-request run failed at its dependency-install step. Treat this as a PR-specific dependency issue, not as evidence that the main branch was failing.
 
-The launchpad proposal PR's dependency review, documentation-kit, CodeQL and main Checks workflows all completed successfully on 28 November 2026 (run IDs 46153542702, 46153542714, 46153542724 and 46153542786). The separate shared-glossary integrity PR in Starting a Business UK also passed its Checks workflow (run ID 46153719364). Both pull requests remain drafts for maintainer review; passing CI does not itself authorise merging.
+The launchpad proposal PR's dependency review, documentation-kit and CodeQL workflows passed on its latest commit (run IDs 46154580856, 46154580823 and 46154580811). Its main Checks workflow (run ID 46154580822) had passed site validation, unit tests, JavaScript syntax, linters and browser checks; the final browser-vaccination loop was still running at the latest inspection. The shared-glossary integrity PR in Starting a Business UK passed its Checks workflow (run ID 46153719364). Both pull requests remain drafts; passing CI does not itself authorise merging.
 
 These are point-in-time CI observations. They do not establish full production readiness or prove that unconfigured risks are absent.
 
@@ -132,12 +132,12 @@ These are point-in-time CI observations. They do not establish full production r
 
 | Priority | Action | Why |
 |---|---|---|
-| 1 | Add a CI integrity check for the shared glossary copy | Low-risk, prevents silent drift across the life-course portals |
+| 1 | Review and merge the shared-glossary integrity check when ready | Draft PR #5 adds the low-risk comparison and its Checks workflow passed; it prevents silent drift while retaining the local offline-build copy |
 | 2 | Document the discovery trio's shared keys and feed contracts | The three products are already linked but have separate data purposes |
 | 3 | Map existing content-provenance and dataset-quality structures to consuming products through documented adapters | Improves traceability while avoiding a competing schema |
 | 4 | Publish a clear standards-status field in integrations | Prevents proposed DCAT-AP-UK material being mistaken for an endorsed standard |
 | 5 | Integrate DQ Commons outputs with DAM/NDL references by identifiers | Strong value with low coupling |
-| 6 | Keep the profile README generated from launchpad data | Avoids duplicate manual project inventories |
+| 6 | Keep the profile README generated from launchpad data | Existing `--check` CI and scheduled refresh already enforce one-way generation; no additional mechanism is needed |
 | 7 | Archive the redirect-only Legacy Code Observatory only after URL checks | Removes obsolete maintenance without breaking old links |
 | 8 | Reassess reusable CI workflows as small opt-in components | Avoids forcing different technology stacks through one oversized pipeline |
 
