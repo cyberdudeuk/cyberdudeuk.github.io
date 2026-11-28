@@ -80,3 +80,16 @@ The connected GitHub identity currently has source-side repository-admin permiss
 ## Evidence limits
 
 This is a public GitHub API/content inspection. It does not establish private organisation policies, secret values, webhook payloads, external DNS control, production runtime state, or the complete set of consumers. A successful placeholder workflow is not evidence of product readiness. Repeat the checks immediately before any authorised transfer.
+
+
+## Conformance assessment update (28 November 2026)
+
+The three repositories have now been assessed against the exact 25-check GDS Way/GDS-DTX framework used in the `cyberdudeuk` portfolio. The full per-repository reports, JSON results, badge SVG/JSON, checker metadata inputs and recursive source-tree manifests are indexed at [`docs/portfolio/conformance/`](conformance/README.md).
+
+| Repository | Result | MUST met | MUST failures |
+|---|---|---:|---|
+| `co-cddo/MoG-Navigator` | **NOT READY** | 7/10 | SC-03, SC-04, SC-05 |
+| `co-cddo/ocdo-data-foundations` | **NOT READY** | 5/10 | SC-01, SC-03, SC-04, SC-05, GA-02 |
+| `co-cddo/ukgov-metadata-exchange-model` | **NOT READY** | 4/10 | SC-03, SC-04, SC-05, GA-01, GA-02, GA-03 |
+
+These are checker-equivalent evidence replays using the complete recursive source trees and available GitHub metadata; they are not claimed as native CLI executions. The GitHub integration returned HTTP 403 when creating source branches in all three repositories, so no source repository has been modified. The native checker self-test and `--write` remain to be run from an authorised checkout, with the canonical outputs committed through source-side PRs. See each report for the exact evidence and limitations.
