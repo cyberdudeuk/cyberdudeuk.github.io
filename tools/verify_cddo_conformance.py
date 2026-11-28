@@ -24,8 +24,10 @@ TARGETS = {
 }
 
 
-def run(args: list[str], *, cwd: pathlib.Path | None = None) -> str:
-    result = subprocess.run(args, cwd=cwd, check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+def run(args: list[str], *, cwd: pathlib.Path | None = None, allowed_codes: tuple[int, ...] = (0,)) -> str:
+    result = subprocess.run(args, cwd=cwd, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    if result.returncode not in allowed_codes:
+        raise subprocess.CalledProcessError(result.returncode, args, output=result.stdout)
     return result.stdout
 
 
@@ -60,7 +62,7 @@ def main() -> int:
             output = run([
                 sys.executable, "-I", str(checker), str(source),
                 "--meta", str(meta_path), "--write"
-            ])
+            ], allowed_codes=(0, 1))
             print(output, end="")
 
             generated = json.loads((source / "docs" / "conformance" / "result.json").read_text(encoding="utf-8"))
