@@ -27,7 +27,7 @@ The GitHub integration denied branch creation in all three source repositories w
 | SC-01 | MUST | [README](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | FAIL | README.md (one word; the checker requires at least 50) |
 | SC-02 | MUST | [Informative commit messages](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | PASS | 2 of 2 recent summaries say what changed |
 | SC-03 | MUST | [MIT and OGL licence files](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | FAIL | MIT: yes, LICENSE; OGL: no |
-| SC-04 | MUST | [An email address for security bug reports](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | FAIL | no SECURITY.md; no working private route |
+| SC-04 | MUST | [An email address for security bug reports](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | FAIL | no SECURITY.md; no email or Cabinet Office VDP route documented; private vulnerability reporting setting not retrievable (metadata null) |
 | SC-05 | MUST | [If third parties are affected: changelog, release notes, known issues, semantic version](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/#publish-open-source-code) (reviewed 2026-03-19) | FAIL | changelog: none; semantic version in it: no; public issues: yes |
 | AD-01 | SHOULD | [Architecture decisions recorded](https://gds-way.digital.cabinet-office.gov.uk/standards/architecture-decisions.html) (reviewed n/a) | FAIL | no decision records folder |
 | GT-01 | SHOULD | [Default branch is main](https://gds-way.digital.cabinet-office.gov.uk/standards/source-code/working-with-git.html#default-branch-name) (reviewed 2025-02-18) | PASS | default branch main |
@@ -66,7 +66,7 @@ The GitHub integration denied branch creation in all three source repositories w
 - GitHub repository metadata: public visibility, default branch, issues and Pages state.
 - Main branch protection endpoint.
 - Up to 30 recent commit summaries from GitHub.
-- No exception register was present in the retrieved source tree. No exceptions were invented.
+- No exception register was present in the retrieved source tree. No exceptions were invented. The private-vulnerability-reporting setting was not retrievable through this connector; the checker metadata therefore leaves it null, and no SECURITY.md/email/VDP route is evidenced.
 
 ## Required source-side completion
 
