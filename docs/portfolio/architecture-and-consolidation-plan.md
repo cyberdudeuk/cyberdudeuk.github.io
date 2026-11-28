@@ -162,3 +162,11 @@ This proposal does not authorise deletion, archival, public release of private c
 ---
 
 **Bottom line:** keep products separate; consolidate contracts, provenance, metadata and engineering practices. Integrate through stable interfaces first. Merge only when the evidence proves that separate repositories no longer provide real value.
+
+## 10. GDS-DTX organisation transition
+
+The work-related portfolio is expected to transition to the `gds-dtx` organisation, including relevant work currently hosted under `co-cddo`. This is an ownership and service-continuity programme, not a bulk repository merge. Preserve product boundaries and select transfer, controlled recreation or retention on a repository-by-repository basis.
+
+The public-source evidence, initial `co-cddo` workstream inventory, candidate mapping to existing GDS-DTX repositories, transfer/recreation criteria, migration controls and access blockers are recorded in [the GDS-DTX migration assessment](gds-dtx-migration-assessment.md). Private and OFFICIAL/OFFICIAL-SENSITIVE repositories are intentionally excluded from that public assessment and require a separate restricted register.
+
+No organisation transfer, source-repository archive, visibility change or production cutover is authorised by this architecture proposal. Each move requires an accountable receiving owner, source and target administrative authority, classification/records review, consumer and deployment mapping, and successful post-migration validation.
