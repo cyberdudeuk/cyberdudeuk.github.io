@@ -10,7 +10,7 @@
 | `co-cddo/ocdo-data-foundations` | **NOT READY** | 5/10 | 3/10 | [Report](ocdo-data-foundations/report.md) |
 | `co-cddo/ukgov-metadata-exchange-model` | **NOT READY** | 4/10 | 3/11 | [Report](ukgov-metadata-exchange-model/report.md) |
 
-Each report includes all 25 checks, evidence, the checker-equivalent result JSON, badge SVG/JSON, migration-specific remediation and the source-side execution steps.
+Each repository folder contains the 25-check Markdown report, checker-shaped result JSON, badge SVG/JSON, the metadata JSON used by the checker and a complete recursive source-tree manifest (path, mode, blob SHA and size). Each report includes evidence, migration-specific remediation and source-side execution steps.
 
 **Qualification:** results are replayed from the current checker logic against the complete recursive Git tree, relevant source files and retrieved GitHub metadata. They are not claimed as native CLI executions. The GitHub integration returned HTTP 403 for branch creation in all three source repositories, so canonical artefacts have been recorded here in the portfolio branch pending an authorised source-repository PR. The native checker self-test and `--write` must still be run from an authorised checkout. No source repository was changed.
 
