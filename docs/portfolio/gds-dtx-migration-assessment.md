@@ -1,6 +1,6 @@
 # GDS-DTX migration and organisation-transition assessment
 
-**Status:** Initial evidence-based assessment; migration execution gated on organisational sponsorship and access  
+**Status:** Initial evidence-based assessment; migration execution gated on the user's receiving-side organisation and repository permissions  
 **Prepared:** 28 November 2026  
 **Target organisation:** `gds-dtx`  
 **Source estates reviewed:** public `cyberdudeuk` portfolio and discoverable `co-cddo` repositories  
@@ -15,7 +15,7 @@ Treat the move to `gds-dtx` as an estate transition, not a bulk GitHub transfer 
 - Reuse existing `gds-dtx` capabilities where the fit is demonstrated, but do not overwrite or absorb existing repositories without their maintainers' agreement.
 - Keep public, internal, private and OFFICIAL handling boundaries intact. Repository visibility must never be widened as a side effect of migration.
 - Maintain old URLs and a transition period. Update references, workflows, Pages, package consumers, MCP clients, documentation, badges and external links before retiring source locations.
-- Obtain an accountable GDS-DTX sponsor, receiving repository owner, data/records owner and security/IG approval before any transfer or recreation of government-related work.
+- The user has clarified that they are the intended receiving-side owner as well as the source-side owner for the three in-scope CDDO repositories. Do not treat a separate GDS-DTX sponsor as a prerequisite. Obtain the necessary organisation/repository rights, plus any formal security, information-governance or standards approvals that apply.
 
 ## 2. Access and authority findings
 
@@ -26,7 +26,7 @@ The connected GitHub identity is not currently returned by GitHub's organisation
 - The available GitHub connector exposes repository reads and ordinary content/PR operations, but no repository-transfer or organisation-administration action. It cannot execute the organisation transfer.
 - Therefore this review can identify candidates, dependencies and migration packs, but cannot complete transfers, create receiving repositories in the organisation, alter team permissions, or validate organisation-level policies.
 
-A transfer must be initiated by an account with the necessary source-repository administration and target-organisation permissions. Before scheduling, confirm the destination organisation's acceptance, naming, visibility, team access, Actions policy, Pages policy, rulesets, secret/environment handling, package permissions and billing limits.
+A transfer must be initiated by the user's account once it has the necessary source-repository administration and target-organisation permissions. Use the existing `gds-dtx/data-asset-management-hub` as the benchmark for the receiving-side access level the user expects to have. Before scheduling, confirm destination naming, visibility, team access, Actions policy, Pages policy, rulesets, secret/environment handling, package permissions and billing limits.
 
 ## 3. Evidence-backed `co-cddo` workstream inventory
 
@@ -101,11 +101,12 @@ Never copy secrets into Git, issues or this migration document. Recreate secrets
 
 ## 8. Sequenced programme
 
-### Gate 0 — scope is now confirmed; obtain transfer authority
+### Gate 0 — scope and personal receiving-side ownership confirmed; complete access
 - The migration scope under `co-cddo` is exactly these three user-confirmed repositories: `MoG-Navigator`, `ocdo-data-foundations` and `ukgov-metadata-exchange-model`. No other CDDO repositories are in scope.
-- Obtain a named GDS-DTX receiving owner/team for each repository and the organisation's acceptance of the ownership transfer.
+- The user is the intended receiving-side owner. No separate GDS-DTX sponsor is required by this plan; the missing prerequisite is the necessary organisation and repository rights.
+- Match the user's receiving-side rights to the access level available on `gds-dtx/data-asset-management-hub` (including the organisation-level capabilities required to accept/transfer repositories, configure teams and policies, and manage settings).
 - Obtain the deprecation date/plan and transition deadline for `co-cddo`.
-- Secure source-repository admin/owner approval for the two repositories where this connection currently exposes only push permission.
+- Secure source-repository admin/owner rights for the two repositories where this connection currently exposes only push permission.
 
 ### Gate 1 — complete restricted inventory
 - Build a private migration register for the 11 private repositories in the cyberdudeuk estate and any private/internal co-cddo repositories in scope.
@@ -132,9 +133,9 @@ Only after receiving-owner acceptance and successful consumer/deployment checks.
 
 | Item | Current status | Required action |
 |---|---|---|
-| GDS-DTX organisation access | No organisation membership returned; internal repository reads return 404; no transfer action exposed | Obtain approved organisation membership/permissions and receiving-team sponsorship. |
+| GDS-DTX organisation access | The user confirms they are the intended receiving-side owner. Current connection still returns no organisation membership; internal repository reads return 404; no transfer action is exposed | Obtain the necessary GDS-DTX organisation and repository rights, using `data-asset-management-hub` as the access benchmark. No separate sponsor is assumed. |
 | CDDO deprecation | User reports organisation is being deprecated; no authoritative sunset date or repository transfer schedule was available in this review | Obtain the official deprecation timeline and repository disposition list from CDDO administrators. |
-| MoG Navigator | Strong direct-work candidate; source repository admin permission available; explicit non-government disclaimer in README | GDS-DTX sponsor must decide whether to accept, transfer, or retain as an independent public project. |
+| MoG Navigator | Strong direct-work candidate; source repository admin permission available; explicit non-government disclaimer in README | User can initiate the source-side transfer once target-organisation rights and any required internal policy approvals are in place; retain the non-endorsement disclaimer. |
 | xGov MEM and federated API model | Important standards/integration dependencies; collaborator push access does not establish ownership | Standards/programme owner to determine successor home and consumer transition. |
 | DAM hub and legacy register | Potential existing destinations; internal content could not be reviewed | Obtain access and perform a deeper comparison before creating or merging anything. |
 | Private work | Excluded from public report | Complete restricted inventory and approvals before moving any private or protected content. |
