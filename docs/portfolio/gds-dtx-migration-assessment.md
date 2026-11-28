@@ -163,7 +163,7 @@ The exact 25-check GDS Way/GDS-DTX framework in `cyberdudeuk/github-repos-asset-
 - [OCDO Data Foundations result](conformance/ocdo-data-foundations/report.md): **NOT READY**, MUST 5/10; SHOULD/CONSIDER 3/10.
 - [UK Government Metadata Exchange Model result](conformance/ukgov-metadata-exchange-model/report.md): **NOT READY**, MUST 4/10; SHOULD/CONSIDER 3/11.
 
-Each repository folder contains a Markdown report, checker-shaped JSON result and badge SVG/JSON. These are portfolio-side evidence artefacts. They are explicitly labelled checker-equivalent replays, not native source-repository CLI outputs: the integration returned HTTP 403 when attempting to create a branch in each source repository. The native checker self-test and `--write` still need to run from an authorised checkout, and the four canonical artefacts must be committed through source-side PRs.
+Each repository folder contains a Markdown report, checker-shaped JSON result, badge SVG/JSON, metadata input and full source-tree manifest. The canonical checker self-test and `--write` passed in [workflow run #46160267470](https://github.com/cyberdudeuk/cyberdudeuk.github.io/actions/runs/46160267470) against full temporary clones pinned to each source commit; all three 25-check results and verdicts matched. The four canonical output files per repository were uploaded as artifact `cddo-conformance-canonical-output` (ID `15269515207`). The GitHub integration still returned HTTP 403 when creating a source branch, so no source repository was modified and source-side PR commits remain outstanding.
 
 The main MUST failures are:
 - **MoG-Navigator:** both MIT and OGL licence evidence, a documented security-reporting route, and a changelog/release record for its known consumer.
