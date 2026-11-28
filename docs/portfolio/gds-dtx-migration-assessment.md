@@ -88,7 +88,7 @@ Private repositories are deliberately excluded from this public table. Their mig
 
 For each accepted repository, create a migration record containing:
 
-1. **Ownership and authority:** source owner/admin, receiving owner/team, accountable service owner, sponsor, records owner and approvals.
+1. **Ownership and authority:** source owner/admin, receiving owner/team, accountable service owner, records owner and required approvals (including a sponsor only if a formal policy requires one).
 2. **Classification and licence:** current visibility, information classification, personal data, special-category data, Crown copyright/licence, third-party licences and data-sharing constraints.
 3. **Technical baseline:** default branch, all branches/tags/releases, LFS usage, submodules, GitHub Pages/custom domains, packages, deployments, environments, Actions workflows, reusable workflow references, secrets/variables (names only), webhooks/apps, Dependabot, CodeQL, rulesets and branch protection.
 4. **Collaboration state:** open issues/PRs, project boards, discussions, milestones, releases, collaborators/teams and required audit/records retention.
@@ -133,7 +133,7 @@ Only after receiving-owner acceptance and successful consumer/deployment checks.
 
 | Item | Current status | Required action |
 |---|---|---|
-| GDS-DTX organisation access | The user confirms they are the intended receiving-side owner. Current connection still returns no organisation membership; internal repository reads return 404; no transfer action is exposed | Obtain the necessary GDS-DTX organisation and repository rights, using `data-asset-management-hub` as the access benchmark. No separate sponsor is assumed. |
+| GDS-DTX organisation access | The user confirms they are the intended receiving-side owner. Current connection still returns no organisation membership; internal repository reads return 404; no transfer action is exposed | Obtain and verify the user's GDS-DTX organisation and repository rights, using `data-asset-management-hub` as the practical access benchmark. No separate sponsor is assumed. |
 | CDDO deprecation | User reports organisation is being deprecated; no authoritative sunset date or repository transfer schedule was available in this review | Obtain the official deprecation timeline and repository disposition list from CDDO administrators. |
 | MoG Navigator | Strong direct-work candidate; source repository admin permission available; explicit non-government disclaimer in README | User can initiate the source-side transfer once target-organisation rights and any required internal policy approvals are in place; retain the non-endorsement disclaimer. |
 | xGov MEM and federated API model | Important standards/integration dependencies; collaborator push access does not establish ownership | Standards/programme owner to determine successor home and consumer transition. |
