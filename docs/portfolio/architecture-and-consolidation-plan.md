@@ -59,11 +59,12 @@ No user-facing application should become the accidental authoritative source for
 ### 3.2 Shared contracts to define once
 
 1. **Project metadata:** canonical name, repository URL, service URL, owner role, audience, status, maturity, licence, accessibility statement, support route and last verified date.
-2. **Evidence/provenance:** claim, source, authority, URL, retrieved/checked date, reviewer, confidence, expiry/review date and supersession state.
-3. **Public-body identifiers:** stable identifiers, aliases, jurisdiction, effective dates and source references.
-4. **Data quality:** rule, severity, method, result, exception, owner and remediation state.
-5. **Metadata and APIs:** versioned schema, source attribution, freshness, confidence/limitations and error semantics.
-6. **Accessibility and service status:** target standard, audit date, known issues, user research date and operational status.
+2. **Content provenance:** where useful, reuse the Data Quality Commons source classes (sourced, derived, real-example, template, estimate, judgement and illustrative) and its explicit authoritative-master register. This is a content-provenance pattern, not a universal dataset-lineage schema.
+3. **Dataset lineage and quality:** reuse existing Data Quality Commons identifiers and outputs (`DataAsset`, `MeasurementRun`, `RuleResult`, DQV JSON-LD) and map lineage to PROV-O and catalogue metadata through documented adapters. Define only fields that existing standards and consumers cannot already express.
+4. **Public-body identifiers:** stable identifiers, aliases, jurisdiction, effective dates and source references.
+5. **Data quality:** rule, severity, method, result, exception, owner and remediation state.
+6. **Metadata and APIs:** versioned schema, source attribution, freshness, confidence/limitations and error semantics.
+7. **Accessibility and service status:** target standard, audit date, known issues, user research date and operational status.
 
 Prefer established standards where they fit. Do not create a bespoke schema simply to make every repository look alike.
 
@@ -77,7 +78,7 @@ The Tech Hub's README says its harvest is based on publiccode.yml. On its 24 Nov
 
 ### 4.2 Data quality, DAM and NDL
 
-Data Quality Commons contains a machine-readable NDL portfolio definition and produces quality assessment artefacts. DAM Capability Playbooks already point users to the Commons kit and to NDL, DCAT-AP-UK, AI governance and Knowledge Web pathways. These are strong integration candidates: share identifiers, rule references and provenance-aware outputs.
+Data Quality Commons already contains relevant building blocks: `knowledge/provenance.yaml` distinguishes sourced, derived, real-example, template, estimate, judgement and illustrative content, and records authoritative masters; its data model defines `DataAsset`, `MeasurementRun` and `RuleResult`; its architecture describes DQV JSON-LD outputs and PROV-O among the standards it uses. DAM Capability Playbooks already point users to the Commons kit and to NDL, DCAT-AP-UK, AI governance and Knowledge Web pathways. Integrate by mapping these existing concepts and outputs to consumers. Do not create a competing portfolio-wide provenance schema; add only documented adapters or genuinely missing fields.
 
 Keep DCAT-AP-UK's proposal status explicit. Its profile states that xGov MEM remains endorsed until a formal decision. NDL PubSec MCP should not imply that the proposed profile is already the government standard.
 
@@ -124,7 +125,7 @@ Do not infer maturity from commit count, repository age, stars or a conformance 
 - Confirm public/private build inputs are separated and that no private data enters public build artefacts.
 
 ### Phase 2 — Integrate shared foundations
-- Define versioned project metadata and provenance contracts.
+- Map existing project metadata, content-provenance and dataset-quality structures to consumers; version the adapters and define only demonstrable gaps.
 - Add the glossary-copy integrity check.
 - Establish small reusable CI components with per-project composition.
 - Document stable identifiers and feed contracts.
