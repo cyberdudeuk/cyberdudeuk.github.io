@@ -121,5 +121,26 @@
  "assessment_mode": "checker-equivalent evidence replay; native CLI not executed in source repository",
  "source_write_status": "blocked: GitHub integration returned HTTP 403 when creating source branch",
  "self_test_status": "not executed in this session",
- "metadata_gaps": ["private_vulnerability_reporting setting not retrievable through this connector", "third_party_impact not supplied; checker default applies"]
+ "metadata_gaps": [
+  "private_vulnerability_reporting setting not retrievable through this connector",
+  "third_party_impact not supplied; checker default applies"
+ ],
+ "source_head_sha": "fefdc8e98d2f7e58e95483f505dc1046bec6482e",
+ "repository_metadata": {
+  "visibility": "public",
+  "default_branch": "main",
+  "has_pages": false,
+  "has_issues": true,
+  "branch_protected": false,
+  "private_vulnerability_reporting": null,
+  "third_party_impact": null,
+  "commit_summaries_retrieved": 9,
+  "connected_identity_permissions": {
+   "admin": true,
+   "maintain": true,
+   "push": true,
+   "pull": true,
+   "triage": true
+  }
+ }
 }
