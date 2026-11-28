@@ -122,7 +122,7 @@ These are point-in-time CI observations. They do not establish full production r
 ## 5. Recommended shared foundations
 
 1. **Project metadata contract:** use launchpad project data for the launchpad; use publiccode.yml where a project is genuinely publishing software for reuse and the declaration is appropriate.
-2. **Evidence contract:** source, publisher, authority, retrieval date, verification date, confidence, claim type, review date and supersession state.
+2. **Evidence/provenance integration:** map existing Data Quality Commons content-provenance classes and authoritative-master register to consumers where relevant; use its `DataAsset`, `MeasurementRun`, `RuleResult` and DQV JSON-LD outputs for quality evidence, with PROV-O mappings for lineage. Do not create a new universal provenance schema unless a specific interoperability gap is demonstrated.
 3. **Identifier contract:** use owning-register identifiers rather than name matching; publish aliases and effective dates.
 4. **Quality-result contract:** rule ID, dataset ID, severity, result, method, timestamp, provenance and remediation state.
 5. **Standards status contract:** distinguish endorsed, proposed, draft, deprecated and locally adopted profiles.
@@ -134,7 +134,7 @@ These are point-in-time CI observations. They do not establish full production r
 |---|---|---|
 | 1 | Add a CI integrity check for the shared glossary copy | Low-risk, prevents silent drift across the life-course portals |
 | 2 | Document the discovery trio's shared keys and feed contracts | The three products are already linked but have separate data purposes |
-| 3 | Define a small provenance schema that can be mapped into existing formats | Improves evidence traceability without forcing a new universal data model |
+| 3 | Map existing content-provenance and dataset-quality structures to consuming products through documented adapters | Improves traceability while avoiding a competing schema |
 | 4 | Publish a clear standards-status field in integrations | Prevents proposed DCAT-AP-UK material being mistaken for an endorsed standard |
 | 5 | Integrate DQ Commons outputs with DAM/NDL references by identifiers | Strong value with low coupling |
 | 6 | Keep the profile README generated from launchpad data | Avoids duplicate manual project inventories |
