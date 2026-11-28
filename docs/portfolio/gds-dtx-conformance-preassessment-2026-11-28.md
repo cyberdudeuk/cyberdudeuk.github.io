@@ -1,11 +1,11 @@
 # GDS-DTX conformance assessment — superseded preliminary note
 
 **Date:** 28 November 2026  
-**Status:** Superseded by the complete-tree checker-equivalent assessment reports.
+**Status:** Superseded by the canonical checker execution reports.
 
 The earlier sparse pre-assessment tables in this file were provisional and are withdrawn. They were based on selected file reads and did not correctly distinguish the exact checker strengths and metadata semantics. Do not use their individual check statuses.
 
-The authoritative current evidence replay is now recorded in [the three-repository conformance results index](conformance/README.md), with one report, machine-readable result and badge pair per in-scope repository:
+The authoritative current canonical checker results are recorded in [the three-repository conformance results index](conformance/README.md), with one report, machine-readable result and badge pair per in-scope repository:
 
 - [co-cddo/MoG-Navigator](conformance/mog-navigator/report.md) — **NOT READY**, MUST 7/10, SHOULD/CONSIDER 2/10.
 - [co-cddo/ocdo-data-foundations](conformance/ocdo-data-foundations/report.md) — **NOT READY**, MUST 5/10, SHOULD/CONSIDER 3/10.
