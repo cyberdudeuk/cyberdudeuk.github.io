@@ -18,7 +18,7 @@ This is the operational companion to the portfolio architecture and forensic ass
 | UK MEM source administration | Blocked | Connected identity had push but not admin. Source owner/admin must grant admin or initiate transfer. |
 | GDS-DTX receiving authority | Blocked / unverified | Org membership listing returned no memberships; direct reads of `gds-dtx/data-asset-management-hub` and `gds-dtx/legacy-register` returned 404. This may be connector visibility, but receiving authority cannot be asserted. |
 | Transfer operation | Not available in connected GitHub actions | No repository-transfer or organisation-administration action is exposed. |
-| Migration artefacts | In progress | This runbook is committed to the existing documentation PR branch. |
+| Migration artefacts | Portfolio-side conformance evidence prepared; source-side artefacts blocked | Per-repository 25-check reports, JSON results, badges, metadata inputs and full tree manifests are in `docs/portfolio/conformance/`; source branch creation returned HTTP 403. |
 | Production/consumer cutover | Not started | No transfer, rename, visibility change, Pages cutover, workflow arming, branch deletion or standards change has been performed. |
 
 **Do not mark any repository as migrated until the destination URL, owner, access, history, settings, integrations and consumer checks have been verified.**
@@ -51,7 +51,7 @@ This is the operational companion to the portfolio architecture and forensic ass
 5. Fetch the feed from the new canonical location and perform the documented GUVNR/Whitehall Connect consumer smoke test.
 6. Update only confirmed hard-coded links and consumer configuration; retain a rollback/forward-fix record.
 
-**Current disposition:** ready for final pre-flight once receiving authority is established. Not transferred.
+**Current disposition:** NOT READY under the conformance replay (MUST 7/10). Resolve SC-03, SC-04 and SC-05, then rerun the native checker before final pre-flight. Not transferred.
 
 ### B. `co-cddo/ocdo-data-foundations` — shell/prototype; decision before transfer
 
@@ -73,7 +73,7 @@ This is the operational companion to the portfolio architecture and forensic ass
 
 **Authority gate:** connected identity had push but not admin permission at the last check. A source owner/admin must grant the required authority or perform the transfer.
 
-**Current disposition:** decision required; not transferred and no successor created.
+**Current disposition:** NOT READY under the conformance replay (MUST 5/10). Establish product purpose/owner, resolve SC-01, SC-03, SC-04, SC-05 and GA-02, then decide transfer versus controlled successor. Not transferred and no successor created.
 
 ### C. `co-cddo/ukgov-metadata-exchange-model` — standards-critical
 
@@ -105,7 +105,7 @@ This is the operational companion to the portfolio architecture and forensic ass
 
 **Authority gate:** connected identity had push but not admin permission at the last check. Source owner/admin action is required.
 
-**Current disposition:** standards and site-continuity approvals plus source admin required; not transferred.
+**Current disposition:** NOT READY under the conformance replay (MUST 4/10). Resolve SC-03, SC-04, SC-05, GA-01, GA-02 and GA-03, with licensing and security review; standards and site-continuity approvals plus source admin are also required. Not transferred.
 
 ## 3. Common destination readiness checklist
 
@@ -155,3 +155,18 @@ These are gates for the affected repository, not reasons to stop safe documentat
 ## 6. Explicitly excluded actions
 
 This pack does not authorise moving any other `co-cddo` repository; creating an unapproved successor; merging products; changing visibility; renaming the standards model; arming the MoG harvester; deleting branches; merging open PRs; changing production deployments or billing; or copying private/OFFICIAL/OFFICIAL-SENSITIVE material into public repositories.
+
+
+## 7. GDS-DTX conformance baseline and remediation gate
+
+The same 25-check framework used in the user's `cyberdudeuk` portfolio is applied to each candidate. The complete reports and reproducibility inputs are in `docs/portfolio/conformance/` on the portfolio PR branch.
+
+| Repository | Replayed verdict | MUST met | MUST failures | Transfer effect |
+|---|---|---:|---|---|
+| `co-cddo/MoG-Navigator` | **NOT READY** | 7/10 | SC-03, SC-04, SC-05 | Resolve licensing, security reporting and third-party release/change information before transfer readiness. |
+| `co-cddo/ocdo-data-foundations` | **NOT READY** | 5/10 | SC-01, SC-03, SC-04, SC-05, GA-02 | Define purpose and owner; improve README; resolve licence/security/release requirements and workflow permissions. |
+| `co-cddo/ukgov-metadata-exchange-model` | **NOT READY** | 4/10 | SC-03, SC-04, SC-05, GA-01, GA-02, GA-03 | Resolve licence, security and release evidence; pin third-party action; tighten workflow permissions; review risky triggers. |
+
+The result reports are checker-equivalent evidence replays based on the complete recursive Git trees, relevant source files, GitHub metadata, branch protection and available recent commit summaries. Each repository folder also contains `meta.json` and `source-manifest.json`. They are not represented as native CLI runs: the connector denied branch creation in each source repository with HTTP 403. The native `python3 -I tools/conformance.py --self-test` and `--write` commands still need to be run from an authorised checkout, followed by source-side PRs containing the canonical `docs/conformance/` artefacts.
+
+The conformance baseline is an additional readiness gate, not permission to change licences, standards, production workflows or repository settings without the appropriate owner review. GDS-DTX-specific DX checks are advisory and do not determine the verdict. Re-run the checker after remediation and again after transfer.
